@@ -68,6 +68,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps # if SmarterASP rejects FTPS, change to: ftp
           local-dir: ./EthioNegarit.WebUI/obj/Release/Package/PackageTmp/
-          server-dir: /site1/ # verify this matches your site's FTP path in the panel
+          server-dir: /site1/
+          protocol: ftp
+          timeout: 120000
+          dangerous-clean-slate: false
