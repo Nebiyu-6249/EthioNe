@@ -1,0 +1,5 @@
+07/06/2026 05:46:35 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Advertisements' was not found for the language English (United Kingdom).
+07/06/2026 05:46:35 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Advertisement Packages' was not found for the language English (United Kingdom).
+07/06/2026 05:46:35 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Advertisements' was not found for the language English (United Kingdom).
+07/06/2026 05:46:36 | EthioNegarit.WebUI.dll | Point | EthioNegarit.WebUI.Controllers.BadgeController | 277 | Object reference not set to an instance of an object.
+07/06/2026 05:46:36 | EthioNegarit.WebUI.dll | Point | EthioNegarit.WebUI.Controllers.BadgeController | 277 | Object reference not set to an instance of an object.

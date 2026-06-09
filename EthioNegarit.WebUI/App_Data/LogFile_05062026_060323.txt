@@ -1,0 +1,50 @@
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Posts' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badges' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badges' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Posts' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Posts' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badges' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badges' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Posts' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Posts' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badges' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badges' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Posts' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Posts' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badges' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badges' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Posts' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Posts' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badges' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badges' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Posts' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:24 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Posts' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:25 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badges' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:25 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Posts' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:49 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Activity' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:49 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Activity' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:49 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Topics' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:49 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Topics' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:50 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'My Ads' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:50 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Desktop Notification' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:50 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'My Ads' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:50 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Email Notification' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:50 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Desktop Notification' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:50 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Close Account' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:50 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Email Notification' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:02:50 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Close Account' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:03:02 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Advertisements' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:03:03 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Advertisements' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:03:03 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Advertisement Packages' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:03:03 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Advertisement Packages' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:03:03 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Advertisements' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:03:03 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Advertisements' was not found for the language Amharic (Ethiopia).
+05/06/2026 18:03:21 | EthioNegarit.WebUI.dll | Application_Start | EthioNegarit.WebUI.MvcApplication | 56 | START APP
+05/06/2026 18:03:23 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badge.BronzeBadge.Name' was not found for the language English (United Kingdom).
+05/06/2026 18:03:23 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badge.BronzeBadge.Desc' was not found for the language English (United Kingdom).
+05/06/2026 18:03:23 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badge.BronzeBadge.Name' was not found for the language English (United Kingdom).
+05/06/2026 18:03:23 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badge.BronzeBadge.Desc' was not found for the language English (United Kingdom).
+05/06/2026 18:03:23 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badge.BronzeBadge.Name' was not found for the language English (United Kingdom).
+05/06/2026 18:03:23 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badge.BronzeBadge.Desc' was not found for the language English (United Kingdom).
+05/06/2026 18:03:23 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badge.BronzeBadge.Name' was not found for the language English (United Kingdom).
+05/06/2026 18:03:23 | EthioNegarit.Services.dll | GetResourceString | EthioNegarit.Services.LocalizationService | 264 | This resource key 'Badge.BronzeBadge.Desc' was not found for the language English (United Kingdom).
