@@ -1,0 +1,72 @@
+name: Build and Deploy to SmarterASP.NET
+
+# Runs automatically on every push to main, and can be run manually
+# from the Actions tab (workflow_dispatch).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    # GitHub's Windows runner already has MSBuild, NuGet, and the
+    # .NET Framework 4.8 targeting pack — so nothing is installed on your PC.
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+
+      - name: Restore NuGet packages
+        run: nuget restore EthioNegarit.sln
+
+      # Replace the Web.config placeholder with your real SmarterASP DB
+      # connection string, kept in a GitHub secret (never in the repo).
+      - name: Inject production connection string
+        shell: pwsh
+        env:
+          DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+        run: |
+          $cfg = "EthioNegarit.WebUI/Web.config"
+          $placeholder = 'Server=YOUR_SQL_SERVER;Database=EthioNegarit_Db;User ID=YOUR_DB_USER;Password=YOUR_DB_PASSWORD;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=True'
+          if ([string]::IsNullOrWhiteSpace($env:DB_CONNECTION_STRING)) {
+            Write-Error "DB_CONNECTION_STRING secret is empty. Add it in repo Settings > Secrets."
+            exit 1
+          }
+          $content = Get-Content $cfg -Raw
+          if (-not $content.Contains($placeholder)) {
+            Write-Error "Placeholder connection string not found in Web.config. Did it already change?"
+            exit 1
+          }
+          $content = $content.Replace($placeholder, $env:DB_CONNECTION_STRING)
+          Set-Content -Path $cfg -Value $content -NoNewline
+          Write-Host "Connection string injected into both EF and provider entries."
+
+      # Build in Release and publish the web project to a folder.
+      # Building the WebUI project also compiles its referenced projects.
+      - name: Build and publish to folder
+        run: >
+          msbuild EthioNegarit.WebUI/EthioNegarit.WebUI.csproj
+          /p:Configuration=Release
+          /p:DeployOnBuild=true
+          /p:WebPublishMethod=FileSystem
+          /p:PublishUrl=publish_output
+          /p:DeleteExistingFiles=true
+
+      # Upload the published site to SmarterASP.NET over FTP.
+      # Incremental sync: first run uploads everything; later runs send only changes.
+      - name: Deploy to SmarterASP.NET via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps # if SmarterASP rejects FTPS, change to: ftp
+          local-dir: ./EthioNegarit.WebUI/publish_output/
+          server-dir: /site1/ # verify this matches your site's FTP path in the panel
