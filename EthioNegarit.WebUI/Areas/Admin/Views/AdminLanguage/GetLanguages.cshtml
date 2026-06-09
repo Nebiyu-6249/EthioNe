@@ -1,0 +1,55 @@
+﻿@model EthioNegarit.WebUI.Areas.Admin.ViewModels.ListLanguagesViewModel
+
+@{
+    ViewBag.Title = "All Languages"; 
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h5>@ViewBag.Title</h5>
+    </div>
+    <div class="panel-content">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 65px;">
+                        Edit
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th style="width: 65px;">
+                        Delete
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var language in Model.Languages)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("ManageLanguageResourceValues", new { languageId = language.Id })" class="btn btn-sm">
+                                <span class="fa fa-fw fa-pencil" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => language.Name)
+                        </td>
+                        <td>
+                            @if (!language.IsDefault)
+                            {
+                                <a href="@Url.Action("DeleteLanguageConfirmation", new { id = language.Id })" class="btn btn-sm">
+                                    <span class="fa fa-fw fa-trash-o" aria-hidden="true"></span>
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+

@@ -1,0 +1,29 @@
+﻿<nav class="main-header navbar navbar-expand navbar-light">
+    <!--navbar-brand*/-->
+    <a href="@Url.Content("~/")" class="navbar-brand">
+        <img src="~/content/images/EthioNegaritLogo.png" alt="Logo" class="brand-image img-size-50 img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">ETHIO  Negarit</span>
+    </a>
+    <a class="nav-item nav-link" data-widget="pushmenu" href="#" role="button"><i class="fa fa-fw fa-bars"></i></a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @User.Identity.Name <b class="caret"></b></a>
+            <ul class="dropdown-menu dropdown-menu-xl-right dropdown-menu-right">
+                @Html.Action("AdminNavPanel", "Members", new { area = "" })
+                <li class="divider"></li>          
+                <li class="user-footer dropdown-item">
+                    <a class="text-sm" title="Change Password" href="@Url.Action("ChangePassword", "Members",new { area = "" })">
+                        <i class="nav-icon fas fa-user-edit mr-21"></i>
+                        Change Password
+                    </a>
+                    <a class="text-sm float-right" href="@Url.Action("LogOff", "Members",new { area = "" })">
+                        <i class="nav-icon fa fa-fw fa-power-off text-muted mr-21"></i>
+                        Log Out
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</nav>
+

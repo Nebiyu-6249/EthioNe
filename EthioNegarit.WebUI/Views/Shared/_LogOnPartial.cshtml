@@ -1,0 +1,51 @@
+﻿@if (!User.Identity.IsAuthenticated)
+    {
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user mr-1"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-xl-right dropdown-menu-right">
+            @if (Html.Settings().SuspendRegistration != true)
+            {
+                <li>
+                    <a href="@Url.Action("Register", "Members")" class="dropdown-item nav-link" , routeValues: null, htmlAttributes: new { id="registerLink",title=@Html.LanguageString("Layout.Nav.Register") }>
+                        <span class="text-muted text-sm">@Html.LanguageString("Layout.Nav.Register")</span>
+                        <i class="fas fa-user-plus float-right "></i>
+                    </a>
+                </li>
+            }
+
+            <li>
+                <a href="@Url.Action("LogOn","Members")" class="dropdown-item nav-link" , routeValues: null, htmlAttributes: new { id="loginLink",title=@Html.LanguageString("Layout.Nav.Logon") }>
+
+                    <span class="text-muted text-sm">
+                        @Html.LanguageString("Layout.Nav.Logon")
+                    </span>
+                    <i class="fas fa-sign-in-alt float-right "></i>
+                </a>
+            </li>
+
+            <li>
+                <a href="@Url.Action("ForgotPassword", "Members")" class="dropdown-item nav-link" , routeValues null htmlAttributes new { id="forgotPasswordLink", title=@Html.LanguageString("Forgot Password") }>
+
+                    <span class="text-muted text-sm">
+                        @Html.LanguageString("Members.ForgotPassword.Title")
+                    </span>
+                    <i class="fas fa-question-circle float-right "></i>
+                </a>
+            </li>
+
+        </ul>
+    }
+    @if (User.Identity.IsAuthenticated)
+            {
+   @*     <a href="#" class="" role="button" title="@User.Identity.Name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img class="img-circle nav-link" src="@Html.CurrentMember().MemberImage(SiteConstants.Instance.GravatarLeaderboardSize)" alt="@Html.Raw(@Html.CurrentMember().UserName)" />
+    </a>*@
+    @*
+    <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        @Html.Action("NavPanel", "Members")
+    </ul>*@
+        @Html.Action("NavPanel", "Members")
+    }
+
+

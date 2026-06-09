@@ -1,0 +1,40 @@
+# ── Build output ───────────────────────────────────────────────
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+*.dll
+*.pdb
+
+# ── NuGet ──────────────────────────────────────────────────────
+packages/
+*.nupkg
+# keep the restore config
+!packages.config
+
+# ── Visual Studio ──────────────────────────────────────────────
+.vs/
+*.user
+*.suo
+*.cache
+_ReSharper*/
+
+# ── Local databases / data files ───────────────────────────────
+*.mdf
+*.ldf
+App_Data/
+
+# ── Tools / binaries that must NOT be in the repo ──────────────
+ngrok.exe
+*.exe
+
+# ── Secrets / environment overrides (keep these OUT of git) ────
+connectionStrings.config
+appSettings.secret.config
+*.Local.config
+
+# ── Logs / OS noise ────────────────────────────────────────────
+*.log
+logs/
+.DS_Store
+Thumbs.db

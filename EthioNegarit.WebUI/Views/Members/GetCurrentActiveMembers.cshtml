@@ -1,0 +1,86 @@
+﻿@using EthioNegarit.WebUI
+@model EthioNegarit.WebUI.ViewModels.ActiveMembersViewModel
+@{ 
+    // Get members that last activity date is valid
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+}
+    @if (Model.ActiveMembers.Any())
+    {
+       
+                <div class="active-members">
+                    <div class="panel-header">
+                        <h3 class="">@Html.LanguageString("Stats.LatestMembers")</h3>
+
+                        @* <h3 class="card-title">@Html.LanguageString("Stats.FooterActiveUsersText")</h3>*@
+                    </div>
+
+
+                    <ul class="content-list">
+
+
+                        @foreach (var member in Model.ActiveMembers)
+                {
+
+
+
+                            <li>
+                                <div class="activemembers">
+                                    <div class="image">
+                                        <a title="@Html.Raw(member.UserName)" href="@member.NiceUrl">
+                                            <img class="img-circle img-bordered-sm" src="@member.MemberImage(SiteConstants.Instance.GravatarLeaderboardSize)" alt="@Html.Raw(member.UserName)" />
+                                          
+                                        </a>
+                                    </div>
+                                    <div class="userprofile">
+                                        <div class="username">
+                                            <a title="@Html.Raw(member.UserName)" href="member.User.NiceUrl">
+                                                @Html.Raw(member.UserName)
+
+                                            
+                                                @if (member.LastActivityDate > date)
+                                                {
+                                                    <span class="nav-icon fas fa-circle text-success float-right"></span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-sm float-right">
+                                                        @DatesUI.GetPrettyDate(member.LastLoginDate.ToString())
+                                                    </span>
+                                                }
+                                            </a>
+                                        </div>
+
+
+
+                                   @*    <div class="username">
+                                            <a title="@Html.Raw(member.UserName)" href="@member.NiceUrl">
+                                                @Html.Raw(member.UserName)
+                                                <span class="nav-icon fas fa-circle text-success float-right"></span>
+                                            </a>
+                                        </div>
+                                        *@
+
+                                        <div class="datejoin">
+
+                                            @Html.LanguageString("Members.Profile.Joined") @DatesUI.GetPrettyDate(member.CreateDate.ToString())
+
+                                        </div>
+                                        <div class="useractivity">
+
+                                            @Html.LanguageString("Members.Profile.Posts") @member.Posts.Count
+                                            @Html.LanguageString("Members.Profile.Points") @member.TotalPoints
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </li>
+
+
+
+                        }
+                    </ul>
+                </div>
+         
+    }
+

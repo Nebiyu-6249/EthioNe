@@ -1,0 +1,169 @@
+﻿@model EthioNegarit.WebUI.ViewModels.NavPanelViewModel
+@if (User.Identity.IsAuthenticated)
+{
+    @section Header
+    {
+        <script type="text/javascript">
+            $(function () {
+                TimeBadges();
+                PointBadges();
+            });
+            function TimeBadges() {
+                var timeBadgeViewModel = new Object();
+                timeBadgeViewModel.Id = '@Model.CurrentUser.Id';
+                var strung = JSON.stringify(timeBadgeViewModel);
+                $.ajax({
+                    url: app_base + 'Badge/Time',
+                    type: 'POST',
+                    cache: false,
+                    data: strung,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        ShowUserMessage("Error: " + xhr.status + " " + thrownError);
+                    }
+                });
+            }
+
+            function PointBadges() {
+                var pointBadgeViewModel = new Object();
+                pointBadgeViewModel.Id = '@Model.CurrentUser.Id';
+                var strung = JSON.stringify(pointBadgeViewModel);
+                $.ajax({
+                    url: app_base + 'Badge/Point',
+                    type: 'POST',
+                    cache: false,
+                    data: strung,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        ShowUserMessage("Error: " + xhr.status + " " + thrownError);
+                    }
+                });
+            }
+        </script>
+    }
+}
+@{
+    //  var desktopcheck = false;
+    var desktopcheck = "";
+    var emailcheck = false;
+
+    if (Model.CurrentUser.DesktopNotification == true)
+    {
+        // desktopcheck = true;
+        desktopcheck = "checked";
+    }
+    if (Model.CurrentUser.DisableEmailNotifications == true)
+    {
+        emailcheck = true;
+    }
+}
+<a href="#" class="nav-itemm nav-linkk" role="button" title="@User.Identity.Name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img class="img-circle img-borderedd-@(Model.AccountStatus) nav-link" src="@Model.CurrentUser.MemberImage(SiteConstants.Instance.GravatarLeaderboardSize)" alt="@Html.Raw(@Model.CurrentUser.UserName)" />
+    </a>
+<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+    @if (!User.IsInRole(AppConstants.AdminRoleName))
+    {
+        <li class="user-header">
+            <a class="dropdown-item" title="@Html.Lang("Members.EditProfile")" href="@Url.Action("Edit", "Members",new {id = @Model.CurrentUser.Id }, null)">
+                <img class="img-circle img-size-64 img-bordered-@(Model.AccountStatus)" src="@Model.CurrentUser.MemberImage(SiteConstants.Instance.GravatarLeaderboardSize)" alt="@Html.Raw(@Model.CurrentUser.UserName)" />
+                <p class="text-muted text-sm">
+                    @Model.CurrentUser.UserName
+                </p>
+                <small title="@Html.LanguageString("Members.Profile.DateJoined")"  class="text-muted text-sm">@Html.LanguageString("Members.Profile.DateJoined") @DatesUI.GetPrettyDate(Model.CurrentUser.CreateDate.ToString()).</small>
+            </a>
+            <a class="text-sm" title="@Model.CurrentUser.UserName  @Html.Lang("SubNav.Dashboard")" href="@Url.Action("Dashboard", "Home")">
+                <i class="nav-icon fas fa-tachometer-alt mr-2"></i>
+                @Html.Lang("SubNav.Dashboard")
+            </a>
+        </li>
+        <!-- Menu Body -->
+        <li class="user-body">
+            <div class="row">
+                <div class="col-4">
+                    <a class="btn btn-xs btn-block" title="Activities" href="@Url.Action("PostedIn", "Home")">
+                        @Html.LanguageString("Activity")
+                    </a>
+                </div>
+                <div class="col-4">
+                    <a class="btn btn-xs btn-block" title="My Topics" href="@Url.Action("Discussions", "Home")">
+                        @Html.LanguageString("Topics")
+                    </a>
+                </div>
+                @if (User.Identity.IsAuthenticated && @Html.CurrentMember().Advertisements.Count() > 0)
+                {
+                    <div class="col-4">
+                        <a role="button" class="btn btn-xs btn-default btn-block" title="My Ads" href="@Url.Action("MyAds", "Ad")">
+                            @Html.LanguageString("My Ads")
+                        </a>
+                    </div>
+                }
+
+            </div>
+            <!-- /.row -->
+        </li>
+        <li>
+            <div class="dropdown-divider"></div>
+        </li>
+        <li>
+            <p>
+                <div class="nav-link">
+                    @Html.Lang("Desktop Notification")
+                    <div class="custom-control custom-switch float-right">
+                        @*<input type="radio" checked="checked" name="radio">*@
+                        <input type="checkbox" checked="@desktopcheck" class="custom-control-input" id="desktopnotification" />
+                        <label class="custom-control-label" for="desktopnotification"></label>
+                    </div>
+                </div>
+            </p>
+        </li>
+        <li>
+            <p>
+                <div class="nav-link">
+                    @Html.Lang("Email Notification")
+                    <div class="custom-control custom-switch float-right">
+                        <input type="checkbox" checked="@emailcheck" class="custom-control-input" id="emailnotification" />
+                        <label class="custom-control-label" for="emailnotification"></label>
+                    </div>
+                </div>
+            </p>
+        </li>
+        <li class="nav-link">
+            <a href="@Url.Action("CloseAccount", "Members")" class="" title="Close Account">
+                <span class="text-muted">@Html.Lang("Close Account")</span>
+                <span class="ethicon fas fa-user-lock text-muted float-right"></span>
+            </a>
+        </li>
+    }
+    @if (User.IsInRole(AppConstants.AdminRoleName))
+    {
+        <li class="user-header dropdown-item">
+            <a class="dropdown-item" title="@Model.CurrentUser.UserName Profile" href="@Url.Action("Edit", "Members",new {id = @Model.CurrentUser.Id }, null)">
+                <img class="img-circle img-size-64 img-bordered-sm" src="@Model.CurrentUser.MemberImage(SiteConstants.Instance.GravatarLeaderboardSize)" alt="@Html.Raw(@Model.CurrentUser.UserName)" />
+                <p class="text-muted text-sm">
+                    @Model.CurrentUser.UserName
+                </p>
+            </a>
+            <a class="text-sm" title="@Model.CurrentUser.UserName" href="@Url.Action("Index", "Admin",new {area = "Admin"}, null)">
+                <i class="nav-icon fas fa-tachometer-alt mr-2"></i>
+                @Html.Lang("Layout.Nav.Admin")
+            </a>
+        </li>
+        @Html.Action("AdminNavPanel", "Members", new { area = "" })
+    }
+
+    <li class="user-footer">
+        <a class="text-sm" title="Change Password" href="@Url.Action("ChangePassword", "Members")">
+            <i class="nav-icon fas fa-user-edit mr-2"></i>
+            @Html.LanguageString("Members.ChangePassword.Title")
+        </a>
+        <a class="text-sm float-right" href="@Url.Action("LogOff", "Members")">
+            <i class="nav-icon fa fa-fw fa-power-off text-muted mr-2"></i>
+            @Html.LanguageString("LogOn.LogOff")
+        </a>
+    </li>
+</ul>

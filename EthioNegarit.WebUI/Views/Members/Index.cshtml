@@ -1,0 +1,77 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model PublicMemberListViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Html.LanguageString("Members.SearchMembers");
+}
+@{
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+}
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mt-2">
+            <div class="col-sm-8 d-none d-sm-inline-block">
+                <h1 class="text-sm">@ViewBag.Title</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-4">
+                @using (Html.BeginForm("Search", "Members", FormMethod.Get))
+                {
+                <div class="input-group input-group-sm">
+                    @Html.TextBoxFor(x => Model.Search, new { @class = "form-control", placeholder = "Search Members . . ." })
+                    <span class="input-group-btn ">
+                        <button class="btn btn-default btn-sm">@Html.LanguageString("Buttons.Search")</button>
+                    </span>
+                </div>
+                @Html.HiddenFor(x => x.PageIndex)
+                }
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="box-container">
+            @foreach (var member in Model.Members)
+            {
+            @Html.Partial("_member", member)
+            @*
+            <div class="box member">
+                <div class="member-image">
+                    <a href="@user.NiceUrl" title="">
+                        <img class="img-circle  @(user.MemberIsOnline ? " img-bordered-success"
+                             "img-bordered-sm" )" src="@AppHelpers.MemberImage(@user.Avatar,@user.Email,@user.Id,SiteConstants.Instance.GravatarLeaderboardSize)" alt="@user.UserName">
+                    </a>
+                </div>
+                <div class="member-bio">
+                    <h4>
+                        <a href="@user.NiceUrl" title="@user.UserName">
+                            @user.UserName
+                        </a>
+                    </h4>
+                    <p> Posts @user.TotalPoints</p>
+                    <p> Posts @user.TotalPoints</p>
+                </div>
+                <div class="member-socials">
+                    @if (!string.IsNullOrEmpty(user.facebook))
+                    {
+                    <a href="@user.facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+                    }
+                    @if (!string.IsNullOrEmpty(user.twitter))
+                    {
+                    <a href="@user.twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                    }
+                    @if (!string.IsNullOrEmpty(user.web))
+                    {
+                    <a href="@user.web" target="_blank"><i class="fab fa-youtube"></i></a>
+                    }
+                </div>
+            </div>
+            *@
+            }
+        </div>
+    </div>
+</section>
+

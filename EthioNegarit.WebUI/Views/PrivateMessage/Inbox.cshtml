@@ -1,0 +1,576 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model PrivateMessagesViewModel
+
+@{
+   // ViewBag.Title = Html.LanguageString("PM.PrivateMessages");
+    var loggedOnUserId = Html.CurrentMember() != null ? Html.CurrentMember().Id : Guid.Empty;
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+}
+
+<div class="page-header">
+    <span class="width-250">
+        @Html.LanguageString("PM.PrivateMessages")
+    </span>
+    @if (@Model.NewMessagesCount > 0)
+    {
+        <span class="width-25">
+            @Html.Raw(string.Format(Html.LanguageString("Inbox.Unread.Messages"), @Model.NewMessagesCount))
+        </span>
+    }
+    <span class="width-50">
+        @Html.Partial("_searchMembers")
+    </span>
+</div>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <ul class="nav nav-tabs" id="-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="all-tab" data-toggle="pill" href="#all" role="tab" aria-controls="all" aria-selected="true">
+                    <i class="ethicon fa fa-inbox fafa-bars"></i>
+                    <span class="d-none d-sm-inline-block">@Html.LanguageString("Inbox.All")</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="received-tab" data-toggle="pill" href="#received" role="tab" aria-controls="received" aria-selected="false">
+                    <i class="ethicon far fa-envelope-open fafa-inbox green-colour"></i>
+                    <span class="d-none d-sm-inline-block">@Html.LanguageString("Inbox.Received")</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="sent-tab" data-toggle="pill" href="#sent" role="tab" aria-controls="sent" aria-selected="false">
+                    <i class="ethicon fa fa-location-arrow orange-colour"></i>
+                    <span class="d-none d-sm-inline-block">@Html.LanguageString("Inbox.Sent")</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="unread-tab" data-toggle="pill" href="#unread" role="tab" aria-controls="unread" aria-selected="false">
+                    <i class="ethicon  @(Model.NewMessagesCount > 0 ? "fas fa-envelope green-colour" : "far fa-envelope")" title="">
+                    </i>
+                    <span class="d-none d-sm-inline-block">@Html.LanguageString("Inbox.Unread")</span>
+
+                    @if (@Model.NewMessagesCount > 0)
+                    {
+                        <span class="badge badge-default badge-successs navbar-badger">
+                            @Model.NewMessagesCount
+                        </span>
+                    }
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="starred-tab" data-toggle="pill" href="#starred" role="tab" aria-controls="starred" aria-selected="false">
+                    <i class="ethicon fas fa-star yellow-colour"></i>
+                    <span class="d-none d-sm-inline-block">@Html.LanguageString("Inbox.Starred")</span>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="-tabContent">
+            @**********************************************@
+            <div id="id-message-list-navbar" class="message-navbar clearfix">
+                <div class="message-bar">
+                    <div class="message-infobar" id="id-message-infobar">
+                        @if (@Model.NewMessagesCount > 0)
+                        {
+                    
+                                        <span class="blue-colour">@Html.LanguageString("Inbox.Title")</span>
+                                        <span class="grey">(@Html.Raw(string.Format(Html.LanguageString("Inbox.Unread.Messages"), @Model.NewMessagesCount)))</span>
+                        }
+                    </div>
+                    <div class="message-toolbar hide">
+                        <div class="inline position-relative align-left">
+                            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <span class="bigger-110">Action</span>
+                                @* <i class="ace-icon fa fa-caret-down icon-on-right"></i>*@
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-lighter dropdown-carett dropdown-1255">
+                                <li class="dropdown-item">
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-mail-reply blue"></i>&nbsp; Reply
+                                    </a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-mail-forward green"></i>&nbsp; Forward
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-folder-open orange"></i>&nbsp; Archive
+                                    </a>
+                                </li>
+
+                                <li class="divider"></li>
+
+                                <li class="dropdown-item">
+                                    <a href="#">
+                                        <i class="ethicon fa fa-eye blue"></i>&nbsp; Mark as read
+                                    </a>
+                                </li>
+
+                                <li class="dropdown-item">
+                                    <a href="#">
+                                        <i class="ethicon fa fa-eye-slash green"></i> Mark unread
+                                    </a>
+                                </li>
+
+                                <li class="dropdown-item">
+                                    <a href="#">
+                                        <i class="ethicon far fa-flag red-colour"></i>&nbsp; Flag
+                                    </a>
+                                </li>
+
+                                <li class="divider"></li>
+
+                                <li class="dropdown-item">
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-trash-o red bigger-110"></i>&nbsp; Delete
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="inline position-relative align-left">
+                            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <i class="ace-icon fa fa-folder-o bigger-110 blue"></i>
+                                <span class="bigger-110">Move to</span>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-lighter dropdown-caret dropdown-125">
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-stop pink2"></i>&nbsp; Tag#1
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-stop blue"></i>&nbsp; Family
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-stop green"></i>&nbsp; Friends
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-stop grey"></i>&nbsp; Work
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button type="button" class="btn btn-xs btn-primary">
+                            <i class="ethicon fas fa-trash orange-colour"></i>
+                            <span class="bigger-110">Delete</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="messagebar-item-left float-left">
+                    <label class="inline middle">
+                        <input type="checkbox" id="id-toggle-all" class="ace" />
+                        <span class="lbl"></span>
+                    </label>
+                    <div class="inline position-relative">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            &nbsp;
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-xl-rightt dropdown-menu-rightt">
+                            <li class="dropdown-item">
+                                <a id="id-select-message-all" href="#">All</a>
+                            </li>
+
+                            <li class="dropdown-item">
+                                <a id="id-select-message-none" href="#">None</a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li>
+                                <a id="id-select-message-unread" href="#">Unread</a>
+                            </li>
+
+                            <li>
+                                <a id="id-select-message-read" href="#">Read</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="messagebar-item-right float-right">
+                    <div class="inline position-relative">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                            Sort &nbsp;
+                            @*  <i class="ace-icon fa fa-caret-down bigger-125"></i>*@
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-lighter dropdown-menu-right dropdown-100">
+                            <li>
+                                <a href="#">
+                                    <i class="ace-icon fa fa-check green"></i>
+                                    Date
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="ace-icon fa fa-check invisible"></i>
+                                    From
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="ace-icon fa fa-check invisible"></i>
+                                    Subject
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-search minimized">
+                    <form class="form-search">
+                        <span class="input-icon">
+                            <input type="text" autocomplete="off" class="input-small nav-search-input" placeholder="Search inbox ..." />
+                            <i class="ace-iconn search-iconn fa fa-search nav-search-icon mt-44"></i>
+                        </span>
+                    </form>
+                </div>
+
+            </div>
+            <div id="id-message-item-navbar" class="hide message-navbar clearfix">
+                <div class="message-bar">
+                    <div class="message-toolbar">
+                        <div class="inline position-relative align-leftt">
+                            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <span class="bigger-110">Action</span>
+                                <i class="ace-icon fa fa-caret-down icon-on-right"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-lighter dropdown-caret dropdown-125">
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-mail-reply blue"></i>&nbsp; Reply
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-mail-forward green"></i>&nbsp; Forward
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-folder-open orange"></i>&nbsp; Archive
+                                    </a>
+                                </li>
+
+                                <li class="divider"></li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-eye blue"></i>&nbsp; Mark as read
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-eye-slash green"></i>&nbsp; Mark unread
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-flag-o red"></i>&nbsp; Flag
+                                    </a>
+                                </li>
+
+                                <li class="divider"></li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-trash-o red bigger-110"></i>&nbsp; Delete
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="inline position-relative align-left">
+                            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <i class="ace-icon fa fa-folder bigger-110 blue"></i>
+                                <span class="bigger-110">Move to</span>
+                           @*   <i class="ace-icon fa fa-caret-down icon-on-right"></i>*@
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-lighter dropdown-caret dropdown-125">
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-stop pink2"></i>&nbsp; Tag#1
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-stop blue"></i>&nbsp; Family
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-stop green"></i>&nbsp; Friends
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-stop grey"></i>&nbsp; Work
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button type="button" class="btn btn-xs btn-primary">
+                            <i class="ace-icon fa fa-trash-o bigger-125 orange"></i>
+                            <span class="bigger-110">Delete</span>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <div class="messagebar-item-left">
+                        <a href="#" class="btn-back-message-list">
+                            <i class="ace-icon fa fa-arrow-left blue bigger-110 middle"></i>
+                            <b class="bigger-110 middle">Back</b>
+                        </a>
+                    </div>
+
+                    <div class="messagebar-item-right">
+                        <i class="ace-icon fa fa-clock-o bigger-110 orange"></i>
+                        <span class="grey">Today, 7:15 pm</span>
+                    </div>
+                </div>
+            </div>
+            @**************************************************@
+            <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">           
+                <div class="message-container">
+                 
+                        @if (@Model.NewMessagesCount > 0)
+                        {
+                            <div id="message-list-navbar" class="message-navbar clearfix">
+                                <div class="message-bar">
+                                    <div class="message-infobar" id="id-message-infobar">
+                                        <span class="blue-colour">@Html.LanguageString("Inbox.Title")</span>
+                                        @*    <span class="grey">(@Model.NewMessagesCount @Html.LanguageString("Inbox.Unread.Messages"))</span>*@
+                                        <span class="grey">(@Html.Raw(string.Format(Html.LanguageString("Inbox.Unread.Messages"), @Model.NewMessagesCount)))</span>
+                                    </div>
+                                </div>
+                     
+                            </div>
+                        }
+                        <div class="message-list-container">
+                            <div class="message-list" id="message-list">
+                                @*     //   var total = _context.PrivateMessage.Where(x => x.UserFrom.Id == user.Id || x.UserTo.Id == user.Id).ToList().DistinctBy(x => x.UserTo);*@
+                                @foreach (var message in Model.AllMessages.Where(x => x.User.Id != loggedOnUserId).ToList().Distinct(x => x.User.Id))
+                                {
+                                @Html.Partial("_inboxMessage", message)
+                                }
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!--------------------------->
+            <div class="tab-pane fade" id="received" role="tabpanel" aria-labelledby="received-tab">
+                <div class="message-container">
+                    <div class="message-list-container">
+                        <div class="message-list" id="message-list">
+                            @foreach (var message in Model.ReceivedMessages.Where(x => x.User.Id != loggedOnUserId).ToList().Distinct(x => x.User.Id))
+                            {
+                             
+                                    @Html.Partial("_inboxMessage", message)
+                            
+                            }
+                                </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="sent" role="tabpanel" aria-labelledby="sent-tab">
+                <div class="message-list-container">
+                    @foreach (var message in Model.SentMessages.Distinct(x => x.User.Id))
+                    {
+                        @Html.Partial("_inboxMessage", message)
+                    }
+                </div>
+            </div>
+            <!--------------------------->
+            <div class="tab-pane fade" id="unread" role="tabpanel" aria-labelledby="unread-tab">
+                <div class="message-list-container">
+                    @foreach (var message in Model.UnreadMessages.Where(x => x.User.Id != loggedOnUserId).ToList().Distinct(x => x.User.Id))
+                    {
+                        @Html.Partial("_inboxMessage", message)
+                    }
+                </div>
+            </div>
+            <!--------------------------->
+            <!--------------------------->
+            <div class="tab-pane fade" id="starred" role="tabpanel" aria-labelledby="starred-tab">
+                <div class="message-list-container">
+                    <div class="message-list" id="message-list">
+                        @foreach (var message in Model.StarredMessages)
+                        {
+                            @Html.Partial("_inboxMessage", message)
+                        }
+                    </div>
+                </div>
+            </div>
+            <!--------------------------->
+        </div>
+        @if (Model.TotalPages > 1)
+        {
+            <ul>
+                <li class="pagination">
+                    @Html.Pager(Convert.ToInt32(Model.PageIndex), SiteConstants.Instance.PrivateMessageListSize, totalCount, null)
+                </li>
+            </ul>
+        }
+        <div id="attachement" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Html.Lang("Post.AttachedFiles")</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modalBodyDiv">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        //basic initializations
+        $('.message-list .message-item input[type=checkbox]').removeAttr('checked');
+        $('.message-list').on('click', '.message-item input[type=checkbox]', function () {
+            $(this).closest('.message-item').toggleClass('selected');
+            if (this.checked) Inbox.display_bar(1);//display action toolbar when a message is selected
+            else {
+                Inbox.display_bar($('.message-list input[type=checkbox]:checked').length);
+                //determine number of selected messages and display/hide action toolbar accordingly
+            }
+        });
+        //check/uncheck all messages
+        $('#id-toggle-all').removeAttr('checked').on('click', function () {
+            if (this.checked) {
+                Inbox.select_all();
+            } else Inbox.select_none();
+        });
+
+        //select all
+        $('#id-select-message-all').on('click', function (e) {
+            e.preventDefault();
+            Inbox.select_all();
+        });
+
+        //select none
+        $('#id-select-message-none').on('click', function (e) {
+            e.preventDefault();
+            Inbox.select_none();
+        });
+
+        //select read
+        $('#id-select-message-read').on('click', function (e) {
+            e.preventDefault();
+            Inbox.select_read();
+        });
+
+        //select unread
+        $('#id-select-message-unread').on('click', function (e) {
+            e.preventDefault();
+            Inbox.select_unread();
+        });
+        var Inbox = {
+            //displays a toolbar according to the number of selected messages
+            display_bar: function (count) {
+                if (count == 0) {
+                    $('#id-toggle-all').removeAttr('checked');
+                    $('#id-message-list-navbar .message-toolbar').addClass('hide');
+                    $('#id-message-list-navbar .message-infobar').removeClass('hide');
+                }
+                else {
+                    $('#id-message-list-navbar .message-infobar').addClass('hide');
+                    $('#id-message-list-navbar .message-toolbar').removeClass('hide');
+                }
+            }
+                ,
+            select_all: function () {
+                var count = 0;
+                $('.message-item input[type=checkbox]').each(function () {
+                    this.checked = true;
+                    $(this).closest('.message-item').addClass('selected');
+                    count++;
+                });
+
+                $('#id-toggle-all').get(0).checked = true;
+
+                Inbox.display_bar(count);
+            }
+                ,
+            select_none: function () {
+                $('.message-item input[type=checkbox]').removeAttr('checked').closest('.message-item').removeClass('selected');
+                $('#id-toggle-all').get(0).checked = false;
+
+                Inbox.display_bar(0);
+            }
+                ,
+            select_read: function () {
+                $('.message-unread input[type=checkbox]').removeAttr('checked').closest('.message-item').removeClass('selected');
+
+                var count = 0;
+                $('.message-item:not(.message-unread) input[type=checkbox]').each(function () {
+                    this.checked = true;
+                    $(this).closest('.message-item').addClass('selected');
+                    count++;
+                });
+                Inbox.display_bar(count);
+            }
+                ,
+            select_unread: function () {
+                $('.message-item:not(.message-unread) input[type=checkbox]').removeAttr('checked').closest('.message-item').removeClass('selected');
+
+                var count = 0;
+                $('.message-unread input[type=checkbox]').each(function () {
+                    this.checked = true;
+                    $(this).closest('.message-item').addClass('selected');
+                    count++;
+                });
+
+                Inbox.display_bar(count);
+            }
+        }
+
+        //show message list (back from writing mail or reading a message)
+        Inbox.show_list = function () {
+            $('.message-navbar').addClass('hide');
+            $('#id-message-list-navbar').removeClass('hide');
+
+            $('.message-footer').addClass('hide');
+            $('.message-footer:not(.message-footer-style2)').removeClass('hide');
+
+            $('.message-list').removeClass('hide').next().addClass('hide');
+            //hide the message item / new message window and go back to list
+        }
+        //back to message list
+        $('.btn-back-message-list').on('click', function (e) {
+
+            e.preventDefault();
+            $('#inbox-tabs a[href="#inbox"]').tab('show');
+        });
+        			});
+</script>
+

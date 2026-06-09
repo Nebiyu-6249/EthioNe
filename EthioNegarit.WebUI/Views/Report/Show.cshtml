@@ -1,0 +1,128 @@
+﻿@model EthioNegarit.WebUI.ViewModels.PostReportsViewModel
+@{
+    ViewBag.Title = "Members Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+}
+<div class="page-header">
+    <span class="width-25">
+        @ViewBag.Title
+    </span>
+    <span class="width-50">
+        <a role="button" class="btn btn-sm btn-outline-info btn-block showhidepostt showhidebutton" id="showinfo" data-toggle="collapse" data-target="#post-@Model.Post.Post.Id" title="Show Post" )>           
+            @Html.LanguageString("Show Reported Post")
+            <i class="fas fa-angle-down showhideicon">
+            </i>
+        </a>
+    </span>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <section class="col-sm-12">            
+                <div id="post-@Model.Post.Post.Id" class="collapse postholder">                                        
+                            <div class="content-fluid">
+                                @{
+                                    Html.RenderPartial("_Post", Model.Post);
+                                }
+                            </div>            
+                </div>
+                    @if (Model.Reports.Any())
+                    {
+                       @* <h1 class="text-sm m-0">Reports</h1>*@
+                        <hr/>
+                        <ul class="contents-list">
+                            @foreach (var report in Model.Reports)
+                            {
+                                <li class="content-fluid">
+                                    <div class="content-aside d-none d-sm-inline-block">
+                                        <a href="report.Reporter.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="right" )'>
+                                            <img class="img-circle  @(report.Reporter.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm")" src="@report.Reporter.MemberImage(32)" alt="@report.Reporter.UserName">
+                                        </a>
+                                        @{
+                                            Html.RenderPartial("_memberInfo", report.Reporter);
+                                        }
+                                    </div>
+                                    <div class="content-detail pull-right-sm">
+                                        <div class="content-textt text-sm1">
+                                            <a class="" title="Show all Reports" href="@Url.Action("Show", "Report", new { postId = @report.ReportedPost.Id })">
+                                                @Html.Raw(AppHelpers.ConvertPostContent(@report.Reason))
+                                            </a>
+                                        </div>
+                                        <div class="report-infos clearfix">
+                                            <span class="chat-timestampp content-footerr">
+                                                @report.Reporter.UserName Reports,
+                                                @DatesUI.GetPrettyDate(@report.DateReport.ToString()).
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+                                            }
+
+                        </ul>
+
+                                            }
+                                            else
+                                            {
+                                                    <p>No Reports Found</p>
+                                                  @*  <a href="#C4">Jump to Chapter 4</a>*@
+                                            }
+      
+                @if (Model.TotalPages > 1)
+                {
+                    <ul>
+                        <li class="pagination">
+
+                            @Html.Pager(Convert.ToInt32(Model.PageIndex), Html.Settings().TopicsPerPage, totalCount, new {postId=Model.PostId })
+
+                        </li>
+                    </ul>
+                }
+</section>   
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+@*
+            @if (Model.TotalPages > 1)
+    {
+                <a href="#" class="showmoreposts btn  btn-outline-success btn-large btn-block">
+                    <span class="smpactive">@Html.LanguageString("Topic.ShowMorePosts")</span>
+                    <span class="smploading" style="display: none;">@Html.LanguageString("Topic.ShowMorePostsLoading")</span>
+                </a>
+            }
+            @if (Model.TotalPages > 1)
+            {
+                <div class="pagination">
+                    @Html.Pager(Convert.ToInt32(Model.PageIndex), Html.Settings().TopicsPerPage, totalCount, null, "Show", "Report")
+                </div>
+            }
+*@
+@*<a href="#C4">Jump to Chapter 4</a>*@
+@*
+    <input type="hidden" id="pageIndex" value="@(Model.PageIndex + 1)" />
+    <input type="hidden" id="postId" value="@Model.Post.Id" />
+    <input type="hidden" id="totalPages" value="@Model.TotalPages" />
+*@
+@*  <div class="clearfix" id="C4">
+        <h2>Chapter 4</h2>
+    </div>*@
+@*         <section class="col-sm-3 side-panel">
+        <div class="panel-content">
+            @Html.Partial("_CommonSideNav")
+        </div>
+    </section>*@

@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "Content/admin/admin.css",
+    "inputFile": "Content/admin/admin.scss"
+  },
+  {
+    "outputFile": "Themes/EthioNegarit/dist/style.css",
+    "inputFile": "Themes/EthioNegarit/scss/style.scss"
+  }
+]

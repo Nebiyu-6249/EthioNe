@@ -1,0 +1,65 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model PrivateMessageAttachementsViewModel
+@{
+    var loggedOnUserId = Html.CurrentMember() != null ? Html.CurrentMember().Id : Guid.Empty;
+}
+<div class="attachements">
+@if (@Model.Attachments.Any())
+{
+    <ul class="contents-list">
+        @foreach (var attachement in @Model.Attachments)
+        {
+            <li>
+                <div class="inline-item">
+                    <span class="width-65 ml-2">
+                        @Html.Raw(@attachement.Filename)
+                      @*  <img src="@AppHelpers.Attachement(attachement.Filename,attachement.MembershipUser.Id,110)" alt="@attachement.Filename">*@
+                    </span>
+                    <span class="inline-item-smm float-right mr-22">
+                        <a class="filedownload" href="@Url.Action("DownloadAttachment", "File", new { id = attachement.Id}) " title="@Html.LanguageString("Buttons.Download")">
+                            <i class="fas fa-file-download green-colour" aria-hidden="true"></i>
+                            <span class="d-none d-sm-inline-block ml-2">@Html.LanguageString("Buttons.Download")</span>
+                        </a>
+                    </span>
+             @if (@attachement.MembershipUser.Id == loggedOnUserId)
+             {
+                    <span class="inline-item-smm mr-2 float-right">      
+                        <a href="@Url.Action("DeleteAttachment", "File", new { attachement.Id })" class="deleteupload" title="@Html.LanguageString("Buttons.Delete")">
+                         <i class="ethicon fas fa-trash-alt red-colour" aria-hidden="true"></i>
+                            <span class="d-none d-sm-inline-block ml-2 ">@Html.LanguageString("Buttons.Delete")</span>
+                            </a>
+                    </span>
+             }
+</div>
+</li>
+        }
+    </ul>
+    if (@Model.Attachments.Count > 1)
+    {
+        <div class="modal-footer">
+            <span class="">
+                <a href="@Url.Action("DownloadAttachments", "File", new {messageId = @Model.MessageId })" class="downloadAttachements" title="@Html.LanguageString("Buttons.DownloadAll")">
+                    <i class="fas fa-file-download green-colour" aria-hidden="true"></i>
+                    &nbsp; <span>@Html.LanguageString("Buttons.DownloadAll")</span>
+                </a>
+            </span>
+             @if (@Model.PrivateMessage.UserFrom.Id == loggedOnUserId)
+             {
+            <span class="">
+                <a href="@Url.Action("DeleteAttachments", "File", new { messageId = @Model.MessageId })" role="button" class="deleteAttachements" title="@Html.LanguageString("Buttons.DeleteAll")">
+                    <i class="fas fa-trash-alt red-colour" aria-hidden="true"></i>
+                    &nbsp; <span>@Html.LanguageString("Buttons.DeleteAll")</span>
+                </a>
+            </span>
+             }
+        </div>
+    }
+}
+else
+{
+    <p> @Html.LanguageString("Text.FilesNotFound") </p>
+}
+</div>
+
+
+

@@ -1,0 +1,33 @@
+﻿@model EthioNegarit.WebUI.ViewModels.MapViewModel
+
+
+<div id="map"></div>
+@section Header{
+    <script>
+        // Use the ViewModel data to initialize the map
+        function initMap() {
+            var location = { lat: @Model.Latitude, lng: @Model.Longitude };
+
+            var map = new google.maps.Map(
+                document.getElementById('map'), {
+                    zoom: 12,
+                    center: location
+                });
+
+            // Add a marker at the specified location
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
+    </script>
+
+    <!--
+        Include the Google Maps JavaScript API script.
+        Replace YOUR_API_KEY with your actual key.
+        The `callback=initMap` parameter tells the API to execute the `initMap` function once the script is loaded.
+    -->
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmB6QOXI8haQ6kX3ZGsbx9j_wHAAAi2W4&callback=initMap">
+    </script>
+}

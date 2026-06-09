@@ -1,0 +1,16 @@
+﻿@model List<EthioNegarit.WebUI.ViewModels.ChatRoomViewModel>
+
+@if (Model.Any())
+    {
+    <div class="box-container">
+        @foreach(var chatRoom in Model)
+			{
+				@Html.Partial("_chatRoom", chatRoom)			
+			}
+
+			</div>
+			}
+else
+    {
+    <p> @Html.Lang("SubscribedCats.NothingToShow") </p>
+    }

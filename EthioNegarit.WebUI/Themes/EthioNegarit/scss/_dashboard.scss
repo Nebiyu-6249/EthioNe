@@ -1,0 +1,80 @@
+﻿//
+// Component: Dashboard
+//
+         .account-healthy {
+  //   background-color: lawngreen;
+      background-color: none;
+    }
+         .account-warning {
+     background-color: yellow;
+    }
+           .account-danger {
+     background-color: red;
+    }
+
+
+.dashboard-overview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+    @media (max-width: breakpoint-max(xs)) {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+.dashboard-summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+    @media (max-width: breakpoint-max(xs)) {
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+.dashboard-component {
+    background-color: darken($gray-100, 6%);
+    color: lighten($dark, 15%);
+    padding: 20px 30px;
+    border-radius: 5px;
+    border: 1px solid darken($gray-400, 10%);
+}
+.dashboard-component:hover {
+    transition: .3s;
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+
+.components {
+     display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    gap: 10px;
+
+}
+
+
+.component-top,
+.component-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span{
+       // width:30%;
+        display:inline-flex;
+        float: right;     
+        gap:10px;
+    }
+}
+
+.dashboard-component h3 {
+    font-size: 1.5rem;
+    line-height: 0.6;
+}
+
+@include dark-mode () {
+    .dashboard-component {
+        background-color: lighten($dark, 3%);
+        color: $gray-500;
+        border-color: lighten($dark, 2%);
+    }
+    }

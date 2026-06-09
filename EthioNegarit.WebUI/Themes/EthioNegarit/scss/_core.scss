@@ -1,0 +1,225 @@
+﻿//
+/*#region =================  Content List================ */
+//
+.contents-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+	margin-bottom:10px;   
+    ul {
+        padding: 0;
+        margin: 0;
+        li {
+            list-style: none;
+            padding: 0 0 4px 0;     
+                  }
+    }
+  
+}
+//To be Replace Contents-list
+/*.item-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+    > li.ui-sortable-helper {
+    cursor: move;
+  }
+    > li {
+    padding: 9px;
+    background-color: #fff;
+    margin-top: -1px;
+    position: relative;
+  }
+    > li.selected {
+    color: #8090a0;
+    background-color: #f4f9fc;
+  }
+    > li.selected label {
+    text-decoration: line-through;
+    color: #8090a0;
+  }
+    > li label {
+    font-size: 13px;
+  }
+    > li .percentage {
+    font-size: 11px;
+    font-weight: 700;
+    color: #777;
+  }
+}*/
+//
+/*#endregion ============== Content List End  ====================  */
+//
+//
+/*#region =================  Content Fluid================ */
+//
+
+.content-fluid {
+    @include clearfix ();
+    position: relative;
+    padding: 5px;
+	border-radius:5px;
+     //   background-color: $lightcyan;
+   background-color: darken($gray-100, 8%);
+ // background: $info-bg;
+ // background: $tag-bg;
+//  background: linear-gradient(135deg, rgba(45,125,210,0.06) 0%, rgba(15,163,177,0.06) 100%);
+
+    color: lighten($dark, 15%);
+	 border-bottom: 1px solid darken($gray-100, 20%);
+    .content-footer {     
+       // margin-top: 5px;
+        margin-bottom: 0;
+    }
+    &:hover {
+        background-color: darken($gray-100, 10%);
+        color: $dark;
+    }
+      &:last-child {
+             border-bottom: 0;
+        }
+    @media (max-width: breakpoint-max(xs)) {
+        padding:5px;
+        margin:0;
+    }
+}
+.content-aside {
+    padding: 5px 5px;
+    display: block;
+    float: left;
+     width: 10%;
+    height: 100%;
+    text-align: center;
+    bottom: 0;
+    span {
+        display: inline-block;
+    }
+    @media (max-width: breakpoint-max(xs)) {
+        display: none;
+    }
+}
+.content-detail {
+     margin: 0;
+    padding: 0;
+    @media (max-width: breakpoint-max(xs)) {
+        margin-left: 0;
+    }
+}
+.content-footer {
+    font-size: 12px;
+    font-weight: 300;
+   // margin-top: 10px;
+    margin-bottom: 0;
+    top:auto;
+
+    ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+            list-style: none;
+            display: inline-block;
+            padding: 0 10px 0 0;
+            font-size: 13px;
+
+            .latestby {
+                background-color: inherit;
+                color: inherit;
+              -ms-border-radius: 50%;
+                border-radius: 50%;
+            }
+
+            a, a:visited {
+                font-weight: 400;
+                cursor: pointer;
+
+                &.replytolink {
+                    font-weight: 600;
+                }
+            }
+
+            &.lastpost {
+                a, a:visited {
+                    color: #808080;
+                    font-size: 12px;
+                    font-weight: 300;
+                    text-decoration: none;
+                    margin: 0 5px 0 0;
+                    &:hover, &:focus {
+                        text-decoration: underline;
+                    }
+                }
+
+                @media (max-width: $media-query-mobile) {
+                    // display: none;
+                    width: 50%;
+                }
+            }
+
+            @media (max-width: $media-query-mobile) {
+                padding: 3px 3px 0 0;
+                width: 18%;
+
+                span {
+                    padding-right: 3px;       
+                }
+            }
+        }
+
+        img {
+            margin: 5px;
+            height: 30px;
+            width: 30px;
+        }
+    }
+}
+//
+/*#endregion ============== Content-Fluid End  ====================  */
+//
+//
+
+// Activities
+.activityentry {
+    padding: 12px 0;
+    border-bottom: 1px $border-color solid;
+    p {
+        margin: 0;
+        padding: 0;
+    }
+    .activitybadgedescription {
+        font-weight: 300;
+    }
+    .activitysubdate {
+        font-weight: 300;
+        font-style: italic;
+        font-size: 13px;
+    }
+    .activitybadge {
+        img {
+            -ms-border-radius: 50%;
+            border-radius: 50%;
+            max-width: 40px;
+        }
+    }
+    .activityinfotext {
+        font-size: 18px;
+    }
+    &:last-child {
+        border: none;
+    }
+}
+@include dark-mode () {
+
+	.content-fluid {
+		background-color: lighten($dark, 3%);
+		color: $gray-500;
+		border-bottom: 1px solid darken($gray-800, 10%);
+		&:hover {
+			background-color: lighten($dark, 1%);
+			color: $gray-500;
+		}
+		&:last-child {
+			border-bottom: 0;
+		}
+	}    
+}

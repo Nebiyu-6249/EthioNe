@@ -1,0 +1,302 @@
+﻿//
+// Component: Main Header
+//
+
+.main-header {
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: $zindex-main-header - 1;
+    .nav-link {
+        height: $nav-link-height;
+        position: relative;
+    }
+    .navbar-nav {
+        .nav-item {
+            margin: 0;
+        }
+        &[class*="-right"] {
+            .dropdown-menu {
+                left: auto;
+                margin-top: -3px;
+                right: 0;
+
+                @media (max-width: breakpoint-max(xs)) {
+                    left: 0;
+                    right: auto;
+                }
+            }
+        }
+    }
+
+    &.dropdown-legacy .dropdown-menu {
+        top: $nav-link-height + $navbar-padding-y;
+        margin-top: 0;
+    }
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    gap: 2rem;
+    margin-left: 14px;
+      /* @media (max-width: breakpoint-max(xs)){
+      display: none;
+      }*/
+}
+
+.ml-auto {
+    display: flex;
+    float: right;
+    justify-content: center;
+    align-items: flex-start;
+    list-style: none;
+    gap: 0.5rem;
+}
+
+// Add this class to images within a nav-link
+.navbar-img {
+    height: calc($main-header-height / 2);
+    width: auto;
+}
+
+// Navbar badge
+.navbar-badge {
+    font-size: .7rem;
+    font-weight: 200;
+    padding: 2px 5px;
+    position: absolute;
+    //right: 5px;
+   // top: 9px;
+    right: 0;
+   top: 7px;
+    border-radius:50%;
+}
+// Info badge
+.info-badge {
+    font-size: .6rem;
+    font-weight: 300;
+    padding: 2px 4px;
+    position: absolute;
+    right: 5px;
+    top: 9px;
+}
+
+.btn-navbar {
+    background-color: transparent;
+    border-left-width: 0;
+
+    //New
+   // padding: 5px 12px; font-size: 12px; line-height: 12px;
+}
+
+.form-control-navbar {
+    border-right-width: 0;
+    + .input-group-append {
+        margin-left: 0;
+        padding:0;
+    }
+}
+
+.form-control-navbar,
+.btn-navbar {
+    transition: none;
+}
+
+// Navbar Search
+.navbar-search-block {
+    position: absolute;
+    padding: 0 $nav-link-padding-x;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    background-color: initial;
+
+    &.navbar-search-open {
+        display: flex;
+        margin-left: 238px !important;
+        margin-right: 0;
+
+        @media (max-width: breakpoint-max(xs)) {
+            margin-left: 60px !important;
+            margin-right: 0;
+        }
+    }
+
+    .input-group {
+        width: 100%;
+    }
+}
+
+.navbar-dark {
+    .form-control-navbar,
+    .btn-navbar {
+        background-color: $main-header-dark-form-control-bg;
+        border-color: $main-header-dark-form-control-border-color;
+    }
+
+    .form-control-navbar {
+        &::placeholder {
+            color: $main-header-dark-placeholder-color;
+        }
+
+        + .input-group-append > .btn-navbar {
+            color: $main-header-dark-placeholder-color;
+        }
+
+        &:focus {
+            &,
+            + .input-group-append .btn-navbar {
+                background-color: $main-header-dark-form-control-focused-bg;
+                border-color: $main-header-dark-form-control-focused-border-color !important;
+                color: $main-header-dark-form-control-focused-color;
+            }
+        }
+    }
+}
+
+.navbar-light {
+    .form-control-navbar,
+    .btn-navbar {
+        background-color: $main-header-light-form-control-bg;
+        border-color: $main-header-light-form-control-border-color;
+    }
+
+    .form-control-navbar {
+        &::placeholder {
+            color: $main-header-light-placeholder-color;
+        }
+
+        + .input-group-append > .btn-navbar {
+            color: $main-header-light-placeholder-color;
+        }
+
+        &:focus {
+            &,
+            + .input-group-append .btn-navbar {
+                background-color: $main-header-light-form-control-focused-bg;
+                border-color: $main-header-light-form-control-focused-border-color !important;
+                color: $main-header-light-form-control-focused-color;
+            }
+        }
+    }
+
+    .navbar-search-block {
+        .form-control-navbar {
+            &:focus {
+                &,
+                + .input-group-append .btn-navbar {
+                    color: $main-header-light-placeholder-color;
+                }
+            }
+        }
+    }
+}
+//
+/*#region ================= Brand Image ================ */
+//
+.navbar-brand {
+    float: left;
+    padding: 0;
+    border-bottom: none;
+    width: $navbar-brand-width;
+    left: 0;
+    margin-left: 0;
+
+    .brand-image {
+        margin-top: -.5rem;
+        margin-right: .2rem;
+        height: 33px;
+    }
+}
+
+@media (max-width: breakpoint-max(xs)) {
+
+    .navbar-brand {
+        padding: 0;
+        margin: 0;
+        border-bottom: none;
+        width: $navbar-brand-width / 2;
+
+        .brand-image {
+            height: $main-header-height/2;
+            margin-bottom: 0;
+            margin-left: 0;
+            margin-top: -.33rem;
+            // margin-top: -.1rem;
+        }
+
+        .brand-text {
+            font-size: .5rem;
+            margin-left: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            display: block;
+            position: relative;
+            padding: 0;
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+    }
+}
+//
+/*#endregion ============== Brand Image End  ====================  */
+//
+///////////////////////////////////
+.page-header {
+	display: flex;
+	flex-flow: row wrap;
+   align-items: center;
+	width: 100%;
+//	min-height: 10px;
+   margin: 10px;
+	padding: 5px;
+	span {
+		&:not(:first-child) {
+             /* styles to apply to all elements except the first one */
+			margin-left: auto;// Pushes
+           padding-right:10px;
+		}
+	}
+}
+.subheader {
+  //  padding: 2px;
+	//border-radius: 5px;
+	position: relative;
+	width:100%;
+   padding-left:10px;
+   margin:0;
+	p {
+      padding:0;
+      margin:0;
+      line-height: 1.8rem;
+	}
+	   &:hover {
+        background-color: darken($gray-100, 8%);
+        color: $dark;
+    }
+}
+@include dark-mode () {
+    	/*.page-header {
+		background-color: lighten($dark, 3%);
+		color: $gray-500;
+	}*/
+	.subheader, 
+    .category {
+		color: darken($gray-500, 15%);
+		&:hover, &:focus, &:active {
+			background-color: lighten($dark, 10%);
+			color: $gray-500;
+		}
+	}
+    }
+

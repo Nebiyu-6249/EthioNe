@@ -1,0 +1,6 @@
+﻿@model EthioNegarit.WebUI.ViewModels.MessagesListViewModel
+
+@foreach (var message in Model.PrivateMessages)
+{
+    @Html.Partial("_message", message)
+}

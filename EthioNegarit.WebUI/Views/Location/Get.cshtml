@@ -1,0 +1,107 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model LocationViewModel
+
+<div class="modal-header">
+    <h5 class="modal-title">@Html.Raw(Model.Advertisement.Name)</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="container-fluid clearfix">
+        @if (Model.Locations.Any())
+        {
+            <table class="table table-bordered table-striped table-head-fixed mb-4">
+                <thead>
+                    <tr>
+                        <th class="text-muted text-center">Edit</th>
+                        <th class="text-muted text-center">City</th>
+                        <th class="text-muted text-center">Latitude</th>
+                        <th class="text-muted text-center">Longitude</th>
+                        <th class="text-muted text-center">Description</th>
+                        <th class="text-muted text-center">Delete</th>
+
+                    </tr>
+                </thead>
+                <tbody id="">
+                    @foreach (var location in Model.Locations)
+                    {
+                        <tr>
+                            <td class="text-muted text-center">
+                                <a class="btn btn-sm btn-outline-infoo btn-block" href="@Url.Action("Edit", "Location", new {advertId = @location.Id })" title="Edit Location">
+                                    <span class="fas fa-edit" style="color: teal">
+                                    </span>
+                                </a>
+                            </td>
+                            <td class="text-muted text-center">
+                                @location.CityName
+                            </td>
+                            <td class="text-muted text-center">
+                                @location.Latitude
+                            </td>
+                            <td class="text-muted text-center">
+                                @location.Longitude
+                            </td>
+                            <td class="text-muted text-sm">
+                                @location.Description
+                            </td>
+                            <td class="text-muted text-center">
+                                <a class="btn btn-sm btn-block"  onclick="return confirm('@(Html.LanguageString("Delete Location"))')" href="@Url.Action("Delete", "Location", new {advertId = location.Id })" title="Delete Location">
+                                    <span class="fas fa-trash" aria-hidden="true" style="color:red"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+</div>
+
+@using (Html.BeginForm("Add", "Location", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.AdvertId)
+   // @Html.ValidationSummary(false)
+   // @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-sm-4 col-md-4 col-xs-12">
+            <div class="form-group">
+                @*Coordinates*@
+                <label>City Name:</label>
+                @Html.EditorFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-xs-12">
+            <div class="form-group">
+                <label>Latitude:</label>
+                @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-xs-12">
+            <div class="form-group">
+                <label>Longitude:</label>
+                @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12">
+                <div class="form-group">
+                    <label>Description:</label>
+                    <textarea name="Description" rows="5" class="form-control"></textarea>
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger rounded-0" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary rounded-0">Submit</button>
+        </div>
+
+}
+<div id="validationSummary" class="validation-summary">
+    <ul></ul>
+</div>
+

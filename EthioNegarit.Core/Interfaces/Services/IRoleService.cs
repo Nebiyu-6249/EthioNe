@@ -1,0 +1,21 @@
+﻿using EthioNegarit.Core.Domain.Entities;
+using EthioNegarit.Core.Domain.General;
+using System;
+using System.Collections.Generic;
+
+
+namespace EthioNegarit.Core.Interfaces.Services
+{
+    public partial interface IRoleService
+    {
+       
+        IList<MembershipRole> AllRoles();
+        void Delete(MembershipRole role);
+        MembershipRole GetRole(string rolename, bool removeTracking = false);
+        MembershipRole GetRole(Guid id);
+        IList<MembershipUser> GetUsersForRole(string roleName);
+        MembershipRole CreateRole(MembershipRole role);
+        PermissionSet GetPermissions(Category category, MembershipRole role);
+        
+    }
+}

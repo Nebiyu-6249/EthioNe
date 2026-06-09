@@ -1,0 +1,108 @@
+﻿@model EthioNegarit.WebUI.ViewModels.ChartViewModel
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-9">
+                <h1 class="text-sm">@Model.Year @Html.LanguageString("Points Summary")</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-3">
+
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<div class="row">
+    <div class="col-sm-12">
+        @* <div style="width:365px; height:300px;text-align:center">
+            <canvas id="myChart2" style="width:365px; height:300px;"></canvas>*@
+        <div style="width:100%; height:300px;text-align:center; background:rgba(14, 4, 4, 0.16)">
+            <canvas id="pointChart" style="width:100%; height:300px;"></canvas>
+            <script>
+                            var ctx = document.getElementById("pointChart").getContext("2d");
+                          //  var ymax = 1000;
+                         //   var ymax = Model.YMax;
+                    var data = {
+                        labels: ["January"+ " " +@Model.Year, "February" + " " +@Model.Year, "March" + " " +@Model.Year, "April" + " " +@Model.Year, "May" + " " +@Model.Year, "June" + " " +@Model.Year, "July" + " " +@Model.Year, "August" + " " +@Model.Year, "September" + " " +@Model.Year, "October" + " " +@Model.Year, "November" + " " +@Model.Year, "December" + " " +@Model.Year],
+                        datasets: [{
+                            label: "Points Get",
+                            backgroundColor: "#36a2eb",
+                            fill: true,
+                          //  fill: false,
+                            borderColor: "green",
+                          pointRadius: 2,
+                            data: [@Model.pointchart_ds1_point_J,@Model.pointchart_ds1_point_F,@Model.pointchart_ds1_point_M,@Model.pointchart_ds1_point_A,@Model.pointchart_ds1_point_MY,@Model.pointchart_ds1_point_JU,@Model.pointchart_ds1_point_JY,@Model.pointchart_ds1_point_AG,@Model.pointchart_ds1_point_S,@Model.pointchart_ds1_point_O,@Model.pointchart_ds1_point_N,@Model.pointchart_ds1_point_D]
+                        }, {
+                            label: "Points Deduct",
+                            // backgroundColor: "#9bbb59",
+                            fill: false,
+                            borderColor: "red",
+                            pointRadius: 2,
+
+                            data: [@Model.pointchart_ds1_point_J,@Model.pointchart_ds1_point_F,@Model.pointchart_ds1_point_M,@Model.pointchart_ds1_point_A,@Model.pointchart_ds1_point_MY,@Model.pointchart_ds1_point_JU,@Model.pointchart_ds1_point_JY,@Model.pointchart_ds1_point_AG,@Model.pointchart_ds1_point_S,@Model.pointchart_ds1_point_O,@Model.pointchart_ds1_point_N,@Model.pointchart_ds1_point_D]
+                        }]
+                    };
+
+                    var myBarChart = new Chart(ctx, {
+                        type: 'line',
+                        data: data,
+                       // fill: false,
+                      //  borderColor: "red",
+                        options: {
+                            responsive: true,
+                            animation: false,
+                            legend: {
+                                display: true
+                            },
+                            title: {
+                                display: true,
+                                text:  @Model.Year + " " +'Member Point Summary'
+                            },
+                            barValueSpacing: 20,
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        min: @Model.YMin,
+                                       //max: ymax,
+                                        max:@Model.YMax,
+                                        // max: 1000,
+                                    }
+                                }]
+                            }
+                        }
+                    });
+            </script>
+        </div>
+    </div>
+</div>
+@*
+    Chart Types
+    'Bar',
+        'Bubble',
+        'Doughnut',
+        'Line',
+        'PolarArea',
+        'Radar',
+        'Scatter'
+    'horizontalBar'
+*@
+@*
+
+        // Maximum value in Series, you may have to change YValues[0] to the appropriate
+    // index for your type of chart (so that it measures the top of your markers)
+    double maxValue = chart.Series[0].Points.Max(x => x.YValues[0])
+
+    // yAxisMax calculated as max value in series + 10 then rounded up to nearest 10
+    // but capped at 125 below. You could change this to perhaps
+    // maxValue * 1.1 to always get a 10 % extra above, anything goes
+    double yAxisMax = Math.Ceiling((maxValue + 10) / 10) * 10;
+
+    if (yAxisMax > 125)
+        yAxisMax = 125;
+
+    chart.ChartAreas[0].AxisY.Minimum = 0;
+    chart.ChartAreas[0].AxisY.Maximum = yAxisMax;
+    chart.ChartAreas[0].AxisY.Interval = 5;
+*@

@@ -1,0 +1,76 @@
+﻿@model EthioNegarit.WebUI.Areas.Admin.ViewModels.ListLogViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Log";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h5>@ViewBag.Title</h5>
+        <div class="tools">
+            <a href="@Url.Action("ClearLog")" class="btn btn-mvc-green">Clear Log</a>
+        </div>
+    </div>
+    <div class="panel-content">
+        <p>This is a limited view of the log, if you need to see even more logs then you you'll need to open the logfile.txt in the App_Data folder</p>
+
+        @if (Model.LogFiles.Any())
+        {
+            <div class="tablescroll">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Entry Date
+                            </th>
+                            <th>
+                                Module
+                            </th>
+                            <th>
+                                Method
+                            </th>
+                            <th>
+                                DeclaringType
+                            </th>
+                            <th>
+                                LineNumber
+                            </th>
+                            <th>
+                                Message
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var log in Model.LogFiles)
+                        {
+                            <tr class="logentry">
+                                <td class="logentrydatee">
+                                    @log.Date
+                                </td>
+                                <td class="logentrymodulee">
+                                    @log.Module
+                                </td>
+                                <td class="logentrymethodd">
+                                    @log.Method
+                                </td>
+                                <td class="logentrydeclaringtypee">
+                                    @log.DeclaringType
+                                </td>
+                                <td class="logentrylinenumberr">
+                                    @log.LineNumber
+                                </td>
+                                <td class="logentrymessagee">
+                                    @log.ErrorMessage
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+
+    </div>
+</div>
+
+

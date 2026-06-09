@@ -1,0 +1,35 @@
+﻿@using EthioNegarit.Core.Domain.Entities
+@using EthioNegarit.WebUI.ViewModels
+@model ChatMessagesViewModel
+@{
+    var messages = Model.ChatMessages.Where(x => x.ChatMessage.InReplyTo == null).OrderBy(x => x.ChatMessage.Timestamp).ToList();
+}
+<!-- Messages -->
+    <ul class="contents-list">
+        @foreach (var message in messages)
+        {
+            <li>
+                @Html.Partial("_chatMessage", message)
+                @GetReplies(message.ChatMessage, "right")
+            </li>
+        }
+    </ul>
+
+@helper GetReplies(ChatMessage message, string position)
+{
+var replies = Model.ChatMessages.Where(x => x.ChatMessage.InReplyTo != null && x.ChatMessage.InReplyTo == message.Id).OrderBy(x => x.ChatMessage.Timestamp).ToList();
+if (replies.Any())
+{   
+        <ul class="contents-list collapsed" id="replies-@message.Id">
+            @foreach (var replay in replies)
+            {
+                <li>
+                    <div class="@position">
+                        @Html.Partial("_chatMessage", replay)
+                    </div>              
+                    @GetReplies(replay.ChatMessage, "left")
+                </li>
+            }
+        </ul>
+}
+}

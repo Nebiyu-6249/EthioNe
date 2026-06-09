@@ -1,0 +1,977 @@
+<!-- HERO -->
+  <header class="hero">
+    <div class="hero-eyebrow">Legal Documentation</div>
+    <h1>[YOUR FORUM NAME]<br><span>Privacy Policy</span></h1>
+    <p class="hero-sub">We are committed to protecting your personal data. This document explains what we collect, why we collect it, and how we keep it safe.</p>
+    <div class="hero-badges">
+      <span class="badge badge-outline">📅 Effective: May 21, 2025</span>
+      <span class="badge badge-outline">🔄 Version 1.0</span>
+      <span class="badge badge-gold">⚖️ GDPR Compliant</span>
+      <span class="badge badge-gold">🔒 CCPA Compliant</span>
+    </div>
+  </header>
+
+  <!-- NOTICE -->
+  <div class="notice" role="note">
+    <strong>⚠ Important Notice</strong>
+    <p>This Privacy Policy governs how <strong>[YOUR FORUM NAME]</strong> collects, uses, stores, and protects your personal information when you use our forum platform at <strong>[YOUR WEBSITE URL]</strong>. By registering or using our services, you agree to this policy. If you do not agree, please do not use our services.</p>
+  </div>
+  <!-- CONTENT -->
+    <!-- 1 -->
+    <section class="section" id="s1">
+      <div class="section-header">
+        <span class="section-num">§ 01</span>
+        <h2>Information We Collect</h2>
+      </div>
+      <p>We collect several categories of information to operate our forum platform effectively and securely.</p>
+
+      <h3>1.1 Account Registration Data</h3>
+      <ul>
+        <li>Username and display name</li>
+        <li>Email address</li>
+        <li>Password (stored as a cryptographic hash — never in plain text)</li>
+        <li>Date of account creation</li>
+        <li>Profile picture (optional)</li>
+        <li>Biography and location (optional, if provided by you)</li>
+      </ul>
+
+      <h3>1.2 Activity &amp; Content Data</h3>
+      <ul>
+        <li>Questions, answers, comments, and edits you post</li>
+        <li>Votes, flags, and moderation actions you take</li>
+        <li>Reputation score and badges earned</li>
+        <li>Tags and topics you follow</li>
+        <li>Private messages (if the forum has this feature)</li>
+      </ul>
+
+      <h3>1.3 Payment Data</h3>
+      <ul>
+        <li>Billing name and address</li>
+        <li>Transaction IDs and payment status</li>
+        <li><strong>Credit/debit card details</strong> — We do NOT store raw card data. Payments are processed by PCI-DSS compliant providers (Stripe or PayPal). We only retain non-sensitive transaction records.</li>
+      </ul>
+
+      <h3>1.4 Technical &amp; Usage Data</h3>
+      <ul>
+        <li>IP address and approximate geolocation</li>
+        <li>Browser type, version, and operating system</li>
+        <li>Device type (desktop, mobile, tablet)</li>
+        <li>Pages visited, search queries, and time spent</li>
+        <li>Referral URLs and error/crash logs</li>
+      </ul>
+
+      <h3>1.5 Cookies &amp; Tracking Technologies</h3>
+      <ul>
+        <li>Session cookies (required for login functionality)</li>
+        <li>Preference cookies (to remember your settings)</li>
+        <li>Analytics cookies (e.g., Google Analytics — opt-out available)</li>
+        <li>Security cookies (to detect and prevent fraud/abuse)</li>
+      </ul>
+    </section>
+
+    <!-- 2 -->
+    <section class="section" id="s2">
+      <div class="section-header">
+        <span class="section-num">§ 02</span>
+        <h2>How We Use Your Information</h2>
+      </div>
+      <p>We use your data only for the following defined purposes, each with a corresponding legal basis under GDPR:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Purpose</th><th>Legal Basis (GDPR)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Providing and operating the forum platform</td><td>Contract performance</td></tr>
+            <tr><td>Sending account verification and notification emails</td><td>Contract performance</td></tr>
+            <tr><td>Processing payments for premium memberships</td><td>Contract performance</td></tr>
+            <tr><td>Preventing spam, abuse, and unauthorized access</td><td>Legitimate interest</td></tr>
+            <tr><td>Improving site performance via analytics</td><td>Legitimate interest</td></tr>
+            <tr><td>Complying with legal obligations (tax, court orders)</td><td>Legal obligation</td></tr>
+            <tr><td>Sending optional newsletters and announcements</td><td>Consent (opt-in only)</td></tr>
+            <tr><td>Personalizing your experience (e.g., recommended tags)</td><td>Legitimate interest</td></tr>
+            <tr><td>Moderation and enforcing our Terms &amp; Conditions</td><td>Legitimate interest</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="section" id="s3">
+      <div class="section-header">
+        <span class="section-num">§ 03</span>
+        <h2>Data Security &amp; Encryption</h2>
+      </div>
+      <p>We implement industry-leading technical measures to protect all data we hold about you.</p>
+
+      <h3>3.1 Encryption Standards</h3>
+      <div class="enc-grid">
+        <div class="enc-card">
+          <div class="enc-icon">🔑</div>
+          <div class="enc-type">Passwords</div>
+          <div class="enc-method">Argon2id Hashing</div>
+          <div class="enc-desc">OWASP-recommended one-way hash with unique salt. Never stored, logged, or transmitted in plain text.</div>
+        </div>
+        <div class="enc-card">
+          <div class="enc-icon">💳</div>
+          <div class="enc-type">Payment Cards</div>
+          <div class="enc-method">PCI-DSS via Stripe/PayPal</div>
+          <div class="enc-desc">We never store raw card numbers. Delegated to PCI-DSS Level 1 certified providers only.</div>
+        </div>
+        <div class="enc-card">
+          <div class="enc-icon">🗄️</div>
+          <div class="enc-type">Data at Rest</div>
+          <div class="enc-method">AES-256-GCM</div>
+          <div class="enc-desc">All sensitive PII and database backups encrypted at rest using NIST FIPS 140-2 standard.</div>
+        </div>
+        <div class="enc-card">
+          <div class="enc-icon">🌐</div>
+          <div class="enc-type">Data in Transit</div>
+          <div class="enc-method">TLS 1.3 (HTTPS)</div>
+          <div class="enc-desc">All connections enforced over HTTPS. HTTP is permanently redirected. HSTS enabled.</div>
+        </div>
+        <div class="enc-card">
+          <div class="enc-icon">🎟️</div>
+          <div class="enc-type">Session Tokens</div>
+          <div class="enc-method">HMAC-SHA256</div>
+          <div class="enc-desc">Short-lived, HttpOnly, Secure-flagged cookies. Auto-expire after inactivity.</div>
+        </div>
+        <div class="enc-card">
+          <div class="enc-icon">🔐</div>
+          <div class="enc-type">2FA</div>
+          <div class="enc-method">TOTP / Authenticator</div>
+          <div class="enc-desc">Two-factor authentication available for all accounts for extra login security.</div>
+        </div>
+      </div>
+
+      <h3>3.2 Additional Security Measures</h3>
+      <ul>
+        <li>Rate limiting on login attempts to prevent brute-force attacks</li>
+        <li>Regular security audits and penetration testing</li>
+        <li>Staff access to personal data is logged, audited, and restricted to need-to-know</li>
+        <li>Automatic session expiration after periods of inactivity</li>
+        <li>Vulnerability disclosure programme — report to security@[yourforum].com</li>
+      </ul>
+    </section>
+
+    <!-- 4 -->
+    <section class="section" id="s4">
+      <div class="section-header">
+        <span class="section-num">§ 04</span>
+        <h2>Data Sharing &amp; Third Parties</h2>
+      </div>
+      <p>We do <strong>not</strong> sell, rent, or trade your personal information. We may share limited data only in the following circumstances:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Third Party / Category</th><th>Data Shared</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Payment processors (Stripe / PayPal)</td><td>Billing name, transaction data</td><td>Payment processing</td></tr>
+            <tr><td>Cloud hosting (e.g., AWS / Azure)</td><td>All platform data (encrypted)</td><td>Infrastructure</td></tr>
+            <tr><td>Email service (e.g., SendGrid)</td><td>Email address, username</td><td>Transactional emails</td></tr>
+            <tr><td>Analytics (e.g., Google Analytics)</td><td>Anonymized usage data, IP</td><td>Site performance</td></tr>
+            <tr><td>Law enforcement (legally required)</td><td>Relevant account data only</td><td>Legal compliance</td></tr>
+            <tr><td>Security / CDN (e.g., Cloudflare)</td><td>IP address, request headers</td><td>DDoS protection</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>All third-party providers are contractually required to protect your data and prohibited from using it for their own marketing.</p>
+    </section>
+
+    <!-- 5 -->
+    <section class="section" id="s5">
+      <div class="section-header">
+        <span class="section-num">§ 05</span>
+        <h2>Your Rights</h2>
+      </div>
+      <p>Depending on your jurisdiction, you have the following rights regarding your personal data:</p>
+      <div class="rights-grid">
+        <div class="right-card">
+          <div class="right-icon">📋</div>
+          <div>
+            <div class="right-title">Right to Access</div>
+            <div class="right-desc">Obtain a copy of all personal data we hold about you via Account Settings → Data Export.</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">✏️</div>
+          <div>
+            <div class="right-title">Right to Rectification</div>
+            <div class="right-desc">Correct inaccurate or incomplete information by editing your profile or contacting us.</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">🗑️</div>
+          <div>
+            <div class="right-title">Right to Erasure</div>
+            <div class="right-desc">Request deletion of your account and personal data via Account Settings → Delete Account.</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">📦</div>
+          <div>
+            <div class="right-title">Data Portability</div>
+            <div class="right-desc">Receive your data in machine-readable format (JSON/CSV) via Account Settings → Data Export.</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">🚫</div>
+          <div>
+            <div class="right-title">Right to Restrict</div>
+            <div class="right-desc">Restrict processing of your data in certain circumstances. Email privacy@[yourforum].com.</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">✋</div>
+          <div>
+            <div class="right-title">Right to Object</div>
+            <div class="right-desc">Object to processing based on legitimate interests. Email privacy@[yourforum].com.</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">🔕</div>
+          <div>
+            <div class="right-title">Withdraw Consent</div>
+            <div class="right-desc">Opt out of newsletters or analytics at any time via Account Settings → Notifications.</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">⚖️</div>
+          <div>
+            <div class="right-title">Lodge a Complaint</div>
+            <div class="right-desc">File a complaint with your national data protection authority (DPA) at any time.</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:1rem;">We will respond to all verified data requests within <strong>30 days</strong>. For complex requests, we may extend this to 90 days with prior notice.</p>
+    </section>
+
+    <!-- 6 -->
+    <section class="section" id="s6">
+      <div class="section-header">
+        <span class="section-num">§ 06</span>
+        <h2>Data Retention</h2>
+      </div>
+      <p>We retain your data only as long as necessary for the purposes described in this policy:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Data Category</th><th>Retention Period</th><th>Reason</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Active account data</td><td>Duration of your account</td><td>Service provision</td></tr>
+            <tr><td>Posts and contributions (public)</td><td>Indefinitely, even after deletion</td><td>Community knowledge base integrity</td></tr>
+            <tr><td>Payment records</td><td>7 years after transaction</td><td>Tax and legal compliance</td></tr>
+            <tr><td>Server / access logs</td><td>90 days</td><td>Security and abuse investigation</td></tr>
+            <tr><td>Deleted account personal data</td><td>30 days, then purged</td><td>Fraud prevention</td></tr>
+            <tr><td>Inactive accounts (no activity)</td><td>2 years, then notified &amp; deleted</td><td>Data minimization</td></tr>
+            <tr><td>Email communications</td><td>3 years</td><td>Support and dispute resolution</td></tr>
+            <tr><td>Backup copies</td><td>90 days rolling</td><td>Disaster recovery</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Anonymized, non-identifiable data (aggregate statistics) may be retained indefinitely for research and improvement purposes.</p>
+    </section>
+
+    <!-- 7 -->
+    <section class="section" id="s7">
+      <div class="section-header">
+        <span class="section-num">§ 07</span>
+        <h2>Cookies Policy</h2>
+      </div>
+      <p>We use the following categories of cookies. You may control non-essential cookies through our consent banner or your browser settings.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Cookie Type</th><th>Examples</th><th>Can Opt Out?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Strictly Necessary</td><td>Login session, CSRF token, security</td><td>No — required for basic functionality</td></tr>
+            <tr><td>Functional</td><td>Theme, language, editor preferences</td><td>Yes — via cookie settings</td></tr>
+            <tr><td>Analytics</td><td>Google Analytics, page view tracking</td><td>Yes — via cookie settings or browser</td></tr>
+            <tr><td>Payment / Security</td><td>Stripe fraud detection, reCAPTCHA</td><td>No — required for payment security</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>For a full list of cookies used, visit <strong>[YOUR WEBSITE URL]/cookie-policy</strong>.</p>
+    </section>
+
+    <!-- 8 -->
+    <section class="section" id="s8">
+      <div class="section-header">
+        <span class="section-num">§ 08</span>
+        <h2>Children's Privacy</h2>
+      </div>
+      <p>Our forum is not directed at children under the age of <strong>13</strong> (or <strong>16</strong> in the European Union). We do not knowingly collect personal information from children under these ages.</p>
+      <p>If you are a parent or guardian and believe your child has created an account, please contact us immediately at <strong>privacy@[yourforum].com</strong>. Upon verification, we will delete the account and all associated personal data within <strong>72 hours</strong>.</p>
+      <p>Users between 13 and 18 may use the service with parental consent. If you are under 18, please ensure a parent or guardian has reviewed and agreed to this Privacy Policy on your behalf.</p>
+    </section>
+
+    <!-- 9 -->
+    <section class="section" id="s9">
+      <div class="section-header">
+        <span class="section-num">§ 09</span>
+        <h2>International Data Transfers</h2>
+      </div>
+      <p>Our servers may be located outside your home jurisdiction. When transferring data internationally, we ensure appropriate safeguards are in place, including:</p>
+      <ul>
+        <li>Standard Contractual Clauses (SCCs) approved by the European Commission</li>
+        <li>Adequacy decisions for countries deemed to have equivalent protections</li>
+        <li>Binding Corporate Rules where applicable</li>
+      </ul>
+    </section>
+
+    <!-- 10 -->
+    <section class="section" id="s10">
+      <div class="section-header">
+        <span class="section-num">§ 10</span>
+        <h2>GDPR — European Union Users</h2>
+      </div>
+      <p>If you are located in the EU or EEA, the General Data Protection Regulation (GDPR) applies to our processing of your personal data.</p>
+
+      <h3>10.1 Data Controller</h3>
+      <p>For the purposes of GDPR, <strong>[YOUR COMPANY NAME]</strong> is the data controller. Contact: <strong>privacy@[yourforum].com</strong></p>
+
+      <h3>10.2 Legal Bases for Processing</h3>
+      <ul>
+        <li><strong>Contract:</strong> Processing necessary to provide the forum service you signed up for</li>
+        <li><strong>Legitimate Interest:</strong> Security monitoring, fraud prevention, analytics</li>
+        <li><strong>Consent:</strong> Marketing emails, optional analytics, non-essential cookies</li>
+        <li><strong>Legal Obligation:</strong> Tax records, responses to lawful authority requests</li>
+      </ul>
+
+      <h3>10.3 Data Protection Officer</h3>
+      <p>If required by law, we have appointed a Data Protection Officer (DPO). Contact: <strong>dpo@[yourforum].com</strong></p>
+
+      <h3>10.4 Right to Lodge a Complaint</h3>
+      <p>If you believe we are processing your data unlawfully, you have the right to lodge a complaint with your national supervisory authority (e.g., ICO in the UK, CNIL in France, BfDI in Germany).</p>
+    </section>
+
+    <!-- 11 -->
+    <section class="section" id="s11">
+      <div class="section-header">
+        <span class="section-num">§ 11</span>
+        <h2>California Privacy Rights (CCPA)</h2>
+      </div>
+      <p>If you are a California resident, the California Consumer Privacy Act (CCPA) grants you the following additional rights:</p>
+      <ul>
+        <li><strong>Right to Know:</strong> Request disclosure of the categories and specific pieces of personal information collected about you</li>
+        <li><strong>Right to Delete:</strong> Request deletion of your personal information, subject to certain exceptions</li>
+        <li><strong>Right to Opt-Out of Sale:</strong> We do <strong>NOT</strong> sell personal information to third parties</li>
+        <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising your CCPA rights</li>
+      </ul>
+      <p>To exercise your California rights, submit a request to <strong>privacy@[yourforum].com</strong> or use the Data Request form in your Account Settings.</p>
+    </section>
+
+    <!-- 12 -->
+    <section class="section" id="s12">
+      <div class="section-header">
+        <span class="section-num">§ 12</span>
+        <h2>Your Responsibilities for Account Security</h2>
+      </div>
+      <p>While we implement strong security measures, you also play a role in keeping your account safe:</p>
+      <ul>
+        <li>Use a strong, unique password for your forum account</li>
+        <li>Enable two-factor authentication (2FA) for additional protection</li>
+        <li>Never share your password with anyone — forum staff will never ask for it</li>
+        <li>Log out of shared or public computers after each session</li>
+        <li>Report suspicious activity immediately to <strong>support@[yourforum].com</strong></li>
+        <li>Keep your registered email address up to date for account recovery</li>
+      </ul>
+    </section>
+
+    <!-- 13 -->
+    <section class="section" id="s13">
+      <div class="section-header">
+        <span class="section-num">§ 13</span>
+        <h2>Data Breach Notification</h2>
+      </div>
+      <p>In the event of a data breach likely to result in risk to your rights, we will:</p>
+      <ul>
+        <li>Notify the relevant supervisory authority <strong>within 72 hours</strong> of becoming aware (GDPR requirement)</li>
+        <li>Notify affected users directly via email within 72 hours where the breach poses high risk</li>
+        <li>Provide a description of the breach, the data involved, and recommended actions you can take</li>
+        <li>Maintain an internal register of all breaches, whether or not notification was required</li>
+      </ul>
+    </section>
+
+    <!-- 14 -->
+    <section class="section" id="s14">
+      <div class="section-header">
+        <span class="section-num">§ 14</span>
+        <h2>Changes to This Privacy Policy</h2>
+      </div>
+      <p>We may update this Privacy Policy from time to time. When we make significant changes, we will:</p>
+      <ul>
+        <li>Post the updated policy with a new effective date</li>
+        <li>Notify registered users via email at least <strong>30 days</strong> before changes take effect</li>
+        <li>Display a prominent notice on the forum homepage for at least 14 days</li>
+      </ul>
+      <p>Your continued use of our forum after the effective date constitutes acceptance of the changes. If you disagree, you may close your account before the changes take effect.</p>
+    </section>
+
+    <!-- 15 -->
+    <section class="section" id="s15">
+      <div class="section-header">
+        <span class="section-num">§ 15</span>
+        <h2>Contact Us</h2>
+      </div>
+      <p>If you have any questions, concerns, or requests regarding this Privacy Policy, reach us through any of the following:</p>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="cc-icon">🔒</div>
+          <div class="cc-label">Privacy Inquiries</div>
+          <div class="cc-value">privacy@[yourforum].com</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">📋</div>
+          <div class="cc-label">Data Requests</div>
+          <div class="cc-value">Account Settings → Data Export</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">🛡️</div>
+          <div class="cc-label">Data Protection Officer</div>
+          <div class="cc-value">dpo@[yourforum].com</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">🔐</div>
+          <div class="cc-label">Security Vulnerabilities</div>
+          <div class="cc-value">security@[yourforum].com</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">🏢</div>
+          <div class="cc-label">Mailing Address</div>
+          <div class="cc-value">[YOUR COMPANY NAME], [ADDRESS]</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">🌐</div>
+          <div class="cc-label">Contact Form</div>
+          <div class="cc-value">[YOUR WEBSITE URL]/contact</div>
+        </div>
+      </div>
+      <p style="margin-top:1rem;">We aim to respond to all privacy-related inquiries within <strong>5 business days</strong>, and to fulfil all data subject requests within <strong>30 calendar days</strong>.</p>
+    </section>
+  <!-- FOOTER -->
+  <footer class="doc-footer">
+    <div class="footer-row">
+      <div>
+        <strong style="color:rgba(255,255,255,0.7)">[YOUR FORUM NAME] — Privacy Policy</strong><br>
+        Version 1.0 &nbsp;·&nbsp; Effective May 21, 2025 &nbsp;·&nbsp; © 2025 [Your Company]. All rights reserved.<br>
+        Prepared in compliance with GDPR (EU 2016/679), CCPA (California), and international data protection best practices.
+      </div>
+      <div class="footer-tags">
+        <span class="footer-tag">GDPR</span>
+        <span class="footer-tag">CCPA</span>
+        <span class="footer-tag">PCI-DSS</span>
+        <span class="footer-tag">AES-256</span>
+        <span class="footer-tag">TLS 1.3</span>
+        <span class="footer-tag">Argon2id</span>
+      </div>
+    </div>
+  </footer>
+
+<!-- BACK TO TOP -->
+<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+  // Back to top visibility
+  window.addEventListener('scroll', () => {
+    document.getElementById('backTop').classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+//////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-eyebrow">ሕጋዊ ሰነድ</div>
+    <h1>[የፎረሙ ስም]<br><span>የግላዊነት ፖሊሲ</span></h1>
+    <p class="hero-sub">የእርስዎን ግላዊ መረጃ ለመጠበቅ ቁርጠኝነት አለን። ይህ ሰነድ ምን እንሰበስባለን፣ ለምን እንሰበስባለን፣ እና እንዴት ደህንነቱ በተጠበቀ ሁኔታ እንይዘዋለን የሚለውን ያብራራል።</p>
+    <div class="hero-badges">
+      <span class="badge badge-outline">📅 ተፈፃሚ ቀን፡ ግንቦት ፲፬ ቀን ፳፻፲፯</span>
+      <span class="badge badge-outline">🔄 ስሪት 1.0</span>
+      <span class="badge badge-gold">⚖️ GDPR ተኳሃኝ</span>
+      <span class="badge badge-gold">🔒 CCPA ተኳሃኝ</span>
+    </div>
+  </header>
+
+  <!-- NOTICE -->
+  <div class="notice" role="note">
+    <strong>⚠ አስፈላጊ ማሳሰቢያ</strong>
+    <p>ይህ የግላዊነት ፖሊሲ <strong>[የፎረሙ ስም]</strong> በ<strong>[የድህረ ገጽዎ አድራሻ]</strong> ያለውን የፎረም መድረካችንን ሲጠቀሙ ግላዊ መረጃዎን እንዴት እንሰበስብ፣ እንጠቀም፣ እናከማችና እንጠብቅ እንደሆነ ይቆጣጠራል። ምዝገባ ሲያደርጉ ወይም አገልግሎታችንን ሲጠቀሙ ለዚህ ፖሊሲ ተስማምተዋል ማለት ነው። ካልተስማሙ፣ አገልግሎታችንን አይጠቀሙ።</p>
+  </div>
+
+  <!-- CONTENT -->
+    <!-- 1 -->
+    <section class="section" id="s1">
+      <div class="section-header">
+        <span class="section-num">§ 01</span>
+        <h2>የምንሰበስባቸው መረጃዎች</h2>
+      </div>
+      <p>የፎረም መድረካችንን ውጤታማ እና ደህንነቱ በተጠበቀ ሁኔታ ለማስተዳደር የተለያዩ ምድቦችን መረጃ እንሰበስባለን።</p>
+
+      <h3>1.1 የሂሳብ ምዝገባ መረጃ</h3>
+      <ul>
+        <li>የተጠቃሚ ስም እና ማሳያ ስም</li>
+        <li>የኢሜይል አድራሻ</li>
+        <li>የሂሳብ ቃል (በምስጠራ ሃሽ ተከማችቷል — ፈጽሞ ሳይምስጠር አይቀመጥም)</li>
+        <li>የሂሳብ መፈጠሪያ ቀን</li>
+        <li>የምስል ፎቶ (አማራጭ)</li>
+        <li>የሕይወት ታሪክ እና ቦታ (አማራጭ፣ እርስዎ ካቀረቡ)</li>
+      </ul>
+
+      <h3>1.2 የእንቅስቃሴ እና ይዘት መረጃ</h3>
+      <ul>
+        <li>የሚጠይቋቸው ጥያቄዎች፣ መልሶች፣ አስተያየቶች እና ማስተካከያዎች</li>
+        <li>ድምፆቻ፣ ምልክቶቻ እና ቁጥጥር እርምጃዎቻ</li>
+        <li>የዝና ነጥቦቻ እና ሽልማቶቻ</li>
+        <li>የሚከተሏቸው መለያዎች እና ርዕሶች</li>
+        <li>የግል መልዕክቶች (ፎረሙ ይህን ባህሪ ካለው)</li>
+      </ul>
+
+      <h3>1.3 የክፍያ መረጃ</h3>
+      <ul>
+        <li>የክፍያ ስም እና አድራሻ</li>
+        <li>የግብይት መታወቂያዎች እና የክፍያ ሁኔታ</li>
+        <li><strong>የክሬዲት/ዴቢት ካርድ ዝርዝሮች</strong> — ጥሬ የካርድ መረጃ አናከማችም። ክፍያዎች PCI-DSS ተኳሃኝ ሦስተኛ ወገን አቅራቢዎች (Stripe ወይም PayPal) ይሰናዳሉ። ሚስጥራዊ ያልሆኑ የግብይት መዝገቦችን ብቻ እናስቀምጣለን።</li>
+      </ul>
+
+      <h3>1.4 ቴክኒካዊ እና አጠቃቀም መረጃ</h3>
+      <ul>
+        <li>የIP አድራሻ እና ቅርብ ቦታ</li>
+        <li>የአሳሽ አይነት፣ ስሪት እና ስርዓተ ክወና</li>
+        <li>የመሳሪያ አይነት (ዴስክቶፕ፣ ሞባይል፣ ታብሌት)</li>
+        <li>የጎበኟቸው ገፆች፣ የፍለጋ ጥያቄዎችና ያሳለፉት ጊዜ</li>
+        <li>የሪፈሩ URLዎች እና የስህተት/ብልሽት ሪፖርቶች</li>
+      </ul>
+
+      <h3>1.5 ኩኪዎች እና ትራኪንግ ቴክኖሎጂዎች</h3>
+      <ul>
+        <li>የክፍለ ጊዜ ኩኪዎች (ለመግቢያ ሥራ አስፈላጊ)</li>
+        <li>የምርጫ ኩኪዎች (ቅንብሮችዎን ለማስታወስ)</li>
+        <li>የትንታኔ ኩኪዎች (ለምሳሌ Google Analytics — መውጣት ይቻላል)</li>
+        <li>የደህንነት ኩኪዎች (ማጭበርበርን/አላግባብ ለመለየትና ለመከላከል)</li>
+      </ul>
+    </section>
+
+    <!-- 2 -->
+    <section class="section" id="s2">
+      <div class="section-header">
+        <span class="section-num">§ 02</span>
+        <h2>መረጃዎን እንዴት እንጠቀምበታለን</h2>
+      </div>
+      <p>መረጃዎን ከዚህ በታች ለተዘረዘሩ ዓላማዎች ብቻ እንጠቀምበታለን፣ ለእያንዳንዱ GDPR ህጋዊ መሰረቱ ተጠቅሷል፦</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ዓላማ</th><th>ህጋዊ መሰረት (GDPR)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>የፎረም መድረኩን ማቅረብ እና ማስተዳደር</td><td>የውል አፈፃፀም</td></tr>
+            <tr><td>የሂሳብ ማረጋገጫ እና ማሳወቂያ ኢሜይሎችን መላክ</td><td>የውል አፈፃፀም</td></tr>
+            <tr><td>ለፕሪሚዬም አባልነቶች ክፍያዎችን ማስፈጸም</td><td>የውል አፈፃፀም</td></tr>
+            <tr><td>ስፓምን፣ አላግባብ አጠቃቀምን እና ያልተፈቀደ መዳረሻን መከላከል</td><td>ህጋዊ ፍላጎት</td></tr>
+            <tr><td>ትንታኔ በኩል የጣቢያ አፈጻጸምን ማሻሻል</td><td>ህጋዊ ፍላጎት</td></tr>
+            <tr><td>ህጋዊ ግዴታዎችን ማክበር (ግብር፣ የፍርድ ቤት ትዕዛዞች)</td><td>ህጋዊ ግዴታ</td></tr>
+            <tr><td>አማራጭ ዜናዎች እና ማስታወቂያዎችን መላክ</td><td>ፈቃድ (ብቻ ቀደም ማስፈቀጃ)</td></tr>
+            <tr><td>ተሞክሮዎን ማበጀት (ለምሳሌ የሚመከሩ መለያዎች)</td><td>ህጋዊ ፍላጎት</td></tr>
+            <tr><td>ቁጥጥር እና የአጠቃቀም ውሎቻን ማስፈጸም</td><td>ህጋዊ ፍላጎት</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="section" id="s3">
+      <div class="section-header">
+        <span class="section-num">§ 03</span>
+        <h2>የመረጃ ደህንነት እና ምስጠራ</h2>
+      </div>
+      <p>ስለ እርስዎ የያዝነውን ሁሉ መረጃ ለመጠበቅ በኢንዱስትሪ ውስጥ ቀዳሚ ቴክኒካዊ እርምጃዎችን እንተገብራለን።</p>
+
+      <h3>3.1 የምስጠራ ደረጃዎች</h3>
+      <div class="enc-grid">
+        <div class="enc-card">
+          <div class="enc-icon">🔑</div>
+          <div class="enc-type">የሂሳብ ቃሎች</div>
+          <div class="enc-method">Argon2id ሃሺንግ</div>
+          <div class="enc-desc">OWASP-ሚመከር አንድ አቅጣጫ ሃሽ ልዩ ጨዉ ጋር። ፈጽሞ ሳይምስጠር አይቀመጥም፣ አይዘገብም ወይም አይተላለፍም።</div>
+        </div>
+        <div class="enc-card">
+          <div class="enc-icon">💳</div>
+          <div class="enc-type">የክፍያ ካርዶች</div>
+          <div class="enc-method">PCI-DSS በ Stripe/PayPal</div>
+          <div class="enc-desc">ጥሬ የካርድ ቁጥሮችን አናከማችም። ሙሉ በሙሉ ለ PCI-DSS ደረጃ 1 ምስክርነት ያላቸው አቅራቢዎች ብቻ ነው የሚሰናዳው።</div>
+        </div>
+        <div class="enc-card">
+          <div class="enc-icon">🗄️</div>
+          <div class="enc-type">ዕረፍተ ቦታ መረጃ</div>
+          <div class="enc-method">AES-256-GCM</div>
+          <div class="enc-desc">ሁሉም ሚስጥራዊ PII እና የዳታቤዝ ምትኬዎች NIST FIPS 140-2 ደረጃ በ AES-256 ምስጠራ ይጠበቃሉ።</div>
+        </div>
+        <div class="enc-card">
+          <div class="enc-icon">🌐</div>
+          <div class="enc-type">ማስተላለፊያ መረጃ</div>
+          <div class="enc-method">TLS 1.3 (HTTPS)</div>
+          <div class="enc-desc">ሁሉም ግንኙነቶች HTTPS ላይ ይፈጸማሉ። HTTP ዘወትር ይዞራል። HSTS ነቃ።</div>
+        </div>
+        <div class="enc-card">
+          <div class="enc-icon">🎟️</div>
+          <div class="enc-type">የክፍለ ጊዜ ቶከኖች</div>
+          <div class="enc-method">HMAC-SHA256</div>
+          <div class="enc-desc">አጭር ዕድሜ ያላቸው፣ HttpOnly፣ Secure-ምልክት ያለባቸው ኩኪዎች። ከዕረፍቱ በኋላ ዘወትር ይቋረጣሉ።</div>
+        </div>
+        <div class="enc-card">
+          <div class="enc-icon">🔐</div>
+          <div class="enc-type">ሁለት ደረጃ ማረጋገጥ</div>
+          <div class="enc-method">TOTP / Authenticator</div>
+          <div class="enc-desc">ለሁሉም ሂሳቦች ሁለት ደረጃ ማረጋገጥ (2FA) ተጨማሪ የመግቢያ ደህንነት ይሰጣል።</div>
+        </div>
+      </div>
+
+      <h3>3.2 ተጨማሪ የደህንነት እርምጃዎች</h3>
+      <ul>
+        <li>የ brute-force ጥቃቶችን ለመከላከል የመግቢያ ሙከራ ፍጥነት ገደብ</li>
+        <li>መደበኛ የደህንነት ኦዲቶች እና የጥሰት ሙከራ</li>
+        <li>የሰራተኞቻ ወደ ግላዊ መረጃ ያለው ዳሶ ይዘገባል፣ ይፈተሻልና ለሚያስፈልጋቸው ብቻ ይወሰናል</li>
+        <li>ከዕረፍት ጊዜ በኋላ የክፍለ ጊዜ ቶከን ዘወትር ያበቃል</li>
+        <li>የተጋላጭነት ግለጣ ፕሮግራም — security@[yourforum].com ዘግቡ</li>
+      </ul>
+    </section>
+
+    <!-- 4 -->
+    <section class="section" id="s4">
+      <div class="section-header">
+        <span class="section-num">§ 04</span>
+        <h2>መረጃ ማጋራት እና ሦስተኛ ወገኖች</h2>
+      </div>
+      <p>ግላዊ መረጃዎን <strong>አንሸጥም</strong>፣ አናከራይም ወይም አንለዋወጥም። ከዚህ ሁኔታ ውጭ ሲኖር ብቻ ውሱን መረጃ ልናጋራ እንችላለን፦</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ሦስተኛ ወገን / ምድብ</th><th>የሚጋራ መረጃ</th><th>ዓላማ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>የክፍያ አሰናዳዮች (Stripe / PayPal)</td><td>የክፍያ ስም፣ የግብይት መረጃ</td><td>የክፍያ ሂደት</td></tr>
+            <tr><td>ክላውድ ሆስቲንግ (AWS / Azure)</td><td>ሁሉም የመድረክ መረጃ (ምስጠራ)</td><td>መሰረተ ልማት</td></tr>
+            <tr><td>ኢሜይል አገልግሎት (SendGrid)</td><td>ኢሜይል አድራሻ፣ የተጠቃሚ ስም</td><td>ግብይት ኢሜይሎች</td></tr>
+            <tr><td>ትንታኔ (Google Analytics)</td><td>ስሙ ያልተጠቀሰ አጠቃቀም፣ IP</td><td>የጣቢያ አፈጻጸም</td></tr>
+            <tr><td>የሕግ አስፈጻሚ (ሕጋዊ ሲጠየቅ)</td><td>አግባብ ያለው የሂሳብ መረጃ ብቻ</td><td>ሕጋዊ ፈቃድ</td></tr>
+            <tr><td>ደህንነት / CDN (Cloudflare)</td><td>IP አድራሻ፣ የጥያቄ ርዕሶች</td><td>DDoS ጥበቃ</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>ሁሉም ሦስተኛ ወገን አቅራቢዎች መረጃዎን ለመጠበቅ ሕጋዊ ግዴታ አለባቸው እና ለራሳቸው ግብይት ዓላማ እንዳይጠቀሙበት ተከልክለዋል።</p>
+    </section>
+
+    <!-- 5 -->
+    <section class="section" id="s5">
+      <div class="section-header">
+        <span class="section-num">§ 05</span>
+        <h2>መብቶችዎ</h2>
+      </div>
+      <p>በሚኖሩበት ሀገር ላይ ተመስርቶ ስለ ግላዊ መረጃዎ የሚከተሉት መብቶች አሉዎት፦</p>
+      <div class="rights-grid">
+        <div class="right-card">
+          <div class="right-icon">📋</div>
+          <div>
+            <div class="right-title">የማግኘት መብት</div>
+            <div class="right-desc">ስለ እርስዎ የምናስቀምጠውን ሁሉ የግላዊ መረጃ ቅጂ ማግኘት። የሂሳብ ቅንብሮች → መረጃ ወደ ውጭ መላክ።</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">✏️</div>
+          <div>
+            <div class="right-title">የማረም መብት</div>
+            <div class="right-desc">ትክክል ያልሆነ ወይም ያልተሟላ መረጃ ማስተካከል። መገለጫዎን ያርትዑ ወይም ያነጋግሩን።</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">🗑️</div>
+          <div>
+            <div class="right-title">የመሰረዝ መብት</div>
+            <div class="right-desc">ሂሳቦን እና ግላዊ መረጃዎን ለመሰረዝ ጥያቄ ያቅርቡ። የሂሳብ ቅንብሮች → ሂሳብ ሰርዝ።</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">📦</div>
+          <div>
+            <div class="right-title">የመረጃ ተንቀሳቃሽነት</div>
+            <div class="right-desc">መረጃዎን ሊነበብ በሚችል ቅርጸት (JSON/CSV) ይቀበሉ። የሂሳብ ቅንብሮች → መረጃ ወደ ውጭ መላክ።</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">🚫</div>
+          <div>
+            <div class="right-title">የማገድ መብት</div>
+            <div class="right-desc">በተወሰኑ ሁኔታዎች ውስጥ የመረጃ ሂደትን ገደብ ያድርጉ። privacy@[yourforum].com ኢሜይል ያድርጉ።</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">✋</div>
+          <div>
+            <div class="right-title">የመቃወም መብት</div>
+            <div class="right-desc">በህጋዊ ፍላጎቶች ላይ የተመሰረተ ሂደትን ይቃወሙ። privacy@[yourforum].com ኢሜይል ያድርጉ።</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">🔕</div>
+          <div>
+            <div class="right-title">ፈቃድ መሰናዶ</div>
+            <div class="right-desc">ዜናዎችን ወይም ትንታኔዎችን በማንኛውም ጊዜ ለቀቁ። የሂሳብ ቅንብሮች → ማሳወቂያዎች።</div>
+          </div>
+        </div>
+        <div class="right-card">
+          <div class="right-icon">⚖️</div>
+          <div>
+            <div class="right-title">ቅሬታ ማቅረብ</div>
+            <div class="right-desc">ብሔራዊ የመረጃ ጥበቃ ባለስልጣን (DPA) ዘንድ ቅሬታ ሁልጊዜ ማቅረብ ይቻላል።</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:1rem;">ሁሉንም የተረጋገጡ የመረጃ ጥያቄዎች በ<strong>30 ቀናት</strong> ውስጥ እናስተናግዳለን። ውስብስብ ጥያቄዎች ሲኖሩ ቀደምት ማስታወቂያ ሰጥተን እስከ 90 ቀን ሊያካትት ይችላል።</p>
+    </section>
+
+    <!-- 6 -->
+    <section class="section" id="s6">
+      <div class="section-header">
+        <span class="section-num">§ 06</span>
+        <h2>የመረጃ ማቆያ ጊዜ</h2>
+      </div>
+      <p>በዚህ ፖሊሲ ውስጥ ለተጠቀሱት ዓላማዎች አስፈላጊ በሆነ ጊዜ ብቻ መረጃዎን እናቆያለን፦</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>የመረጃ ምድብ</th><th>የማቆያ ጊዜ</th><th>ምክንያት</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ንቁ የሂሳብ መረጃ</td><td>የሂሳቦ ዘመን ሙሉ</td><td>አገልግሎት አቅርቦት</td></tr>
+            <tr><td>ልጥፎች እና አስተዋጽኦዎች (ህዝባዊ)</td><td>ለዘለዓለም፣ ሂሳቡ ቢሰረዝም</td><td>የማህበረሰብ እውቀት ቤት ታማኝነት</td></tr>
+            <tr><td>የክፍያ መዝገቦች</td><td>ከግብይቱ በኋላ 7 ዓመት</td><td>ግብር እና ህጋዊ ፈቃድ</td></tr>
+            <tr><td>የአገልጋይ / ዳሰሳ ምዝግቦች</td><td>90 ቀን</td><td>ደህንነት እና አላግባብ ምርመራ</td></tr>
+            <tr><td>የተሰረዘ ሂሳብ ግላዊ መረጃ</td><td>30 ቀን ከዚያ ይሰረዛል</td><td>ማጭበርበር ምርምር</td></tr>
+            <tr><td>ዝምተኛ ሂሳቦች (ምንም እንቅስቃሴ)</td><td>2 ዓመት ከዚያ ማሳወቂያ እና ስረዛ</td><td>የመረጃ ቅናሽ</td></tr>
+            <tr><td>ኢሜይል ደብዳቤዎች</td><td>3 ዓመት</td><td>ድጋፍ እና አለመግባባት ፍቺ</td></tr>
+            <tr><td>ምትኬ ቅጂዎች</td><td>90 ቀን ሽክርክሪ</td><td>አደጋ ሲያጋጥም ማቋቋሚያ</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>ስሙ ያልተጠቀሰ፣ ሊለዩ የማይችሉ መረጃዎች (ድምር ስታቲስቲክስ) ለምርምር እና ማሻሻያ ዓላማ ለዘለዓለም ሊቆዩ ይችላሉ።</p>
+    </section>
+
+    <!-- 7 -->
+    <section class="section" id="s7">
+      <div class="section-header">
+        <span class="section-num">§ 07</span>
+        <h2>የኩኪ ፖሊሲ</h2>
+      </div>
+      <p>የሚከተሉትን የኩኪ ምድቦች እንጠቀማለን። ዋና ያልሆኑ ኩኪዎችን የፈቃድ ሳጥናችን ወይም የአሳሽ ቅንብሮችዎ በኩል መቆጣጠር ይችላሉ።</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>የኩኪ አይነት</th><th>ምሳሌዎች</th><th>መቃወም ይቻላል?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ፈጽሞ አስፈላጊ</td><td>የመግቢያ ክፍለ ጊዜ፣ CSRF ቶከን፣ ደህንነት</td><td>አይደለም — ለመሰረታዊ ሥራ ያስፈልጋል</td></tr>
+            <tr><td>ተግባራዊ</td><td>ቀለም፣ ቋንቋ፣ የአርታዒ ምርጫዎች</td><td>አዎን — በኩኪ ቅንብሮች</td></tr>
+            <tr><td>ትንታኔ</td><td>Google Analytics፣ ገጽ እይታ ትራኪንግ</td><td>አዎን — በኩኪ ቅንብሮች ወይም አሳሽ</td></tr>
+            <tr><td>ክፍያ / ደህንነት</td><td>Stripe ማጭበርበር ፍለጋ፣ reCAPTCHA</td><td>አይደለም — ለክፍያ ደህንነት ያስፈልጋል</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>የምንጠቀምባቸውን ሁሉ ኩኪዎች ዝርዝር ለማወቅ <strong>[የድህረ ገጽዎ አድራሻ]/cookie-policy</strong> ይጎብኙ።</p>
+    </section>
+
+    <!-- 8 -->
+    <section class="section" id="s8">
+      <div class="section-header">
+        <span class="section-num">§ 08</span>
+        <h2>የሕፃናት ግላዊነት</h2>
+      </div>
+      <p>ፎረሙ ከ<strong>13</strong> ዓመት (ወይም በአውሮፓ ህብረት ከ<strong>16</strong> ዓመት) ዕድሜ ያነሱ ሕፃናትን ያነጣጠረ አይደለም። ከእነዚህ ዕድሜ ዕድሜ ያነሱ ሕፃናት ዘንድ ሆን ብለን ግላዊ መረጃ አንሰበስብም።</p>
+      <p>ወላጅ ወይም አሳዳጊ ሆነው ልጅዎ ሂሳብ እንደፈጠረ የሚያምኑ ከሆነ፣ ወዲያውኑ በ<strong>privacy@[yourforum].com</strong> ያነጋግሩን። ማረጋገጫ ሲደረስ ሂሳቡን እና ሁሉ ተዛማጅ ግላዊ መረጃን ውስጥ <strong>72 ሰዓታት</strong> እናሰርዛለን።</p>
+      <p>ከ13 እስከ 18 ዓመት ዕድሜ ያላቸው ተጠቃሚዎች የወላጅ ፈቃድ ካለ አገልግሎቱን መጠቀም ይችላሉ። ዕድሜዎ ከ18 ዓመት ዝቅ ካለ፣ ወላጅ ወይም አሳዳጊ ይህን የግላዊነት ፖሊሲ ያንብቦ እና ፈቃዱን እንደሰጠ ያረጋግጡ።</p>
+    </section>
+
+    <!-- 9 -->
+    <section class="section" id="s9">
+      <div class="section-header">
+        <span class="section-num">§ 09</span>
+        <h2>ዓለም አቀፍ የመረጃ ዝውውሮች</h2>
+      </div>
+      <p>አገልጋዮቻችን ከቤትዎ ሀገር ውጭ ሊቀመጡ ይችላሉ። መረጃ በዓለም አቀፍ ደረጃ ሲዘዋወር ተገቢ ጥበቃዎች መኖራቸውን እናረጋግጣለን፦</p>
+      <ul>
+        <li>በአውሮፓ ኮሚሽን ጸድቀው የወጡ ደረጃዊ ውል አንቀፆች (SCCs)</li>
+        <li>ተመጣጣኝ ጥበቃ እንዳላቸው ለሚታዩ ሀገሮች የፅቡቅ ውሳኔዎች</li>
+        <li>ተፈፃሚ ሲሆን አስገዳጅ የድርጅት ደንቦች</li>
+      </ul>
+    </section>
+
+    <!-- 10 -->
+    <section class="section" id="s10">
+      <div class="section-header">
+        <span class="section-num">§ 10</span>
+        <h2>GDPR — የአውሮፓ ህብረት ተጠቃሚዎች</h2>
+      </div>
+      <p>በኢዩ ወይም ኢኢኤ ውስጥ የሚኖሩ ከሆነ፣ አጠቃላይ የመረጃ ጥበቃ ደንብ (GDPR) ለግላዊ መረጃዎ ሂደት ተፈፃሚ ይሆናል።</p>
+
+      <h3>10.1 የመረጃ ተቆጣጣሪ</h3>
+      <p>ለ GDPR ዓላማ <strong>[የኩባንያዎ ስም]</strong> የመረጃ ተቆጣጣሪ ነው። ያግኙን፦ <strong>privacy@[yourforum].com</strong></p>
+
+      <h3>10.2 ለሂደት ህጋዊ መሰረቶች</h3>
+      <ul>
+        <li><strong>ውል፦</strong> ለተመዘገቡበት ፎረም አገልግሎት አስፈላጊ ሂደት</li>
+        <li><strong>ህጋዊ ፍላጎት፦</strong> የደህንነት ቁጥጥር፣ ማጭበርበር መከላከል፣ ትንታኔ</li>
+        <li><strong>ፈቃድ፦</strong> ግብይት ኢሜይሎች፣ አማራጭ ትንታኔ፣ ዋና ያልሆኑ ኩኪዎች</li>
+        <li><strong>ህጋዊ ግዴታ፦</strong> የግብር መዝገቦች፣ ሕጋዊ ለሆኑ ጥያቄዎች ምላሽ</li>
+      </ul>
+
+      <h3>10.3 የመረጃ ጥበቃ ኦፊሰር</h3>
+      <p>ሕጉ ሲያስፈልግ የመረጃ ጥበቃ ኦፊሰር (DPO) ሾምናል። ያግኙ፦ <strong>dpo@[yourforum].com</strong></p>
+
+      <h3>10.4 ቅሬታ የማቅረብ መብት</h3>
+      <p>መረጃዎን ሕገ-ወጥ ሁኔታ ላይ እየሰራነው ብለው ካሰቡ፣ ለብሔራዊ ቁጥጥር ባለስልጣን (ለምሳሌ በዩኬ ICO፣ በፈረንሳይ CNIL፣ በጀርመን BfDI) ቅሬታ የማቅረብ መብት አለዎት።</p>
+    </section>
+
+    <!-- 11 -->
+    <section class="section" id="s11">
+      <div class="section-header">
+        <span class="section-num">§ 11</span>
+        <h2>የካሊፎርኒያ ምስጢራዊነት መብቶች (CCPA)</h2>
+      </div>
+      <p>የካሊፎርኒያ ነዋሪ ከሆኑ፣ የካሊፎርኒያ ተጠቃሚ ምስጢራዊነት ህግ (CCPA) ተጨማሪ መብቶችን ይሰጥዎታል፦</p>
+      <ul>
+        <li><strong>የማወቅ መብት፦</strong> ስለ እርስዎ ስለሰበሰብናቸው ምድቦች እና ልዩ ግላዊ መረጃ ይፋ እንዲሆን ይጠይቁ</li>
+        <li><strong>የመሰረዝ መብት፦</strong> ከተወሰኑ ልዩ ሁኔታዎች በስተቀር ግላዊ መረጃዎን ይሰርዙ</li>
+        <li><strong>ሽያጩን የመቃወም መብት፦</strong> ግላዊ መረጃን ለሦስተኛ ወገን <strong>አንሸጥም</strong></li>
+        <li><strong>ያለ መድሎ የመቆም መብት፦</strong> CCPA መብቶቻን ስለሚጠቀሙ አናገለናቸውም</li>
+      </ul>
+      <p>የካሊፎርኒያ መብቶቻን ለመጠቀም ጥያቄ ያቅርቡ፦ <strong>privacy@[yourforum].com</strong> ወይም የሂሳብ ቅንብሮች → የመረጃ ጥያቄ ፎርም።</p>
+    </section>
+
+    <!-- 12 -->
+    <section class="section" id="s12">
+      <div class="section-header">
+        <span class="section-num">§ 12</span>
+        <h2>ሂሳቦ ደህንነት ሃላፊነትዎ</h2>
+      </div>
+      <p>ጠንካራ የደህንነት እርምጃዎችን ስንተገብር ሂሳቦን ለመጠበቅ እርስዎም ሚና ይጫወታሉ፦</p>
+      <ul>
+        <li>ለፎረም ሂሳቦ ጠንካራ፣ ልዩ የሂሳብ ቃል ይጠቀሙ</li>
+        <li>ተጨማሪ ጥበቃ ለማግኘት ሁለት ደረጃ ማረጋገጥ (2FA) ያብሩ</li>
+        <li>ፈጽሞ የሂሳብ ቃልዎን ለማንም አይስጡ — የፎረም ሰራተኞች ፈጽሞ አይጠይቁም</li>
+        <li>የጋራ ወይም ህዝባዊ ኮምፒዩተሮች ከተጠቀሙ በኋላ ዘወትር ይውጡ</li>
+        <li>አጠራጣሪ እንቅስቃሴ ካዩ ወዲያው support@[yourforum].com ያሳውቁ</li>
+        <li>ሂሳብ ማቋቋሚያ ምዝዙ ኢሜይልዎ ዘመናዊ ሆኖ ይቆይ</li>
+      </ul>
+    </section>
+
+    <!-- 13 -->
+    <section class="section" id="s13">
+      <div class="section-header">
+        <span class="section-num">§ 13</span>
+        <h2>የመረጃ ጥሰት ማሳወቂያ</h2>
+      </div>
+      <p>መብቶቻን አደጋ ሊያደርስ የሚችል የመረጃ ጥሰት ቢፈጠር፦</p>
+      <ul>
+        <li>ያወቅንበት ጊዜ ጀምሮ <strong>ውስጥ 72 ሰዓታት</strong> ለሚመለከታቸው ቁጥጥር ባለስልጣናት ማሳወቂያ (GDPR ግዴታ)</li>
+        <li>ጥሰቱ ከፍ ያለ አደጋ ሲፈጥር ውስጥ 72 ሰዓታት ለተጠቃሚዎች ቀጥታ ኢሜይል ማሳወቂያ</li>
+        <li>ስለ ጥሰቱ ዝርዝር፣ ስለ ተጠቁ መረጃ እና ሊወሰዱ ስለሚገቡ እርምጃዎች ማሳወቂያ</li>
+        <li>ሁሉም ጥሰቶች ማሳወቂያ ሚያስፈልጋቸው든 አይደሉም ሳይለይ ውስጣዊ መዝገብ ይቀመጣሉ</li>
+      </ul>
+    </section>
+
+    <!-- 14 -->
+    <section class="section" id="s14">
+      <div class="section-header">
+        <span class="section-num">§ 14</span>
+        <h2>ለዚህ የግላዊነት ፖሊሲ ለውጦች</h2>
+      </div>
+      <p>ይህን የግላዊነት ፖሊሲ አልፎ አልፎ ልናዘምነው እንችላለን። ጉልህ ለውጦች ሲኖሩ፦</p>
+      <ul>
+        <li>ዘምኖ ፖሊሲውን አዲስ ተፈፃሚ ቀን ጋር እናስቀምጠዋለን</li>
+        <li>ምዝጉ ተጠቃሚዎችን ለውጦቹ ከሚፀናሉ ቢያንስ <strong>30 ቀናት</strong> ቀደም ኢሜይል ማሳወቂያ ይደርሳቸዋል</li>
+        <li>ቢያንስ 14 ቀናት ለ ፎረሙ ዋና ገጽ ላይ ጎላ ያለ ማሳወቂያ ይቀመጣል</li>
+      </ul>
+      <p>ለውጦቹ ከፀናሉ ቀን ጀምሮ ፎረሙን መጠቀምዎ ቀጥሉ ማለት ለለውጦቹ ፈቃዳቸውን ሰጥተዋል ማለት ነው። ካልተስማሙ ለውጦቹ ከፀናሉ ቀደም ሂሳቦን ሊዘጉ ይችላሉ።</p>
+    </section>
+
+    <!-- 15 -->
+    <section class="section" id="s15">
+      <div class="section-header">
+        <span class="section-num">§ 15</span>
+        <h2>እኛን ያግኙ</h2>
+      </div>
+      <p>ስለዚህ የግላዊነት ፖሊሲ ወይም ስለ መረጃ አሰራራችን ጥያቄ፣ ስጋት ወይም ጥያቄ ካለዎት፣ ከሚከተሉት በኩል ያናግሩን፦</p>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="cc-icon">🔒</div>
+          <div class="cc-label">ምስጢራዊነት ጥያቄዎች</div>
+          <div class="cc-value">privacy@[yourforum].com</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">📋</div>
+          <div class="cc-label">የመረጃ ጥያቄዎች</div>
+          <div class="cc-value">የሂሳብ ቅንብሮች → መረጃ ወደ ውጭ</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">🛡️</div>
+          <div class="cc-label">የመረጃ ጥበቃ ኦፊሰር</div>
+          <div class="cc-value">dpo@[yourforum].com</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">🔐</div>
+          <div class="cc-label">የደህንነት ችግሮች</div>
+          <div class="cc-value">security@[yourforum].com</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">🏢</div>
+          <div class="cc-label">የፖስታ አድራሻ</div>
+          <div class="cc-value">[የኩባንያዎ ስም]፣ [አድራሻ]</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">🌐</div>
+          <div class="cc-label">የኮምፒዩተር ፎርም</div>
+          <div class="cc-value">[የድህረ ገጽዎ አድራሻ]/contact</div>
+        </div>
+      </div>
+      <p style="margin-top:1rem;">ሁሉ ከምስጢራዊነት ጋር ዝማሪ ጥያቄዎችን ውስጥ <strong>5 የሥራ ቀናት</strong> ምላሽ ለመስጠት፣ ሁሉ የርዕሰ ጉዳይ መረጃ ጥያቄዎችን ደግሞ ውስጥ <strong>30 የቀን አቆጣጠር ቀናት</strong> ለማጠናቀቅ ጥረት እናደርጋለን።</p>
+    </section>
+  <!-- FOOTER -->
+  <footer class="doc-footer">
+    <div class="footer-row">
+      <div>
+        <strong style="color:rgba(255,255,255,0.75)">[የፎረሙ ስም] — የግላዊነት ፖሊሲ</strong><br>
+        ስሪት 1.0 &nbsp;·&nbsp; ተፈፃሚ ቀን ግንቦት ፲፬ ቀን ፳፻፲፯ &nbsp;·&nbsp; © 2025 [ኩባንያዎ]። ሁሉ መብቶች የተጠበቁ ናቸው።<br>
+        ሰነዱ GDPR (ኢዩ 2016/679)፣ CCPA (ካሊፎርኒያ) እና ዓለም አቀፍ የመረጃ ጥበቃ ምርጥ ተሞክሮዎችን ተኳሃኝ ሆኖ ተዘጋጅቷል።
+      </div>
+      <div class="footer-tags">
+        <span class="footer-tag">GDPR</span>
+        <span class="footer-tag">CCPA</span>
+        <span class="footer-tag">PCI-DSS</span>
+        <span class="footer-tag">AES-256</span>
+        <span class="footer-tag">TLS 1.3</span>
+        <span class="footer-tag">Argon2id</span>
+      </div>
+    </div>
+  </footer>

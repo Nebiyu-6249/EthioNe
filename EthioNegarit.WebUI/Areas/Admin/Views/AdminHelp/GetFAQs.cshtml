@@ -1,0 +1,51 @@
+﻿@model EthioNegarit.WebUI.Areas.Admin.ViewModels.ListFAQViewModel
+
+<div class="panell">
+    <div class="panel-heading">
+        @using (Html.BeginForm("Manage", "AdminHelp", FormMethod.Post))
+        {
+            @*   @Html.HiddenFor(x => x.PageIndex)*@
+            <div class="input-group tablesearch">
+                @Html.TextBoxFor(x => Model.Search, new { @class = "form-control" })
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Search</button>
+                </span>
+            </div>
+        }
+    </div>
+</div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row mb-4">
+                <div class="col-sm-12" id="accordion">
+                    @if (Model.Faqs != null)
+                    {
+                        foreach (var faq in Model.Faqs)
+                        {
+                            <div class="card card-primaryy card-warning card-outline">
+                                <a class="d-block w-100" data-toggle="collapse" href="#collapse-@faq.Id">
+                                    <div class="card-header">
+                                        <h4 class="card-title w-100">
+                                            @faq.Question
+                                        </h4>
+                                    </div>
+                                </a>
+                                <div id="collapse-@faq.Id" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                        @Html.Raw(@faq.Replay)
+                                    </div>
+                                    <div class="card-footerr submit-holder  float-right">
+                                        <div class="btn-group" role="group">
+                                            <a href="@Url.Action("Edit", new {id = faq.Id })" role="button" class="btn btn-sm btn-success">Edit</a>
+                                            <a href="@Url.Action("DeleteFAQ", new {id = faq.Id })" role="button" class="btn btn-sm btn-danger" >Delete</a>
+                                            @*     <a href="@Url.Action("Delete", new { id = @faq.Id })" role="button" class="btn btn-mvc-green">Delete</a>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>

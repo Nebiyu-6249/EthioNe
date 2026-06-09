@@ -1,0 +1,83 @@
+﻿@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.ViewModels
+@model TagTopicsViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = string.Concat(Html.LanguageString("Topic.DiscussionTaggedWith"), Model.Tag);
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+    ViewBag.Canonical = Html.Raw(AppHelpers.CanonicalPagingTag(totalCount, Html.Settings().TopicsPerPage, Html));
+
+    // Email subscription
+    var subScribe = string.Empty;
+    var unSubscribe = string.Empty;
+    const string displayNone = "style='display:none;'";
+    if (Model.IsSubscribed)
+    {
+        subScribe = displayNone;
+    }
+    else
+    {
+        unSubscribe = displayNone;
+    }
+}
+<div class="popup popup-top">
+</div>
+<div class="page-header">
+    <span class="width-50">
+        @ViewBag.Title
+    </span>
+    <span class="">
+        @if (Html.CurrentMember() != null && Html.Settings().EnableEmailSubscriptions)
+        {
+            <a @Html.Raw(subScribe) href="#" class="emailsubscription" data-id="@Model.TagId" data-type="tag">
+                <i class="ethicon far fa-star yellow-colour" aria-hidden="true"></i>
+                <span class="d-none d-sm-inline-block">
+                    @Html.LanguageString("Topic.Subscribe")
+                </span>
+                        </a>
+                            <a @Html.Raw(unSubscribe) href="#" class="emailunsubscription" data-id="@Model.TagId" data-type="tag">
+                                <i class="ethicon fas fa-star yellow-colour" aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline-block">
+                                    @Html.LanguageString("Topic.UnSubscribe")
+                                </span>
+                            </a>
+        }
+        </span>
+
+        <span class="width-25">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.Action("CreateTopicButton", "Topic")
+            }
+        </span>
+    </div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-sm-9">
+                <ul class="contents-list">
+                    @foreach (var topic in Model.Topics)
+                    {
+                        <li class="content-fluid">
+                            @{
+                                Html.RenderPartial("_Topic", topic);
+                            }
+                        </li>
+                                }
+                </ul>
+                    @if (Model.TotalPages > 1)
+                    {
+                        <ul>
+                            <li class="pagination">
+                                @Html.Pager(Convert.ToInt32(Model.PageIndex), Html.Settings().TopicsPerPage, totalCount, null)
+                            </li>
+                        </ul>
+                    }
+</section>
+
+            <section class="col-sm-3 side-panel">
+               @Html.Partial("_CommonSideNav")
+            </section>
+        </div>
+    </div>
+</section>

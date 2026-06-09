@@ -1,0 +1,181 @@
+﻿@using EthioNegarit.WebUI.Application.ExtensionMethods
+@using EthioNegarit.WebUI.ViewModels
+@model MemberFrontEndEditViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Html.LanguageString("Members.EditProfile");
+   var settings = Html.Settings();
+}
+
+@section Header
+{
+    <script type="text/javascript">
+        $.ajax({
+            url: app_base + 'Badge/ProfileBadgeCheck',
+            type: 'POST',
+            error: function (xhr, ajaxOptions, thrownError) {
+                ShowUserMessage("Error: " + xhr.status + " " + thrownError);
+            }
+        });
+    </script>
+}
+<!-- Page header -->
+    <div class="page-header">
+        <span class="width-50">
+           @Html.LanguageString("Members.EditProfile")
+        </span>
+        <span class="width-50 changepasswordtext">
+            <a href="@Url.Action("ChangePassword", "Members")" class="">
+                @Html.LanguageString("Members.ChangePassword.Title")
+            </a>
+            @*    @Html.Raw(string.Format(Html.LanguageString("Members.ChangePassword.Link"), string.Format("<a href=\"{0}\">{1}</a>", Url.Action("ChangePassword"), Html.LanguageString("Members.ChangePassword.Title"))))*@
+        </span>
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col-md-12 col-md-6 col-md-offset-3">
+                @using (Html.BeginForm("Edit", "Members", FormMethod.Post, new { enctype = "multipart/form-data", @class = "editmemberform" }))
+                {
+                    @Html.HiddenFor(x => Model.Id)
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                @Html.LabelFor(x => x.UserName)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.UserName)
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                @Html.LanguageString("Address.Label.Email")
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.LabelFor(x => x.Email)                       
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", type = "email" })
+                                @Html.ValidationMessageFor(x => x.Email)
+                            </div>
+                        </div>
+                        @if (!Model.DisableFileUploads)
+                {
+                            <div class="row membereditavatar">
+                                <div class="col-sm-2">
+                                    <img class="img-circle img-size-64 img-bordered-sm" src="@AppHelpers.MemberImage(Model.Avatar, Model.Email, Model.Id, SiteConstants.Instance.GravatarProfileSize)" alt="@Model.UserName">
+                                </div>
+                                <div class="col-sm-10">
+                                    @Html.LabelFor(x => x.Files)
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-default btn-sm btn-file">
+                                                @Html.LanguageString("Post.Browse") <input type="file" name="files" id="files" value="">
+                                            </span>
+                                        </span>
+                                        <input type="text" class="form-control form-control-sm" readonly="">
+                                    </div>
+                                    @Html.ValidationMessageFor(x => x.Files)
+                                </div>
+                            </div>
+                        }
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+
+                                @Html.LabelFor(x => x.Age)
+                            </div>
+                            <div class="col-sm-10">
+
+                                @Html.TextBoxFor(x => x.Age, new { @class = "form-control", type = "number" })
+                                @Html.ValidationMessageFor(x => x.Age)
+                           
+                        </div>
+                            </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">                         
+                            @Html.LabelFor(x => x.Location)
+                        </div>
+                                <div class="col-sm-10">                             
+                                @Html.TextBoxFor(x => x.Location, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Location)
+                            </div>
+                        </div>
+                        @if (Model.AmountOfPoints >= settings.PointsAllowedForExtendedProfile)
+                {
+                            <div class="row form-group">
+                                <div class="col-sm-2">
+                             
+                                @Html.LabelFor(x => x.Website)
+                            </div>
+                                <div class="col-sm-10">
+                               
+                                @Html.TextBoxFor(x => x.Website, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Website)
+                            </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-sm-2">
+                              
+                                @Html.LabelFor(x => x.Twitter)
+                            </div>
+                                <div class="col-sm-10">
+                              
+                                @Html.TextBoxFor(x => x.Twitter, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Twitter)
+                            </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-sm-2">
+                              
+                                @Html.LabelFor(x => x.Facebook)
+                            </div>
+                                <div class="col-sm-10">
+                               
+                                @Html.TextBoxFor(x => x.Facebook, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Facebook)
+                            </div>
+                            </div>
+
+                            if (settings.EnableSignatures)
+                            {
+                                <div class="row form-group">
+                                    <div class="col-sm-2">
+                                  
+                                    @Html.LabelFor(x => x.Signature)
+                                </div>
+                                    <div class="col-sm-10">
+
+                                        @Html.TextAreaFor(x => x.Signature, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.Signature)
+                                    </div>
+                                </div>
+                            }
+                        }
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                @Html.LabelFor(m => m.DisableEmailNotifications)
+                            </div>
+                            <div class="col-sm-9 float-right">
+                                <div class="form-group">
+                                    @Html.CheckBoxFor(m => m.DisableEmailNotifications)
+                                </div>
+                            </div>
+                        </div>
+                     @*   <div class="checkbox">
+        @using (Html.BeginLabelFor(m => m.DisableEmailNotifications, new { @class = "checkbox" }))
+        {
+            @Html.CheckBoxFor(m => m.DisableEmailNotifications)
+        }
+        @Html.ValidationMessageFor(m => m.DisableEmailNotifications)
+    </div>*@
+                        <div class="submit-holder">
+                            <button type="submit" class="btn btn-outline-success btn-block">@Html.LanguageString("Buttons.Save")</button>
+                        </div>
+                    </fieldset>
+                }
+            </div>
+        </div>
+    </div>
+</section>

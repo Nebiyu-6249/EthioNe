@@ -1,0 +1,123 @@
+﻿@using EthioNegarit.Utilities
+@using EthioNegarit.WebUI.ViewModels
+@model RecentActivityViewModel
+
+@if (Model.RecentActivity.RecentTopics.Any() || Model.RecentActivity.RecentCategories.Any() || Model.RecentActivity.RecentChatRoom.Any())
+    {
+       @* <div class="card collapsed-card">*@
+    <div class="card collapsed-card">      
+            <div class="card-header">
+                <h3 class="card-title">@Html.LanguageString("Topic.RecentlyVisited")</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        <div class="card-body p-2">
+            @if (Model.RecentActivity.RecentCategories.Any())
+                {      
+          <div class="card-header">
+        <h3 class="card-title text-sm float-right" title="Categories Browse">@Html.LanguageString("Layout.Nav.Categories")</h3>
+    </div>
+                    <ul class="contents-list contents-list-in-card">
+                        @foreach (var category in Model.RecentActivity.RecentCategories)
+                        {
+                        <li class="item pull-right-sm">
+                            <a id="@category.Category.Id" class="show-pop-delay" role="button" href="@Html.Raw(@category.Category.NiceUrl)" data-delay-show="300" data-delay-hide="1000" data-placement="left">
+                                <div class="category inline-item">
+                                    <div class="category-title">
+                                        @Html.Raw(@category.Category.Name)
+                                    </div>
+                                    @if (@category.Category.Topics.Count > 0)
+                                        {
+                                        <span class="ethicon pull-right">
+                                            <i class="far fa-comments"></i>
+                                            <span class="badge badge-default">
+                                                @category.Category.Topics.Count
+                                            </span>
+                                        </span>
+
+                                        }
+                                </div>
+                            </a>
+
+                            <div id="@category.Category.Id" class="webui-popover-content text-sm">
+                                <text>
+                                    @category.Category.Description
+                                </text>
+</div>
+
+                        </li>
+
+                                        }
+
+
+                    </ul>
+
+                                    }
+
+            @if (Model.RecentActivity.RecentTopics.Any())
+                {
+     <div class="card-header">
+        <h3 class="card-title text-sm float-right" title="Topics Visited">@Html.Lang("Layout.Nav.Topics")</h3>
+    </div>
+                    <ul class="contents-list contents-list-in-card">
+                                                @foreach (var topic in Model.RecentActivity.RecentTopics)
+                                                    {
+                                
+                        <li class="item">
+                            @{
+                                Html.RenderPartial("_topicAside", new TopicViewModel { Topic = topic.Topic});
+                            }                      
+                        </li>
+                                    }
+                    </ul>
+
+                                        }
+            @if (Model.RecentActivity.RecentChatRoom.Any())
+                {
+      
+                    <div class="card-header">
+                        <h3 class="card-title text-sm float-right" title="Chat Rooms">@Html.LanguageString("Layout.Nav.ChatRooms")</h3>
+                    </div>
+                    <ul class="contents-list contents-list-in-card">
+                        @foreach (var chatRoom in Model.RecentActivity.RecentChatRoom)
+                        {
+                            <li class="item">
+                                <div class="info-icon" title="Room Members">
+                                    <i class="fas fa-users text-muted text-sm"></i>
+                                    <span class="badge  badge-default">@chatRoom.ChatRoom.RoomMembersCount</span>
+                                </div>
+                                <div class="topic-side">
+                                    @{
+                                        var postToolTip = string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(@chatRoom.ChatRoom.Description), 50), "....");
+                                    }
+                                    <span class="date-time" title="Last Activity">
+
+                                        @DatesUI.GetPrettyDate(@chatRoom.ChatRoom.LastActive.ToString())
+                                    </span>
+                                    <span class="topic-title">
+                                        <a title="@postToolTip" href="@Html.Raw(@chatRoom.ChatRoom.NiceUrl)" class="">
+                                            @Html.Raw(chatRoom.ChatRoom.Name)
+                                        </a>
+                                    </span>
+                                    <span class="user-name">
+                                        <a href="@chatRoom.ChatRoom.NiceUrl" class="">
+                                            @Html.Raw(chatRoom.ChatRoom.Name)
+                                        </a>
+                                    </span>
+                                </div>
+                            </li>
+
+                                            }
+                    </ul>
+          
+                                    }
+        </div>
+
+
+
+    </div>
+                                        }
+     

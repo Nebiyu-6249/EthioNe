@@ -1,0 +1,133 @@
+﻿@using EthioNegarit.Core.Domain.Enums
+@using EthioNegarit.WebUI.ViewModels
+@model PaymentsListViewModel
+@{
+    ViewBag.Title = @Html.LanguageString("Layout.Nav.Payments");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+    var date = DateTime.UtcNow.AddDays(-AppConstants.RefundRequestPeriod);
+    var paymentsToRefund = Model.Payments.Where(x => x.DateSubmitted > date).ToList();
+}
+    <div class="page-header">
+        <span class="width-25 d-none d-sm-inline-block">
+            @ViewBag.Title
+        </span>
+@if (@paymentsToRefund.Any(x => x.PaymentStatus == PaymentStatus.Confirmed))
+{
+        <span class="width-25">
+            <a href="@Url.Action("Refund", "Payment")" class="">
+                <i class="ethicon fas fa-users"></i>
+                @Html.LanguageString("Payment.RefundRequest")
+            </a>
+        </span>
+}
+@if ((@totalCount - 1) > 0)
+{
+    <span class="search-box width-50">
+        <span class="input-group input-group-sm">
+            <input class="form-control" id="searchpayment" type="search" placeholder=@Html.LanguageString("Search.SearchPayments")>
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-sm">
+                    <i class="fas fa-search fa-fw"></i>
+                </button>
+            </span>
+        </span>
+    </span>
+}
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div id="confirmationMessage" class="text-xs float-right" style="color: Green"></div>
+        @if (Model.Payments.Any())
+        {
+            <div class="card-body table-responsive p-0">
+                <table class="table table-bordered table-striped table-head-fixed table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-muted text-center">@Html.LanguageString("Payment.Name")</th>
+                            <th class="text-muted text-center">@Html.LanguageString("Payment.AmountTransferred")</th>
+                            <th class="text-muted text-center">@Html.LanguageString("Payment.DateTransferred")</th>
+                            <th class="text-muted text-center">@Html.LanguageString("Payment.Bank")</th>                            
+                            <th class="text-muted text-center">@Html.LanguageString("Payment.Reference")</th>
+                            <th class="text-muted text-center">@Html.LanguageString("Payment.Duration")</th>
+                            <th class="text-muted text-center">@Html.LanguageString("Payment.Status")</th>
+                           <th colspan="2" class="text-muted text-center">@Html.LanguageString("Table.Action")</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymenttable">
+                        @foreach (var payment in Model.Payments)
+                        {
+                          
+                            <tr>
+                                <td class="text-muted text-center">
+                                    <a href="@payment.User.NiceUrl">@payment.User.UserName</a>
+                                </td>
+                                <td class="text-muted text-center">
+                                    @payment.Amount
+                                </td>
+                                <td class="text-muted text-center">
+                                    @if (@payment.DateTransfer != null)
+                                    {
+                                        @payment.DateTransfer.ToShortDateString()
+                                    }
+                                </td>
+                                <td class="text-muted text-center">
+                                    @payment.Bank
+                                </td>                              
+                                <td class="text-muted text-center">
+                                    @payment.Reference
+                                </td>
+                                <td class="text-muted text-center">
+                                    @payment.Month  @Html.LanguageString("Payment.Label.Month")
+                                </td>
+                                <td class="text-muted text-center">
+                                    @{
+                                        var paymentStatus = string.Concat("Status.", payment.PaymentStatus);
+                                       // var paymentStatus = string.Concat("Status.", "Active");
+                                        //   var displayName = string.Concat(partialKey, ".Name");
+                                    }
+                                    @Html.Lang(paymentStatus)
+                                  @*  @payment.PaymentStatus*@
+                                </td>
+                                    <td class="text-muted text-center">
+                                        @if (payment.PaymentStatus == PaymentStatus.Pending)
+                                        {
+                                            <a class="btn btn-sm" href="@Url.Action("Edit", "Payment", new { paymentId = @payment.Id })" title="Edit Payment">
+                                                <span class="fas fa-edit" style="color:blue">
+                                                </span>
+                                            </a>
+                                        }    
+                                        @if (payment.PaymentStatus == PaymentStatus.Pending || payment.PaymentStatus == PaymentStatus.Rejected)
+                                        {
+                                            <a class="paymentdeletelink" href="#" role="button" data-id="@payment.Id" data-deleteconfirmation="@(Html.LanguageString("Delete.Confirmation"))" data-paymentdeleted="@(Html.LanguageString("Payment.Deleted"))" title="Delete Payment">
+                                                <span class="fas fa-trash" aria-hidden="true" style="color:red"></span>
+                                            </a>
+                                        }   
+                                        @* @if (payment.PaymentStatus == PaymentStatus.Confirmed && payment.DateSubmitted.AddDays(-AppConstants.RefundRequestPeriod) >= DateTime.UtcNow)*@    
+                                       @if (payment.PaymentStatus == PaymentStatus.Confirmed)
+                                        {
+                                       <a href="@Url.Action("Invoice", "Payment", new { paymentId = payment.Id })" rel="noopener" target="_blank" class="btn btn-sm" title="@Html.LanguageString("Payment.Invoice.Print")">
+                                                <i class="fas fa-print" style="color:green"></i>
+                                            </a>
+                                       }                                  
+                                </td>                             
+                                </tr>
+                        }
+                    </tbody>
+                </table>
+                @if (@totalCount > SiteConstants.Instance.AdminListPageSize)
+                {
+                    <ul>
+                        <li class="pagination">
+                            @Html.Pager(Convert.ToInt32(Model.PageIndex), SiteConstants.Instance.AdminListPageSize, @totalCount, null)
+                        </li>
+                    </ul>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No Payments</p>
+        }
+    </div>
+</section>

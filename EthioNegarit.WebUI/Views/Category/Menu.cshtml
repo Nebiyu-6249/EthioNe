@@ -1,0 +1,92 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model List<CategorySectionViewModel>
+
+<div class="page-header">
+    <div class="row mb-0">
+        <div class="col-sm-9">
+            <h3 class="m-0 text-sm">Explore Categories With in Sections</h3>
+        </div><!-- /.col -->
+        <div class="col-sm-3 float-right">
+            <a href="@Url.Action("Index", "Section")"> more &raquo;</a>
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div>
+
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        @foreach (var sectionItem in Model.OrderBy(x => x.Section.SortOrder))
+            {
+                if (sectionItem.AllPermissionSets.Any() && sectionItem.Section.Categories.Count > 0)
+                {
+                <div class="card swiper-slide">
+                    <div class="card-header">
+                        <h3 class="text-sm text-center">@(sectionItem.Section.Name)</h3>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var cat in sectionItem.AllPermissionSets.Keys)
+                    {
+
+                        if (@cat.Category.Topics.Count >= 0)
+                        {
+                            var permissions = sectionItem.AllPermissionSets[cat];
+                                <ul class="contents-list category-list-in-card">
+                                    <li>
+                                        @Html.Partial("_categoryList", new CategoryViewModel
+                                   {
+                                       Category = cat.Category,
+                                       LatestTopic = cat.MostRecentTopic,
+                                       Permissions = permissions,
+                                       PostCount = cat.PostCount,
+                                       TopicCount = cat.TopicCount
+                                   })
+
+                                    </li>
+                                </ul>
+                            }
+                            @*    else
+                                                            {
+                                <p class="text-sm text-center">Coming Soon</p>
+                                                            }*@
+
+
+                        }
+                    </div>
+
+                    @if (sectionItem.Section.Categories.Count > 5)
+                    {
+                        <div class="card-footer text-center">
+                            <a href="#" class="uppercase">Show more &raquo</a>
+                            @*@Html.Raw(@sectionItem.Section.Id)*@
+                            @*href="@Html.Raw(@sectionItem.Section.NiceUrl)"*@
+                        </div><!-- /.card-footer -->
+                    }
+                </div>
+            }
+
+        }
+
+    </div>
+    @*       <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>*@
+    <div class="swiper-pagination"></div>
+</div>
+
+<!--SWIPER JS-->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        cssMode: true,
+        @* navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },*@
+        pagination: {
+            el: ".swiper-pagination",
+        },
+        mousewheel: true,
+        keyboard: true,
+    });
+</script>
+

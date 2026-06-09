@@ -1,0 +1,15 @@
+﻿
+<div class="bottom-message">
+    <p>
+        <a href="@Url.Action("Register", "Members")" routeValues null htmlAttributes new { id="registerLink" ,title=@Html.LanguageString("Layout.Nav.Register") }>
+            @Html.LanguageString("Layout.Nav.Register")
+        </a>
+        Or
+        <a href="@Url.Action("LogOn","Members")" routeValues null htmlAttributes new { id="loginLink" ,title=@Html.LanguageString("Layout.Nav.Logon") }>
+
+            <span class="text-muted text-sm">
+                @Html.LanguageString("Layout.Nav.Logon")
+            </span>
+        </a>
+    </p>
+</div>

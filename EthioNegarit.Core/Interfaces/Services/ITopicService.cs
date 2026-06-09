@@ -1,0 +1,71 @@
+﻿using EthioNegarit.Core.Domain.Entities;
+using EthioNegarit.Core.Domain.Enums;
+using EthioNegarit.Core.Domain.General;
+using EthioNegarit.Core.Interfaces.UnitOfWork;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
+
+namespace EthioNegarit.Core.Interfaces.Services
+{
+    public partial interface ITopicService
+    {
+       
+        Topic SanitizeTopic(Topic topic);
+        IList<Topic> GetAll(List<Category> allowedCategories);
+        IList<SelectListItem> GetAllSelectList(List<Category> allowedCategories, int amount);
+        IList<Topic> GetHighestViewedTopics(int amountToTake, List<Category> allowedCategories);
+        IList<Topic> GetPopularTopics(DateTime? from, DateTime? to, List<Category> allowedCategories, int amountToShow);
+        Topic Add(Topic topic);
+        IList<Topic> GetTodaysTopics(int amountToTake, List<Category> allowedCategories);
+      //  PagedList<Topic> GetRecentTopics(int pageIndex, int pageSize, int amountToTake, List<Category> allowedCategories);
+      //  IList<Topic> GetRecentTopics(int amountToTake, List<Category> allowedCategories);
+        IList<Topic> GetRecentRssTopics(int amountToTake, List<Category> allowedCategories);
+        IList<Topic> GetTopicsByUser(Guid memberId, List<Category> allowedCategories);
+        IList<Topic> GetTopicsByLastPost(List<Guid> postIds, List<Category> allowedCategories);
+        PagedList<Topic> GetPagedTopicsByCategory(int pageIndex, int pageSize, int amountToTake, Guid categoryId);
+        PagedList<Topic> GetPagedPendingTopics(int pageIndex, int pageSize, List<Category> allowedCategories);
+        IList<Topic> GetPendingTopics(List<Category> allowedCategories, MembershipRole usersRole, Guid userId);
+        IList<Topic> GetAllPendingTopics();
+      //  int GetPendingTopicsCount();
+        IList<Topic> GetRssTopicsByCategory(int amountToTake, Guid categoryId);
+        PagedList<Topic> GetPagedTopicsByTag(int pageIndex, int pageSize, int amountToTake, string tag, List<Category> allowedCategories);
+        IList<Topic> SearchTopics(int amountToTake, string searchTerm, List<Category> allowedCategories);
+        PagedList<Topic> GetTopicsByCsv(int pageIndex, int pageSize, int amountToTake, List<Guid> topicIds, List<Category> allowedCategories);
+       // PagedList<Topic> GetMembersActivity(int pageIndex, int pageSize, int amountToTake, Guid memberGuid, List<Category> allowedCategories);
+        IList<Topic> GetTopicsByCsv(int amountToTake, List<Guid> topicIds, List<Category> allowedCategories);
+        IList<Topic> GetSolvedTopicsByMember(Guid memberId, List<Category> allowedCategories);
+        Topic GetTopicBySlug(string slug);
+        Topic Get(Guid topicId);
+        List<Topic> Get(List<Guid> topicIds, List<Category> allowedCategories);
+        void Delete(Topic topic, IUnitOfWork unitOfWork);
+        int TopicCount(List<Category> allowedCategories);
+        Post AddLastPost(Topic topic, string postContent);
+        List<MarkAsSolutionReminder> GetMarkAsSolutionReminderList(int days);
+        /// <summary>
+        /// Mark a topic as solved
+        /// </summary>
+        /// <param name="topic"></param>
+        /// <param name="post"></param>
+        /// <param name="marker"></param>
+        /// <param name="solutionWriter"></param>
+        /// <returns>True if topic has been marked as solved</returns>
+        bool SolveTopic(Topic topic, Post post, MembershipUser marker, MembershipUser solutionWriter);
+        IList<Topic> GetAllTopicsByCategory(Guid categoryId , int amountToTake);
+      //  PagedList<Topic> GetPagedTopicsAll(int pageIndex, int pageSize, int amountToTake, List<Category> allowedCategories);
+        IList<Topic> GetTopicBySlugLike(string slug);
+        bool PassedTopicFloodTest(string topicTitle, MembershipUser user);
+
+       // List<Topic> GetTopics(List<Guid> topicIds, List<Category> allowedCategories);
+     
+        List<Topic> GetTopicNotifications(List<Guid> catIds, MembershipUser user);
+        PagedList<Topic> GetTopics(int pageIndex, int pageSize, int amountToTake, List<Category> allowedCategories, TopicViewOrder order);
+     
+        IList<Topic> GetNewsandEvent(int amountToTake, Guid categoryId);
+
+        IList<Topic> GetSuggestionTopics(DateTime? from, List<Guid> categoryIds, MembershipUser user, int amountToShow = 5);
+		PagedList<Topic> GetMembersDiscussion(int pageIndex, int pageSize, int amountToTake, Guid memberGuid, List<Category> allowedCategories);
+        PagedList<Topic> GetMembersActivity(int pageIndex, int pageSize, int amountToTake, Guid memberGuid, List<Category> allowedCategories);
+    }
+
+}

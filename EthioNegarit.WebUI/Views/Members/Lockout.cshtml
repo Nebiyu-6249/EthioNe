@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutFullWidth.cshtml";
+    ViewBag.Title = Html.Lang("Members.AccountLocked");
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="fullscreen flex-container">
+            <div class="content-center mt-44">
+                <div class="callout callout-danger">
+                    <h1 class="text-center red-colour">@ViewBag.title</h1>
+                    <p>@Html.Lang("Members.AccountLockedText") <span id="timer"></span>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+   let seconds = @ViewBag.RemainingSeconds;
+    const display = document.querySelector('#timer');
+    const timer = setInterval(() => {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        display.textContent = `${mins}m ${secs}s`;
+        if (--seconds < 0) {
+            clearInterval(timer);
+            display.textContent = "0m 0s (You can try again)";
+            window.location.href = ''
+         //   location.reload(); // Refresh to re-enable login
+        }
+    }, 1000);
+</script>

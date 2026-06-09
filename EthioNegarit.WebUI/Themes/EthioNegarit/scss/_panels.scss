@@ -1,0 +1,524 @@
+﻿//
+/*#region =================  Main Panel ================ */
+//
+
+.panel-footer {
+    line-height: 16px;
+    font-size: 16px;
+    font-weight: 300;
+    padding-top: 1px;
+    margin-top: 2rem;
+    margin-bottom: 0;
+    text-align: center;
+
+    ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+            list-style: none;
+            display: inline-block;
+            // padding: 0 10px 0 0;
+            padding: 20px;
+            font-size: 13px;
+        }
+    }
+}
+
+//
+/*#endregion ============== Main Panel End  ====================  */
+//
+//
+/*#region =================  Side  Panel ================ */
+//
+.side-panel {
+    display: block;
+    min-height: calc(100vh - #{$main-header-height} - #{$main-footer-height});
+    margin: 0;
+    padding: 3px;
+    background-color: $main-bg;
+    border: none;
+    z-index: $zindex-slide-out-panel;
+    @media (max-width: breakpoint-max(xs)) {
+        display: none;
+    }
+}
+
+.panel-header {
+    @include clearfix ();
+    position: relative;
+    background-color: transparent;
+   border-bottom: 1px solid $card-border-color;
+   // padding: (($card-spacer-y * .5) * 2) $card-spacer-x;
+   padding: 8px 0;
+    .title {
+        float: left;
+      //  font-size: $card-title-font-size;
+      //  font-weight: $card-title-font-weight;		
+        font-size: $font-size-sm;
+		 font-weight: $font-light-weight; 
+		color: lighten($dark, 15%);
+        margin: 0;
+    }
+}
+
+
+//Side-panel open state
+.side-panel-open {
+    @media (max-width: breakpoint-max(xs)) {
+        .side-panel {
+            position: fixed;
+            top: $main-header-height;
+            display: block;
+            &,
+            &::before {
+                right: 0;
+                @include transition( right $transition-speed $transition-fn, display $transition-speed $transition-fn );
+            }
+        }
+        .close-panel {
+            display: block;
+        }
+        .push-panel {
+            display: none;
+        }
+    }
+}
+.close-panel {
+    display: none;
+}
+
+//
+/*#endregion ============== Side Panel End  ====================  */
+//
+
+
+
+//
+/*#region =================  Slide-Out  Panel ================ */
+//
+.slide-out-panel-container {
+    position: fixed;
+    width: 90%;
+    height: calc(100vh - #{$main-header-height});
+    top: $main-header-height;
+    background-color: darken($gray-100, 6%);
+    z-index: $zindex-slide-out-panel;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-delay: 0.3s;
+    -moz-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+     @media (max-width: breakpoint-max(xs)) {
+          width: 100%;
+         }
+}
+
+.slide-out-panel::after { /* overlay layer */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    cursor: pointer;
+    -webkit-transition: background 0.3s 0.3s;
+    -moz-transition: background 0.3s 0.3s;
+    transition: background 0.3s 0.3s;
+}
+
+.slide-out-panel.is-visible {
+    visibility: visible;
+    -webkit-transition: visibility 0s 0s;
+    -moz-transition: visibility 0s 0s;
+    transition: visibility 0s 0s;
+}
+
+.slide-out-panel.is-visible::after {
+    background: rgba(0, 0, 0, 0.6);
+    -webkit-transition: background 0.3s 0s;
+    -moz-transition: background 0.3s 0s;
+    transition: background 0.3s 0s;
+}
+
+.slide-out-panel.is-visible .slide-out-close::before {
+    -webkit-animation: slide-out-close-1 0.6s 0.3s;
+    -moz-animation: slide-out-close-1 0.6s 0.3s;
+    animation: slide-out-close-1 0.6s 0.3s;
+}
+
+.slide-out-panel.is-visible .slide-out-close::after {
+    -webkit-animation: slide-out-close-2 0.6s 0.3s;
+    -moz-animation: slide-out-close-2 0.6s 0.3s;
+    animation: slide-out-close-2 0.6s 0.3s;
+}
+
+
+@-webkit-keyframes slide-out-close-1 {
+    0%, 50% {
+        -webkit-transform: rotate(0);
+    }
+
+    100% {
+        -webkit-transform: rotate(45deg);
+    }
+}
+
+@-moz-keyframes slide-out-close-1 {
+    0%, 50% {
+        -moz-transform: rotate(0);
+    }
+
+    100% {
+        -moz-transform: rotate(45deg);
+    }
+}
+
+@keyframes slide-out-close-1 {
+    0%, 50% {
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+        transform: rotate(0);
+    }
+
+    100% {
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+}
+
+@-webkit-keyframes slide-out-close-2 {
+    0%, 50% {
+        -webkit-transform: rotate(0);
+    }
+
+    100% {
+        -webkit-transform: rotate(-45deg);
+    }
+}
+
+@-moz-keyframes slide-out-close-2 {
+    0%, 50% {
+        -moz-transform: rotate(0);
+    }
+
+    100% {
+        -moz-transform: rotate(-45deg);
+    }
+}
+
+@keyframes slide-out-close-2 {
+    0%, 50% {
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+        transform: rotate(0);
+    }
+
+    100% {
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+}
+
+
+.slide-out-panel-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 70px 5%;
+    overflow: auto; /* smooth scrolling on touch devices */
+    -webkit-overflow-scrolling: touch;
+}
+
+.from-right {
+    .slide-out-panel-container {
+        box-shadow: -1px 0 1px 1px rgba(0, 0, 0, 0.08);
+        right: 0;
+        -webkit-transform: translate3d(100%, 0, 0);
+        -moz-transform: translate3d(100%, 0, 0);
+        -ms-transform: translate3d(100%, 0, 0);
+        -o-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+    }
+}
+
+.from-left {
+    .slide-out-panel-container {
+        left: 0;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        -moz-transform: translate3d(-100%, 0, 0);
+        -ms-transform: translate3d(-100%, 0, 0);
+        -o-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+.is-visible .slide-out-panel-container {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    transition-delay: 0s;
+}
+.slide-out-panel-header {
+    position: fixed;
+    width: 90%;
+    height: 50px;
+    line-height: 50px;
+    background-color: darken($gray-100, 6%);
+    z-index: $zindex-slide-out-panel +1;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+    -webkit-transition: top 0.3s 0s;
+    -moz-transition: top 0.3s 0s;
+    transition: top 0.3s 0s;
+}
+
+.slide-out-panel-header h6 {
+    padding-left: 5%;
+    font-size: 22px;
+    color: #424f5c;
+    padding-top: 1.4%;
+}
+
+.from-right .slide-out-panel-header, .from-left .slide-out-panel-header {
+    top: -50px;
+}
+
+.from-right .slide-out-panel-header {
+    right: 0;
+}
+
+.from-left .slide-out-panel-header {
+    left: 0;
+}
+
+.is-visible .slide-out-panel-header {
+  
+    top: $main-header-height;
+    -webkit-transition: top 0.3s 0.3s;
+    -moz-transition: top 0.3s 0.3s;
+    transition: top 0.3s 0.3s;
+}
+
+
+
+.slide-out-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 60px;
+    /* image replacement */
+    display: inline-block;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+}
+
+
+.slide-out-close::before, .slide-out-close::after {
+    /* close icon created in CSS */
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 20px;
+    height: 3px;
+    width: 20px;
+    background-color: #424f5c; /* this fixes a bug where pseudo elements are slighty off position */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.slide-out-close::before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.slide-out-close::after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.no-touch .slide-out-close:hover {
+    background-color: #424f5c;
+}
+
+.no-touch .slide-out-close:hover::before, .no-touch .slide-out-close:hover::after {
+    //  background-color: #ffffff;
+    background-color: darken($gray-100, 6%);
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+.no-touch .slide-out-close:hover::before {
+    -webkit-transform: rotate(220deg);
+    -moz-transform: rotate(220deg);
+    -ms-transform: rotate(220deg);
+    -o-transform: rotate(220deg);
+    transform: rotate(220deg);
+}
+
+.no-touch .slide-out-close:hover::after {
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+
+@include media-breakpoint-up(md) {
+    .slide-out-panel-container, .slide-out-panel-header {
+        width: 40%;
+    }
+}
+//
+/*#endregion ============== Slide-Out Panel End  ====================  */
+//
+
+
+//
+/*#region =================/*Component: Home Panel ================ */
+//
+
+.menu-panel {
+    position: relative;
+    margin: 2rem;
+    border-radius: 1rem;
+    height: 100px;
+}
+
+.main-menu {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.2rem;
+    margin: 2rem;
+
+    @media (max-width: breakpoint-max(xs)) {
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+
+
+.category-sections {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.2rem;
+    margin: 2rem;
+
+    @media (max-width: breakpoint-max(xs)) {
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+
+
+//
+/*#endregion ============== Home Panel End  ====================  */
+//
+
+
+//
+/*#region =================  Moderate Panel ================ */
+//
+
+
+// Moderate Topics and Posts
+.moderatepanel {
+    padding: 20px 0;
+}
+
+.moderatetopicholder, .moderatepostholder {
+    .topicsnippet {
+        padding: 0 0 12px 0;
+        margin: 0 0 12px 0;
+        border-bottom: 3px dotted #efefef;
+
+        h2 {
+            font-size: 17px;
+            padding: 0 0 0 0;
+            margin: 0 0 0 0;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        .postuser {
+            font-style: italic;
+        }
+    }
+}
+
+.moderatepostholder {
+    .postsnippet {
+        padding: 0 0 12px 0;
+        margin: 0 0 12px 0;
+        border-bottom: 3px dotted #efefef;
+
+        h2 {
+            font-size: 15px;
+            padding: 0;
+            margin: 0;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        .postuser {
+            font-style: italic;
+        }
+    }
+}
+
+//
+/*#endregion ============== Moderate Panel  End  ====================  */
+//
+@include dark-mode () {
+    .side-panel, .slide-out-panel-container {
+        background-color: $dark-main-bg;
+    }
+
+    .slide-out-panel-header {
+        background-color: lighten($dark, 10%);
+
+        h6 {
+            color: $gray-500;
+        }
+    }
+
+    .slide-out-close{
+       background-color: lighten($dark, 10%);
+     color: $gray-500;
+    }
+}

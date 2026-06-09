@@ -1,0 +1,54 @@
+﻿@using EthioNegarit.Utilities
+@using EthioNegarit.WebUI.ViewModels
+@model ChatRoomsViewModel
+
+@if (Model.ChatRooms.Any())
+    {
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                @Html.LanguageString("Layout.Nav.ChatRooms")
+            </h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body p-2">
+            <ul class="contents-list contents-list-in-card">
+                @foreach (var chatRoom in Model.ChatRooms)
+                    {
+                    <li class="item">
+                        <div class="info-icon" title="Room Members">
+                            <i class="fas fa-users text-muted text-sm"></i>
+                            <span class="badge  badge-default">@chatRoom.ChatRoom.RoomMembersCount</span>
+                        </div>
+                        <div class="topic-side">
+                            @{
+                                var postToolTip = string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(@chatRoom.ChatRoom.Description), 50), "....");
+                            }
+                            <span class="date-time" title="Last Activity">
+
+                                @DatesUI.GetPrettyDate(@chatRoom.ChatRoom.LastActive.ToString())
+                            </span>
+                            <span class="topic-title">
+                                <a title="@postToolTip" href="@Html.Raw(@chatRoom.ChatRoom.NiceUrl)" class="">
+                                    @Html.Raw(chatRoom.ChatRoom.Name)
+                                </a>
+                            </span>
+                            <span class="user-name">
+                                <a href="@chatRoom.ChatRoom.NiceUrl" class="">
+                                    @Html.Raw(chatRoom.ChatRoom.Name)
+                                </a>
+                            </span>
+                        </div>
+                    </li>
+                                    }
+            </ul>
+        </div>
+    </div>
+                                    }

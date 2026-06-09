@@ -1,0 +1,138 @@
+﻿//
+/*#region =================  Colors ================ */
+//
+
+// Background colors (theme colors)
+@each $name, $color in $theme-colors {
+    @include background-variant($name, $color);
+}
+// Background colors (colors)
+@each $name, $color in $colors {
+    @include background-variant($name, $color);
+}
+
+.progress-bar{
+    color:black;
+}
+.progress-bar-success{
+     background-color: green;
+   // color: red;
+}
+.progress-bar-danger{
+     background-color: red;
+   // color: red;
+}
+.progress-bar-warning{
+     background-color: yellow;
+     //#ffc107
+   // color: red;
+}
+.progress-bar-info{
+     background-color: #17a2b8;
+     //#17a2b8
+   // color: red;
+}
+.red-colour {
+   // background-color: transparent;
+    color: red;
+    //color: color-yiq(lighten($red, 3%)) !important;
+}
+
+.blue-colour {
+   // background-color: transparent;
+    color: blue;
+}
+
+.green-colour {
+   // background-color: transparent;
+    color: green;
+}
+
+.yellow-colour {
+   // background-color: transparent;
+    color: yellow;
+}
+
+.orange-colour {
+    color: orange;
+}
+
+.bg-gray {
+    background-color: $gray-500;
+    color: color-yiq($gray-500);
+}
+
+.bg-gray-light {
+    background-color: lighten($gray-200, 3%);
+    color: color-yiq(lighten($gray-200, 3%)) !important;
+}
+
+.bg-black {
+    background-color: $black;
+    color: color-yiq($black) !important;
+}
+
+.bg-white {
+    background-color: $white;
+    color: color-yiq($white) !important;
+}
+
+// Gradient Background colors (theme colors)
+@each $name, $color in $theme-colors {
+    @include background-gradient-variant($name, $color);
+}
+
+// Gradient Background colors (colors)
+@each $name, $color in $colors {
+    @include background-gradient-variant($name, $color);
+}
+
+// Backgrund Color Disabled
+[class^="bg-"].disabled {
+    opacity: .65;
+}
+
+// Text muted hover
+a.text-muted:hover {
+    color: theme-color(primary) !important;
+}
+// Link Styles
+.link-muted {
+    color: darken($gray-500, 30%);
+
+    &:hover,
+    &:focus {
+        color: darken($gray-500, 40%);
+    }
+}
+
+.link-black {
+    color: $gray-600;
+
+    &:hover,
+    &:focus {
+        color: lighten($gray-500, 20%);
+    }
+}
+
+// Accent colors (theme colors)
+@each $name, $color in $theme-colors {
+    @include accent-variant($name, $color);
+}
+
+// Accent colors (colors)
+@each $name, $color in $colors {
+    @include accent-variant($name, $color);
+}
+
+// Accent button override fix
+[class*="accent-"] {
+    @each $name, $color in $theme-colors {
+        a.btn-#{$name} {
+            color: color-yiq($color);
+        }
+    }
+}
+//
+/*#endregion ============== Colors End  ====================  */
+//

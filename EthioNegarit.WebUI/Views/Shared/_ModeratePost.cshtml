@@ -1,0 +1,23 @@
+﻿@model  EthioNegarit.Core.Domain.Entities.Post
+@{
+    var userId = Html.CurrentMember().Id;
+}
+<div class="postsnippet" id="post-@Model.Id">
+    <div class="row">
+        <div class="col-sm-9">
+            <h2>Replying in: @Model.Topic.Name</h2>
+            <p>@Html.Raw(AppHelpers.ConvertPostContent(Model.PostContent))</p>
+            <p class="postuser">@Model.User.UserName</p>
+        </div>
+        <div class="col-sm-3">
+@if (User.IsInRole(AppConstants.AdminRoleName))
+{
+            <p><a href="#" data-postid="@Model.Id" data-postaction="approve" class="btn btn-sm btn-success btn-block postaction">Approve</a></p>
+}
+@if (Model.User.Id == userId || User.IsInRole(AppConstants.AdminRoleName))
+{
+            <p><a href="#" data-postid="@Model.Id" data-postaction="delete" class="btn btn-sm btn-danger btn-block postaction">Delete</a></p>
+}
+        </div>
+    </div>
+</div>

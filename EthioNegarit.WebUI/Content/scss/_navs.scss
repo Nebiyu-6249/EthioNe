@@ -1,0 +1,203 @@
+﻿//
+// Component: Nav
+//
+.navbar-light {
+ //$lightblue $lightgreen $navy $lightcyan $iceblue lawngreen $gray-300
+  background-color: $iceblue !important;
+ // background-color: $gray-300 !important;
+  border: none !important;
+  border-width: 0!important;
+}
+.nav-pills {
+  .nav-link {
+    color: $gray-600;
+     &:not(.active):hover {
+      //color: theme-color("primary");
+      color: theme-color("light");
+     // color: $color-global-grey-blue;
+    }
+  }
+  .nav-item {
+      background-color: $sidebar-light-bg;
+    //  background-color: $lightcyan !important;
+     //  background-color: $tag-bg;
+      //  background: $green;
+       
+    &.dropdown.show {
+      .nav-link:hover {
+        color: $dropdown-link-active-color;
+      }
+    }
+  }
+}
+.nav-header {
+       background-color: inherit;
+       }
+.nav-tabs{
+    li{
+//background-color:$gray-100;
+margin-bottom: 0px;
+    }    
+}
+.nav-tabs > li.active {
+    margin-bottom: -1px;    
+}
+// Vertical Tabs
+.nav-tabs.flex-column {
+   //  tab-size:24px;
+  border-bottom: 0;
+  border-right: $nav-tabs-border-width solid $nav-tabs-border-color;
+  .nav-link {
+     //  background-color:$gray-300;
+    border-bottom-left-radius: $nav-tabs-border-radius;
+    border-top-right-radius: 0;
+    margin-right: -$nav-tabs-border-width;
+
+    @include hover-focus () {
+      border-color: $gray-200 transparent $gray-200 $gray-200;
+    }
+  }
+
+  .nav-link.active,
+  .nav-item.show .nav-link {
+    border-color: $gray-300 transparent $gray-300 $gray-300;
+  }
+
+  &.nav-tabs-right {
+    border-left: $nav-tabs-border-width solid $nav-tabs-border-color;
+    border-right: 0;
+    .nav-link {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: $nav-tabs-border-radius;
+      border-top-left-radius: 0;
+      border-top-right-radius: $nav-tabs-border-radius;
+      margin-left: -$nav-tabs-border-width;
+
+      @include hover-focus () {
+        border-color: $gray-200 $gray-200 $gray-200 transparent;
+      }
+    }
+
+    .nav-link.active,
+    .nav-item.show .nav-link {
+      border-color: $gray-300 $gray-300 $gray-300 transparent;
+    }
+  }
+}
+.navbar-no-expand {
+  flex-direction: row;
+  .nav-link {
+    padding-left: $navbar-nav-link-padding-x;
+    padding-right: $navbar-nav-link-padding-x;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+  }
+}
+//////////////////////////////////////////////////
+ .nav-label {
+            padding: 1.2rem 1.5rem 0.4rem;
+            padding: 1rem 1.1rem 0.4rem;
+            font-size: 0.58rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.22);
+            font-weight: 600;
+           // font-family: 'DM Mono', monospace;
+        }
+// Color variants
+@each $color, $value in $theme-colors {
+  @if $color == dark or $color == light {
+    .navbar-#{$color} {
+      background-color: $value;
+      @if $color == dark {
+        border-color: lighten($dark, 10%);
+      }
+    }
+  }
+}
+@each $color, $value in $theme-colors {
+  @if $color != dark and $color != light {
+    @include navbar-variant($color, $value);
+  }
+}
+@each $color, $value in $colors {
+  @include navbar-variant($color, $value);
+}
+.navbar-nav-not-expanded {
+  flex-direction: row;
+  .dropdown-menu {
+    position: absolute;
+  }
+
+  .nav-link {
+    padding-right: $navbar-nav-link-padding-x;
+    padding-left: $navbar-nav-link-padding-x;
+  }
+}
+@include dark-mode () {
+   .nav-item {
+       background-color: $sidebar-dark-bg;
+       }
+ /*.nav-pills .nav-link {
+    color: $gray-400;  
+  }  */
+  .nav-tabs {
+    border-color: lighten($dark, 15%);
+    .nav-link:focus,
+    .nav-link:hover {
+      border-color: lighten($dark, 15%);
+    }
+    .nav-item.show .nav-link,
+    .nav-link.active {
+      background-color: $dark;
+      border-color: lighten($dark, 15%) lighten($dark, 15%) transparent lighten($dark, 15%);
+      color: $white;
+    }
+    &.flex-column {
+      .nav-item.show .nav-link,
+      .nav-link {
+        &.active,
+        &:focus,
+        &:hover {
+          border-color: lighten($dark, 15%) transparent lighten($dark, 15%) lighten($dark, 15%);
+        }
+        &:focus,
+        &:hover {
+          background-color: lighten($dark, 5%);
+        }
+      }
+      &.nav-tabs-right {
+        border-color: lighten($dark, 15%);
+        .nav-link {
+          &.active,
+          &:focus,
+          &:hover {
+            border-color: lighten($dark, 15%) lighten($dark, 15%) lighten($dark, 15%) transparent;
+          }
+        }
+      }
+    }
+  }
+  // Color variants
+  @each $color, $value in $theme-colors-alt {
+    @if $color == dark or $color == light {
+      .navbar-#{$color} {
+        background-color: $value;
+        @if $color == dark {
+          border-color: lighten($dark, 10%);
+        }
+      }
+    }
+  }
+
+  @each $color, $value in $theme-colors-alt {
+    @if $color != dark and $color != light {
+      @include navbar-variant($color, $value);
+    }
+  }
+  @each $color, $value in $colors-alt {
+    @include navbar-variant($color, $value);
+  }
+}

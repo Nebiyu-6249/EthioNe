@@ -1,0 +1,111 @@
+﻿@using EthioNegarit.WebUI.Application.ExtensionMethods
+@model EthioNegarit.WebUI.ViewModels.LogOnViewModel
+@{
+Layout = "~/Views/Shared/_LayoutFullWidth.cshtml";
+ViewBag.Title = Html.LanguageString("LogOn.LogOn");
+}
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+                <div class="fullscreen flex-container">
+                    <div class="split split-left d-none d-sm-inline-block">      
+                        @Html.Partial("_about")
+                    </div>              
+                      <div class="split split-right">
+                        <div class="vertical-center">
+                            <div class="register-logo text-center">
+                                <a href="@Url.Action("Index","Home")">
+                                    @Html.Settings().ForumName
+                                </a>
+                            </div>
+                            @if (Html.Settings().DisableStandardRegistration != true)
+                        {
+                    <div class="mainlogonform">
+                        @using (Html.BeginForm("LogOn", "Members", FormMethod.Post, new { @class = "form-login form-horizontal" }))
+                {
+                            @Html.ValidationSummary(true)
+                            @Html.AntiForgeryToken()
+                            if (Html.Settings().DisableStandardRegistration != true)
+                            {
+                              @*  <p class="help-block">
+    @Html.Raw(string.Format(Html.LanguageString("Members.LogOnMessage"), Html.ActionLink(Html.Lang("Members.Register"), "Register")))
+            </p>*@
+                            }
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(m => m.UserName)
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.UserName)
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(m => m.Password)
+                                            </div>
+                                            <div class="col-md-8 input-icon input-icon-right">                                             
+                                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-feedback", @id = "password-field" })                         
+                                                    <i toggle="#password-field" class="fa fa-fw fa-eye ethicon toggle-password" id="togglePassword"></i>
+                                                    @Html.ValidationMessageFor(m => m.Password)                                            
+                                            </div>                                      
+                                            </div>
+                                    </div>                         
+                                <div class="form-group float-right">
+                                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input mr-4" })
+                                     @Html.LabelFor(x => x.RememberMe)                              
+                                    @Html.ValidationMessageFor(m => m.RememberMe)
+                                </div>                             
+                                <div class="submit-holder">
+                                    <button type="submit" class="btn btn-success btn-sm btn-block" id="submitButton">
+                                        @Html.LanguageString("Buttons.LogOn")
+                                    </button>                        
+                                </div>
+                                @Html.HiddenFor(x => x.ReturnUrl)                       
+                        }
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="@Url.Action("ForgotPassword")">
+                                        @Html.LanguageString("Members.ForgotPassword.Link")
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="@Url.Action("Register", "Members")" class="">
+                                        @Html.LanguageString("Members.RegisterAsNewMember.Link")
+                                    </a>
+                                </div>
+                            </div>
+                            }
+                            <div class="panel-footer">
+                                @Html.Partial("_SocialLoginButtons")
+                            </div>   
+                                                                     
+                </div>               
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /.content -->
+<script>
+$(".toggle-password").click(function () {
+    $(this).toggleClass("fa-eye fa-eye-slash");
+    var input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+        input.attr("type", "text");
+    } else {
+        input.attr("type", "password");
+    }
+});
+</script>
+
+@*      <div class="checkbox">
+        @using (Html.BeginLabelFor(m => m.RememberMe, new { @class = "checkbox mr-2" }))
+            {
+            @Html.CheckBoxFor(m => m.RememberMe)
+            }
+        @Html.ValidationMessageFor(m => m.RememberMe)
+    </div>*@

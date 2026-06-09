@@ -1,0 +1,45 @@
+﻿<div class="site-info">
+    <div class="site-logo">
+        <img src="~/Content/Images/default.png" class="img-circle img-bordered-sm img-size-64 elevation-5" style="opacity: .8">
+    </div>
+    <div class="site-name">
+        <a href="@Html.Settings().ForumUrl">
+            <h1>
+                @Html.Raw(Html.Settings().ForumName)
+            </h1>
+        </a>
+    </div>
+    <div class="site-moto">
+        <p class="text-center">
+            @Html.LanguageString("Site.Moto")
+        </p>
+    </div>
+    <div class="panel-footer">
+        <ul>
+            <li>
+                <div class="title">
+                    <span class="fas fa-home mr-1" aria-hidden="true"></span>
+                    @Html.Raw(Html.Settings().Address)
+                </div>
+            </li>
+            <li>
+                <div class="title">
+                    <span class="fas fa-envelope mr-1" aria-hidden="true"></span>
+                    @Html.Raw(Html.Settings().NotificationReplyEmail)
+                </div>
+            </li>
+            <li>
+                <div class="title">
+                    <a href="@Url.Action("ContactUs","Home")" class="">
+                        <i class="ethicon fas fa-phone "></i>
+                        @Html.LanguageString("Layout.Nav.SendUsMessage")
+                    </a>
+                </div>
+            </li>
+            <li><div class="highlight-box">
+    <p>📢 <strong>የተጠቃሚ ይዘቶቻ ክህደት፦</strong> ETHIONEGARIT ተጠቃሚዎቻ ሚቀርቡ ጥያቄዎቸ፣ መልሶቸ ወይም ኮዶቸ ትክክለኛነት አያረጋግጥም። ምክርና ኮድ ምርት አካባቢ ሲጠቀሙ ቀደም ሲል ነፃ ሆኖ ያረጋግጡ።</p>
+</div>
+            </li>
+    </ul>
+</div>
+</div>

@@ -1,0 +1,131 @@
+﻿//
+/*#region =================Component: Box  ================ */
+//
+.box-container {
+    display: grid;
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+  grid-gap: 10px;
+
+    @media (max-width: breakpoint-max(xs)) {
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+    }
+}
+
+.box {
+padding:5px;
+	 box-shadow:3px 3px 3px $gray-500;
+  background-color: darken($gray-100, 10%);
+    opacity:.92;
+    color: lighten($dark, 14%);
+      border-radius: 10px;
+    border: 1px solid $border;
+     border-top: 3px solid $accent;
+
+    &:hover {
+        background-color: darken($gray-100, 12%);
+        color: $dark;
+       transform: translateY(-1px);
+       transition: transform 0.18s, box-shadow 0.18s; 
+    }
+}
+.box-header {
+	display: inline-flex;
+	width: 100%;
+	min-height: 20%;
+	padding: 5px;
+	column-gap: 10px;
+	margin-right: 10px;
+	justify-content: center;
+	.image {
+		float: left;
+		width: 30%;
+           img {
+        height: 80%;
+        width: 80%;
+    }
+	}
+	.box-title {
+	display: block;
+		overflow-x: hidden;
+        text-overflow:ellipsis;
+		margin-left: auto;
+        width: auto;
+		margin-top: 15px;
+
+		@media (max-width: breakpoint-max(xs)) {		
+            position:relative;
+            width:100%;
+			text-align:center;
+			margin-top:0;
+			margin-left:0;			
+		}
+	}
+
+	span {
+		&:last-child {
+			margin-left: auto;
+		}
+	}
+
+	.widget-right {
+		margin-left: auto;
+		margin-top: 0;
+	}
+}
+.box-body{
+	text-align: center;
+	display:block;   
+    p {
+        font-size: 10px;
+        color: lighten($dark, 15%);
+    }
+}
+.box-footer {
+    padding: 5px;
+    display: block;
+     font-size: 12px;
+    font-weight: 200;
+    margin-top: 10px;
+   margin-bottom: 0;
+  bottom: 0;
+   top:auto;
+}
+.info-box {
+    padding: 10px 20px;
+    font-weight: 300;
+    font-size: 16px;
+    text-align: center;
+    justify-content: center;
+}
+////////////////////////////
+
+//
+/*#endregion ==============Box End  ====================  */
+//
+//////////////////////////////////////////////////////////////////
+            /* ── HIGHLIGHT BOX ── */
+            .highlight-box {
+                background: linear-gradient(135deg, rgba(45,125,210,0.06) 0%, rgba(15,163,177,0.06) 100%);
+                border: 1px solid rgba(45,125,210,0.2);
+                border-radius: 10px;
+                padding: 1.2rem 1.4rem;
+                margin: 1rem 0 1.5rem;
+            }
+                .highlight-box p {
+                    margin: 0;
+                    font-size: 0.9rem;
+                    line-height: 1.85;
+                }
+////////////////////////////////////////////////////////////////////
+@include dark-mode () {
+    	.box {
+		background-color: lighten($dark, 3%);
+		color: $gray-500;
+		border-color: lighten($dark, 15%);
+		box-shadow: 3px 3px 3px lighten($dark, 10%);
+		&:hover {
+			background-color: lighten($dark, 1%);
+			color: $gray-500;
+		}
+	}
+    }

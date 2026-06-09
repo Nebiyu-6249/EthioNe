@@ -1,0 +1,31 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model HotTopicsViewModel
+@if (Model.Topics.Any())
+{
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@Html.LanguageString("Topic.HotTopics")</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body p-2">          
+                <ul class="contents-list contents-list-in-card">
+                    @foreach (var topic in Model.Topics)
+                    {
+                        <li class="item">
+                            @{ 
+                            Html.RenderPartial("_topicAside", topic);
+                            }
+                        </li>
+                                    }
+                </ul>
+
+        </div>
+    </div>
+    }

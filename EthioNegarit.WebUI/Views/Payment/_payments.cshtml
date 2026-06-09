@@ -1,0 +1,115 @@
+﻿@using EthioNegarit.Core.Domain.Enums
+@using EthioNegarit.WebUI.ViewModels
+@model PaymentsListViewModel
+<div class="card-body table-responsive p-0">
+    <table class="table table-bordered table-striped table-head-fixed table-hover">
+        <thead>
+            <tr>
+                <th class="text-muted text-center">Name</th>
+                <th class="text-muted text-center">Total</th>
+                <th class="text-muted text-center">Amount</th>
+                <th class="text-muted text-center">Date</th>
+                <th class="text-muted text-center">Bank</th>
+                <th class="text-muted text-center">AccountNo</th>
+                <th class="text-muted text-center">Refernce</th>
+                <th class="text-muted text-center">For</th>
+                <th class="text-muted text-center">Status</th>
+                <th class="text-muted text-center">Confirmation</th>
+                <th colspan="2" class="text-muted text-center">Action</th>
+</tr>
+        </thead>
+        <tbody id="paymenttable">
+            @foreach (var payment in Model.Payments)
+            {
+                <tr>
+                    <td class="text-muted text-center">
+                        <a href="@payment.User.NiceUrl">@payment.User.UserName</a>
+                    </td>
+                    <td class="text-muted text-center">
+                        @payment.TotalPrice
+                    </td>
+                    <td class="text-muted text-center">
+                        @payment.Amount
+                    </td>
+
+                    <td class="text-muted text-center">
+                        @if (@payment.DateTransfer != null)
+                        {
+                            @payment.DateTransfer.ToShortDateString()
+                        }
+                    </td>
+                    <td class="text-muted text-center">
+                        @payment.Bank
+                    </td>
+                    <td class="text-muted text-center">
+                        @payment.AccountNo
+                    </td>
+                    <td class="text-muted text-center">
+                        @payment.Reference
+                    </td>
+                    <td class="text-muted text-center">
+                        @payment.Month Month
+                    </td>
+                    <td class="text-muted text-center">
+                        @payment.PaymentStatus
+                    </td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole(AppConstants.AdminRoleName))
+                    {
+                        <td class="text-muted text-center">
+                            @if ((payment.PaymentStatus == PaymentStatus.Pending || payment.PaymentStatus == PaymentStatus.Rejected) && payment.Amount >= payment.TotalPrice)
+                            {
+                                <a class="paymentconfirmationlink" href="#" data-id="@payment.Id" title="Confirm Payment">
+                                    <span class="btn btn-sm btn-outline-success btn-block" aria-hidden="true">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                </a>
+                            }
+                            @if (payment.PaymentStatus == PaymentStatus.Confirmed || payment.Amount < payment.TotalPrice)
+                            {
+                                <a class="paymentrejectionlink" href="#" data-id="@payment.Id" title="Reject Payment">
+                                    <span class="btn btn-sm btn-outline-warning btn-block" aria-hidden="true">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                </a>
+                            }
+
+                        </td>
+                        <td class="text-muted text-center">
+                            <a class="btn btn-sm" href="@Url.Action("Edit", "Payment", new { paymentId = @payment.Id })" title="Edit Payment">
+                                <span class="fas fa-edit" style="color:blue"></span>
+                            </a>
+                            <a class="paymentdeletelink" href="#" role="button" data-id="@payment.Id" data-deleteconfirmation="@(Html.LanguageString("Delete.Confirmation"))" data-paymentdeleted="@(Html.LanguageString("Payment.Deleted"))" title="Delete Payment">
+                                <span class="fas fa-trash" aria-hidden="true" style="color:red"></span>
+                            </a>
+                          @*  <a class="btn btn-sm paymentdeletelink" title="Delete Payment" data-id="@payment.Id" onclick="return confirm('@(Html.LanguageString("Delete Payment"))')" href="@Url.Action("Delete", "Payment", new { paymentId = payment.Id })">
+        <span class="fas fa-trash" aria-hidden="true" style="color:red"></span>
+    </a>*@
+                        </td>
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>  
+</div>
+
+
+
+  
+
+@*   <td class="text-muted text-center">
+        @if (payment.PaymentStatus == PaymentStatus.Pending)
+        {
+            <a class="paymentrejectionlink" href="#" data-id="@payment.Id" title="Reject">
+                <span class="btn btn-sm btn-outline-warning btn-block" aria-hidden="true">
+                    <i class="fas fas fa-times"></i>
+                </span>
+            </a>
+        }
+        else if (payment.PaymentStatus == PaymentStatus.Rejected)
+        {
+            <a class="btn btn-sm btn-outline-dangerr btn-block" title="Delete Payment" onclick="return confirm('@(Html.LanguageString("Delete"))')" href="@Url.Action("Delete", "Payment", new { id = payment.Id })">
+                <span class="fas fa-trash" aria-hidden="true" style="color:red"></span>
+            </a>
+        }
+    </td>*@

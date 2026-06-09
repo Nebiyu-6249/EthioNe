@@ -1,0 +1,531 @@
+﻿.notification-popover-content {
+    display: none;    
+}
+.notification-popover {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    z-index: 9999;
+    display: none;
+    min-width: 200px;
+    min-height: 32px;
+    padding: 1px;
+    text-align: left;
+    white-space: normal;
+    background-color: darken($gray-100, 6%);
+    color: lighten($dark, 15%);
+   
+     background-clip: padding-box;
+ //   border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+///////////////////////////////////////////////////////////////////
+       //Create the arrow
+    &::after,
+    &::before {
+        border: solid transparent;
+        border-right-color: darken($gray-200, 10%);
+        content: "";
+        height: 0;
+        pointer-events: none;
+        position: absolute;
+        right: 100%;
+        top: 15px;
+        width: 0;
+    }
+
+    &::after {
+        border-width: 5px;
+        margin-top: -5px;
+    }
+
+    &::before {
+        border-width: 6px;
+        margin-top: -6px;
+    }
+/////////////////////////////
+}
+.notification-popover .notification-popover-content {
+    padding: 9px 14px;
+    overflow: auto;
+    display: block;
+}
+.notification-popover .notification-popover-content > div:first-child {
+    width: 99%;
+}
+.notification-popover-title {
+    padding: 8px 14px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 18px;
+  //  background-color: #ffffff;
+    background-color: darken($gray-100, 6%);
+    color: lighten($dark, 15%);
+    border-bottom: 1px solid #f2f2f2;
+    border-radius: 5px 5px 0 0;
+}
+.notification-popover-content {
+    padding: 9px 14px;
+    overflow: auto;
+    display: none;
+}
+//
+// Component: Swiper
+//
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+.swiper-slide {
+    display: flex;
+}
+.title-name {
+    font-size: 18px;
+    font-weight: 300;
+    color: lighten($dark, 15%);
+    padding: 0;
+    margin-top: 0;
+}
+.point-award {
+    font-size: 14px;
+    font-weight: 300;
+    color: $gray-500;
+    letter-spacing: 3px;
+    padding: 0;
+    margin-top: 0;
+    span {
+        display: block;
+        letter-spacing: 5px;
+    }
+}
+.logon-message {
+    @include clearfix();
+
+    @if $enable-rounded {
+        @include border-radius($border-radius-lg);
+    }
+
+    position: absolute;
+    background-color: darken($gray-100, 6%);
+    color: lighten($dark, 15%);
+    border-width: 1px;
+    border-style: solid;
+    border-color: darken($gray-100, 10%);
+    bottom: 10px;
+    width: 95%;
+    height: 60px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    overflow: hidden;
+
+    p {
+        padding-top: 15px;
+        font-size: 16px;
+        color: lighten($dark, 15%);
+        text-align: center;
+        justify-content: center;
+    }
+}
+.social-bottom,
+.report,
+.report-text {
+    display: block;
+}
+.report {
+    @include clearfix ();
+    width:100%;
+}
+.report-infos {
+     font-size: 10px;
+    font-weight: 300;
+    display: block;
+    margin-bottom: 2px;
+}
+.member-avatar {
+    float: left;
+    height: 40px;
+    width: 40px;
+
+    .right & {
+        float: right;
+    }
+}
+.name-sm {
+    float: left;
+    font-weight: 500;
+    color: darken($gray-500, 25%);
+
+    .right & {
+        float: right;
+    }
+}
+.timestamp-sm {
+    color: darken($gray-500, 25%);
+    float: right;
+
+    .right & {
+        float: left;
+    }
+}
+.social-bottom {
+    color: darken($gray-500, 25%);
+    float: right;
+}
+.profile-tools {
+background-color: none;
+//top:10px;
+ position:relative;
+ padding:5px;
+//height:250px;
+left:0;
+width: 100%;
+}
+.profile-tools>ul {
+margin:0;
+}
+.profile-tools li {
+position:relative;
+display:block;
+width: 100%;
+  }
+.profile-tools li>a {
+position:relative;
+margin:0;
+width: 100%;
+display:table;
+border-collapse:collapse;
+border-spacing:0;
+ color: darken($gray-500, 25%);
+font-size: 13px;
+text-decoration:none;
+-webkit-transform:translateZ(0) scale(1,1);
+-webkit-transition:all .14s linear;
+transition:all .14s linear;
+border-radius:5px; 
+}
+.profile-tools .nav-text  {
+position:relative;
+display:table-cell;
+vertical-align:middle;
+//width: 75%;
+width: 80%;
+}
+.profile-tools li:hover>a,profile-tools li.active>a{
+color:#fff;
+background-color: darken($gray-500, 8%);
+}
+.site-logo {
+        padding: 10px;
+        margin: 5px;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+
+        img {
+            margin: 2px;
+            height: 50px;
+            width: 50px;
+        }
+    }
+    .site-name {
+        width: 100%;
+        text-align: center;
+        top: 0;
+        padding: 5px;
+        line-height: 30px;
+        font-weight: 300;
+        font-size: 22px;
+    }
+    .site-moto {
+        margin: 0;
+        top: 0;
+        line-height: 16px;
+        font-weight: 100;
+        font-size: 14px;
+        text-align: center;
+        padding: 0;
+    }
+    .site-info {
+        margin-top: 5rem;
+        padding: 30px;
+    }
+
+
+@include dark-mode () {
+    .logon-message {
+        background-color: lighten($dark, 3%);
+        color: $gray-500;
+        border-color: lighten($dark, 15%);
+    }
+}
+
+//
+/*#region =================  Split ================ */
+//
+.split {
+	position: absolute;
+  height: 100%;
+  width: 50%; 
+  z-index: 1;
+  overflow-x: hidden;
+  padding:10px;
+     @media (max-width: breakpoint-max(xs)) {
+width: 100%;
+    }
+}
+.split-left {
+  left: 0;
+}
+.split-right{
+  right: 0;
+    @media (max-width: breakpoint-max(xs)) {
+		 left: 0;                      
+    }
+}
+
+//
+/*#endregion ============== Split End  ====================  */
+//
+
+//Note Used By Get By name
+.inlineitems {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left:20px;
+    margin-right:10px;
+    span{
+       // width:30%;
+        display:inline-flex;
+        float: right;     
+        gap:10px;
+    }
+}
+
+//
+/*#region =================  Inline Items ================ */
+//
+.inline-items {
+    width:100%;
+    clear:both;
+   display: inline-flex; // Keeps the container inline while allowing flex properties
+   column-gap:20px;
+   span {
+     @include inline-gap(10px);
+    &:last-child {
+      margin-left: auto; // Pushes the last item to the far right
+    }
+
+  }
+}
+.inline-item {
+    display: flex;
+    align-items: center;
+    width:100%;
+    span{
+        display:inline-flex;
+  
+&:first-child {
+	left:0;
+	float:left;
+    }
+			&:not(:first-child) {
+  /* styles to apply to all elements except the first one */
+   margin-left: auto; // Pushes
+   
+}
+    }
+}
+.inline-item-lg {
+   width:50%;   
+    //   width:max(50%,200px);
+}
+.inline-item-md {
+  width:33%; 
+}
+.inline-item-sm {
+  width:25%; 
+}
+
+//
+/*#endregion ============== Inline Items End  ====================  */
+//
+
+/*#region =================  Center ================ */
+//
+.vertical-center {
+	position: absolute;
+	display:block;
+	width:95%;   
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+    @media (max-width: breakpoint-max(xs)) {
+top: 40%;
+    }
+}
+ .content-center{
+  position: absolute; /* Positions relative to the body/viewport */
+    top: 40%;           /* Moves top edge to the vertical midpoint */
+    left: 50%;          /* Moves left edge to the horizontal midpoint */
+    transform: translate(-50%, -50%); /* Shifts element back by half its own width/height */
+   //  overflow-y: hidden;
+}
+ .float-center {
+    display:block;   
+    text-align: center;
+    align-items: center;
+   justify-content:center;
+}
+
+//
+/*#endregion ============== Center End  ====================  */
+//
+.search-box{ 
+   right:0;
+   margin-right:0;
+   width:100%; 
+    @media (max-width: breakpoint-max(xs)) {
+        width:100%;  
+        margin-top: 0;        
+    }
+}
+.header-info {
+  display: flex;
+    flex-flow: row;
+    align-items: center;
+    font-weight: 700;
+  //  color: lighten($dark, 15%);
+    font-size: 13px;
+    text-align: center;
+    justify-content: center;
+}
+//line 
+.line {
+    width: 100%;
+     border-bottom: 1px solid darken($gray-300, 10%);
+    margin: 5px 0;
+}
+.divider {
+    width: 100%;
+   border-bottom: 1px solid darken($gray-300, 10%);
+    margin: 5px 0;
+}
+
+//
+/*#region =================Misc: Count ================ */
+//
+.count {
+    //  margin: 20px auto;
+    text-align: center;
+    justify-content: center;
+
+    h2 {
+        font-size: 3rem;
+     //   color: lighten($dark, 15%);
+        transition: color 1.3s;
+    }
+
+    span {
+        letter-spacing: 5px;
+        font-weight: 300;
+    }
+}
+
+.count h2 {
+    font-size: 3rem;
+    transition: color 1.3s;
+}
+
+//
+/*#endregion ============== Misc: Count  ====================  */
+//
+
+
+//
+/*#region =================Misc: Status ================ */
+//
+.stats {
+    margin: 0 0 0 5px;
+    font-size: 14px;
+    font-weight: 200;
+}
+.stats-down {
+    color: red;
+    font-size: 14px;
+    font-weight: 200;
+}
+.stats img,
+.stats-down img {
+    margin-bottom: 3px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.stats-center{
+     text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+//
+/*#endregion ============== Misc: Status End  ====================  */
+//
+
+
+//
+/*#region =================Misc: Rate ================ */
+//
+
+.rate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+    gap: 10px;
+
+}
+
+.rate-up {
+    color: lime;
+    font-weight: 600;
+}
+
+.rate-down {
+    color: red;
+    font-weight: 600;
+}
+//
+/*#endregion ============== Misc: Rate End  ====================  */
+//
+
+//
+/*#endregion ============== Misc: Preloader End  ====================  */
+//
+
+.bottom-message {
+ //   position: absolute;
+ //   bottom: 10px;
+    width: 100%;
+    min-height: 60px;
+    overflow: hidden;
+    text-align:center;
+     display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.count-sm {
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    padding: 0;
+    margin-top: 0;
+	 span {
+       // display: block;
+     letter-spacing: 5px;
+    }
+}

@@ -1,0 +1,133 @@
+﻿@using EthioNegarit.Core.Domain.Enums
+@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.ViewModels
+@model AdListViewModel
+@{
+    ViewBag.Title = @Html.LanguageString("Layout.Nav.Advertisements");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+    ViewBag.Canonical = Html.Raw(AppHelpers.CanonicalPagingTag(totalCount, Html.Settings().TopicsPerPage, Html));
+    var qs = Request.QueryString[AppConstants.AdViewQuery] ?? string.Empty;
+}
+@if (Request.QueryString.AllKeys.Any())
+{
+    ViewBag.Canonical = Html.Raw(string.Format("<link rel=\"canonical\" href=\"{0}\"/>", "All"));
+}
+<!-- Page header -->
+<div class="page-header">
+    <span class="width-30 d-none d-sm-inline-block">
+        @ViewBag.Title
+    </span>
+    @if ((Model.TotalCount - 1) > 0)
+    {
+        <span class="width-30 adorderfilter ml-0">
+            <text>
+                @*  @Html.LanguageString("PostFilter.OrderBy")*@
+                <a class="orderfilerlink @(string.IsNullOrEmpty(qs) ? "orderfilerlinkactive" : "")" href="@Url.Action("List", "Ad")">@Html.LanguageString("All")</a> |
+                <a class="orderfilerlink @(qs.Contains(AdViewQuery.Active.ToString()) ? "orderfilerlinkactive" : "")" href="?@AppConstants.AdViewQuery=@AdViewQuery.Active.ToString()">@Html.LanguageString("Active")</a> |
+                <a class="orderfilerlink @(qs.Contains(AdViewQuery.Pending.ToString()) ? "orderfilerlinkactive" : "")" href="?@AppConstants.AdViewQuery=@AdViewQuery.Pending.ToString()">@Html.LanguageString("Pending")</a> |
+                <a class="orderfilerlink @(qs.Contains(AdViewQuery.Completed.ToString()) ? "orderfilerlinkactive" : "")" href="?@AppConstants.AdViewQuery=@AdViewQuery.Completed.ToString()">@Html.LanguageString("Completed")</a> |
+                <a class="orderfilerlink @(qs.Contains(AdViewQuery.Partial.ToString()) ? "orderfilerlinkactive" : "")" href="?@AppConstants.AdViewQuery=@AdViewQuery.Partial.ToString()">@Html.LanguageString("Partial")</a>
+            </text>
+        </span>
+        <span class="width-30">
+            <span class="input-group input-group-sm">
+                <input class="form-control" id="searchad" type="text" placeholder="Search. . .">
+                <span class="input-group-btn ">
+                    <button class="btn btn-default btn-sm">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </span>
+            </span>
+            @*            <input class="form-control-sm ml-auto" id="searchad" type="text" placeholder="Search..">*@
+        </span>
+    }
+</div>
+<!-- /.page-header -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="adverts" id="adverts">
+            <div class="card-body table-responsive p-0">
+                <table class="table table-bordered table-striped table-head-fixed table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-muted text-center">User</th>
+                            <th class="text-muted text-center">Company</th>
+                            <th class="text-muted text-center">Country</th>
+                            <th class="text-muted text-center">Created</th>
+                            <th class="text-muted text-center">Update</th>
+                            <th class="text-muted text-center">Start</th>
+                            <th class="text-muted text-center">End</th>
+                            <th class="text-muted text-center">LastActive</th>                         
+                            <th class="text-muted text-center">Status</th>
+                            <th colspan="2" class="text-muted text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adtable">
+                        @foreach (var ad in Model.Advertisements)
+            {
+                            <tr>
+                                <td class="text-muted text-center">
+                                    <a href="@ad.User.NiceUrl">@ad.User.UserName</a>
+                                </td>
+                                <td class="text-muted text-center">
+                                    <a href="@ad.NiceUrl">@ad.Name</a>
+                                </td>                             
+                                <td class="text-muted text-center">
+                                    @ad.Country
+                                </td>
+                                <td class="text-muted text-center">                                 
+                                        @ad.DateCreated.ToShortDateString()                                   
+                                </td>
+                                <td class="text-muted text-center">
+                                    @ad.DateUpdate.ToShortDateString()
+                                </td>
+                                <td class="text-muted text-center">
+                  @if (@ad.AdStatus == AdStatus.Active || @ad.AdStatus == AdStatus.Completed)
+                  {
+                                        @ad.DateStart.ToShortDateString()
+                                    }
+                                </td>
+                                <td class="text-muted text-center">
+@if (@ad.AdStatus == AdStatus.Active || @ad.AdStatus == AdStatus.Completed)
+{
+                                    @ad.DateEnd.ToShortDateString()
+}
+                                </td>
+                                <td class="text-muted text-center">
+@if (@ad.AdStatus == AdStatus.Active || @ad.AdStatus == AdStatus.Completed)
+{
+                                    @ad.DateLastActive.ToShortDateString()
+}
+                                </td>
+                              
+                                <td class="text-muted text-center">
+                                    @ad.AdStatus
+                                </td>
+                                <td class="text-muted text-center">
+                                    <a class="btn btn-sm" href="@Url.Action("Edit", "Ad", new { id = @ad.Id })" title="Edit Advertisement">
+                                        <span class="fas fa-edit" style="color:blue">
+                                        </span>
+                                    </a>
+                                    <a class="btn btn-sm" title="Delete Advertisement" onclick="return confirm('@(Html.LanguageString("Delete Advertisement"))')" href="@Url.Action("Delete", "Ad", new { id = ad.Id })">
+                                        <span class="fas fa-trash" aria-hidden="true" style="color:red"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @if (@totalCount > SiteConstants.Instance.AdminListPageSize)
+                {
+                    <ul>
+                        <li class="pagination">
+                            @Html.Pager(Convert.ToInt32(Model.PageIndex), SiteConstants.Instance.AdminListPageSize, @totalCount, new { query = qs.ToString() })
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</section>

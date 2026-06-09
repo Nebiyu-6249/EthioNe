@@ -1,0 +1,94 @@
+﻿@using EthioNegarit.WebUI.Application
+@using EthioNegarit.Utilities
+@using EthioNegarit.WebUI.ViewModels
+@model  PrivateMessageNotificationViewModel
+@{
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+    var disable = string.Empty;
+    const string disabled = "style='pointer-events:none;'";
+    const string enable = "style='cursor:pointer;'";
+
+}
+@{
+    if (Model.CanViewPrivateMessages)
+    {
+        disable = enable;
+    }
+    else
+    {
+        disable = disabled;
+    }
+}
+@if (@Model.NewPrivateMessageCount > 0)
+{
+    <a @Html.Raw(disable) class="nav-link btn-shake" data-toggle="dropdown" href="#" title="@Html.LanguageString("PM.NewMessages")">
+        <i class="fas fa-envelope green-colour"></i>
+@if (Model.CanViewPrivateMessages)
+{
+            <span class="badge badge-warning navbar-badge">@Model.NewPrivateMessageCount</span> 
+}
+    </a>
+}
+else
+{
+    @*<a @Html.Raw(disable) class="nav-link"  href="@Url.Action("Index", "PrivateMessage")" title="@Html.LanguageString("PM.GoToInbox")">
+        <i class="far fa-envelope-open"></i>
+    </a>*@
+    <a class="nav-link"  href="@Url.Action("Index", "PrivateMessage")" title="@Html.LanguageString("PM.GoToInbox")">
+        <i class="far fa-envelope-open"></i>
+    </a>
+}
+
+@if (Model.CanViewPrivateMessages)
+{
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+@if (Model.NewPrivateMessageCount > 0)
+{
+        <a class="dropdown-item" href="@Url.Action("Index", "PrivateMessage")" title="@Html.LanguageString("PM.GoToInbox")">                          
+                <span class="ml-4">
+                    <i class="fas fa-envelope  green-colour ml-1 mr-2"></i>
+                    @Model.NewPrivateMessageCount
+                </span>
+                    <span class="float-right text-successs blue-colourr mr-2">
+                        @Html.LanguageString("PM.NewMessages")
+                    </span>
+        </a>
+        <div class="dropdown-divider"></div>
+}
+        @foreach (var message in Model.NewMessages)
+        {
+            <div class="dropdown-item">
+                <div class="media">
+                    <a href="@message.UserFrom.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+                        <img class="img-circle img-size-32 @(message.UserFrom.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm") mr-3" src="@message.UserFrom.MemberImage(SiteConstants.Instance.GravatarLeaderboardSize)" alt="@Html.Raw(message.UserFrom.UserName)" />
+                    </a>
+                    @{
+                        Html.RenderPartial("_memberInfo", message.UserFrom);
+                    }
+                    <div class="media-body">
+                      @*  @Html.Raw(string.Format(Html.LanguageString("PM.ShowAllMessages"), @message.UserFrom.UserName))*@
+                        <a href="#" role="button" class="show-messages" data-id="@message.UserFrom.Id" data-name="@string.Concat(Html.Lang("PM.Title"), message.UserFrom.UserName)" title="@Html.Raw(string.Format(Html.LanguageString("PM.ShowAllMessages"), @message.UserFrom.UserName))")>
+                            <p class="text-sm">
+                                @Html.Raw(string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(@message.Message), 5), "...."))
+                            </p>
+                            <p class="text-muted text-xs float-right">
+                                <i class="far fa-clock mr-1"></i>
+                                @DatesUI.GetPrettyDate(@message.DateSent.ToString())
+                            </p>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="dropdown-divider"></div>
+                        }
+        <div class="dropdown-footer">
+            <a class="btn btn-block btn-outline-successss" href="@Url.Action("Index", "PrivateMessage")" title="@Html.LanguageString("PM.GoToInbox")">
+                @Html.LanguageString("PM.AllMessages")
+            </a>
+</div>
+
+</div>
+
+                        }
+

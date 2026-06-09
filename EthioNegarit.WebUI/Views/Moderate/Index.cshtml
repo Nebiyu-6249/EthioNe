@@ -1,0 +1,92 @@
+﻿@model EthioNegarit.WebUI.ViewModels.ModerateViewModel
+@{
+    // Layout = null;
+    Layout = Model.IsAjaxRequest ? null : "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Html.Lang("Moderate.Title");
+}
+<script>
+    var areYouSureText = '@Html.Lang("Post.DeleteConfirmation")';
+</script>
+
+<!-- Page header -->
+@if(!Model.IsAjaxRequest){
+<div class="page-header">
+    <span class="">
+        @Html.LanguageString("Moderate.NavText")
+    </span>
+    <span class="">       
+    </span>
+</div>
+}
+
+<section class="content">
+    <div class="container-fluid">
+        @if (!Model.Topics.Any() && !Model.Posts.Any())
+        {
+            <p>
+                @Html.Lang("Moderate.NothingHere")
+            </p>
+        }
+        else
+        {
+            <div class="panel">
+                <div class="panel-content">
+                    <div role="tabpanel">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" href="#topics" aria-controls="topics" type="button" role="tab" data-toggle="tab"  aria-selected="true">@Html.Lang("Moderate.Topics")</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" href="#posts" aria-controls="posts" role="tab" data-toggle="tab"  aria-selected="false">@Html.Lang("Moderate.Posts")</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="topics">
+                                <div class="moderatepanel">
+                                    @if (Model.Topics.Any())
+                                    {
+                                        <div class="moderatetopicholder">
+                                            @foreach (var topic in Model.Topics)
+                                            {
+                                                @Html.Partial("_ModerateTopic", topic)
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <p>
+                                            @Html.Lang("Moderate.NothingHere")
+                                        </p>
+                                    }
+
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="posts">
+                                <div class="moderatepanel">
+
+                                    @if (Model.Posts.Any())
+                                    {
+                                        <div class="moderatepostholder">
+                                            @foreach (var post in Model.Posts)
+                                            {
+                                                @Html.Partial("_ModeratePost", post)
+                                            }
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <p>
+                                            @Html.Lang("Moderate.NothingHere")
+                                        </p>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

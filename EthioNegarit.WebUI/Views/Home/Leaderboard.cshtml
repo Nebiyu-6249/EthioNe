@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Html.LanguageString("Leaderboard.LeaderboardTitle");
+}
+
+@section Header {
+    @(
+        Bundle.JavaScript()
+            .Add("~/Scripts/leaderboard.js")
+            .MvcRender("~/scripts/cache/leaderboard-combined_#.js")
+    )
+}
+<div class="popup popup-top">
+</div>
+<!--Page header-->
+    <div class="page-header">
+            <span class="text-sm">
+                @Html.Raw(ViewBag.Title)
+            </span>
+        @*    <span class="inline-item-lg">
+        <a href="@Url.Action("Scoring", "Help")" class="btn btn-sm btn-defaultt btn-block text-center" title="@Html.Lang("HowToCollectPoints")">
+            @Html.Lang("Help.Label.HowToCollectPoints")
+        </a>
+    </span>*@
+</div>
+
+<section class="content">
+    <div class="container-fluid">   
+                <div class="leaderboard">
+                    <div class="row">
+                        <div class="col-sm-6 thisweeksstars">
+                            <h6>@Html.LanguageString("Leaderboard.ThisWeeksStars")</h6>
+                            <div class="leaderboardholders thisweekleaderboard">
+                                <span class="ajaxspinner" title="@Html.LanguageString("Ajax.PleaseWait")">@Html.LanguageString("Ajax.PleaseWait")</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 thisyearsstars">
+                            <h6>@Html.LanguageString("Leaderboard.ThisYearsStars")</h6>
+                            <div class="leaderboardholders alltimeleaderboard">
+                                <span class="ajaxspinner" title="@Html.LanguageString("Ajax.PleaseWait")">@Html.LanguageString("Ajax.PleaseWait")</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+</section>
+<div class="popup popup-bottom">
+</div>

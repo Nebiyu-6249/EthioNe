@@ -1,0 +1,397 @@
+﻿
+//
+/*#region =================  Private Message ================ */
+//
+.nav-search.minimized {
+    .nav-search-input {
+    width: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    max-width: 0;
+  }
+    .nav-search-icon {
+    border: 1px solid;
+    border-radius: 100%;
+    background-color: #fff;
+    padding: 0 5px !important;
+  }
+}
+.message-container {
+    clear: both;
+}
+.message-list {
+  position: relative;
+}
+.message-navbar {
+  line-height: 24px;
+  padding: 10px 12px;
+  border: 1px solid #d6e1ea;
+  border-color: #d6e1ea transparent;
+ // background-color: #f1f5fa;
+  background-color: darken($gray-100, 15%);
+  //color: lighten($dark, 10%);
+  text-align: center;
+  position: relative;
+   input.ace + .lbl::before {
+    top: auto;
+  }
+    .dropdown-toggle {
+    color: #777;
+  }
+    .dropdown-toggle:hover {
+    text-decoration: none;
+    color: #2283c5;
+  }
+    .nav-search {
+    right: auto;
+    left: 5px;
+    top: auto;
+  //  bottom: 11px;
+    bottom: 8px;
+  }
+    .messagebar-item-left ~ .nav-search {
+    left: 60px;
+  }
+}
+.message-bar {
+    display: inline-block;
+  min-height: 28px;
+}
+.message-infobar {
+   // padding-top: 12px;
+  //  padding-top: 0;
+}
+.message-list-container {
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: darken($gray-100, 10%);
+}
+.message-item {
+    margin: 5px;
+    padding: 5px;
+    border-bottom: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: darken($gray-100, 20%);
+    font-size: 14px;
+    font-weight: 300;
+    background-color: darken($gray-100, 5%);
+
+    .time {
+        float: right;
+     //   padding-left: 10px;
+        overflow-x:hidden;
+       display: inline;
+    }
+      &:hover {
+        background-color: darken($gray-100, 10%);
+        color: $dark;
+           transition: .3s;
+    transform: translateY(-3px);
+    cursor: pointer;
+    }
+      &:last-child {
+             border-bottom: 0;
+        }
+}
+.messagebar-item-right {
+ //position: absolute;
+  bottom: 14px;
+  left: 12px;
+  text-align: left;
+  right: 12px;
+  left: auto;
+}
+.time {
+    float: right;
+   width:140px;
+   text-align:left;
+ // overflow-x:hidden;
+ // overflow-y:hidden;
+  overflow: hidden;
+  text-overflow: clip;
+     @media (max-width: breakpoint-max(xs)) {
+         width:20px;
+         }
+}
+.message-delete {
+    float: right;
+  // padding-right: 5px;
+    font-weight: 100;
+    color: gray;
+    margin-right:15px;
+   margin-left:5px;
+}
+.attachment {
+    float: right;
+  //  padding-right: 10px;
+    font-weight: 100;
+    color: gray;
+     /* @media (max-width: breakpoint-max(xs)) {
+         padding-right: 10px;
+         }*/
+}
+.message-star {
+    margin-left: 10px;
+}
+.sender {
+    position:fixed;
+    margin-left: 30px;
+   width: 150px;
+ //  overflow: hidden;
+ // text-overflow: clip;
+}
+.summary {
+    position: relative;
+    margin-left: 200px;
+    padding: 0;
+    text-align: left;
+  //  overflow: hidden;
+  //text-overflow: clip;
+   //justify-content: center;
+     @media (max-width: breakpoint-max(xs)) {
+        display:none;
+         }
+}
+.message-flags {
+ //   position:fixed;
+     // float: right;
+     margin-left: 5px;
+  //  padding-left: 5px;
+}
+.message-text {
+    float: left;
+    padding-left: 15px;
+    cursor: pointer;
+      @media (max-width: breakpoint-max(xs)) {
+         padding-right: 5px;
+         }
+}
+.message-content {
+    margin: 5px;
+    padding: 5px;
+    border-bottom: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: darken($gray-100, 10%);
+    font-size: 14px;
+    font-weight: 300;
+}
+.message-header {
+    display: inline;
+    .time {
+        float: right;
+        margin-top: 12px;
+        margin-left: 10px;
+        // display: inline;
+    }
+}
+.action-buttons {
+    display: inline;
+    margin-right: 0;
+}
+.message-body {
+    position: relative;
+    max-height: 200px;
+    //height: 480px;
+    overflow-x: hidden;
+    overflow-y: initial;
+    margin-top: 1px;
+    padding: 10px;
+
+    p {
+        line-height: 10px;
+    }
+    /* smooth scrolling on touch devices */
+    -webkit-overflow-scrolling: touch;
+    @include scrollbar-color-gray();
+    @include scrollbar-width-none();
+
+    &:hover {
+        @include scrollbar-width-thin();
+    }
+}
+
+.message-attachment {
+    width: 100%;
+    display: inline;
+    margin-top: 10px;
+}
+
+.attachment-title {
+    position: relative;
+    display: inline;
+    margin-top: 10px;
+}
+
+.attachment-list {
+    padding: 10px;
+    .action-buttons {
+        margin-left: 40px;
+    }
+}
+
+
+// Private Messages
+.privatemessages {
+    clear: both;
+    padding: 30px 0 0 0;
+
+    .top-pm-nav {
+        padding-top: 8px;
+        padding-bottom: 12px;
+    }
+
+    .newmessageicon {
+        color: $color-global-green;
+    }
+}
+
+.message-view {
+    h1 {
+        margin: 20px 0 0 0;
+        .pmavatar {
+            float: left;
+            margin: 0 15px 0 0;
+            -ms-border-radius: 50%;
+            border-radius: 50%;
+            margin-top: -8px;
+        }
+
+        span.label {
+            font-size: 12px;
+            font-weight: $font-light-weight;
+        }
+    }
+}
+.message-block {
+       // margin-bottom: 25px;
+         margin-bottom: 15px;
+      //  padding: 12px 12px 8px 12px;
+        padding: 6px 6px 4px 12px;
+        border-radius: 8px;
+
+        .smallavatar {
+            -ms-border-radius: 50%;
+            border-radius: 50%;
+            z-index: 10;
+        }
+    }
+.message-tools {
+        padding: 4px 0 0 0;
+        margin: 0;
+        text-align: right;
+        font-size: 12px;
+        a, a:visited {
+            cursor: pointer;
+        }
+        li {
+            list-style: none;
+            display: inline-block;
+            text-align: left;
+            padding: 0 0 0 4px;
+            .glyphicon-ok {
+                color: $color-global-green;
+            }
+        }
+    }
+.message-to {
+        margin-right: 10%;
+      //  background-color: #f2f2f2;
+        background-color: darken($gray-100, 10%);
+        position: relative;
+        &:after {
+            top: -14px;
+            left: 14px;
+            border: solid transparent;
+            content: "";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
+           // border-left: 20px solid #f2f2f2;
+            border-left: 20px solid darken($gray-100, 10%);
+            z-index: 5;
+        }
+    }
+.message-from {
+        margin-left: 10%;
+        background-color: darken($gray-100, 15%);
+        position: relative;
+        &:after {
+            bottom: -14px;
+            right: 14px;
+            border: solid transparent;
+            content: "";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-top: 4px solid transparent;
+            border-bottom: 14px solid transparent;
+        //    border-right: 20px solid #dedede;
+             border-right: 20px solid darken($gray-100, 15%);           
+            z-index: 5;
+        }
+    }
+
+    .admin-nav {
+        padding: 0 0 15px 0;
+        margin: 0 0 0 0;
+
+        li {
+            display: inline-block;
+            padding: 0 7px 0 0;
+            margin: 0 0 0 0;
+        }
+    }
+
+    p.pmerrormessage {
+        text-align: center;
+        font-weight: bold;
+        margin: 0;
+        display: block;
+        padding: 5px 0;
+    }
+
+
+.form-createpm {
+    padding: 10px 0;
+    clear: both;
+  //  height:100px;
+}
+
+//
+/*#endregion ============== Private Message End  ====================  */
+//
+
+
+@include dark-mode () {
+ .message-item {
+ background-color: lighten($dark, 5%);
+// color: $gray-200;
+ border-bottom-color: lighten($dark, 15%);
+    &:hover {
+        background-color: lighten($dark, 10%);
+        color: $gray-100;
+    }
+ }
+.message-list-container {
+   border-color: lighten($dark, 15%);
+}
+     .message-to {
+        background-color: lighten($dark, 15%);
+        &:after {
+            border-left: 20px solid lighten($dark, 15%);
+        }
+    }
+
+    .message-from {
+        background-color: lighten($dark, 10%);
+
+        &:after {
+            border-right: 20px solid lighten($dark, 10%);
+        }
+    }
+}

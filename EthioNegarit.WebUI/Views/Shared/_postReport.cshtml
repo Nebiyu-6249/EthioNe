@@ -1,0 +1,50 @@
+﻿@model EthioNegarit.WebUI.ViewModels.CreatePostReportViewModel
+
+@using (Ajax.BeginForm("PostReport", "Report", null, new AjaxOptions
+    {
+    HttpMethod = "POST",
+    LoadingElementId = "submitreportwait",
+    OnSuccess = "AjaxReportSuccess()",
+    OnFailure = "AjaxReportError('Error creating Report')",
+    OnBegin = "AjaxReportBegin()"
+    }, new { @id = "reportcodeform", @class = "form-createreport" }))
+    {
+    @Html.HiddenFor(x => x.PostId)
+    <p>@Html.LanguageString("Post.By") - @Model.PostCreatorUsername</p>
+    <div class="card-footer">
+        <div class="input-group">
+            <textarea class="form-control required reason" id="reason" name="Reason" placeholder="@Html.LanguageString("Report.Text")"></textarea>
+        </div>
+    </div>
+    @Html.ValidationMessageFor(x => x.Reason)
+    <div class="row submit-holder">
+        <div class="col-sm-6">
+            <input type="reset" id="" class="btn btn-default btn-sm btn-block reset" value="@Html.LanguageString("Buttons.Clear")" />
+        </div>
+        <div class="col-sm-6">
+            <input type="submit" id="submitreport" data-id="@Model.PostId" data-confirmation="@Html.LanguageString("Report.Sent")" class="btn btn-outline-success btn-sm btn-block submitreport" value="@Html.LanguageString("Buttons.Submit")" />
+        </div>
+        <span style="display: none;" id="submitreportwait" class="ajaxspinner" title="@Html.LanguageString("Post.PleaseWait")">@Html.LanguageString("Post.PleaseWait")</span>
+    </div>
+    }
+
+@*<script type="text/javascript">
+        $(document).on("click", "#submitreport", function (e) {
+            var id = $(this).data("id");
+            var sentconfirmationText = $(this).data("confirmation");
+            $("#post-" + id).fadeOut("slow");
+            $("#postreport-" + id).hide();
+            $("#postreported-" + id).show();
+            $("#confirmationMessage").text(sentconfirmationText);
+            /*setTimeout(function () {
+                $("#confirmationMessage").delay(25000).fadeOut();
+            }, 25000)*/
+           ShowConfirmation();
+        });
+        function ShowConfirmation() {
+            setTimeout(function () {
+                $("#confirmationMessage").delay(5000).fadeOut();
+            }, 5000)
+        }
+    </script>*@
+

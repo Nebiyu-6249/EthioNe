@@ -1,0 +1,11 @@
+﻿@*@using EthioNegarit.WebUI.ViewModels
+    @model PrivateMessagesViewModel*@
+
+@{
+    ViewBag.Title = Html.LanguageString("PM.PrivateMessages");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="privateMessage" id="privateMessage">
+ @Html.Action("Inbox", "PrivateMessage")
+</div>

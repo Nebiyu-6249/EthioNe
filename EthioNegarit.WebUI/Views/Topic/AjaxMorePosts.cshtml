@@ -1,0 +1,16 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model ShowMorePostsViewModel
+<div class="contents-list">
+    <ul>
+        @foreach (var post in Model.Posts)
+        {
+            <li>
+                <div class="content-fluid  align-right-sm">
+                    @{
+                        Html.RenderPartial("_Post", post);
+                    }
+                </div>
+            </li>
+      }
+    </ul>
+</div>

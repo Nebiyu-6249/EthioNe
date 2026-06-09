@@ -1,0 +1,76 @@
+﻿@using EthioNegarit.WebUI.Application.ExtensionMethods
+@{
+    Layout = "~/Views/Shared/_LayoutFullWidth.cshtml";
+    ViewBag.Title = Html.Settings().PageTitle ?? Html.Settings().ForumName;
+    ViewBag.MetaDesc = Html.Settings().MetaDesc;
+}
+<div class="container">
+    <div class="menu-panel">
+        <div class="panel-header">
+            <div class="site-name text-muted text-center">
+                <h1>@Html.Raw(Html.Settings().ForumName)</h1>
+            </div>
+            <div class="moto text-muted">
+                <p class="text-center">
+                    @Html.LanguageString("Site.Moto")
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="main-menu">
+        @Html.Action("GetMainStats", "Stats")
+    </div>
+</div>
+<div class="container">
+    <div class="clearfix">
+        @Html.Action("Menu", "Category")
+    </div>
+</div>
+<div class="container">
+    <div class="clearfix">
+        @Html.Action("Slide", "Ad")
+    </div>
+</div>
+<div class="clearfix">
+    @Html.Partial("_footer")
+</div>
+@*
+    <script>
+        $(document).ready(function () {
+            checkCookie();
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        function checkCookie() {
+            let user = getCookie("username");
+            if (user != "") {
+                alert("Welcome again " + user);
+            } else {
+                user = prompt("Please enter your name:", "");
+                if (user != "" && user != null) {
+                    setCookie("username", user, 365);
+                }
+            }
+        }
+        });
+    </script>*@

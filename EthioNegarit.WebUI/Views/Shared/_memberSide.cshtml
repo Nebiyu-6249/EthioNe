@@ -1,0 +1,33 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@using MembershipUser = EthioNegarit.Core.Domain.Entities.MembershipUser
+@model MembershipUser
+
+@{
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+    var placement = Convert.ToBoolean(PageData[AppConstants.IsMobileDevice]) ? "bottom" : "left";
+}
+
+<a id="@Model.Id" class="show-pop-delay" role="button" href="@Model.NiceUrl" data-delay-show="300" data-delay-hide="1000" data-placement="@placement.ToString()">
+    <div class="member-side">
+        <div class="member-header">
+            <div class="image">
+                <img class="img-circle @(Model.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm")" src="@Model.MemberImage(SiteConstants.Instance.GravatarLeaderboardSize)" alt="" />
+            </div>
+            <span class="member-name">
+                @Html.Raw(Model.UserName)
+                @if (Model.LastActivityDate >= date)
+
+                {
+                    <span class="ethicon far fa-dot-circle text-success float-right mt-2"></span>
+                }
+                else
+                {
+                    <span class="postdate text-xs text-muted float-right mt-1">
+                        @DatesUI.GetPrettyDate(Model.LastActivityDate.ToString())					
+                    </span>
+                }
+            </span>
+        </div>
+    </div>
+</a>
+	@Html.Partial("_memberPopover", new MemberPopUpViewModel{User = @Model})

@@ -1,0 +1,50 @@
+﻿@model EthioNegarit.WebUI.ViewModels.MyFavouritesViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+ViewBag.Title = Html.Lang("Favourites.PageTitle");
+}
+<div class="popup popup-top">
+</div>
+	<div class="page-header">
+        <span class="width-25">
+            @ViewBag.Title
+        </span>	
+            <span class="width-25">
+                @if (User.Identity.IsAuthenticated)
+            {
+                    @Html.Action("CreateTopicButton", "Topic")
+                }
+            </span>	
+	</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-sm-9">
+                <div class="myfavourites">               
+                    @if (Model.Posts.Any())
+                    {
+                        <ul class="contents-list">
+                            @foreach (var postViewModel in Model.Posts)
+                            {
+                            <li class="content-fluid">
+                                @{
+                                    @Html.Partial("_Post", postViewModel)
+                                }
+                            </li>
+                                }
+</ul>
+                    }
+                    else
+                    {
+                            <p>@Html.Lang("Favourites.NoMemberFavourites")</p>
+                            }
+</div>
+            </section>
+            <section class="col-sm-3 side-panel">
+             @Html.Partial("_CommonSideNav")     
+            </section>
+        </div>
+    </div>
+</section>
+<div class="popup popup-bottom">
+</div>

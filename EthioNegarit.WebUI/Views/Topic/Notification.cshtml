@@ -1,0 +1,164 @@
+﻿@using EthioNegarit.WebUI.Application
+@using EthioNegarit.Utilities
+@using EthioNegarit.WebUI.ViewModels
+@model  NotificationsViewModel
+@{
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+    var notificationcount = @Model.NewNotification + @Model.ModerateCount;
+}
+@{
+    var enabled = string.Empty;
+    var disabled = string.Empty;
+    const string displayNone = "style='display:none;'";
+    if (Model.LoggedOnUser.DesktopNotification == true)
+    {
+        enabled = displayNone;
+    }
+    else
+    {
+        disabled = displayNone;
+    }
+}
+    <a class="nav-link  shownotification @(notificationcount > 0 && Model.LoggedOnUser.DesktopNotification == true ? "btn-wobble" : "")" role="button" data-toggle="dropdown" href="#">
+        <i class="notificationicon @(Model.LoggedOnUser.DesktopNotification == true ? "far fa-bell" : "far fa-bell-slash")"></i>
+@if (Model.LoggedOnUser.DesktopNotification == true)
+{
+        if (@Model.NewNotification > 0)
+        {
+            <span class="newnotification badge badge-warning navbar-badge">
+                @Model.NewNotification
+            </span>
+        }
+        if (@Model.ModerateCount > 0 && @Model.NewNotification <= 0)
+        {
+            <span class="newnotification badge badge-success navbar-badge">
+                @Model.ModerateCount
+            </span>
+        }
+        }
+    </a>
+<div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
+    <div class="dropdown-item">
+        <span class="ml-4">
+            @Html.LanguageString("Notification.Title")
+        </span>
+        <a @Html.Raw(enabled) href="#" class="enablenotification float-right" role="button" title= @Html.LanguageString("Notifications.Enable")>
+            <i class="far fa-bell-slash mr-4" aria-hidden="true"></i>
+        </a>
+        <a @Html.Raw(disabled) class="disablenotification float-right" role="button" href="#" title="@Html.LanguageString("Notifications.Enabled")">
+            <i class="far fa-bell mr-4" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="notifications">
+        @if (Model.LoggedOnUser.DesktopNotification == true)
+        {
+            if (Model.ModerateCount > 0)
+            {
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item moderatepanelnav" href="@Url.Action("Index", "Moderate")" data-name="@Html.Lang("Moderate.NavText")">
+            <div class="media">
+                <i class="fas fa-file ml-2 mt-1 mr-4"></i>
+                <div class="media-body">
+                    @Html.LanguageString("Moderate.NavText")
+                    <span class="float-right text-muted text-sm badge  badge-warning ml-46">@Model.ModerateCount</span>
+                </div>
+            </div>
+        </a>
+        <div class="dropdown-divider"></div>
+            }
+            if (Model.Topics.Any())
+            {
+                notificationcount += 1;
+                foreach (var topic in Model.Topics)
+                {
+                    var startPost = topic.Posts.FirstOrDefault(x => x.IsTopicStarter);
+        <div class="dropdown-item">
+            <div class="media">
+                <a href="@topic.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+                    <img class="img-circle img-size-32 @(topic.User.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm") mr-3" src="@topic.User.MemberImage(SiteConstants.Instance.GravatarLeaderboardSize)" alt="img" />
+                </a>
+                @{
+                                Html.RenderPartial("_memberInfo", topic.User);
+                }
+                <div class="media-body">
+                    <h3 class="dropdown-item-title">
+                        <a class="" href="@topic.Category.NiceUrl">
+                            @topic.Category.Name
+                        </a>
+                        <span class="float-right text-sm ">
+                            <a href="#" class="emailunsubscription" data-id="@topic.Category.Id" data-type="category" title="Unfollow">
+                                <i class="fas fa-star text-warning"></i>
+                            </a>
+                        </span>
+                    </h3>
+                    <p class="text-sm">
+                        <a class="" href="@topic.NiceUrl">
+                            @Html.Raw(string.Format(Html.LanguageString("Notification.NewTopic"), @topic.User.UserName, string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(@startPost.PostContent), 10), "....")))
+                        </a>
+                    </p>
+                    <p class="text-muted text-xs float-right">
+                        <i class="far fa-clock mr-1"></i>
+                        @DatesUI.GetPrettyDate(@topic.CreateDate.ToString())
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown-divider"></div>
+                                    }
+                                }
+                                if (Model.Posts.Any())
+                                {
+                                    notificationcount += 1;
+                                    foreach (var post in Model.Posts)
+                                    {
+        <div class="dropdown-item">
+            <div class="media">
+                <a href="@post.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+                    <img class="img-circle img-size-32 @(post.User.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm") mr-3" src="@post.User.MemberImage(SiteConstants.Instance.GravatarLeaderboardSize)" alt="img" />
+                </a>
+                @{
+                        Html.RenderPartial("_memberInfo", post.User);
+                }
+                <div class="media-body">
+                    <h3 class="dropdown-item-title">
+                        <a class="" href="@post.Topic.NiceUrl">
+                            @post.Topic.Name
+                        </a>
+                        <span class="float-right text-sm ">
+                            <a href="#" class="emailunsubscription" data-id="@post.Topic.Id" data-type="topic" title="Unfollow">
+                                <i class="fas fa-star text-warning"></i>
+                            </a>
+                        </span>
+                    </h3>
+                    <p class="text-sm">
+                        <a class="" href="@post.Topic.NiceUrl">
+                            @Html.Raw(string.Format(Html.LanguageString("Notification.NewPost"), @post.User.UserName, string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(@post.PostContent), 10), "....")))
+                        </a>
+                    </p>
+                    <p class="text-muted text-xs float-right">
+                        <i class="far fa-clock mr-1"></i>
+                        @DatesUI.GetPrettyDate(@post.DateCreated.ToString())
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown-divider"></div>
+                                                        }
+                                                    }
+                                                    if (notificationcount <= 0)
+                                                    {
+        <div class="dropdown-item float-center">
+            @Html.Lang("Notifications.NothingHere")
+        </div>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+        <div class="dropdown-item float-center">
+       <a class="enablenotification" role="button" href="#">
+        @Html.Lang("Notifications.Disabled")
+    </a>
+        </div>
+                                                    }
+    </div>
+</div>

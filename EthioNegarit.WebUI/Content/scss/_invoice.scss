@@ -1,0 +1,169 @@
+﻿//
+/*#region =================Invoice ================ */
+//
+.invoice-box {
+  -webkit-box-shadow: none;
+  padding: 0;
+  box-shadow: none;
+  margin: 3px 0;
+ // border: 1px solid #ccc;
+}
+.invoice-header {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  position: relative;
+  min-height: 38px;
+ // background: repeat-x #f7f7f7;
+ // background-image: -webkit-linear-gradient(top, #fff 0, #eee 100%);
+//  background-image: -o-linear-gradient(top, #fff 0, #eee 100%);
+//  background-image: linear-gradient(to bottom, #fff 0, #eee 100%);
+ // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffeeeeee', GradientType=0);
+  color: #669fc7;
+  border-bottom: 1px solid #ddd;
+  padding-left: 12px;
+    > .invoice-title {
+    line-height: 36px;
+    padding: 0;
+    margin: 0;
+    display: inline;
+  }
+    > .invoice-title > .ethicon {
+    margin-right: 5px;
+    font-weight: 400;
+    display: inline-block;
+  }
+ 
+}
+.invoice-header-large {
+  min-height: 49px;
+  padding-left: 18px;
+    > .invoice-title {
+    line-height: 48px;
+  }
+    > .invoice-toolbar {
+    line-height: 48px;
+  }
+    > .invoice-toolbar:before {
+    top: 6px;
+    bottom: 6px;
+  }
+    > .invoice-toolbar > a {
+    font-size: 15px;
+    margin: 0 1px;
+  }
+    > .invoice-toolbar > .nav-tabs > li > a {
+    line-height: 22px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    margin-top: 4px;
+  }
+    > .invoice-toolbar > .nav-tabs > li.active > a {
+    margin-top: 3px;
+  }
+}
+
+////////////////////
+  .invoice-toolbar {
+  display: inline-block;
+  padding: 0 10px;
+  line-height: 37px;
+  float: right;
+  position: relative;
+  }
+
+.invoice-toolbar:before {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: -1px;
+  border: 1px solid #d9d9d9;
+  border-width: 0 1px 0 0;
+}
+.invoice-toolbar.no-border:before {
+  display: none;
+}
+
+.invoice-body {
+  background-color: #fff;
+    .table {
+    border-top: 1px solid #e5e5e5;
+  }
+    .table thead:first-child tr {
+    background: #fff;
+  }
+    .table.table-bordered thead:first-child > tr {
+    border-top-width: 0;
+  }
+}
+
+.invoice-main {
+  padding: 12px;
+    .tab-content {
+    border-width: 0;
+  }
+    > form .input-prepend {
+    margin-bottom: 0;
+  }
+}
+
+.invoice-main.padding-24 {
+  padding: 24px;
+}
+.invoice-info {
+  line-height: 24px !important;
+  color: #444;
+  vertical-align: bottom;
+  margin-left: 9px;
+  margin-right: 9px;
+}
+.invoice-info-label {
+  display: inline-block;
+  max-width: 100px;
+  text-align: right;
+  font-size: 14px;
+}
+.invoice-box {
+    .label-large[class*="arrowed"] {
+    margin-left: 11px !important;
+    max-width: 95%;
+  }
+}
+//
+/*#endregion ============== Invoice End  ====================  */
+//
+//
+/*#region =================Print Invoice ================ */
+//
+
+@media print {
+  //Add to elements that you do not want to show when printing
+  .no-print {
+    display: none !important;
+  }
+  //Elements that we want to hide when printing
+  .main-sidebar,
+  .main-header,
+  .content-header {
+    @extend .no-print;
+  }
+
+  //This is the only element that should appear, so let's remove the margins
+  .content-wrapper,
+  .main-footer {
+    @include translate(0, 0);
+    margin-left: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .layout-fixed .content-wrapper {
+    padding-top: 0 !important;
+  }
+
+}
+
+//
+/*#endregion ============== Print Invoice End  ====================  */
+//

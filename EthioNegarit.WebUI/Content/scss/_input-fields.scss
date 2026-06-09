@@ -1,0 +1,247 @@
+﻿/* Text Inputs + Textarea
+   ========================================================================== */
+
+/* Style Placeholders */
+/*
+::placeholder {
+  color: $placeholder-text-color;
+}*/
+//input:not([type]):not(.browser-default),
+/* Text inputs */
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=email]:not(.browser-default),
+input[type=url]:not(.browser-default),
+input[type=time]:not(.browser-default),
+input[type=date]:not(.browser-default),
+input[type=datetime]:not(.browser-default),
+input[type=datetime-local]:not(.browser-default),
+input[type=tel]:not(.browser-default),
+input[type=number]:not(.browser-default),
+input[type=search]:not(.browser-default),
+textarea
+{
+  background-color: darken($gray-100, 5%);
+  color: lighten($dark, 25%);
+  min-width: 45%;
+  margin-bottom: 10px;
+  border: 1px solid darken($gray-100, 20%);
+  border-radius: 4px;
+  padding: 12px;
+   // Disabled input style
+  &:disabled,
+  &[readonly="readonly"] {
+    color: $input-disabled-color;
+  }
+   // Disabled label style
+ /* &:disabled+label,
+  &[readonly="readonly"]+label {
+    color: $input-disabled-color;
+  }*/
+  // Focused input style
+  &:focus:not([readonly]) {
+      border: 1px solid blue;
+      background-color:$white;
+  }
+    // Focused label style
+ /* &:focus:not([readonly])+label {
+    color: $input-focus-color;
+  }*/
+    // Valid Input Style
+  &.valid,
+  &:focus.valid {
+      border: 1px solid $color-global-green;
+  }
+  // Invalid Input Style
+ &.invalid,
+  &:focus.invalid {
+     border: 1px solid $color-global-red;
+     background-color: beige;
+  }
+  &.invalid:not(:focus) {
+   border: 1px solid $color-global-red;
+    background-color: beige;
+}
+  &.required {
+       border: 1px solid $color-global-red;
+     background-color: beige;
+      }
+ &.invalid:not(:focus).invalid {
+  border: 1px solid $color-global-red;
+}
+  &:invalid {
+    border: 1px solid $color-global-red;
+    }
+  .input-error {
+    border: 1px solid $color-global-red;
+    }
+  }
+textarea {
+     background-color: darken($gray-100, 8%);
+   color: lighten($dark, 15%);
+}
+select {
+// border: none;
+   min-width: 45%;
+   padding: 5px;
+   border-radius: 4px;
+   border: 1px solid darken($gray-100, 10%);
+   background-color: darken($gray-100, 8%);
+   color: lighten($dark, 10%);
+      &:focus {
+      border: 1px solid blue;
+      }
+}
+.form-control {
+  // Use the Bootstrap specific invalid class
+  &.is-invalid {
+    border: 1px solid $color-global-red;
+    background-color: beige;
+  }
+}
+input {
+  transition: border-color 0.2s ease-in-out;
+  border: 1px solid #ccc; // Default border color
+  // Style the input when it's in an invalid state
+  &:invalid {
+     border: 1px solid $color-global-red;
+     background-color: beige;
+  }
+  // Optional: change back to normal when valid
+  &:valid {
+    // You can set it back to the default or a 'valid' color
+     border: 1px solid $color-global-green;
+     background-color: $limegreen;
+  }
+}
+  // Styling for input field wrapper
+.input-field {
+  // Inline styles
+  &.inline {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    input,
+    .select-dropdown {
+      margin-bottom: 1rem;
+    }
+  }
+  }
+
+//
+/*#region =================Form Validation Errors ================ */
+//
+
+.form-group {
+  input {
+    border: 1px solid $color-global-red;
+    // Target the input when its parent has the 'has-error' class
+    .has-error & {
+      border: 1px solid $color-global-red;
+    }
+  }
+  }
+input:valid {
+ background-color: $limegreen;
+  border: 1px solid $color-global-green;
+}
+/*input:valid + span::before {
+  content: "✓";
+  color: green;
+}*/
+input:invalid {
+  border: 1px solid $color-global-red;
+ background-color: beige;
+}
+/*input:invalid + span::before {
+  content: "✖";
+  color: red;
+}*/
+/* Optional: To only show the red border when the user is not focused on the field */
+input:invalid:not(:focus) {
+     border: 1px solid $color-global-red;
+     background-color: beige;
+}
+input:required {
+  border: 1px solid $color-global-red;
+}
+.input-error {
+   border: 1px solid $color-global-red;
+  /* Add a box-shadow for a more prominent effect, if desired */
+   box-shadow: 0 0 3px red;
+}
+input + span {
+  position: relative;
+}
+input + span::before {
+  position: absolute;
+  right: -20px;
+  top: 5px;
+}
+
+//
+/*#region =================Form Validation Errors ================ */
+//
+/*
+.error{
+   // border:2px solid red;
+    border: 1px solid $color-global-red;
+ //   border-color: $color-global-red;
+
+}
+*/
+.validation-summary-errors {
+    ul {
+        padding: 0;
+        margin: 0 0 5px 0;
+
+        li {
+            padding: 4px;
+          //  background-color: $color-global-red;
+            background-color: inherit;
+            color: lighten($color-global-red, 50%);
+            list-style: none;
+        }
+    }
+}
+.field-validation-error {
+    color: $color-global-red;
+    font-size: 12px;
+}
+@include dark-mode () {
+   // input:not([type]):not(.browser-default),
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=email]:not(.browser-default),
+input[type=url]:not(.browser-default),
+input[type=time]:not(.browser-default),
+input[type=date]:not(.browser-default),
+input[type=datetime]:not(.browser-default),
+input[type=datetime-local]:not(.browser-default),
+input[type=tel]:not(.browser-default),
+input[type=number]:not(.browser-default),
+input[type=search]:not(.browser-default)
+     {
+     background-color: lighten($dark, 10%);
+     color: $white;
+      &:focus:not([readonly]) {
+      border: 1px solid blue;
+      color:$gray-100;
+  }
+       }
+
+   select
+   {
+      background-color: lighten($dark, 1%);
+       border: 1px solid lighten($dark,1%);
+        color: $gray-500;
+        }
+  textarea{
+     background-color: lighten($dark, 10%);
+     color: $white;
+        &:focus:not([readonly]) {
+      border: 1px solid blue;
+      color:$gray-100;
+  }
+  }
+    }

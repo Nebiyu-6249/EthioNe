@@ -1,0 +1,26 @@
+﻿@model EthioNegarit.WebUI.ViewModels.RssFeedViewModel
+<div class="panel-content">
+    @if (Model.RssFeed.Any())
+    {
+        <div class="panel-header">
+            <h3 class="title">@Html.Lang("Topic.RecentDiscussions")</h3>
+        </div>
+        <div class="contents-list">
+            <ul class="ml-1">
+                @foreach (var rssItem in Model.RssFeed)
+                {
+                    <li class="mb-0 pl-2 category">
+                        <a href="@rssItem.Link" target="_blank">@rssItem.Title</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        <div class="panel-body">
+            Nothing to show
+        </div>
+    }
+</div>
+

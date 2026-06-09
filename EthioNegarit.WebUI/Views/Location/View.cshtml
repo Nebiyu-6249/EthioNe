@@ -1,0 +1,46 @@
+﻿@model EthioNegarit.WebUI.ViewModels.LocationViewModel
+    <script>
+        function initMap() {
+            //center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+            var map = new google.maps.Map(document.getElementById('map'), {
+              //  center: { lat: 34.0522, lng: -118.2437 }, // Initial center point
+               // center: { lat: 9.0370, lng: 38.7545 }, // Initial center point
+                center: { lat: @Model.Locations[0].Latitude, lng: @Model.Locations[0].Longitude }, // Initial center point               
+                zoom: 3
+            });
+            var infoWindow = new google.maps.InfoWindow();
+            // Loop through the locations in your MVC model
+            @foreach (var item in Model.Locations)
+            {
+                <text>
+                var marker = new google.maps.Marker({
+                    position: { lat: @item.Latitude, lng: @item.Longitude },
+                    map: map,
+                    title: '@item.CityName',
+                    description: '@item.Description'
+                });
+                // Add an info window for each marker (optional)
+                google.maps.event.addListener(marker, 'click', function () {
+                    infoWindow.setContent('<div><strong>@item.CityName</strong><br>@item.Description</div>');
+                    infoWindow.open(map, marker);
+                });
+                </text>
+            }
+        }
+    </script>
+    <!--
+        Include the Google Maps JavaScript API script.
+        Replace YOUR_API_KEY with your actual key.
+        The `callback=initMap` parameter tells the API to execute the `initMap` function once the script is loaded.
+    -->
+   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=drawing,geometry"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYqHOFQ33Ke169tVYaEfjNlEOytpRbm04&callback=initMap">
+    </script>
+
+
+
+
+
+
+

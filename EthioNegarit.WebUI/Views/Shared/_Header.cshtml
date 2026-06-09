@@ -1,0 +1,97 @@
+﻿<nav class="main-header navbar navbar-expand navbar-light">
+    <!--navbar-brand*/-->
+    <a href="/Home/Index" class="navbar-brand">
+        <img src="../../content/images/EthioNegaritLogo.png" alt="Logo" class="brand-image img-size-50 img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">@Html.Settings().ForumName</span>
+    </a>
+    <!-- Left navbar links -->
+    <ul class="nav-menu navbar-nav d-nonek d-sm-inline-blockk">
+        <li class="nav-item"><a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a></li>
+        <li class="nav-item d-none d-sm-inline-block"><a href="@Url.Action("Index", "Topic")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "topic" && TempData[AppConstants.CurrentAction].ToString() == "index" ? "active" : "")" title="@Html.Lang("Layout.Nav.Discussions")">@Html.Lang("Layout.Nav.Discussions")</a></li>
+        <li class="nav-item d-none d-sm-inline-block"><a href="@Url.Action("Index", "Category")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "category" && TempData[AppConstants.CurrentAction].ToString() == "index" ? "active" : "")" title="@Html.LanguageString("Layout.Nav.Categories")">@Html.LanguageString("Layout.Nav.Categories")</a></li>
+        @if (Html.Settings().EnableChat)
+        {
+            <li class="nav-item d-none d-sm-inline-block"><a href="@Url.Action("Index", "Chat")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "chat" && TempData[AppConstants.CurrentAction].ToString() == "index" ? "active" : "")" title="@Html.LanguageString("Layout.Nav.ChatRooms")">@Html.LanguageString("Layout.Nav.ChatRooms")</a></li>
+        }
+        <li class="nav-item d-none d-sm-inline-block"><a href="@Url.Action("About", "Home")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "home" && TempData[AppConstants.CurrentAction].ToString() == "about" ? "active" : "")" title="@Html.LanguageString("Layout.Nav.About")">@Html.LanguageString("Layout.Nav.About")</a></li>
+        <li class="nav-item d-none d-sm-inline-block dropdown">
+            <a class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "home" && TempData[AppConstants.CurrentAction].ToString() == "faq" ? "active" : "")" title="@Html.LanguageString("Layout.Nav.Help")" data-toggle="dropdown" href="#">
+                @Html.LanguageString("Layout.Nav.Help")
+            </a>
+            <div class="dropdown-menu dropdown-menu-lgg dropdown-menu-right">
+                <a href="@Url.Action("FAQ", "Home")" class="dropdown-item dropdown-header">
+                    @Html.LanguageString("Help.FAQ")
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="@Url.Action("ContactUs", "Home")" class="dropdown-item dropdown-header">
+                    @Html.LanguageString("Layout.Nav.ContactUs")
+                </a>
+            </div>
+        </li>
+    </ul>
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+        <!-- Navbar Search -->
+        <li class="nav-item">
+            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                <i class="fas fa-search"></i>
+            </a>
+            <div class="navbar-search-block">
+                <!-- <form class="form-inline">-->
+                @using (Html.BeginForm("Index", "Search", FormMethod.Get, new { @class = "form-inline" }))
+                {
+                    <div class="input-group input-group-sm">
+                        <input class="form-control form-control-navbar" type="search" name="term" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn  btn-navbar btn-sm d-none d-sm-inline-block" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="btn btn-navbar btn-sm" type="button" data-widget="navbar-search">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                }
+                <!--</form>-->
+            </div>
+        </li>
+        <!-- Messages Notification Menu -->
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li class="nav-item">
+                @Html.Action("Notification", "PrivateMessage", new { isDropDown = true })
+            </li>
+            <li class="nav-item notification-menu">
+                @Html.Action("Notification", "Topic")
+            </li>
+        }
+        <li class="nav-item user-menu">
+            @Html.Partial("_LogOnPartial")
+        </li>
+        <li class="nav-item nav-link d-none d-sm-inline-block" title="@Html.LanguageString("Settings.DarkMode")">
+            <div class="custom-control custom-switch float-right">
+                <input type="checkbox" checked="" class="custom-control-input" id="darkSwitch" />
+                <label class="custom-control-label" for="darkSwitch"></label>
+            </div>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block nav-linkk" title="@Html.LanguageString("Language.Change")">
+            @Html.Action("Index", "Language")
+        </li>
+        <li class="nav-item d-xl-nonee">
+            <a class="nav-link settingsbutton" href="#" role="button" title="@Html.LanguageString("Settings.Title")">
+                <i class="fas fa-cog"></i>
+            </a>
+        </li>
+        <li class="nav-item d-xl-none">
+            <a class="nav-link close-panel" href="#" role="button">
+                <i class="fas fa-times"></i>
+            </a>
+        </li>
+        <li class="nav-item d-xl-none d-sm-inline-block">
+            <a class="nav-link push-panel" href="#" role="button">
+                <i class="fas fa-ellipsis-v"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- /.navbar -->

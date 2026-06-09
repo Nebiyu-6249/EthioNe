@@ -1,0 +1,38 @@
+﻿@model EthioNegarit.WebUI.ViewModels.MemberReportViewModel
+
+<div class="modal-header">
+    <h5 class="modal-title">@Html.LanguageString("Report.On") - @Model.Username</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+                <div class="col-sm-12 col-sm-offset-66">
+                    @using (Html.BeginForm("MemberReport", "Report", FormMethod.Post, new { @class = "form-report" }))
+                    {
+                        @Html.HiddenFor(x => Model.Id)
+                        @Html.ValidationSummary(false)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Reason)
+                            @Html.TextAreaFor(model => model.Reason, new { @class = "form-control textarea", @id = "reason" })
+                            @Html.ValidationMessageFor(model => model.Reason)
+                        </div>
+                        <div class="modal-footer">                        
+                                    <button type="reset" class="btn btn-outline-info btn-sm btn-blockk width-25">
+                                        @Html.LanguageString("Buttons.Clear")
+                                    </button>
+                       
+                                    @*   <button type="button" class="btn btn-danger rounded-0" data-dismiss="modal">Close</button>*@
+                                    <button type="submit" id="submitreport" class="btn btn-sm btn-outline-success btn-blockk width-25">
+                                        @Html.LanguageString("Buttons.Send")
+                                    </button>
+                               
+                         
+                        </div>
+                    }
+                </div>
+        </div>
+    </div>
+</section>

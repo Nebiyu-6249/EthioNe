@@ -1,0 +1,242 @@
+﻿@using EthioNegarit.Utilities
+@using EthioNegarit.Core.Domain.Activity;
+@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.ViewModels
+@model AllRecentActivitiesViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = @Html.LanguageString("Activity.Title");
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+}
+<div class="popup popup-top">
+</div>
+<div class="page-header">
+    <span class="width-50">
+        @Html.Raw(ViewBag.Title)
+    </span>
+    @if (Html.Settings().EnableRSSFeeds)
+    {
+        <span class="">
+            <a href="#" class="rsssubscribe rsslink" data-action="activity" data-slug="" title="@Html.LanguageString("Home.Rss")" )>
+                <i class="ethicon fa fa-rss-square orange-colour"></i>
+            </a>
+        </span>
+    }
+</div>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- The time line -->
+                <div class="timeline">
+                    @{
+                        var currentDate = DateTime.Today;
+                    }
+                    <div class="time-label">
+                        <span class="bg-grayy text-sm text-muted">
+                          @Html.LanguageString("Date.Today") @DateTime.Now.ToShortDateString()
+                        </span>
+                    </div>
+                    @foreach (var activity in Model.Activities)
+                    {
+                        if (currentDate.Day != activity.ActivityMapped.Timestamp.Day)
+                        {
+                            currentDate = activity.ActivityMapped.Timestamp;
+                            <div class="time-label">
+                                <span class="bg-grayy text-sm text-muted">@DatesUI.GetPrettyDate(currentDate.ToString())</span>
+                            </div>
+                        }
+                        <div>
+                            @if (activity is TopicCreatedActivity)
+                            {
+                                var topicCreatedActivity = activity as TopicCreatedActivity;
+                                var startPost = topicCreatedActivity.Topic.Posts.FirstOrDefault(x => x.IsTopicStarter);
+                                <img class="img-circle img-size-32 @(topicCreatedActivity.Topic.User.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm")" src="@topicCreatedActivity.Topic.User.MemberImage(SiteConstants.Instance.GravatarPostSize)" alt="img">
+                                <div class="timeline-item">
+                                    <span class="time">
+                                        <i class="fas fa-clock"></i>
+                                        @DatesUI.GetPrettyDate(topicCreatedActivity.ActivityMapped.Timestamp.ToString())
+                                    </span>
+                                    <div class="timeline-body">
+                                        <a href="@topicCreatedActivity.Topic.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+                                            @Html.Raw(topicCreatedActivity.Topic.User.UserName)
+                                        </a>
+                                        @{
+                                            Html.RenderPartial("_memberInfo", topicCreatedActivity.Topic.User);
+                                        }
+                                     @*   @Html.LanguageString("Create discussion - ")*@
+                                        <a href="@Html.Raw(topicCreatedActivity.Topic.NiceUrl)">
+                                            @Html.Raw(string.Format(Html.LanguageString("Activity.CreateDiscussion"), topicCreatedActivity.Topic.Name))
+                                        @*    @Html.Raw(topicCreatedActivity.Topic.Name)*@
+                                            <span class="content-text timeline-text">
+                                                @Html.Raw(string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(startPost.PostContent), 25), "...."))
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+            <!-- END timeline item -->
+                                            }
+                                            else if (activity is MemberPostedActivity)
+                                            {
+                                                var memberPostedActivity = activity as MemberPostedActivity;
+                                                <img class="img-circle img-size-32 @(memberPostedActivity.Post.User.LastActivityDate > date ? "img-bordered-success" : "")" src="@memberPostedActivity.Post.User.MemberImage(SiteConstants.Instance.GravatarPostSize)" alt="img" />
+                                                <div class="timeline-item">
+                                                    <span class="time">
+                                                        <i class="fas fa-clock"></i>
+                                                        @DatesUI.GetPrettyDate(memberPostedActivity.ActivityMapped.Timestamp.ToString())
+                                                    </span>
+                                                    <div class="timeline-body">
+                                                        <a href="@memberPostedActivity.Post.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+                                                            @Html.Raw(memberPostedActivity.Post.User.UserName)
+                                                        </a>
+                                                        @{
+                                                            Html.RenderPartial("_memberInfo", memberPostedActivity.Post.User);
+                                                        }
+                                                       @* @Html.LanguageString("Activity.PostedIn")*@
+                                                        <a href="@Html.Raw(memberPostedActivity.Post.Topic.NiceUrl)">
+@Html.Raw(string.Format(Html.LanguageString("Activity.PostedIn"),memberPostedActivity.Post.Topic.Name))
+                                                          @*  @Html.Raw(memberPostedActivity.Post.Topic.Name)*@
+                                                            <span class="content-text timeline-text ">
+                                                                @Html.Raw(string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(memberPostedActivity.Post.PostContent), 25), "...."))
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+            <!-- END timeline item -->
+                                                            }
+                                                            else if (activity is BadgeActivity)
+                                                            {
+                                                                var badgeActivity = activity as BadgeActivity;
+                                                                <img class="img-circle" src="@Url.Content(AppHelpers.ReturnBadgeUrl(badgeActivity.Badge.Image))" alt="@badgeActivity.Badge.DisplayName" />
+                                                                <div class="timeline-item">
+                                                                    <span class="time">
+                                                                        <i class="fas fa-clock"></i> @DatesUI.GetPrettyDate(badgeActivity.ActivityMapped.Timestamp.ToString())
+                                                                    </span>
+
+                                                                    <div class="timeline-body">
+
+                                                                        <a href = "@badgeActivity.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+                                                                            @*   <img class="img-circle img-size-32 @(badgeActivity.User.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm")" src="@badgeActivity.User.MemberImage(SiteConstants.Instance.GravatarPostSize)" alt="img" />*@
+                                                                            @Html.Raw(badgeActivity.User.UserName)
+                                                                        </a>
+                                                                        @Html.LanguageString("Activity.UserAwardedBadge") @Html.Raw(badgeActivity.Badge.DisplayName) @Html.LanguageString("Activity.Badge")
+
+
+                                                                        @{
+                                                                            Html.RenderPartial("_memberInfo", badgeActivity.User);
+                                                                        }
+
+                                                                        <span class="content-text timeline-text ">
+                                                                            @Html.Raw(badgeActivity.Badge.Description)
+                                                                            @if (badgeActivity.Badge.AwardsPoints != null && badgeActivity.Badge.AwardsPoints > 0)
+                                                                            {
+                                                                                @(string.Format("({0} {1})", badgeActivity.Badge.AwardsPoints, Html.LanguageString("Members.Points")))
+                                                                            }
+                                                                        </span>
+
+                                                                    </div>
+                                                                </div>
+
+            <!-- END timeline item -->
+                                                                            }
+                                                                            else if (activity is MemberJoinedActivity)
+                                                                            {
+                                                                                var memberJoinedActivity = activity as MemberJoinedActivity;
+
+                                                                                <img class="img-circle img-size-32 @(memberJoinedActivity.User.LastActivityDate > date ? "img-bordered-success" : "")" src="@memberJoinedActivity.User.MemberImage(SiteConstants.Instance.GravatarPostSize)" alt="img" />
+                                                                                <div class="timeline-item">
+                                                                                    <span class="time"><i class="fas fa-clock"></i> @DatesUI.GetPrettyDate(memberJoinedActivity.ActivityMapped.Timestamp.ToString())</span>
+                                                                                    <div class="timeline-body">
+                                                                                        <a href="@memberJoinedActivity.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+                                                                                            @Html.Raw(memberJoinedActivity.User.UserName)
+                                                                                        </a>
+                                                                                        @{
+                                                                                            Html.RenderPartial("_memberInfo", memberJoinedActivity.User);
+                                                                                        }
+
+                                                                                        @Html.LanguageString("Activity.MemberJoined")
+                                                                                        <span class="content-text timeline-text ">
+                                                                                            @Html.LanguageString("Activity.NewMemberJoined")
+                                                                                        </span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                            }
+                                                                                            else if (activity is ProfileUpdatedActivity)
+                                                                                            {
+                                                                                                var profileUpdatedActivity = activity as ProfileUpdatedActivity;
+
+                                                                                                <img class="img-circle img-size-32 @(profileUpdatedActivity.User.LastActivityDate > date ? "img-bordered-success" : "")" src="@profileUpdatedActivity.User.MemberImage(SiteConstants.Instance.GravatarPostSize)" alt="img" />
+                                                                                                <div class="timeline-item">
+                                                                                                    <span class="time"><i class="fas fa-clock"></i> @DatesUI.GetPrettyDate(profileUpdatedActivity.ActivityMapped.Timestamp.ToString())</span>
+                                                                                                    <div class="timeline-body">
+                                                                                                        <a href="@profileUpdatedActivity.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+                                                                                                            @*<img class="img-circle img-size-32 @(profileUpdatedActivity.User.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm")" src="@profileUpdatedActivity.User.MemberImage(SiteConstants.Instance.GravatarPostSize)" alt="img">*@
+                                                                                                            @Html.Raw(profileUpdatedActivity.User.UserName)
+                                                                                                        </a>
+
+                                                                                                        @{
+                                                                                                            Html.RenderPartial("_memberInfo", profileUpdatedActivity.User);
+                                                                                                        }
+
+                                                                                                        @Html.LanguageString("Activity.ProfileUpdated")
+
+                                                                                                        <span class="content-text timeline-text ">
+                                                                                                            @Html.LanguageString("Activity.ProfileUpdate")
+                                                                                                        </span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                            }
+                                                                                                            else if (activity is ChatRoomActivity)
+                                                                                                            {
+                                                                                                                var chatRoomActivity = activity as ChatRoomActivity;
+                                                                                                                <img class="img-circle img-size-32 @(chatRoomActivity.User.LastActivityDate > date ? "img-bordered-success" : "")" src="@chatRoomActivity.User.MemberImage(SiteConstants.Instance.GravatarPostSize)" alt="img" />
+                                                                                                                <div class="timeline-item">
+                                                                                                                    <span class="time d-none d-sm-inline-block">
+                                                                                                                        <i class="fas fa-clock"></i> @DatesUI.GetPrettyDate(chatRoomActivity.ActivityMapped.Timestamp.ToString())
+                                                                                                                    </span>
+                                                                                                                    <div class="timeline-body">
+                                                                                                                        <a href="@chatRoomActivity.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+
+                                                                                                                            @Html.Raw(chatRoomActivity.User.UserName)
+                                                                                                                        </a>
+                                                                                                                        @{
+                                                                                                                            Html.RenderPartial("_memberInfo", chatRoomActivity.User);
+                                                                                                                        }
+
+                                                                                                                        @Html.LanguageString("has been joined in")
+                                                                                                                        <a href="@Html.Raw(chatRoomActivity.ChatRoom.NiceUrl)">
+                                                                                                                            @Html.Raw(chatRoomActivity.ChatRoom.Name)
+                                                                                                                        </a>
+                                                                                                                        @Html.LanguageString("Chat Room")
+
+                                                                                                                        <span class="content-text timeline-text">
+                                                                                                                            <a href="@Html.Raw(chatRoomActivity.ChatRoom.NiceUrl)">
+                                                                                                                                @Html.Raw(string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(chatRoomActivity.ChatRoom.Description), 25), "...."))
+                                                                                                                            </a>
+                                                                                                                        </span>
+                                                                                                                    </div>
+
+                                                                                                                </div>
+            <!-- END timeline item -->                                                                                                                   }
+                        </div>                                                                                                                                  }
+                    @if (Model.Activities.TotalPages > 1)
+                    {
+                        <ul>
+                            <li class="pagination">
+                                @Html.Pager(Convert.ToInt32(Model.PageIndex), Html.Settings().ActivitiesPerPage, totalCount, null)
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+
+    </div>
+</section>
+<!-- /.content -->
+<div class="popup popup-bottom">
+</div>

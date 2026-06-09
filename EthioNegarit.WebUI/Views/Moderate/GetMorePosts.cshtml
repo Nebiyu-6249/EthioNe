@@ -1,0 +1,8 @@
+﻿@model EthioNegarit.Core.Domain.PagedList<EthioNegarit.Core.Domain.Entities.Post>
+@{
+    Layout = null;
+}
+@foreach (var post in Model)
+{
+    @Html.Partial("_ModeratePost", post)
+}

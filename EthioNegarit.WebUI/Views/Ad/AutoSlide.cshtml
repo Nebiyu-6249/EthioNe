@@ -1,0 +1,86 @@
+﻿@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.ViewModels
+@model AdListViewModel
+<div class="swiper swiperSm">
+    <div class="swiper-wrapper">
+        @if (Model.Advertisements != null)
+        {
+            foreach (var ad in Model.Advertisements)
+            {
+                <div class="ad swiper-slide">
+                    <div class="square-sm">
+                        <div class="float-center">
+                            <img src="@AppHelpers.AdvertImage(@ad.Image, @ad.Id,110)" class="img-circle img-size-64 img-bordered-sm elevation-3" style="opacity: .8">
+                        </div>
+                        <div class="company-name text-sm float-center">
+                            <a href=" @ad.NiceUrl" title=" @ad.Name">
+                                @ad.Name
+                            </a>
+                        </div>
+                        <div class="slogan float-center">
+                            @ad.MotoSlogan
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+@if (Model.TotalCount < 1)
+{
+    <div class="banner d-none d-sm-inline-block mt-4">
+        <div class="banner-image">
+            <img src="../../Content/images/default.png" class="img-circle img-bordered-sm elevation-3" style="opacity: .8">
+        </div>
+        <div class="banner-body pull-right">
+            <div class="title text-center text-capitalize">
+                <p>Advertisement on EthioNegarit</p>
+            </div>
+            <p class="content-text">
+                Do you want to reach  Our Visitors
+                A banner is a piece of cloth or flexible material displaying a message, often used for advertising, decoration, or as a symbol of an idea or group.
+            </p>
+        </div>
+    </div>
+}
+
+<!--SWIPER JS-->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".swiperSm", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+         autoplay: {
+             delay: 7000,
+             disableOnInteraction: false
+         },
+
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        mousewheel: true,
+        keyboard: true,
+        //when window width is >= 600px
+        breakpoints: {
+            600: {
+                slidesPerView: 3
+            }
+        },
+
+        /*   on: {
+           autoplayTimeLeft(s, time, progress) {
+           progressCircle.style.setProperty("--progress", 1 - progress);
+           progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+       }
+       }*/
+    });
+</script>
+
+@*   <div class="autoplay-progress">
+        <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20"></circle>
+        </svg>
+        <span></span>
+    </div>*@

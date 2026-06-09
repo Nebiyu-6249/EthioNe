@@ -1,0 +1,67 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model MessagesListViewModel
+@{
+    Layout = null;
+  //  ViewBag.Title = string.Concat(Html.LanguageString("PM.PrivateMessages"), Model.From.UserName);
+}
+<div class="message-view">
+    <ul class="admin-nav">
+        <li>
+            <a href="#" class="btn btn-outline-warning btn-sm pm-block" data-userid="@Model.From.Id" data-blocktext="@Html.Lang("PM.Block") @Model.From.UserName" data-isblocked="@Model.IsBlocked.ToString().ToLower()" data-blockedtext="@Html.Lang("PM.Blocked") @Model.From.UserName">
+                @(Model.IsBlocked ? Html.Lang("PM.Blocked") : Html.Lang("PM.Block")) @Model.From.UserName
+            </a>
+        </li>
+        @if (Html.Settings().EnableMemberReporting)
+            {
+            <li>
+                @*  <a href="@Url.Action("MemberReport", "Report", new { id = Model.From.Id }, null)" class="btn btn-outline-danger btn-sm">*@
+                <a href="#" class="btn btn-sm btn-outline-danger memberreportlink" data-id="@Model.From.Id" title="@Html.LanguageString("Buttons.Report")" )>                  
+                        @Html.LanguageString("Buttons.Report")
+                    </a>
+</li>
+            }
+        @if (Model.FromUserIsOnline)
+            {
+            <li>
+                <a href="@Url.Action(Model.From.NiceUrl)" class="btn  btn-sm btn-outline-success">
+               @Html.Lang("PM.MemberIsOnline")
+                </a>
+               @* <span class="label label-success text-success">@Html.Lang("PM.MemberIsOnline")</span>*@
+            </li>
+            }
+        <li>
+            @Html.ActionLink(Html.LanguageString("PM.BackToInbox"), "Index", "PrivateMessage", new { }, new { @class = "btn btn-outline-success btn-sm" })
+        </li>
+</ul>
+    @if(!Model.Blocked){
+    <div class="createmessageholder" data-messagesent="@Html.Lang("PM.Sent")">
+        @Html.Action("Create", new { to = Model.From.Id })
+    </div>
+    }
+    <span id="newpmmarker"></span>
+    <a id="createmessage"></a>
+    @if (@Model.PrivateMessages.Count > 0)
+        {
+        <div class="privatemessages">
+
+            @foreach (var message in Model.PrivateMessages)
+                {
+                @Html.Partial("_message", message)
+                }
+
+            @if (Model.PrivateMessages.TotalPages > 1)
+                {
+                <a href="#" class="showmorepms btn  btn-sm btn-block">
+                    <span class="smpmactive">@Html.LanguageString("PM.ShowMore")</span>
+                    <span class="smpmloading" style="display: none;">
+                        @Html.LanguageString("PM.ShowMoreLoading")                       
+                        <i class="fa fa-spinner fa-spin"></i>                                       
+                </span>
+                </a>
+                }
+        </div>      
+    }
+    <input type="hidden" id="pageIndex" value="@(Model.PrivateMessages.PageIndex + 1)" />
+    <input type="hidden" id="userId" value="@Model.From.Id" />
+    <input type="hidden" id="totalPages" value="@Model.PrivateMessages.TotalPages" />
+</div>

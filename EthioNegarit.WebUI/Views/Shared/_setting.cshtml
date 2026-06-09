@@ -1,0 +1,61 @@
+﻿<div class="settings-container" id="settings-container">
+    <div class="settings-box" id="settings-box">
+        <div class="setting-header">
+            @Html.LanguageString("Settings.Title")
+            <span class="">
+                <a href="#" class="settingsbutton" role="button">
+                    <i class="fas fa-times"></i>
+                </a>
+            </span>
+        </div>
+        <div class="settings-item">
+            @Html.LanguageString("Language.Change")
+            <span class="">
+                @Html.Action("Index", "Language")
+            </span>
+        </div>
+        <div class="settings-item darkModeSwitch">
+            @Html.LanguageString("Settings.DarkMode")
+            <span class="custom-control custom-switch">
+                <input type="checkbox" checked="" class="custom-control-input" id="darkSwitch" />
+                <label class="custom-control-label" for="darkSwitch"></label>
+            </span>
+        </div>
+        <a class="settings-item" title="@Html.LanguageString("Layout.PrivacyPolicy")" href="@Url.Action("Index", "Privacy")">
+            @Html.LanguageString("Layout.PrivacyPolicy")
+            <span class="">
+                <i class="nav-icon far fa-question-circle"></i>
+            </span>
+        </a>
+        <a class="settings-item" title="@Html.LanguageString("Layout.TermsAndConditions")" href="@Url.Action("Terms", "Privacy")">
+            @Html.LanguageString("Layout.TermsAndConditions")
+            <span class="">
+                <i class="nav-icon far fa-question-circle"></i>
+            </span>
+        </a>
+        <a class="settings-item" title="@Html.LanguageString("Help.FAQ")" href="@Url.Action("FAQ", "Home")">
+            @Html.LanguageString("Help.FAQ")
+            <span class="">
+                <i class="nav-icon far fa-question-circle"></i>
+            </span>
+        </a>
+        <a class="settings-item" title="@Html.LanguageString("Layout.Nav.ContactUs")" href="@Url.Action("ContactUs", "Home")">
+            @Html.LanguageString("Layout.Nav.ContactUs")
+            <span class="">
+                <i class="nav-icon far fa-question-circle"></i>
+            </span>
+        </a>
+        <a class="settings-item" title="@Html.LanguageString("Layout.Nav.About")" href="@Url.Action("About", "Home")">
+            @Html.LanguageString("Layout.Nav.About")
+            <span class="">
+                <i class="nav-icon far fa-question-circle"></i>
+            </span>
+        </a>
+    </div><!-- /settings-box -->
+</div><!-- /settings-container -->
+<script>
+    $(document).on("click", ".settingsbutton", function () {
+        var settingsbox = $(".settings-box");
+        settingsbox.toggleClass("open")
+    });
+</script>

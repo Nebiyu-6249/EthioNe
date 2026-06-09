@@ -1,0 +1,192 @@
+﻿  .footer_container{
+    display: grid;
+   // grid-template-columns: repeat(4,1fr);
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+    gap: 5rem;
+    
+ @media (max-width: breakpoint-max(xs)) {
+   // grid-template-columns: repeat(1,1fr);
+     grid-template-columns:repeat(1, minmax(0, 1fr));
+    }
+}
+
+.footer_container > div h4{
+    margin-bottom: 1rem;
+}
+
+.main-footer {
+          background-color: darken($gray-100, 15%); 
+    color: lighten($dark, 15%);
+    }
+
+footer{
+    margin-top: 2rem;
+    margin-bottom: 0;
+    background-color: darken($gray-100, 15%); 
+    color: lighten($dark, 15%);
+    padding-top: 4rem;   
+    font-size: 0.9rem;
+
+        ul {
+li{
+    list-style: none;
+    display: block;
+    margin-bottom: 0.5rem ;
+  
+    a:hover{
+    text-decoration: underline;
+    
+}
+}
+}
+    }
+
+
+.footer-one p{
+    margin: 0 0 2rem;
+}
+
+.footer-socials{
+    display: flex;
+    gap: 1rem;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}
+
+.footer-copyright{
+    text-align: center;
+    justify-content: center;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid gray;
+}
+.footer-fixed{
+  position: fixed;
+  bottom: 5px;
+  left:$sidebar-width * 1.1;
+ // right:$slide-out-panel-width;
+  margin:5px;
+ width:57%;
+ vertical-align:central;
+  
+      .sidebar-collapse & {
+        &,
+        &::before {
+            margin-left: -$sidebar-mini-width * 1.9;
+            width:64%;
+        }
+    }
+   @media (max-width: breakpoint-max(xs)) {
+       left:0;
+       right:0;
+       width:95%;
+         .sidebar-collapse & {
+        &,
+        &::before {
+          left:0;
+           right:0;
+            margin:5px;
+           width:95%;
+        }
+        }
+    }
+}
+//////////////////////////////////////////
+ /* ── FOOTER ── */
+        .doc-footer {
+            background: $navy;
+            color: rgba(255,255,255,0.5);
+            padding: 2.5rem 3rem;
+            font-size: 0.78rem;
+            line-height: 1.8;
+        }
+
+            .doc-footer .footer-row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            .doc-footer .footer-tags { 
+                display: flex; 
+                gap: 0.8rem; 
+                wrap: wrap; 
+            }
+  
+        .footer-tag {
+            padding: 0.2rem 0.6rem;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 99px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            color: rgba(255,255,255,0.38);
+        }
+          .footer-tags {
+                display: flex;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+          ////////////////////////////////////////////////
+            /* ── FOOTER ── */
+                   .doc-footer {
+               background: $navy;
+                color: rgba(255,255,255,0.48);
+                padding: 2.5rem 3rem;
+                font-size: 0.8rem;
+                line-height: 1.8;
+            }
+
+            .footer-row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+            }
+             .doc-footer .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+               .footer-tag {
+            padding: 0.2rem 0.6rem;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 99px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            color: rgba(255,255,255,0.38);
+        }
+          .footer-tags {
+                display: flex;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+     
+            .footer-links {
+                display: flex;
+                gap: 1.2rem;
+                margin-top: 0.5rem;
+                flex-wrap: wrap;
+            }
+
+                .footer-links a {
+                    color: rgba(255,255,255,0.4);
+                    text-decoration: none;
+                    font-size: 0.75rem;
+                    transition: color 0.15s;
+                }
+
+                    .footer-links a:hover {
+                        color: rgba(255,255,255,0.75);
+                    }
+
+//////////////////////////////////////
+
+ @include dark-mode () {
+   footer,.footer-copyright{
+   background-color: lighten($dark, 3%);   
+  color: $gray-500;
+   }
+}

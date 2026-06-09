@@ -1,0 +1,67 @@
+﻿@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.ViewModels
+@model ShareTopicViewModel
+@{ 
+   // string ReturnUrl = string.Concat(Html.Settings().ForumUrl.TrimEnd('/'), Url.Action("@Model.Topic.NiceUrl"));
+ string ReturnUrl= string.Concat(Html.Settings().ForumUrl.TrimEnd('/'), @Model.Topic.NiceUrl);
+    string title = @Model.Topic.Name;
+}
+<div class="content-header">
+    <div class="content-body">      
+        <div class="title">
+            <a href="@Html.Raw(Model.Topic.NiceUrl)">
+                @Html.Raw(Model.Topic.Name)
+            </a>
+        </div>
+        <div class="inline">
+            @Html.Action("GetTopicBreadcrumb", "Topic", new { topic = Model.Topic })
+        </div>
+        <hr/>
+        <div class="container-fluid clearfix">
+            <div class="postcontent content-text">
+                <p>@Html.Raw(AppHelpers.ConvertPostContent(Model.StartPost.PostContent))</p>
+            </div>
+        </div>
+        </div>
+</div>
+@* <!-- Remember to change URL_HERE, TITLE_HERE and TWITTER_HANDLE_HERE -->
+    <a href="http://www.facebook.com/sharer/sharer.php?u=@ReturnUrl&t=@title" target="_blank" class="share-popup">Share on Facebook</a>
+    <a href="http://www.twitter.com/intent/tweet?url=@Url&via=TWITTER_HANDLE_HERE&text=TITLE_HERE" target="_blank" class="share-popup">Share on Twitter</a>
+    <a href="http://plus.google.com/share?url=URL_HERE" target="_blank" class="share-popup">Share on Googleplus</a>
+*@
+
+   <div class="float-center">
+    <a href="http://www.facebook.com/sharer/sharer.php?u=@ReturnUrl&t=@title" target="_blank" class="btn btn-default btn-xs share-popup" title="@Html.LanguageString("Topic.Share.Facebook")" )>
+        <img class="social-icons" src="~/Content/Images/social-icons/icon-facebook.svg" alt="facebook">
+        @Html.LanguageString("Topic.Share.Facebook")
+    </a>
+    <a href="http://www.twitter.com/intent/tweet?url=@ReturnUrl&via=TWITTER_HANDLE_HERE&text=@title" target="_blank" class="btn btn-default btn-xs share-popup" title="@Html.LanguageString("Topic.Share.Twitter")" )>
+        <img class="social-icons" src="~/Content/Images/social-icons/icon-twitter.svg" alt="twitter">
+        @Html.LanguageString("Topic.Share.Twitter")
+    </a>
+    <a href="http://plus.google.com/share?url=@ReturnUrl" target="_blank" class="btn btn-default btn-xs share-popup" title="@Html.LanguageString("Topic.Share.Googleplus")" )>
+        <img class="social-icons" src="~/Content/Images/social-icons/icon-instagram.svg" alt="googleplus">
+        @Html.LanguageString("Topic.Share.Googleplus")
+    </a>
+</div>
+    <script type="text/javascript">
+        $(".share-popup").click(function () {
+            var window_size = "width=585,height=511";
+            var url = this.href;
+            var domain = url.split("/")[2];
+            switch (domain) {
+                case "www.facebook.com":
+                    window_size = "width=585,height=368";
+                    break;
+                case "www.twitter.com":
+                    window_size = "width=585,height=261";
+                    break;
+                case "plus.google.com":
+                    window_size = "width=517,height=511";
+                    break;
+            }
+            window.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,' + window_size);
+            return false;
+        });
+
+    </script>

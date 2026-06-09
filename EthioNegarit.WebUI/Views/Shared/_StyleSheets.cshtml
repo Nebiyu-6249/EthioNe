@@ -1,0 +1,8 @@
+﻿@model EthioNegarit.Core.Domain.General.Theme
+@(Bundle.Css()
+      .Add($"{Model.ThemePath}/dist/imports.css")
+      .Add("~/Scripts/fancybox/jquery.fancybox.css")
+      .Add("~/Content/bootstrap/css/bootstrap.min.css")
+      .Add("~/Content/plugins/fontawesome-free-5.15.4-web/css/all.min.css")
+      .Add($"{Model.ThemePath}/dist/style.min.css")
+      .MvcRender($"~/content/cache/combined_{Model.ThemeName}_#.css"))

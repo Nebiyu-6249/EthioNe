@@ -1,0 +1,176 @@
+﻿@using EthioNegarit.Utilities
+@model EthioNegarit.WebUI.ViewModels.TopicViewModel
+@{
+            var postToolTip = string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(Model.StarterPost.Post.PostContent), 50), "....");
+            var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+           var date2 = DatesUI.GetPrettyDate(Model.Topic.User.LastLoginDate.ToString());
+}
+
+@*
+    @if (!Model.Permissions[SiteConstants.Instance.PermissionDenyAccess].IsTicked)
+    {
+    <div class="topicrow topicrow-slim topicsticky-@(Model.Topic.IsSticky.ToString().ToLower()) topiclocked-@(Model.Topic.IsLocked.ToString().ToLower()) topicsolved-@(Model.Topic.Solved.ToString().ToLower())">
+        <div class="rowdetails">
+   
+<h5 class="">
+    <a title="@postToolTip" href="@Html.Raw(Model.Topic.NiceUrl)">
+        @if (Model.Topic.IsSticky)
+        {
+            <span class="fas fa-exclamation" aria-hidden="true"></span>
+        }
+        @if (Model.Topic.IsLocked)
+        {
+            <span class="fas fa-lock" aria-hidden="true"></span>
+        }
+        @if (Model.Topic.Poll != null)
+        {
+            <span class="fas fa-align-left" aria-hidden="true"></span>
+        }
+        @Html.Raw(Model.Topic.Name)
+    </a>
+</h5>
+<p class="content-footer">
+    <a href="@Html.Raw(Model.Topic.NiceUrl)">@Html.LanguageString("Topic.LatestBy")</a>
+    <a href="@Model.Topic.LastPost.User.NiceUrl">@Model.Topic.LastPost.User.UserName</a>
+    @DatesUI.GetPrettyDate(Model.Topic.LastPost.DateCreated.ToString()).
+    <span class="stats topicanswers"><span class="fas fa-comment" aria-hidden="true"></span> @Model.Answers.KiloFormat()</span>
+    <span class="stats topicviews"><span class="fas fa-eye" aria-hidden="true"></span> @Model.Views.KiloFormat()</span>
+    <span class="stats topicupvotes"><span class="fas fa-thumbs-up" aria-hidden="true"></span> @Model.VotesUp.KiloFormat()</span>
+    <span class="stats topicdownvotes"><span class="fas fa-thumbs-down" aria-hidden="true"></span> @Model.VotesDown.KiloFormat()</span>
+    @if (Model.Topic.Solved)
+            {
+        <span class="stats topicsolved"><span class="fas fa-check green-colour" aria-hidden="true"></span></span>
+    }
+</p>
+    </div>
+</div>
+}
+*@
+
+
+@if (!Model.Permissions[SiteConstants.Instance.PermissionDenyAccess].IsTicked)
+{
+    <div class="topicrow topicrow-slim topicsticky-@(Model.Topic.IsSticky.ToString().ToLower()) topiclocked-@(Model.Topic.IsLocked.ToString().ToLower()) topicsolved-@(Model.Topic.Solved.ToString().ToLower())">
+ 
+        <div class="content-detail">
+            <div class="topic-header">
+
+                <ol class="breadcrumb text-sm mt-0 mb-0">
+                    <li class="breadcrumb-item"><a href="@Model.Topic.Category.NiceUrl">@Model.Topic.Category.Name</a></li>
+                    <li class="breadcrumb-item active">
+                        @Model.Topic.Name
+                    </li>
+                    <li class="">
+                        <div class="user-name d-xl-none d-sm-block float-right">
+                            <a href="@Model.Topic.User.NiceUrl" class="@(Model.MemberIsOnline ? "green-colour" : "")" title="@(Model.MemberIsOnline ? "Active now" :"Active " + @date2)">
+                                @Model.Topic.User.UserName - @DatesUI.GetPrettyDate(@Model.Topic.CreateDate.ToString())
+                            </a>                          
+                        </div>
+                    </li>
+                </ol>
+                <div class="topic-title">
+
+                    <a title="@postToolTip" href="@Html.Raw(Model.Topic.NiceUrl)" class="nav-link">
+                        @if (Model.Topic.IsSticky)
+                {
+                            <span class="fas fa-exclamation" aria-hidden="true"></span>
+                        }
+                        @if (Model.Topic.IsLocked)
+                {
+                            <span class="fas fa-lock" aria-hidden="true"></span>
+                        }
+                        @if (Model.Topic.Poll != null)
+                {
+                            <span class="fa fa-align-left" aria-hidden="true"></span>
+                        }
+                        @Html.Raw(Model.Topic.Name)
+                    </a>
+
+                </div>   
+                           
+           
+            </div>
+          @*  <div class="content-text">
+        @Html.Raw(string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(Model.StarterPost.Post.PostContent), 25), "...."))
+    </div>*@
+        </div>
+        <div class="topic-footer clearfix float-right">
+            <ul>
+                <li>
+                    <a href="@Html.Raw(Model.LastPostPermaLink)" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+                        <img src="@Model.Topic.LastPost.User.MemberImage(SiteConstants.Instance.GravatarLatestBySize)" class="latestby img-circle @(Model.Topic.LastPost.User.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm")" alt="">
+                    </a>
+                    @{
+                        Html.RenderPartial("_memberInfo", Model.Topic.LastPost.User);
+                    }
+                    <span class="d-none d-sm-inline-block">
+                        <a href="@Html.Raw(Model.LastPostPermaLink)">
+                            Latest By
+                        </a>
+                        <a href="@Model.Topic.LastPost.User.NiceUrl">
+                            @Model.Topic.LastPost.User.UserName
+                        </a>
+                    </span>
+                    <span title="Latest Post">
+                        @DatesUI.GetPrettyDate(Model.Topic.LastPost.DateCreated.ToString()).
+                    </span>
+
+                </li>
+              
+                <li>
+                    <span class="stats topicanswers">
+                        <span class="fas fa-comments mr-1" aria-hidden="true">
+                        </span>@Model.Answers.KiloFormat()
+                    </span>
+                </li>
+                <li>
+                    <span class="stats topicviews">
+                        <span class="fas fa-eye mr-1" aria-hidden="true">
+                        </span>@Model.Views.KiloFormat()
+                    </span>
+                </li>
+                <li>
+                    <span class="stats topicupvotes">
+                        <i class="far fa-thumbs-up mr-1" aria-hidden="true">
+                        </i>@Model.VotesUp.KiloFormat()
+                    </span>
+                </li>
+                <li>
+                    <span class="stats topicdownvotes">
+                        <i class="far fa-thumbs-down mr-1" aria-hidden="true">
+                            @Model.VotesDown.KiloFormat()
+                        </i>
+                    </span>
+                </li>
+                @if (Model.Topic.Solved)
+                {
+                    <li>
+                        <span class="stats topicsolved">
+                            <i class="fas fa-check green-colour mr-1" aria-hidden="true" title="solved">
+
+                            </i>
+                        </span>
+                        <span class="d-none d-sm-inline-block">
+                            @Html.Lang("Topic.IsSolved")
+                        </span>
+
+                    </li>
+                }
+                @if (!Model.Topic.Solved)
+                {
+                    <li>
+                        <span class="stats topicsolved">
+                            <i class="fas fa-question yellow-colour mr-1" aria-hidden="true" title="help">
+
+                                @*   <span class="d-none d-sm-inline-block">
+                                        @Html.Lang("help")
+                                    </span>
+                                *@
+                            </i>
+                        </span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+                        }

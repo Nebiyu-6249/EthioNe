@@ -1,0 +1,71 @@
+﻿
+// ============ tinyMCE overides
+
+.mce-container, .mce-container *,
+.mce-widget, .mce-widget * {
+    color: inherit;
+    font-family: inherit;
+}
+
+#mce-modal-block.mce-in {
+    opacity: .7;
+    filter: alpha(opacity=70);
+}
+
+.tinymceholder {
+    margin-bottom: 14px;
+    border: 1px solid #e5e5e5;
+    width: 99.5%;
+
+    textarea {
+        width: 100%;
+        min-height: 100px;
+    }
+}
+// ============ TinyMCE Plugins
+
+.tinymceinsertimageplugin {
+    padding: 12px;
+
+    label {
+        font-size: 12px;
+    }
+
+    .input-group-sm {
+        position: relative;
+    }
+
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+
+    #waiting {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        text-align: center;
+        background-color: #fff;
+        -ms-opacity: 0.8;
+        opacity: 0.8;
+        z-index: 999;
+    }
+
+    #waiting img {
+        margin-top: 30px;
+    }
+}
+
+// ============ end TinyMCE Plugins

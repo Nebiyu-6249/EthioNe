@@ -1,0 +1,75 @@
+﻿@using EthioNegarit.Core.Domain.Entities
+@using EthioNegarit.WebUI.ViewModels
+@model ChatMessagesViewModel
+@{
+    var messages = Model.ChatMessages.Where(x => x.ChatMessage.InReplyTo == null).OrderBy(x => x.ChatMessage.Timestamp).ToList();
+}       
+<!-- Messages -->
+@if (Model.ChatMessages.Any())
+{
+       <ul class="contents-list" id="chatmessages">
+        @foreach (var message in messages)
+        {
+            <li>
+                @Html.Partial("_chatMessage", message)
+                <span id="chatmessagemarker + @message.ChatMessage.Id">
+                </span>
+                <a id="createchatmsg"></a>
+                @GetReplies(message.ChatMessage, "right")
+            </li>
+        }
+    </ul>
+}
+else
+    {
+        <p> @Html.Lang("No Conversation Now, Write Your Message to be First") </p>
+    }
+
+@helper GetReplies(ChatMessage message, string position)
+{
+string currentPosition = position;
+var replies = Model.ChatMessages.Where(x => x.ChatMessage.InReplyTo != null && x.ChatMessage.InReplyTo == message.Id).OrderBy(x => x.ChatMessage.Timestamp).ToList();
+if (replies.Any())
+{
+            <ul class="contents-list @(Model.LogOn ? "expanded" : "collapse")"  id="replies-@message.Id">
+                @foreach (var replay in replies)
+                {
+                    <li>
+                        <div class="@currentPosition ml-30">
+                            @Html.Partial("_chatMessage", replay)
+                        </div>
+                        <span id="chatmessagemarker + @replay.ChatMessage.Id">
+                        </span>
+                        <a id="createchatmsg"></a>
+                        @if(currentPosition == "right")
+                        {
+                            currentPosition = "left";
+                        }
+                        else
+                        {
+                            currentPosition = "right";
+                        }
+                        @GetReplies(replay.ChatMessage, @currentPosition)
+                    </li>
+                }
+            </ul>
+            }
+            }
+            <input type="hidden" id="pageIndex" value="@(Model.PageIndex + 1)" />
+            <input type="hidden" id="roomId" value="@Model.ChatRoom.Id" />
+            <input type="hidden" id="myChat" value="@Model.MyChat.ToString()" />
+            <input type="hidden" id="totalPages" value="@Model.TotalPages" />
+
+@if (Model.TotalPages > 0 && Model.LogOn != true)
+{
+    if (Model.ChatEnabled == true) {
+    <a href="#" class="btn  btn-sm btn-block  showmoremessages" role="button" title="Show More Messages">
+        <span class="spmactive">@Html.LanguageString("Buttons.ShowMore")</span>
+        <span class="spmloading ajaxspinner" style="display: none;">
+            <i class="ethicon fa fa-spinner fa-spin"></i>
+        </span>
+    </a>
+    }
+}
+
+            <span id="chatmessagemarker"></span>

@@ -1,0 +1,194 @@
+﻿
+//
+/*#region =================/*Time Line ================ */
+//
+.timeline {
+    margin: 0 0 45px;
+    padding: 0;
+    position: relative;
+    // The line
+    &::before {
+        @include border-radius($border-radius);
+        background-color: $gray-300;
+        bottom: 0;
+        content: "";
+        left: 31px;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        width: 4px;
+    }
+    // Element
+    > div {
+        &::before,
+        &::after {
+            content: "";
+            display: table;
+        }
+
+        margin-bottom: 15px;
+        margin-right: 10px;
+        position: relative;
+        // The content
+        > .timeline-item {
+            @include box-shadow($card-shadow);
+            @include border-radius($border-radius);
+            background-color: $white;
+            color: $gray-700;
+            margin-left: 60px;
+            margin-right: 15px;
+            margin-top: 0;
+            padding: 0;
+            position: relative;
+            // The time and header
+            > .time {
+                color: #999;
+                float: right;
+                font-size: 12px;
+                padding: 10px;
+            }
+            // Header
+            > .timeline-header {
+                border-bottom: 1px solid $card-border-color;
+                color: $gray-700;
+                font-size: 16px;
+                line-height: 1.1;
+                margin: 0;
+                padding: 10px;
+                // Link in header
+                > a {
+                    font-weight: 600;
+                }
+            }
+            // Item body and footer
+            > .timeline-body,
+            > .timeline-footer {
+                padding: 10px;
+            }
+
+            > .timeline-body {
+                > img {
+                    margin: 10px;
+                }
+
+                > dl,
+                ol,
+                ul {
+                    margin: 0;
+                }
+            }
+
+            > .timeline-footer {
+                > a {
+                    color: $white;
+                }
+            }
+
+            > .timeline-text {
+                margin-left: 5%;
+                padding-left:5%;
+            }
+        }
+        // The icons at line
+        > .fa,
+        > .fas,
+        > .far,
+        > .fab,
+        > .fal,
+        > .fad,
+        > .svg-inline--fa,
+        > img,
+        > .ion {
+          //  background-color: $gray-500;
+           background-color: darken($gray-400, 8%);
+           color: $gray-100;
+            border-radius: 50%;
+            font-size: 16px;
+             //height: 30px;
+            //width: 30px;
+            height: 40px;
+            width: 40px;
+            line-height: 40px;
+            //left: 18px;
+             left: 12px;
+            
+            position: absolute;
+            text-align: center;
+            top: 0;
+            
+        }
+
+        > .svg-inline--fa {
+            padding: 7px;
+        }
+    }
+    // Time label
+    > .time-label {
+        // background-color: darken($gray-100, 8%);
+        > span {
+            @include border-radius(4px);
+          //  background-color: $white;
+           background-color: darken($gray-100, 8%);
+            display: inline-block;
+            font-weight: 300;
+            padding: 5px;
+        }
+    }
+}
+.timeline-body,.timeline-footer{
+     background-color: darken($gray-100, 8%);
+        color: $dark;
+}
+.timeline-inverse {
+    > div {
+        > .timeline-item {
+            @include box-shadow(none);
+            background-color: $gray-100;
+            border: 1px solid $gray-300;
+
+            > .timeline-header {
+                border-bottom-color: $gray-300;
+            }
+        }
+    }
+}
+ .timeline-text {
+    position: relative;
+   display: block;
+   margin-left: 0;
+  //  margin-left: 5%;
+            }
+//
+/*#endregion ============== Time Line End  ====================  */
+//
+@include dark-mode () {
+        .timeline {
+        &::before {
+        background-color: lighten($dark, 3%);
+            }
+          > div {
+                > .fa,
+        > .fas,
+        > .far,
+        > .fab,
+        > .fal,
+        > .fad,
+        > .svg-inline--fa,
+        > img,
+        > .ion {
+        background-color: lighten($dark, 3%);
+		color: $gray-600;
+                    }
+              }
+         > .time-label {
+        > span {
+            background-color: lighten($dark, 3%);
+		color: $gray-200;
+            }
+        }
+        }
+	.timeline-body, .timeline-footer {
+		background-color: lighten($dark, 3%);
+		color: $gray-500;
+	}
+    }

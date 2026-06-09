@@ -1,0 +1,49 @@
+﻿@model EthioNegarit.WebUI.ViewModels.CreateMessageViewModel
+@{
+    var messagemarker = "chatmessagemarker";
+}
+@if (Model.InReplyTo != null && !string.IsNullOrEmpty(Model.ReplyToUsername))
+    {
+    messagemarker = "chatmessagemarker" + Model.InReplyTo;
+    <div class="showchatreplyto">
+        @Html.Lang("Post.ReplyingTo")
+        <strong>@Model.ReplyToUsername</strong>
+    </div>
+    }
+
+@using (Ajax.BeginForm("CreateMessage", "Chat", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    LoadingElementId = "createchatmessagewait",
+    OnSuccess = "AjaxChatSuccess()",
+    UpdateTargetId = messagemarker,
+    OnBegin = "AjaxChatBegin()"
+}, new { @id = "chatmessageform", @class = "form-createchatmessage" }))
+{
+ @*   @Html.ValidationSummary(false)
+    @Html.AntiForgeryToken()*@
+    @Html.HiddenFor(x => x.RoomId)
+    @Html.HiddenFor(x => x.InReplyTo)
+    @Html.HiddenFor(x => x.IsReplay)
+        <div class="input-group">
+            <textarea class="form-control required message" id="message" name="Message" placeholder="@Html.LanguageString("Buttons.PressEnter")"></textarea>        
+        </div>
+        @Html.ValidationMessageFor(x => x.Message)
+        <span class="input-group-append">
+            <input type="submit" id="chatmessagebutton" class="btn btn-success btn-sm" value="@Html.LanguageString("PM.Send")" style="display: none;" />
+<span style="display: none;" id="createchatmessagewait" class="ajaxspinner" ></span>
+        </span>
+       @* <span style="display: none;" id="createchatmessagewait" class="ajaxspinner" >@Html.LanguageString("Post.PleaseWait")</span>*@
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+             var input = document.getElementById("message");
+        input.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("chatmessagebutton").click();
+            //   $('#message').val('').focus();
+            }
+        });
+    });
+</script>

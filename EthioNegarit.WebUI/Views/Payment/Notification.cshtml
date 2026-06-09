@@ -1,0 +1,10 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model MemberNotificationViewModel
+<div class="notification-popover-contentt text-smm">
+    <div class="notification-popover-title text-center">
+      @Html.Raw(Model.Subject)
+    </div>
+    <a href="@Url.Action("MyAds", "Ad")" class="" target="_blank">
+        <p>@Html.Raw(Model.Notice)</p>
+    </a>
+</div>

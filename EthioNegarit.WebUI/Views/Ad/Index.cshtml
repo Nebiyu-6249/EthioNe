@@ -1,0 +1,132 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model AdListViewModel
+@{
+    ViewBag.Title = @Html.LanguageString("SubNav.AdService");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+}
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row mb-2 mt-4">
+                <div class="col-sm-6">
+                    <div class="title text-center text-capitalize">
+                        <p class="mt-2 text-capitalize">Advertisement on EthioNegarit</p>
+                    </div>
+                    <p class="content-text">
+                        Do you want to reach  Our Visitors
+                        A banner is a piece of cloth or flexible material displaying a message, often used for advertising, decoration, or as a symbol of an idea or group.
+                    </p>
+                    @if (User.Identity.IsAuthenticated && @Html.CurrentMember().Advertisements.Count() > 0)
+                    {
+                    <div class="col-sm-12">
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="boxx content-fluid mb-2 mt-2">
+                                    <a href="@Url.Action("MyAds", "Ad")" class="">
+                                        <span class="badge-name" title="">
+                                            <i class="ethicon fas fa-ad mr-4"></i>
+                                            @Html.Lang("SubNav.MyAdvertisements") / @Html.CurrentMember().Advertisements.Count
+                                        </span>
+                                        <div class="badge-awardd text-muted float-center">
+                                            <div class="badge-award text-muted float-center">
+                                                <p class="publicbadgeawards">@Html.CurrentMember().Advertisements.Count  @Html.LanguageString("Layout.Nav.Advertisements") </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="boxx content-fluid mb-2 mt-2">
+                                    <a href="@Url.Action("List", "Payment")" class="">
+                                        <span class="badge-name" title="">
+                                            <i class="ethicon fas fa-receipt mr-4"></i>
+                                           @Html.LanguageString("Layout.Nav.Payments")
+                                        </span>
+                                        <div class="badge-awardd text-muted float-center">
+                                            <div class="badge-award text-muted float-center">
+                                                <p class="publicbadgeawards">@(string.Format(Html.LanguageString("About.TopicsText"), @Html.CurrentMember().Advertisements.Count))</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        </div>
+                    }
+                </div>
+                <div class="col-sm-6">
+                    <div class="row mb-2">
+                        @if (Html.CurrentMember() != null && @Model.UserCanCreatAd == true)
+                        {
+                        <div class="col-sm-12">
+                            <div class="boxx content-fluid mb-2 mt-2">
+                                <a href="@Url.Action("Create", "Ad")" class="">
+                                    <span class="badge-name" title="">
+                                        @Html.LanguageString("Ad.Label.CreateAd")
+                                        @*<i class="ethicon fas fa-ad ml-4"></i>*@
+                                    </span>
+                                </a>  
+                                @if (@Model.TrialAdEnabled != true)
+                                {
+                                    <a href="@Url.Action("Create", "Ad", new { trial = true })" class="btn btn-sm btn-defaultt btn-blockk text-center float-right" title="@Html.Lang("Ad.Label.Trial")">
+                                        @Html.Raw(string.Format(Html.LanguageString("Ad.Label.Try"), Html.Settings().AdTrialDays))
+                                    </a>  
+                                }
+                            </div> 
+                        </div>
+                        }
+                        <div class="col-sm-12">
+                            <div class="boxx content-fluid mb-2 mt-2">
+                                <a href="@Url.Action("Index", "Package")" class="">
+                                    <span class="badge-name" title="">
+                                        @Html.LanguageString("SubNav.Packages")
+                                        <i class="ethicon fa fa-folder-plus ml-4"></i>                                       
+                                    </span>
+                                  <div class="badge-awardd text-muted float-center">
+        <div class="badge-award text-muted float-center">
+            <p class="publicbadgeawards">@Html.LanguageString("SubNav.Packages")</p>
+        </div>
+    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12" id="accordion">
+                            <div class="cardd card-primaryy card-warningg card-outlinee content-fluid">
+                                <a class="d-block w-100" data-toggle="collapse" href="#collapse-Id">
+                                    <span class="badge-name" title="">
+                                        @Html.Lang("Help.Label.HowToAdvertise")
+                                        <i class="ethicon fas fa-question-circle ml-4"></i>                                  
+                                    </span>
+                                </a>
+                                <div id="collapse-Id" class="collapse showw" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <p> How To Advertise</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+            </div> 
+                    <br />
+                    <div class="dividerr"></div>
+                    @if (Model.Advertisements != null)
+                    {
+                        <div class="ad-container mb-4">
+                            @foreach (var ad in Model.Advertisements)
+                            {
+                                Html.RenderPartial("_ad", ad);
+                            }
+                        </div>
+                        if (Model.TotalPages > 1)
+                        {
+                            <ul>
+                                <li class="pagination">
+                                    @Html.Pager(Convert.ToInt32(Model.PageIndex), SiteConstants.Instance.AdListSize, totalCount, null)
+                                </li>
+                            </ul>
+                        }
+                    }
+                </div>
+</section>

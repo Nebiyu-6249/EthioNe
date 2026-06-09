@@ -1,0 +1,62 @@
+﻿@using System.Linq;
+@using MembershipUser = EthioNegarit.Core.Domain.Entities.MembershipUser
+	@model MembershipUser
+@*@{
+		var topics = @Model.Topics.Where(x => x.User.Id == Model.Id).Count();
+		//var count = Model.ChatRoomMembers.Where(x => x.LastActive > date && x.LogOn).Count();
+	}*@
+@*@model EthioNegarit.Core.Domain.Entities.MembershipUser*@
+    <div id="@Model.Id" class="webui-popover-content member-info">
+        <div class="member-name text-center">
+            @Model.UserName
+        </div>
+        <span class="date">
+            @Html.LanguageString("Members.DateJoined")
+            <span class="float-right">
+                @DatesUI.GetPrettyDate(@Model.CreateDate.ToString())
+            </span>
+		
+        </span>
+		<span class="date">
+			@Html.LanguageString("Badges")
+			<span class="float-right">
+				@Model.Badges.Count
+			</span>
+		</span>
+
+		<span class="date">
+			@Html.LanguageString("Posts")
+			<span class="float-right">
+			
+			</span>
+		</span>
+	
+	@*
+
+
+	@if(@Model.Topics.Any())
+		{
+			<span class="date">
+				@Html.LanguageString("Topics")
+				<span class="float-right">
+		   @Model.Topics.Count
+				</span>
+			</span>
+		}
+		   @if(@Model.Posts.Any())
+			   {
+			<span class="date">
+				@Html.LanguageString("Members.Profile.Posts")
+				<span class="float-right">
+					@Model.Posts.Count
+				</span>
+			</span>
+			   }
+	*@
+        <span class="date">
+            @Html.LanguageString("Members.Profile.Score")
+            <span class="float-right">
+                @Model.TotalPoints
+            </span>
+        </span>
+    </div>

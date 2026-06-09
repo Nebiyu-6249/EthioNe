@@ -1,0 +1,46 @@
+﻿@using EthioNegarit.Utilities
+@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.ViewModels
+@model TopicViewModel
+
+<a id="@Model.Topic.Id" class="info-icon show-pop-delay" role="button" href="@Html.Raw(Model.Topic.NiceUrl)" data-delay-show="300" data-delay-hide="1000" data-placement="left">
+    <i class="far fa-comments"></i>
+    <span class="badge  badge-default">@Model.Topic.Posts.Count</span>
+</a>
+    <div id="@Model.Topic.Id" class="webui-popover-content text-sm">
+        @{
+            <text>
+        <div class="text-center">
+                <a href="@Model.Topic.NiceUrl" class="">
+                    @Model.Topic.Name
+                </a>
+        </div>
+        @* <p>@Html.Raw(string.Format(Html.LanguageString("Topic.Started"), @DatesUI.GetPrettyDate(@Model.Topic.CreateDate.ToString()), string.Format("<a href='{0}'>{1}</a>{2}", Model.Topic.User.NiceUrl, Model.Topic.User.UserName), @DatesUI.GetPrettyDate(@Model.Topic.CreateDate.ToString()),@DatesUI.GetPrettyDate(@Model.Topic.LastPost.DateCreated.ToString())))</p>*@
+        <p>@Html.Raw(string.Format(Html.LanguageString("Topic.Started"), @DatesUI.GetPrettyDate(@Model.Topic.CreateDate.ToString()), string.Format("<a href='{0}'>{1}</a>", Model.Topic.User.NiceUrl, Model.Topic.User.UserName), string.Format("<a href='{0}'>{1}</a>", Model.Topic.NiceUrl, @DatesUI.GetPrettyDate(@Model.Topic.LastPost.DateCreated.ToString()))))</p>
+            </text>
+        }
+    </div>
+
+    <div class="topic-side">
+        @{
+            var postToolTip = string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(@Model.Topic.LastPost.PostContent), 10), "....");
+        }
+        @*  <span class="date-time" title="Discussion Started at @DatesUI.GetPrettyDate(@Model.Topic.CreateDate.ToString()), Last Post at @DatesUI.GetPrettyDate(@Model.Topic.LastPost.DateCreated.ToString()) ">*@
+        <span class="date-time" title="@Html.LanguageString("Topic.LastPost")">
+            <a href="@Model.Topic.NiceUrl" class="">
+                @DatesUI.GetPrettyDate(@Model.Topic.LastPost.DateCreated.ToString())
+            </a>
+</span>
+        <span class="topic-title">
+            @* <a title="@Html.Raw(string.Format(Html.LanguageString("Topic.Started"), @DatesUI.GetPrettyDate(@Model.Topic.CreateDate.ToString()), string.Format("<a href='{0}'>{1}</a>", Model.Topic.User.NiceUrl, Model.Topic.User.UserName), string.Format("<a href='{0}'>{1}</a>", Model.Topic.NiceUrl, @DatesUI.GetPrettyDate(@Model.Topic.LastPost.DateCreated.ToString()))))" href="@Html.Raw(@Model.Topic.NiceUrl)" class="">*@
+                <a class="" title="@postToolTip" href="@Html.Raw(@Model.Topic.NiceUrl)">
+                        @Html.Raw(@Model.Topic.Name)
+                    </a>
+</span>
+        <span class="user-name" title="Started by @Model.Topic.User.UserName at @DatesUI.GetPrettyDate(@Model.Topic.CreateDate.ToString())">
+            <a href="@Model.Topic.User.NiceUrl" class="">
+                @Html.Raw(@Model.Topic.User.UserName)
+            </a>
+        </span>
+    </div>
+

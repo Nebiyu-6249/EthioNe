@@ -1,0 +1,26 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model RecentMembersViewModel
+
+@if (@Model.RecentMembers.Any())
+{
+ <div class="active-members">
+   <div class="panel-header">
+      <h3 class="title">@Html.LanguageString("Stats.LatestMembers")</h3>
+   </div>  
+	 <ul class="contents-list">
+	@foreach(var member in Model.RecentMembers)
+		{
+
+		<li>
+			@Html.Partial("_memberSide", member)
+		</li>
+		}
+	</ul>
+
+                </div>
+            }
+<div class="pagination">
+    <a href="@Url.Action("Search", "Members")" class="btn btn-block btn-sm nav-link" role="button">
+        @Html.LanguageString("Members.SearchMembers")
+    </a>
+</div>

@@ -1,0 +1,58 @@
+﻿@using EthioNegarit.Utilities
+@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.ViewModels
+@model CategoryViewModel
+@*
+    <a id="@Model.Category.Id" class="show-pop-delay" role="button" href="@Html.Raw(Model.Category.NiceUrl)" data-trigger="hover" data-toggle="popover" data-tooltip="popover" data-delay-show="300" data-delay-hide="1000" data-placement="vertical">
+*@
+
+<a id="@Model.Category.Id" class="show-pop-delay" role="button" href="@Html.Raw(Model.Category.NiceUrl)" data-delay-show="300" data-delay-hide="1000" data-placement="vertical">
+    <div class="category">
+        <div class="category-title">
+            @Html.Raw(Model.Category.Name)
+        </div>
+@if (@Model.TopicCount > 0)
+{
+        <div class="category-info-icon">
+            <i class="far fa-comments"></i>
+            <span class="">
+              
+                @Model.TopicCount
+                
+            </span>
+        </div>
+}
+    </div>
+</a>
+
+	<div id="@Model.Category.Id" class="webui-popover-content text-sm">
+			@if(Model.LatestTopic != null)
+				{
+
+				<text>
+					@Html.LanguageString("Category.MostRecent")
+					<a href="@Model.LatestTopic.NiceUrl">@Html.Raw(Model.LatestTopic.Name)</a>
+					@Html.Raw(string.Format(Html.LanguageString("Topic.StartedBy"),
+							  DatesUI.GetPrettyDate(Model.LatestTopic.CreateDate.ToString()),
+							  string.Format("<a href='{0}'>{1}</a>", Model.LatestTopic.User.NiceUrl, Model.LatestTopic.User.UserName)))
+
+				</text>
+
+
+				}
+			else
+				{
+				<p class="text-center text-sm">No discussion has taken place / included.</p>
+				<p class="text-center text-sm">ምንም ውይይት አልተፈጠረም / አልተካተተም </p>
+				}
+		</div>
+		@if(Model.SubCategories != null)
+			{
+			<div class="content-footer">
+				@Html.Partial("_SubCategories", new SubCategoryViewModel
+			   {
+			   AllPermissionSets = Model.SubCategories.AllPermissionSets,
+			   ParentCategory = Model.Category
+			   })
+			</div>
+			}

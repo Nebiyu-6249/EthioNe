@@ -1,0 +1,65 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model ChatRoomMembersViewModel
+@{
+  var timeSpan = DateTime.UtcNow.AddSeconds(-30);
+    var count = Model.ChatRoomMembers.Where(x => x.LastActive > timeSpan && x.LogOn == true).Count();
+}
+
+@if(@Model.ChatRoomMembers.Count > 0 && Html.CurrentMember() != null)
+	{
+	<div class="panel-header  text-sm">
+		<a href="@Url.Action("RoomMembers", "Chat",new {roomId= Model.ChatRoom.Id })" class="" title="All Room Members">
+			<i class="ethicon fa fa-users text-muted"></i>
+			@Html.LanguageString("Chat.RoomMembers") -
+			<span class="">
+				@Model.ChatRoom.ChatRoomMembers.Count.KiloFormat()
+			</span>
+		</a>		
+@if (count > 0)
+{
+		<span class="text-xs green-colour float-right">
+			@Html.LanguageString("Chat.ActiveNow") - @count.KiloFormat()
+		</span>
+		}
+	</div>
+<div id="logonMessage" style="color: Green"></div>
+	<ul class="contents-list">
+     @foreach(var member in Model.ChatRoomMembers.OrderByDescending(x => x.LastActive))
+		{
+		<li>
+			<a href="@member.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="left">
+				<div class="member-side">
+					<div class="member-header">
+						<div class="image">
+							<img class="img-circle img-bordered-sm" src="@member.User.MemberImage(SiteConstants.Instance.GravatarLeaderboardSize)" alt="@Html.Raw(@member.User.UserName)" />
+						</div>
+						<span class="member-name">
+							@Html.Raw(@member.User.UserName)                                  
+                           @if (@member.LastActive > @timeSpan && @member.LogOn == true)
+                           {
+								<span class="ethicon far fa-dot-circle  text-success float-right mt-1"></span>
+								}
+							else
+								{
+								<span class="postdate text-xs mt-1 text-muted float-right">
+									@DatesUI.GetPrettyDate(member.LastActive.ToString())
+								</span>
+								}
+                            
+						</span>
+					</div>
+				</div>
+			</a>
+            @{
+                Html.RenderPartial("_memberPopover", new MemberPopUpViewModel { User = member.User });
+            }
+
+		@*	@{
+        Html.RenderPartial("_memberInfo", @member.User);
+    }*@
+			@*@Html.Partial("_memberPopover", new MemberPopUpViewModel { User = @member.User })*@
+		</li>
+
+					}
+				</ul>
+}

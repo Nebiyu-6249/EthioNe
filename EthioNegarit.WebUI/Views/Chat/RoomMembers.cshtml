@@ -1,0 +1,34 @@
+﻿@model EthioNegarit.WebUI.ViewModels.ChatRoomMembersViewModel
+@{
+ViewBag.Title = @Html.Raw(string.Concat(Model.ChatRoom.Name," ", @Html.LanguageString("Chat.RoomMembers")));
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+}
+<div class="page-header">
+    <span class="">
+        <a title="@Html.LanguageString("Chat.GoToRoom")" href="@Html.Raw(@Model.ChatRoom.NiceUrl)" class="">
+            @ViewBag.Title
+        </a>
+    </span>
+    <span class="inline-item-lg">
+        @Html.Partial("_searchMembers")        
+    </span>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        @if (@Model.RoomMembers.Count > 0 && Html.CurrentMember() != null)
+        {
+            <div class="box-container">
+                @foreach (var member in Model.RoomMembers.OrderByDescending(x => x.LastActivityDate))
+                {
+                    <div class="box member">
+                        @Html.Partial("_member", member)
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>
