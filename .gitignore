@@ -7,7 +7,7 @@
 *.pdb
 
 # ── NuGet ──────────────────────────────────────────────────────
-/packages/
+
 *.nupkg
 # keep the restore config
 !packages.config
