@@ -906,16 +906,29 @@
 
         public Dictionary<string, string> GetAllLanguageStringsByLangauge(Guid languageId)
         {
-            var results = _context.LocaleStringResource
+            // Pull the raw rows for this language, then build the dictionary in memory.
+            // Grouping by the trimmed key name and taking the first value guarantees we
+            // never throw "An item with the same key has already been added" even if the
+            // data contains duplicate or whitespace-variant resource keys.
+            var rows = _context.LocaleStringResource
                     .Include(x => x.Language)
-                   .Include(x => x.LocaleResourceKey)
+                    .Include(x => x.LocaleResourceKey)
                     .Where(x => x.Language.Id == languageId)
-                      .Join(_context.LocaleResourceKey,
-                            strRes => strRes.LocaleResourceKey.Id,
-                            resKey => resKey.Id,
-                            (strRes, resKey) =>
-                            new { LocaleStringResource = strRes, LocaleResourceKey = resKey })
-                      .ToDictionary(arg => arg.LocaleResourceKey.Name.Trim(), arg => arg.LocaleStringResource.ResourceValue);
+                    .Join(_context.LocaleResourceKey,
+                          strRes => strRes.LocaleResourceKey.Id,
+                          resKey => resKey.Id,
+                          (strRes, resKey) =>
+                          new { LocaleStringResource = strRes, LocaleResourceKey = resKey })
+                    .AsEnumerable();
+
+            var results = rows
+                    .Where(arg => arg.LocaleResourceKey != null
+                                  && arg.LocaleResourceKey.Name != null
+                                  && arg.LocaleStringResource != null)
+                    .GroupBy(arg => arg.LocaleResourceKey.Name.Trim())
+                    .ToDictionary(
+                        grp => grp.Key,
+                        grp => grp.First().LocaleStringResource.ResourceValue);
 
             return results;
         }
