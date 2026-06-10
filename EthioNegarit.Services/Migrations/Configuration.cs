@@ -54,6 +54,14 @@ namespace EthioNegarit.Services.Migrations
                         }
                     }
 
+                    // Track key names already in the database plus ones added in this run,
+                    // so the import can never create duplicate LocaleResourceKey rows
+                    // (duplicates crash localization with "An item with the same key has
+                    // already been added" at startup)
+                    var existingKeyNames = new HashSet<string>(
+                        context.LocaleResourceKey.Select(x => x.Name).AsEnumerable().Where(x => x != null).Select(x => x.Trim()),
+                        StringComparer.OrdinalIgnoreCase);
+
                     // Read the CSV file and import all the keys and values
                     var lineCounter = 0;
                     foreach (var csvline in allLines)
@@ -88,6 +96,14 @@ namespace EthioNegarit.Services.Migrations
                         // Trim both the key and value
                         key = key.Trim();
                         value = value.Trim();
+
+                        // Skip keys that already exist (duplicate CSV lines or a previous
+                        // partial import) - insert-if-not-exists semantics
+                        if (existingKeyNames.Contains(key))
+                        {
+                            continue;
+                        }
+                        existingKeyNames.Add(key);
 
                         // Create the resource key
                         var resourceKey = new LocaleResourceKey

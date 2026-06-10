@@ -104,7 +104,12 @@ namespace EthioNegarit.Services
                 .Where(x => x.Category.Id == cat.Id &&
                             x.MembershipRole.Id == role.Id)
                             .ToList();
-                return catRowList.ToDictionary(catRow => catRow.Permission);
+                // Group by permission first - duplicate rows for the same category/role/permission
+                // would otherwise throw "An item with the same key has already been added"
+                return catRowList
+                    .Where(catRow => catRow.Permission != null)
+                    .GroupBy(catRow => catRow.Permission.Id)
+                    .ToDictionary(grp => grp.First().Permission, grp => grp.First());
             });
         }
 
