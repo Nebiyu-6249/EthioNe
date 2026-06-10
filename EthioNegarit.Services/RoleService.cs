@@ -249,7 +249,10 @@ namespace EthioNegarit.Services
             {
                 // Get the known permissions for this role and category
                 var categoryRow = _categoryPermissionForRoleService.GetCategoryRow(role, category);
-                var categoryRowPermissions = categoryRow.ToDictionary(catRow => catRow.Key.Id);
+                // Group by permission id first so duplicate permission rows can't throw
+                var categoryRowPermissions = categoryRow
+                    .GroupBy(catRow => catRow.Key.Id)
+                    .ToDictionary(grp => grp.Key, grp => grp.First());
 
                 // Load up the results with the permisions for this role / cartegory. A null entry for a permissions results in a new
                 // record with a false value
@@ -266,7 +269,10 @@ namespace EthioNegarit.Services
 
             // Get the known global permissions for this role
             var globalRow = _globalPermissionForRoleService.GetAll(role);
-            var globalRowPermissions = globalRow.ToDictionary(row => row.Key.Id);
+            // Group by permission id first so duplicate permission rows can't throw
+            var globalRowPermissions = globalRow
+                .GroupBy(row => row.Key.Id)
+                .ToDictionary(grp => grp.Key, grp => grp.First());
 
             // Load up the results with the permisions for this role. A null entry for a permissions results in a new
             // record with a false value
