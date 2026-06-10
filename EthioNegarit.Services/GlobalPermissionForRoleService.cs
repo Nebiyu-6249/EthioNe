@@ -50,7 +50,12 @@ namespace EthioNegarit.Services
             return _cacheService.CachePerRequest(cacheKey, () =>
             {
                 var catRowList = _context.GlobalPermissionForRole.Include(x => x.MembershipRole).Where(x => x.MembershipRole.Id == role.Id).ToList();
-                return catRowList.ToDictionary(catRow => catRow.Permission);
+                // Group by permission first - duplicate rows for the same role/permission
+                // would otherwise throw "An item with the same key has already been added"
+                return catRowList
+                    .Where(catRow => catRow.Permission != null)
+                    .GroupBy(catRow => catRow.Permission.Id)
+                    .ToDictionary(grp => grp.First().Permission, grp => grp.First());
             });
         }
 
@@ -60,7 +65,12 @@ namespace EthioNegarit.Services
             return _cacheService.CachePerRequest(cacheKey, () =>
             {
                 var catRowList = _context.GlobalPermissionForRole.Include(x => x.MembershipRole).ToList();
-                return catRowList.ToDictionary(catRow => catRow.Permission);
+                // Across all roles the same Permission entity can appear more than once,
+                // so group first to guarantee unique dictionary keys
+                return catRowList
+                    .Where(catRow => catRow.Permission != null)
+                    .GroupBy(catRow => catRow.Permission.Id)
+                    .ToDictionary(grp => grp.First().Permission, grp => grp.First());
             });
         }
 
