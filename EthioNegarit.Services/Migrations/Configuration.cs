@@ -201,8 +201,8 @@ namespace EthioNegarit.Services.Migrations
                     // create the settings
                     var settings = new Settings
                     {
-                        ForumName = "EthioNegarit",
-                        ForumUrl = "http://www.negarit.com",
+                        ForumName = "Ethiopical",
+                        ForumUrl = "https://www.ethipical.com",
                         IsClosed = false,
                         EnableRSSFeeds = true,
                         DisplayEditedBy = true,
