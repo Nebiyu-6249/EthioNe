@@ -1,16 +1,13 @@
-name: Build and Deploy to SmarterASP.NET
+name: Build and Deploy
 
-# Runs automatically on every push to main, and can be run manually
-# from the Actions tab (workflow_dispatch).
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   build-and-deploy:
-    # GitHub's Windows runner already has MSBuild, NuGet, and the
-    # .NET Framework 4.8 targeting pack — so nothing is installed on your PC.
     runs-on: windows-latest
 
     steps:
@@ -26,30 +23,6 @@ jobs:
       - name: Restore NuGet packages
         run: nuget restore EthioNegarit.sln
 
-      # Replace the Web.config placeholder with your real SmarterASP DB
-      # connection string, kept in a GitHub secret (never in the repo).
-      - name: Inject production connection string
-        shell: pwsh
-        env:
-          DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
-        run: |
-          $cfg = "EthioNegarit.WebUI/Web.config"
-          $placeholder = 'Server=YOUR_SQL_SERVER;Database=EthioNegarit_Db;User ID=YOUR_DB_USER;Password=YOUR_DB_PASSWORD;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=True'
-          if ([string]::IsNullOrWhiteSpace($env:DB_CONNECTION_STRING)) {
-            Write-Error "DB_CONNECTION_STRING secret is empty. Add it in repo Settings > Secrets."
-            exit 1
-          }
-          $content = Get-Content $cfg -Raw
-          if (-not $content.Contains($placeholder)) {
-            Write-Error "Placeholder connection string not found in Web.config. Did it already change?"
-            exit 1
-          }
-          $content = $content.Replace($placeholder, $env:DB_CONNECTION_STRING)
-          Set-Content -Path $cfg -Value $content -NoNewline
-          Write-Host "Connection string injected into both EF and provider entries."
-
-      # Build in Release and publish the web project to a folder.
-      # Building the WebUI project also compiles its referenced projects.
       - name: Build and publish to folder
         run: >
           msbuild EthioNegarit.WebUI/EthioNegarit.WebUI.csproj
@@ -73,3 +46,6 @@ jobs:
           protocol: ftp
           timeout: 120000
           dangerous-clean-slate: false
+          exclude: |
+            **/Web.config
+            **/web.config
