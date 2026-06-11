@@ -46,7 +46,10 @@ jobs:
           server-dir: /site1/
           protocol: ftp
           timeout: 120000
-          dangerous-clean-slate: true
+          dangerous-clean-slate: false
+          # Exclude ONLY the root web.config (hand-maintained on the server with the
+          # real connection strings). Views/web.config and Areas .../Views/web.config
+          # must deploy or Razor view compilation breaks.
           exclude: |
-            **/Web.config
-            **/web.config
+            Web.config
+            web.config
