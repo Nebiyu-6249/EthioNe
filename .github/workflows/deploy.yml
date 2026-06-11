@@ -1,28 +1,26 @@
 name: Build and Deploy
-
 on:
   push:
     branches:
       - main
   workflow_dispatch:
-
 jobs:
   build-and-deploy:
     runs-on: windows-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
-
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v2
-
       - name: Restore NuGet packages
         run: nuget restore EthioNegarit.sln
-
+      - name: Clean previous build output
+        run: |
+          if (Test-Path "EthioNegarit.WebUI/obj") { Remove-Item -Recurse -Force "EthioNegarit.WebUI/obj" }
+          if (Test-Path "EthioNegarit.WebUI/bin") { Remove-Item -Recurse -Force "EthioNegarit.WebUI/bin" }
+        shell: pwsh
       - name: Build and publish to folder
         run: >
           msbuild EthioNegarit.WebUI/EthioNegarit.WebUI.csproj
@@ -32,9 +30,12 @@ jobs:
           /p:PublishUrl=publish_output
           /p:DeleteExistingFiles=true
           /p:SolutionDir=${{ github.workspace }}\
-
+      - name: Upload build artifact (fallback for manual upload)
+        uses: actions/upload-artifact@v4
+        with:
+          name: published-site
+          path: ./EthioNegarit.WebUI/obj/Release/Package/PackageTmp/
       # Upload the published site to SmarterASP.NET over FTP.
-      # Incremental sync: first run uploads everything; later runs send only changes.
       - name: Deploy to SmarterASP.NET via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
