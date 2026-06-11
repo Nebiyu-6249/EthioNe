@@ -14,6 +14,9 @@ namespace EthioNegarit.Utilities
             var req = (HttpWebRequest)WebRequest.Create(url);
             req.Method = "GET";
             req.UserAgent = "Fiddler";
+            // Never let a dead/slow feed endpoint tie up a request thread
+            req.Timeout = 10000;
+            req.ReadWriteTimeout = 10000;
 
             var rep = req.GetResponse();
             var reader = XmlReader.Create(rep.GetResponseStream());
