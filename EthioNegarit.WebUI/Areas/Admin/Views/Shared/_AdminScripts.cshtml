@@ -2,7 +2,7 @@
 @using SquishIt.Mvc
 
 @(
- Bundle.Css()
+ SquishIt.Framework.Bundle.Css()
             .Add("~/Content/admin/Imports.css")
             .Add("~/Content/bootstrap/css/bootstrap.min.css")
             .Add("~/Scripts/fancybox/jquery.fancybox.css")
@@ -22,7 +22,7 @@
 <script type="text/javascript">
     var app_base = '@Url.Content("~/")';
 </script>
-@(Bundle.JavaScript()
+@(SquishIt.Framework.Bundle.JavaScript()
         .Add("~/Scripts/jquery-3.1.0.min.js")
         .Add("~/Scripts/jquery.unobtrusive-ajax.js")
         .Add("~/Content/bootstrap/js/bootstrap.min.js")
