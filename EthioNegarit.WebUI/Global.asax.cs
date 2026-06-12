@@ -57,6 +57,10 @@ namespace EthioNegarit.WebUI
 
             // Get assemblies for badges, events etc...
             var loadedAssemblies = ReflectionService.GetAssemblies();
+
+            // Breadcrumbs around each startup phase so a hang or crash can be located
+            // from App_Data/LogFile.txt (the last marker written shows the phase that stuck)
+            LoggingService.Error("STARTUP: database initialise + badge/package sync starting");
             // Do the badge and Ad package processing
             using (var unitOfWork = UnitOfWorkManager.NewUnitOfWork())
             {
@@ -73,12 +77,23 @@ namespace EthioNegarit.WebUI
 
                 }
             }
+            LoggingService.Error("STARTUP: database initialise + badge/package sync complete");
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new ForumViewEngine(SettingsService.GetSettings().Theme));
+            LoggingService.Error("STARTUP: view engine + settings loaded");
             // Initialise the events
             EventManager.Instance.Initialize(LoggingService, loadedAssemblies);
-            // Finally Run scheduled tasks
-            ScheduledRunner.Run(unityContainer);
+            // Finally Run scheduled tasks - a scheduler failure should never stop the site
+            try
+            {
+                ScheduledRunner.Run(unityContainer);
+                LoggingService.Error("STARTUP: Quartz scheduler started");
+            }
+            catch (Exception ex)
+            {
+                LoggingService.Error($"STARTUP: Quartz scheduler failed to start: {ex.Message}");
+            }
+            LoggingService.Error("STARTUP COMPLETE");
         }
         protected void Application_AcquireRequestState(object sender, EventArgs e)
         {

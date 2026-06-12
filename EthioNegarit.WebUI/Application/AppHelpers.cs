@@ -311,6 +311,9 @@ namespace EthioNegarit.WebUI.Application
         public static Image GetImageFromExternalUrl(string url)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            // Never let a dead/slow image host tie up a request thread
+            httpWebRequest.Timeout = 15000;
+            httpWebRequest.ReadWriteTimeout = 15000;
 
             using (var httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse())
             {
