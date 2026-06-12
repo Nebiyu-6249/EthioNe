@@ -10,6 +10,12 @@
     TempData[AppConstants.GlobalClass] = Convert.ToBoolean(PageData[AppConstants.IsMobileDevice]) ? "mobile" : "desktop";
     TempData[AppConstants.CurrentAction] = ViewContext.RouteData.GetRequiredString("action").ToLower();
     TempData[AppConstants.CurrentController] = ViewContext.RouteData.GetRequiredString("controller").ToLower();
+
+    // Temporary render breadcrumbs: the layout runs AFTER the page body, so these
+    // markers in App_Data/LogFile.txt show which layout phase a hanging request
+    // reached. Remove once the hang is diagnosed.
+    var renderLog = ServiceFactory.Get<EthioNegarit.Core.Interfaces.Services.ILoggingService>();
+    renderLog.Error("RENDER: layout starting (page body complete)");
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -36,11 +42,13 @@
     @ViewBag.Canonical
     @RenderSection("SocialMeta", false)
     @Html.Partial("_StyleSheets", theme)
+    @{ renderLog.Error("RENDER: css bundle rendered"); }
     <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
     @Html.Partial("_JavaScript", theme)
+    @{ renderLog.Error("RENDER: js bundle rendered"); }
     @RenderSection("Header", false)
     @if (!string.IsNullOrEmpty(Html.Settings().CustomHeaderCode))
     {
@@ -56,7 +64,8 @@
     </div>*@
        @* <div class="popup bottom-right">
     </div>*@            
-        <div class="content-wrapper"> 
+        <div class="content-wrapper">
+          @{ renderLog.Error("RENDER: header + side nav rendered"); }
           @Html.Partial("_setting")
             <div id="notification" class="notification-popover notification-popover-content right-bottom notification"></div>
             <div id="notice" class="notification-popover notification-popover-content right-bottom notice"></div>
@@ -69,7 +78,8 @@
                 @Html.Partial("_GenericMessage")
                 @Html.Partial("_NoScript")
                 @RenderBody()
-                @Html.Partial("_slideOutPanel")              
+                @Html.Partial("_slideOutPanel")
+                @{ renderLog.Error("RENDER: layout complete"); }
             <div id="copylink" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">

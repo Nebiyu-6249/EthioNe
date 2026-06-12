@@ -1286,12 +1286,51 @@ namespace EthioNegarit.Utilities
         }
         #endregion
 
+        // ipinfo.io lookups happen on hot paths (e.g. the home page ad slider runs one
+        // per request), so responses are cached per IP and the call gets a short
+        // timeout - WebClient has none, and a silently dropped outbound connection
+        // would otherwise stall every page render for the full 100-second default.
+        private static string DownloadIpInfo(string ip)
+        {
+            var cacheKey = "ipinfo-io-" + ip;
+            var cached = HttpRuntime.Cache[cacheKey] as string;
+            if (cached != null)
+            {
+                if (cached.Length == 0)
+                {
+                    throw new WebException("ipinfo.io lookup previously failed for this IP (cached failure)");
+                }
+                return cached;
+            }
+
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create("http://ipinfo.io/" + ip);
+                request.Timeout = 5000;
+                request.ReadWriteTimeout = 5000;
+                request.Proxy = null;
+                using (var response = (HttpWebResponse)request.GetResponse())
+                using (var reader = new StreamReader(response.GetResponseStream()))
+                {
+                    var info = reader.ReadToEnd();
+                    HttpRuntime.Cache.Insert(cacheKey, info, null, DateTime.UtcNow.AddHours(1), System.Web.Caching.Cache.NoSlidingExpiration);
+                    return info;
+                }
+            }
+            catch (Exception)
+            {
+                // Cache the failure too, so a blocked endpoint cannot stall every request
+                HttpRuntime.Cache.Insert(cacheKey, string.Empty, null, DateTime.UtcNow.AddMinutes(30), System.Web.Caching.Cache.NoSlidingExpiration);
+                throw;
+            }
+        }
+
         public static string GetUserCountryByIp(string ip)
         {
             IpInfo ipInfo = new IpInfo();
             try
             {
-                string info = new WebClient().DownloadString("http://ipinfo.io/" + ip);
+                string info = DownloadIpInfo(ip);
                 ipInfo = JsonConvert.DeserializeObject<IpInfo>(info);
                 RegionInfo myRI1 = new RegionInfo(ipInfo.Country);
                 ipInfo.Country = myRI1.EnglishName;
@@ -1313,7 +1352,7 @@ namespace EthioNegarit.Utilities
                 IpInfo ipInfo = new IpInfo();
                 try
                 {
-                    string info = new WebClient().DownloadString("http://ipinfo.io/" + ip);
+                    string info = DownloadIpInfo(ip);
                     ipInfo = JsonConvert.DeserializeObject<IpInfo>(info);
                     RegionInfo myRI1 = new RegionInfo(ipInfo.Country);
                     ipInfo.Country = myRI1.EnglishName;
@@ -1339,7 +1378,7 @@ namespace EthioNegarit.Utilities
                 IpInfo ipInfo = new IpInfo();
                 try
                 {
-                    string info = new WebClient().DownloadString("http://ipinfo.io/" + ip);
+                    string info = DownloadIpInfo(ip);
                     ipInfo = JsonConvert.DeserializeObject<IpInfo>(info);
                     RegionInfo myRI1 = new RegionInfo(ipInfo.Loc);
                     ipInfo.Country = myRI1.EnglishName;

@@ -26,6 +26,7 @@ namespace EthioNegarit.WebUI.Controllers
         [OutputCache(Duration = (int)CacheTimes.OneHour)]
         public PartialViewResult GetMainStats()
         {
+            LoggingService.Error("RENDER: Stats.GetMainStats starting");
             var allCats = _categoryService.GetAll();
             var viewModel = new MainStatsViewModel
             {
@@ -36,6 +37,7 @@ namespace EthioNegarit.WebUI.Controllers
                 CategoryCount = allCats.Count
 
             };
+            LoggingService.Error("RENDER: Stats.GetMainStats done");
             return PartialView(viewModel);
         }
     }
