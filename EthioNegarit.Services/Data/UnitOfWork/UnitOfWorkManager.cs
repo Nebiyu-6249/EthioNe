@@ -1,23 +1,50 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using EthioNegarit.Services.Data.Context;
 using EthioNegarit.Core.Interfaces.UnitOfWork;
 using EthioNegarit.Core.Constants;
 using EthioNegarit.Core.Interfaces;
 using EthioNegarit.Services.Migrations;
+using EthioNegarit.Utilities;
 
 namespace EthioNegarit.Services.Data.UnitOfWork
 {
     public class UnitOfWorkManager : IUnitOfWorkManager
     {
+        private static bool _initializerSet;
+        private static readonly object InitializerLock = new object();
+
         private bool _isDisposed;
         private readonly EthioNegaritContext _context;
 
        public UnitOfWorkManager(IEthioNegaritContext context)
         {
-         
-   Database.SetInitializer(new MigrateDatabaseToLatestVersion<EthioNegaritContext, Configuration>(SiteConstants.Instance.EthioNegaritContext));
-  _context = context as EthioNegaritContext;
-              
+            if (!_initializerSet)
+            {
+                lock (InitializerLock)
+                {
+                    if (!_initializerSet)
+                    {
+                        // Automatic migrations (plus the Seed method) used to run against the
+                        // live database on every cold start; a slow or lock-blocked migration
+                        // makes the first request hang with no error. Migration-on-startup is
+                        // therefore opt-in: set appSetting RunDatabaseMigrationsOnStartup to
+                        // "true" when deploying a model change or installing into an empty
+                        // database, then set it back to "false" once the schema is updated.
+                        var runMigrations = ConfigUtils.GetAppSetting("RunDatabaseMigrationsOnStartup", "false");
+                        if (string.Equals(runMigrations, "true", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Database.SetInitializer(new MigrateDatabaseToLatestVersion<EthioNegaritContext, Configuration>(SiteConstants.Instance.EthioNegaritContext));
+                        }
+                        else
+                        {
+                            Database.SetInitializer<EthioNegaritContext>(null);
+                        }
+                        _initializerSet = true;
+                    }
+                }
+            }
+            _context = context as EthioNegaritContext;
         }
 
         /// <summary>
