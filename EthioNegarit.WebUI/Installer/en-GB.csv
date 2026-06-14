@@ -522,3 +522,17 @@ Address.Web,Web/Url
 Address.Label.Country,Country/City
 Name.Label,Name
 Status.Pending,Pending
+About.Discussions,Discussions
+About.CategoriesText,Categories
+About.MembersText,Members
+About.TopicsText,Topics
+Home.Permalinks,Quick Links
+Layout.Nav.Discussions,Discussions
+Layout.Nav.Help,Help
+Help.FAQ,FAQ
+SubNav.AdService,Ad Service
+Home.PrivacyAndSecurity,Privacy and Security
+Home.ContactUs,Contact Us
+Text.Copyright,Copyright
+Text.AllRights,All rights reserved.
+Text.Version,Version
