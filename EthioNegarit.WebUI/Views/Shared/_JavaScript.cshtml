@@ -3,7 +3,18 @@
     var app_base = '@Url.Content("~/")';
     var largeSpinnerBlockImage = '@Url.Content("~/content/Images/ajaxloader-large.gif")';
 </script>
+@*
+    NullMinifier: concatenate the scripts into one cached file but do NOT minify.
+    SquishIt's default JS minifier (Microsoft Ajax Minifier / AjaxMin) is ES5-only
+    and stalls indefinitely trying to parse the ES6 syntax in several bundled files
+    (advert.js, payment.js, general.js, chat.js, topicPost.js, Chart.js, ...). With
+    debug="false" ASP.NET drops the request execution timeout, so that stall shows as
+    the home page hanging forever on first render. Skipping minification removes the
+    AjaxMin parse entirely; the combined file is larger but IIS gzip recovers most of
+    the size over the wire. The single-request concatenation/caching benefit is kept.
+*@
 @(SquishIt.Framework.Bundle.JavaScript()
+    .WithMinifier<SquishIt.Framework.Minifiers.JavaScript.NullMinifier>()
     .Add("~/Scripts/jquery-3.1.0.min.js")
     .Add("~/Scripts/jquery-ui.min.js")
     .Add("~/Scripts/jquery.unobtrusive-ajax.js")
