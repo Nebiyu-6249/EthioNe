@@ -821,3 +821,11 @@ Topic.AlreadyAnswered,Questions that may already have your answer
 Topic.Label.TopicTitle,Title
 Topic.ShowMorePosts,Show More Posts
 Topic.ShowMorePostsLoading,Loading Posts...
+Chat.Subtitle,Pick a room to join the conversation, or start a new one.
+Chat.SearchPlaceholder,Search for . . .
+Chat.Members,Members
+Chat.Messages,Messages
+Chat.LastActivity,Last activity
+Chat.Favourite,Favourite
+Chat.NotFavourite,Add to favourites
+Chat.NoRooms,No chat rooms yet.

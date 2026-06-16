@@ -1,54 +1,49 @@
-﻿@using EthioNegarit.Utilities
+@using EthioNegarit.Utilities
 @using EthioNegarit.WebUI.ViewModels
 @model ChatRoomsViewModel
 
-@if (Model.ChatRooms.Any())
-    {
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">
-                @Html.LanguageString("Layout.Nav.ChatRooms")
-            </h3>
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body p-2">
-            <ul class="contents-list contents-list-in-card">
-                @foreach (var chatRoom in Model.ChatRooms)
-                    {
-                    <li class="item">
-                        <div class="info-icon" title="Room Members">
-                            <i class="fas fa-users text-muted text-sm"></i>
-                            <span class="badge  badge-default">@chatRoom.ChatRoom.RoomMembersCount</span>
-                        </div>
-                        <div class="topic-side">
-                            @{
-                                var postToolTip = string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(@chatRoom.ChatRoom.Description), 50), "....");
+@if (Model.ChatRooms != null && Model.ChatRooms.Any())
+{
+    <div class="row">
+        @foreach (var room in Model.ChatRooms)
+        {
+            var cr = room.ChatRoom;
+            var preview = string.IsNullOrWhiteSpace(cr.Description)
+                ? string.Empty
+                : StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(cr.Description), 12);
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4" data-room-name="@cr.Name">
+                <div class="card chat-room-card">
+                    <div class="room-fav" title="@(room.IsSubscribed ? Html.LanguageString("Chat.Favourite") : Html.LanguageString("Chat.NotFavourite"))">
+                        <i class="fas fa-star @(room.IsSubscribed ? "" : "o")" aria-hidden="true"></i>
+                    </div>
+                    <a href="@Html.Raw(cr.NiceUrl)" class="card-body text-decoration-none text-reset">
+                        <div class="text-center mb-2">
+                            @if (!string.IsNullOrEmpty(cr.Image))
+                            {
+                                <img src="@Url.Content(cr.Image)" alt="@cr.Name" class="room-avatar" />
                             }
-                            <span class="date-time" title="Last Activity">
-
-                                @DatesUI.GetPrettyDate(@chatRoom.ChatRoom.LastActive.ToString())
-                            </span>
-                            <span class="topic-title">
-                                <a title="@postToolTip" href="@Html.Raw(@chatRoom.ChatRoom.NiceUrl)" class="">
-                                    @Html.Raw(chatRoom.ChatRoom.Name)
-                                </a>
-                            </span>
-                            <span class="user-name">
-                                <a href="@chatRoom.ChatRoom.NiceUrl" class="">
-                                    @Html.Raw(chatRoom.ChatRoom.Name)
-                                </a>
-                            </span>
+                            else
+                            {
+                                <span class="room-avatar"><i class="fas fa-comments" aria-hidden="true"></i></span>
+                            }
+                            <div class="room-name mt-2">@Html.Raw(cr.Name)</div>
                         </div>
-                    </li>
-                                    }
-            </ul>
-        </div>
+                        <p class="room-preview text-center">@preview</p>
+                        <div class="room-stats mt-auto pt-2 text-center">
+                            <span title="@Html.LanguageString("Chat.Members")"><i class="fas fa-users" aria-hidden="true"></i> @cr.RoomMembersCount</span>
+                            <span title="@Html.LanguageString("Chat.Messages")"><i class="fas fa-comment" aria-hidden="true"></i> @cr.RoomMessageCount</span>
+                            <span title="@Html.LanguageString("Chat.LastActivity")"><i class="fas fa-clock" aria-hidden="true"></i> @DatesUI.GetPrettyDate(cr.LastActive.ToString())</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
     </div>
-                                    }
+}
+else
+{
+    <div class="text-center text-muted py-5">
+        <i class="fas fa-comments fa-2x mb-2" aria-hidden="true"></i>
+        <p>@Html.LanguageString("Chat.NoRooms")</p>
+    </div>
+}

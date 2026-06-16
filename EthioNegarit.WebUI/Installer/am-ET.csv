@@ -821,3 +821,11 @@ Topic.AlreadyAnswered,ምናልባት የእርስዎ መልስ ሊኖራቸው 
 Topic.Label.TopicTitle,ርዕስ
 Topic.ShowMorePosts,ተጨማሪ ልጥፎችን አሳይ
 Topic.ShowMorePostsLoading,ልጥፎችን በመጫን ላይ...
+Chat.Subtitle,ለመወያየት ክፍል ይምረጡ ወይም አዲስ ይጀምሩ።
+Chat.SearchPlaceholder,ይፈልጉ . . .
+Chat.Members,አባላት
+Chat.Messages,መልዕክቶች
+Chat.LastActivity,የመጨረሻ እንቅስቃሴ
+Chat.Favourite,ተወዳጅ
+Chat.NotFavourite,ወደ ተወዳጆች ጨምር
+Chat.NoRooms,እስካሁን ምንም የውይይት ክፍል የለም።
