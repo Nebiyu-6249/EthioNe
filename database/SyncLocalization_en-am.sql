@@ -1670,7 +1670,23 @@ INSERT INTO #kv (Name,Culture,Value) VALUES
 (N'Topic.ShowMorePosts','en-GB',N'Show More Posts'),
 (N'Topic.ShowMorePosts','am-ET',N'ተጨማሪ ልጥፎችን አሳይ'),
 (N'Topic.ShowMorePostsLoading','en-GB',N'Loading Posts...'),
-(N'Topic.ShowMorePostsLoading','am-ET',N'ልጥፎችን በመጫን ላይ...');
+(N'Topic.ShowMorePostsLoading','am-ET',N'ልጥፎችን በመጫን ላይ...'),
+(N'Chat.Subtitle','en-GB',N'Pick a room to join the conversation, or start a new one.'),
+(N'Chat.Subtitle','am-ET',N'ለመወያየት ክፍል ይምረጡ ወይም አዲስ ይጀምሩ።'),
+(N'Chat.SearchPlaceholder','en-GB',N'Search for . . .'),
+(N'Chat.SearchPlaceholder','am-ET',N'ይፈልጉ . . .'),
+(N'Chat.Members','en-GB',N'Members'),
+(N'Chat.Members','am-ET',N'አባላት'),
+(N'Chat.Messages','en-GB',N'Messages'),
+(N'Chat.Messages','am-ET',N'መልዕክቶች'),
+(N'Chat.LastActivity','en-GB',N'Last activity'),
+(N'Chat.LastActivity','am-ET',N'የመጨረሻ እንቅስቃሴ'),
+(N'Chat.Favourite','en-GB',N'Favourite'),
+(N'Chat.Favourite','am-ET',N'ተወዳጅ'),
+(N'Chat.NotFavourite','en-GB',N'Add to favourites'),
+(N'Chat.NotFavourite','am-ET',N'ወደ ተወዳጆች ጨምር'),
+(N'Chat.NoRooms','en-GB',N'No chat rooms yet.'),
+(N'Chat.NoRooms','am-ET',N'እስካሁን ምንም የውይይት ክፍል የለም።');
 
 -- 1) Create any missing resource keys (matched on trimmed Name)
 INSERT INTO LocaleResourceKey (Id, Name, Notes, DateAdded)
