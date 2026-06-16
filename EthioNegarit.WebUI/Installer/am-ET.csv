@@ -1,12 +1,50 @@
-Activity.ActivityTitle,እንቅስቃሴ
-Advertisement.Label.AdsService,የማስታወቂያ አገልግሎት
+Activity.Title,የአባላት ተሳትፎ
+Activity.PostedIn,እዚህ ውስጥ {0} ለጥፈዋል
+Activity.CreateDiscussion,አዲስ ውይይት ጀምረዋል - {0}
+Activity.Badge,ባጅ
+Activity.ProfileUpdated,መገለጫቸው ዘመኖአል ።
+Activity.ProfileUpdate,መገለጫቸው ዘመኖአል ።
+Address.Title,አድራሻ
+Activity.MemberAwardedBadge,ተሸልሟል
+Activity.MemberJoined,የመድረኩ አዲስ አባል ሆነዋል ።
+Activity.NewMemberJoined,አዲስ አባል ተቀላቅሎአል
+About.CategoriesText,{0} ምድቦች፣ ከ {1} በላይ ርዕሶችን የያዙ
+About.MembersText,ከ {0} በላይ ንቁ አባላት
+About.Discussions,ውይይቶች
+About.TopicsText,ከ {0} በላይ  ርዕሶች
+Address.Label.Country,አገር/ከተማ
+Address.Label.Email,ኢሜይል
+Address.Label.Line,ስልክ
+Address.Label.Name,ስም
+Address.Web,ድር ገጽ
 Admin,አስተዳዳሪ
+Ad.Title,ማስታወቂያዎች
+Ad.UploadFile,አዲስ ፋይል ስቀል
+Ad.Label.PostCount,የልጥፍ ብዛት
+Ad.Label.Posted,{0} ጊዜ
+Ad.Label.Reminder,አስታዋሽ አንቃ
+Ad.Label.Back,ወደ ማስታወቂያዎች ተመለስ
+Ad.Label.Create,አዲስ ማስታወቂያ
+Ad.Label.Edit,የማስታወቂያ አርትዖት
+Ad.Label.AdsService,የማስታወቂያ አገልግሎት
+Ad.Label.Annual,አንድ ዓመት
+Ad.Label.CompanyService,የኩባንያ ወይም የአገልግሎት ስም
+Ad.Label.Duration,የቆይታ ጊዜ
+Ad.Label.Info,የማስታወቂያ መረጃ
+Ad.Label.MotoSlogan,የኩባንያ ሞቶ/መፈክር
+Ad.Label.Month,አንድ ወር
+Ad.Label.SelectDuration,የቆይታ ጊዜን ይምረጡ
+Ad.Label.SemiAnnual,ስድስት ወር
+Ad.Label.Status,የማስታወቂያ ሁኔታ
+Ad.Label.Try,ለ {0} ቀናት  ይሞክራሉ ?
+Ad.Label.Quarter,ሩብ ዓመት(ሶስት ወር)
+Ad.Notification.Subject,ማሳወቂያ !
+Ad.Notification.Message,ሰላም {0} የቆይታ ጊዜው ሊያበቃ ጥቂት ቀናት የቀረው ማስታወቂያ አለዎት ፡፡ እባከዎ ማስታወቂያዎን ይጎብኙ ፡፡
+Ad.Created,ማስታወቂያ በተሳካ ሁኔታ ተፈጥሯል
+Ad.Updated,ማስታወቂያ በተሳካ ሁኔታ ዘምኗል
 Ajax.PleaseWait,እባክህ ጠብቅ...
-Activity.Badge,ባጅ 
-Activity.UserAwardedBadge,ተሸልሟል
-Activity.UserJoined,የመድረኩ አዲስ አባል ነው።
-Activity.ProfileUpdated,የዘመነ መገለጫ አለው።
-Badges.AwardsPoints,፣ሽልማቶች {0} ነጥቦች
+Ajax.Loading,በመጫን ላይ...
+Badges.AwardsPoints,ሽልማቶች {0} ነጥቦች
 Badge.AuthorMarkAsSolution.Name,ጥያቄህ ተፈቷል
 Badge.AuthorMarkAsSolution.Desc,ይህ ባጅ ለተጠቃሚው የሚሰጠው ሌላ ተጠቃሚዎች ለርዕሳቸው እንደ መፍትሄ ሲለጥፉ ነው።
 Badge.UserVoteUp.Name,የመጀመሪያውን ድምጽ ሰጥተሃል
@@ -37,408 +75,629 @@ Badge.YourPostFavourited.Name,Favourited Post
 Badge.YourPostFavourited.Desc,በሌላ አባል የተወደዱ አንድ ወይም ከዚያ በላይ ልጥፎች አሉዎት
 Badges.UnableToAward,ባጅ መሰብሰብ ለተጠቃሚው ዋጋ እንደሌለው ባጆችን መስጠት አልተቻለም {0}
 Badge.UnknownBadge,ያልታወቀ ባጅ አይነት {0}
-Badge.BadegEnumNoClass,የባጅ ኢነም አይነት {0} የተገለጸ ተዛማጅ ክፍል የለውም።
+Badge.BadegEnumNoClass,የባጅ አይነት {0} የተገለጸ ተዛማጅ ክፍል የለውም።
 Badges.PageTitle,ባጆች
-Buttons.CreatePost,ፖስት አክል
-Buttons.Search,ፈልግ
-Buttons.Send,ላክ
-Buttons.Edit,አርትዕ
-Buttons.LogOn,ግባ
-Buttons.Save,አስቀምጥ
-Buttons.Continue,ቀጥል
-Buttons.Submit,አስገባ
-Buttons.Delete,ሰርዝ
+Badges.NoBadges,እስከ አሁን ምንም ባጆች አላገኙም
 Buttons.Back,ተመለስ
 Buttons.Cancel,ዝጋ
-Category.NoDiscussions,በአሁኑ ጊዜ በዚህ ምድብ ውስጥ ምንም ውይይቶች የሉም
-Category.CategoriesSideHeading,ምድቦች
-Category.SubCategoriesHeading,ንዑስ ምድቦች በ
+Buttons.CreatePost,ለጥፍ
+Buttons.ChangePassword,የይለፍ ቃል ቀይር
+Buttons.Continue,ቀጥል
+Buttons.Clear,አጽዳ
+Buttons.Delete,ሰርዝ
+Buttons.DeleteAll,ሁሉንም ሰርዝ
+Buttons.Download,አውርድ
+Buttons.DownloadAll,ሁሉንም አውርድ
+Buttons.Edit,አርትዕ
+Buttons.LogOn,ግባ
+Buttons.Send,ላክ
+Buttons.SendInvitation,ግብዣ ላክ
+Buttons.AddGuest,ተጋባዥ አክል
+Buttons.Search,ፈልግ
+Buttons.Save,አስቀምጥ
+Buttons.Submit,አስገባ
+Buttons.ShowPassword,የይለፍ ቃል አሳይ
+Buttons.ResetPassword,የይለፍ ቃል ዳግም አስጀምር
+Buttons.Report,ሪፖርት
+Buttons.ShowMore,ተጨማሪ አሳይ
+Buttons.PressEnter,ለመለጠፍ enter የሚለውን ይጫኑ
 Category.AllCategories,ሁሉም ምድቦች
-Category.MostRecent,በጣም የቅርብ ጊዜ:
-Confirmation.DeleteMembersPosts,ኧረ ይህ ሁሉንም የአባላት ልጥፎችን እና ርዕሶችን ይሰርዛል!
-Confirmation.SrubAndBan,እርግጠኛ ነዎት ይህን ማድረግ ይፈልጋሉ? ሁሉንም ልጥፎቻቸውን ይሰርዛል እና ከዚያ ያግዳቸዋል።
+Category.CategoriesSideHeading,ምድቦች
+Category.NoDiscussions,በአሁኑ ጊዜ በዚህ ምድብ ውስጥ ምንም ውይይቶች የሉም
+Category.SubCategoriesHeading,ንዑስ ምድቦች
+Category.MostRecent,በጣም የቅርብ ጊዜ :
+Confirmation.DeleteMembersPosts,ይህ ሁሉንም የአባላት ልጥፎችን እና ርዕሶችን ይሰርዛል!
+Confirmation.SrubAndBan,እርግጠኛ ነዎት ይህን ማድረግ ይፈልጋሉ ? ሁሉንም ልጥፎቻቸውን ይሰርዛል እና ከዚያ ያግዳቸዋል
+ContactUs.Label.Subject,ርዕሰ ጉዳይ
+ContactUs.Label.Message,መልእክት
+Chat.MyChat,የእኔ ውይይቶች
+Chat.GoToRoom,ወደ ውይይት ክፍል ይሂዱ
+Chat.Disallowed,ውይይት ለጊዜው ተከልክሏል
+Chat.Start,ውይይት ለመጀመር እዚህ ጠቅ ያድርጉ
+Chat.Placeholder,መልእክት ይተይቡ … (ለመላክ Enter , ለአዲስ መስመር  Shift+Enter የሚለውን ይጫኑ )
+Chat.Join,ይቀላቀሉ
+Chat.Leave,ውጣ
+Chat.Room,የ {0} ውይይት ክፍል
+Chat.Replay,መልስ
+Chat.Replies,ምላሾች
+Chat.RoomMembers,የውይይት ክፍል አባላት
+Chat.ActiveNow,አሁን ንቁ
+Chat.LogOut,ውጣ
+Chat.AllChat,ሁሉም ውይይቶች
+Date.Minutes,ደቂቃዎች
+Date.Days,ቀን/ቀናት
+Date.Today,ዛሬ
 Date.JustNow,ልክ አሁን
 Date.OneMinuteAgo,ከ1 ደቂቃ በፊት
 Date.MinutesAgo,ከ {0} ደቂቃዎች በፊት
 Date.OneHourAgo,ከ1 ሰአት በፊት
-Date.HoursAgo, ከ {0} ሰዓታት በፊት
+Date.HoursAgo,ከ {0} ሰዓታት በፊት
 Date.Yesterday,ትናንት
 Date.DaysAgo,ከ {0} ቀናት በፊት
 Date.WeeksAgo,ከ {0} ሳምንታት በፊት
+Date.DateCreate,የተፈጠረበት ቀን
+Date.LastView,የመጨረሻ እይታ
+Date.EndDate,የሚያበቃበት ቀን
+Date.StartDate,የሚጀምርበት ቀን
+Date.Title,ቀን
+Dashboard.Label.Topics,ርዕሶች
+Dashboard.Label.TopicsStart,የጀምራቸው ውይይቶች
+Dashboard.Label.Posts,ሁሉም ልጥፎች
+Dashboard.Label.BadgesGet,ሁሉም ያገኟቸው ባጆች
+Dashboard.Label.TotalPoints,ጠቅላላ ያገኟቸው ነጥቦች
+Dashboard.Label.PointsGet,ያገኟቸው ነጥቦች
+Dashboard.Label.TopicsFollow,የሚከተላቸው ርዕሶች
+Dashboard.Label.CategoriesSubscribed,የተመዘገቡባቸው ምድቦች
+Dashboard.Label.ChatRoomsJoined,የተቀላቀሉዋቸው የውይይት ክፍሎች
+Dashboard.Label.FavouritePosts,ተወዳጅ ልጥፎች
+Dashboard.Title.Overview,አጠቃላይ እይታ
+Dashboard.Title.Subscription,ምዝገባ | ተወዳጅ | የሚከተላቸው
+Dashboard.Title.Actions,እርምጃዎች | ምላሽ | ግብረመልስ
+Dashboard.Title.PointSummary,የነጥቦች ማጠቃለያ
+Dashboard.Title.SelectYear,ዓመት ይምረጡ
+Dashboard.Title.Vote,ድምጽ
+Dashboard.Label.VoteGiven,የእርስዎ ድምጽ
+Dashboard.Label.MembersVote,የአባላት ድምጽ
+Dashboard.Title.ChatResponse,የውይይት ምላሽ
+Dashboard.Label.YourResponse,የውይይት ምላሽዎ
+Dashboard.Label.MembersResponse,የአባላት የውይይት ምላሽ
+Delete.Confirmation,እርግጠኛ ነህ ይህንን መሰረዝ ትፈልጋለህ ?
 Errors.NoAccess,መዳረሻ የለም
 Errors.GenericMessage,ይቅርታ ስህተት ተፈጥሯል።
 Errors.NoPermission,ይህን እርምጃ ለመፈጸም ፍቃድ የለዎትም።
-Editor.NeedHelp,የቅርጸት እገዛ ይፈልጋሉ?
-Errors.NothingToDisplay,ምንም የሚታይ ነገር የለም።
-Error.WrongAnswerRegistration,መልስህ ላይ ስህተት ነበር። እባክህ እንደገና ሞክር
-Errors.NoPermissionPolls,ርዕስ ተፈጠረ። ግን ምርጫዎችን ለመፍጠር ፈቃድ የለዎትም።
 Error.EmailIsBanned,ለመጠቀም እየሞከሩ ያሉት የኢሜይል አድራሻ ወይም ጎራ ታግዷል
+Editor.NeedHelp,የቅርጸት እገዛ ይፈልጋሉ?
+Error.WrongAnswerRegistration,መልስህ ላይ ስህተት ነበር። እባክህ እንደገና ሞክር
+Errors.NothingToDisplay,ምንም የሚታይ ነገር የለም።
+Errors.NoPermissionPolls,ርዕስ ተፈጠረ። ግን ምርጫዎችን ለመፍጠር ፈቃድ የለዎትም።
+Facebook.Error.EnabledButNotAddedKeys,የፌስቡክ መግቢያን አንቅተዋል ነገርግን የእርስዎን AppId ወይም Secret ቁልፍ ወደ forum.config አልጨመሩም።
 Favourites.PageTitle,የእኔ ተወዳጆች
 Favourites.NoMemberFavourites,ምንም ልጥፎችን ኮከብ አላደረጉም።
-Following.PageTitle,ርዕሶች እና ምድቦች
-Following.Categories,የሚከተሏቸው ምድቦች
-Following.Topics,የሚከተሏቸው ርዕሶች
-Facebook.Error.EnabledButNotAddedKeys,የፌስቡክ መግቢያን አንቅተዋል ነገርግን የእርስዎን AppId ወይም Secret ቁልፍ ወደ forum.config አልጨመሩም።
 File.SuccessfullyDeleted,ፋይል ተሰርዟል።
+Following.Topics,የሚከተሏቸው ርዕሶች
+Following.PageTitle,የሚከተሏቸው ርዕሶች ምድቦች እና የውይይት ክፍሎች
+Following.Categories,የሚከተሏቸው ምድቦች
 Google.Error.EnabledButNotAddedKeys,ማህበራዊ መግቢያዎችን አንቅተዋል ነገርግን በ forum.config ውስጥ የጉግል መታወቂያ እና ሚስጥራዊ ቁልፍን አላከሉም።
+Help.ContactUs,እኛን ለማግኘት
+Help.ContactUs.Message,ትክክለኛውን መልስ ካላገኙ ወይም ሌላ ጥያቄ ካለዎት ?
+Help.FAQ,ተደጋጋሚ ጥያቄዎች
+Help.Label.HowToAdvertise,እንዴት ማስተዋወቅ እችላለሁ
+Help.Label.HowToGetPackage,የማስታወቂያ ጥቅል እንዴት ማግኘት እችላለሁ
+Help.Label.HowToPay,የማስታወቂያ ክፍያን እንዴት መክፈል እችላለሁ
+Help.Label.HowRequestRefund,ተመላሽ ገንዘብ እንዴት እንደሚጠይቅ
+Help.Label.GeneralSupport,አጠቃላይ ድጋፍ
+Help.Label.GettingStarted,መግቢያ
+Help.Label.AdAndPaymentSupport,የማስታወቂያ እና የክፍያ ድጋፍ
+Help.Label.RulesAndObligations,ደንቦች እና ግዴታዎች
+Help.Title,እገዛ
 Home.LatestDiscussions,የቅርብ ጊዜ ውይይቶች
 Home.Rss,Rss
-Help.ContactUs,እኛን ለማግኘት
-Help.Title,እገዛ
-Help.Title.GeneralSupport,አጠቃላይ ድጋፍ
-Help.Title.GettingStarted,መግቢያ
-Help.Title.AdAndPaymentSupport,የማስታወቂያ እና የክፍያ ድጋፍ
-Help.Title.RulesAndObligations,ደንቦች እና ግዴታዎች
-Language.Changed,ቋንቋ ተለውጧል
+Home.Permalinks,ቋሚ አገናኞች
+Home.PrivacyAndSecurity,ግላዊነት እና ደህንነት
+Home.ContactUs,እኛን ለማግኘት
+Image.Label,ምስል
+Inbox.Title,የመልእክት ሳጥን
+Inbox.All,ሁሉም
+Inbox.Received,የተቀበልኩት
+Inbox.Sent,የተላኩ
+Inbox.Unread,ያልተነበቡ
+Inbox.Unread.Messages,{0} ያልተነበቡ መልእክት/ቶች
+Inbox.Starred,ኮከብ የተደረገባቸው
+Inbox.Messages,መልእክት/ቶች
 Language.Change,ቋንቋ ቀይር
-Layout.Nav.Home,መነሻ
-Layout.Nav.Register,ይመዝገቡ
-Layout.Nav.Logon,ግባ
-Layout.Nav.Admin,አስተዳዳሪ
-Layout.Nav.Activity,እንቅስቃሴ
-Layout.Nav.Leaderboard,የመሪዎች ሰሌዳ
+Language.Changed,ቋንቋ ተለውጧል
 Layout.CreateButton,አዲስ ውይይት
-Layout.PoweredBy,የተጎላበተው በ
+Layout.Nav.About,ስለኛ
+Layout.Nav.Activity,የአባላት ተሳትፎ
+Layout.Nav.Admin,አስተዳዳር
+Layout.Nav.Advertisements,ማስታወቂያዎች
+Layout.Nav.Badges,ባጆች
 Layout.Nav.Categories,ምድቦች
-Layout.Nav.Topics,ርዕሶች
 Layout.Nav.ChatRooms,የውይይት ክፍሎች
+Layout.Nav.ContactUs,ያግኙን
+Layout.Nav.SendUsMessage,መልእክት ይላኩልን
 Layout.Nav.HelpAndSupport,እገዛ እና ድጋፍ
-LogOn.LogOn,ግባ
-LogOn.LogOff,ዘግተህ ውጣ
+Layout.Nav.Home,መነሻ
+Layout.Nav.Leaderboard,የመሪዎች ሰሌዳ
+Layout.Nav.Logon,ግባ
+Layout.Nav.Register,ይመዝገቡ
+Layout.Nav.Payments,ክፍያዎች
+Layout.Nav.Permalinks,ቋሚ አገናኞች
+Layout.Nav.Topics,ርዕሶች
+Layout.Nav.Discussions,ውይይቶች
+Layout.Nav.Utilities,መገልገያዎች
+Layout.PoweredBy,የተጎላበተው በ
+Layout.PrivacyPolicy,የግላዊነት ፖሊሲ
+Layout.Nav.Sections,ክፍሎች
+Layout.Nav.TermsAndConditions,የአጠቃቀም ውሎች እና ሁኔታዎች
 Leaderboard.ThisWeeksStars,የዚህ ሳምንት ኮከቦች
 Leaderboard.ThisYearsStars,በዚህ አመት ሮክ ኮከቦች
 Leaderboard.LeaderboardTitle,ዓለም አቀፍ መሪ ሰሌዳ
-Layout.Nav.JobVaccancy,ክፍት የሥራ ቦታ
-Layout.Nav.ContactUs,ያግኙን
-Layout.Nav.SendUsMessage,መልእክት ላኩልን
-Layout.Nav.Permalinks,ቋሚ አገናኞች
-Layout.Nav.About,ስለኛ
-Layout.TermsAndConditions,ውሎች እና ሁኔታዎች
-Layout.PrivacyPolicy,የግላዊነት መመሪያ
-Layout.Nav.TermsOfService,የአገልግሎት ውል
-Layout.Nav.PrivacyAndSecurity,ግላዊነት እና ደህንነት
-SideBox.MyTools,የእኔ መሳሪያዎች
-Members.SrubAndBan,የጭረት አባል
-Members.SuccessfulSrub,ሁሉም ተፈጽሟል
-Members.NowBanned,አባል አሁን ታግዷል
-Members.NowUnBanned,አባል አሁን አልተከለከለም።
-Members.Points,ነጥቦች
-Members.Users,ተጠቃሚዎች
-Members.DateJoined,የተቀላቀለበት ቀን
-Members.ProfileTitle,መገለጫ
-Members.Profile.Joined,ተቀላቅሏል:
-Members.Profile.Posts,ልጥፎች:
-Members.Profile.Points,ነጥቦች:
-Buttons.Report,ሪፖርት አድርግ
-Buttons.ChangePassword,የይለፍ ቃል ቀይር
-Members.SearchMembers,አባላትን ፈልግ
-Members.Profile.Age,ዕድሜ:
-Members.Profile.Location,አካባቢ:
-Members.Profile.Website,ድህረገፅ
-Members.Profile.Twitter,Twitter
-Members.Profile.DiscussionActivity,የውይይት እንቅስቃሴ
-Members.Profile.Facebook,Facebook:
-Members.Profile.Badges,ባጆች
-Members.EditProfile,መገለጫ አርትዕ
-Members.Register,ይመዝገቡ
+LogOn.LogOn,ግባ
+LogOn.LogOff,ዘግተህ ውጣ
+Members.Account.CloseDays,ለስንት ቀናት ይዘጋ
+Members.AccountLocked,መለያው ለጊዜው ተቆልፏል !
+Members.AccountLockedText,መለያዎ ተቆልፏል ። እባክዎ እንደገና ይሞክሩ
+Members.Admin,አስተዳዳሪ
 Members.AlreadyRegistered,አስቀድመው ተመዝግበዋል? ለምን እንደገና ማድረግ ይፈልጋሉ?
-Members.LogOnMessage,እባክዎ የተጠቃሚ ስምዎን እና የይለፍ ቃልዎን ያስገቡ። ወይም {0} መለያ ከሌለህ
-Members.Label.Username,የተጠቃሚ ስም
-Members.Label.EmailAddress,የኢሜል አድራሻ (የአቫታር ምስልዎን ለማሳየት በግራቫታር ጥቅም ላይ ይውላል)
-Members.Label.Password,የይለፍ ቃል
-Members.Label.ConfirmPassword,የይለፍ ቃል ያረጋግጡ
-Members.Label.UserIsApproved,ተጠቃሚ ተፈቅዷል
-Members.Label.Comment,አስተያየት
-Members.Label.Signature,ፊርማ
-Members.Label.Roles,ሚናዎች
-Members.Label.Age,ዕድሜ
-Members.Label.Website,ድህረገፅ
-Members.Label.Location,አካባቢ
-Members.Label.Twitter,Twitter Url
-Members.Label.Facebook,የፌስቡክ ገጽ
-Members.Label.RememberMe,አስታውሰኝ?
-Members.Label.Users,ተጠቃሚዎች
-Members.Label.DateJoined,የተቀላቀለበት ቀን
+Members.BanUser,ተጠቃሚን አግድ
+Members.Blocked,የታገዱ አባላት
+Members.BlockedNone,ምንም የታገደ አባል የለም ፡፡
+Members.UnBlock,አታግድ
+Members.CantUnlock,ተጠቃሚ የለም - መክፈት አይችልም ።
+Members.ChangePassword.Success,የይለፍ ቃል ተቀይሯል ።
+Members.ChangePassword.Error,አሁን ያለው የይለፍ ቃል ትክክል አይደለም ወይም አዲሱ የይለፍ ቃል ልክ ያልሆነ ነው።
+Members.ChangePassword.Title,የይለፍ ቃል ቀይር
+Members.ChangePassword.Text,አዲሱ የይለፍ ቃል ቢያንስ ቢያንስ {0} ቁምፊዎች ርዝመት መሆን አለበት ፡፡
+Members.ChangePassword.Link,ከፈለጉ እዚህ ጠቅ ያድርጉ {0}
+Members.ChangePassword.TextLink,የይለፍ ቃል መቀይር ከፈለጉ እዚህ ጠቅ ያድርጉ
+Members.CreateAccountMessage,መለያ ይፍጠሩ
+Members.CreateAccount,መለያ ፍጠር
+Members.DeleteAllPosts,ሁሉንም ልጥፎች ሰርዝ
+Members.EditProfile,መገለጫ አርትዕ
 Members.EditMember,አባል አርትዕ
-Members.NowRegistered,አሁን ተመዝግበሃል
-Members.NowRegisteredNeedApproval,አሁን ተመዝግበሃል። ግን የመድረክ አስተዳዳሪው መለያዎን መፍቀድ አለበት።
-Members.NowLoggedIn,አሁን ገብተሃል
 Members.Errors.PasswordIncorrect,የቀረበው ተጠቃሚ ወይም የይለፍ ቃል የተሳሳተ ነው።
 Members.Errors.PasswordAttemptsExceeded,ከፍተኛው የይለፍ ቃል ሙከራዎች ታልፏል።
 Members.Errors.UserLockedOut,ተጠቃሚው ተዘግቷል።
 Members.Errors.UserNotApproved,ተጠቃሚ አልጸደቀም።
 Members.Errors.LogonGeneric,መግባት አልተቻለም።
-Member.ProfileUpdated,መገለጫ ተዘምኗል
-Members.NowLoggedOut,አሁን ወጥተሃል
 Members.Errors.DuplicateUserName,የተጠቃሚ ስም አስቀድሞ አለ። እባክዎ የተለየ የተጠቃሚ ስም ያስገቡ።
 Members.Errors.DuplicateEmail,የዚያ ኢ-ሜይል አድራሻ የተጠቃሚ ስም አስቀድሞ አለ። እባክህ የተለየ ኢሜል አስገባ።
 Members.Errors.InvalidPassword,የቀረበው የይለፍ ቃል ልክ ያልሆነ ነው። እባክዎ የሚሰራ የይለፍ ቃል እሴት ያስገቡ።
-Members.Errors.InvalidAnswer,የቀረበው የይለፍ ቃል መልሶ ማግኛ መልስ ልክ ያልሆነ ነው። እባክህ እሴቱን አረጋግጥ እና እንደገና ሞክር።
 Members.Errors.InvalidEmail,የቀረበው የኢሜል አድራሻ ልክ ያልሆነ ነው። እባክህ እሴቱን አረጋግጥ እና እንደገና ሞክር።
+Members.Errors.InvalidAnswer,የቀረበው የይለፍ ቃል መልሶ ማግኛ መልስ ልክ ያልሆነ ነው። እባክህ እሴቱን አረጋግጥ እና እንደገና ሞክር።
 Members.Errors.InvalidQuestion,የቀረበው የይለፍ ቃል መልሶ ማግኛ ጥያቄ ልክ ያልሆነ ነው። እባክህ እሴቱን አረጋግጥ እና እንደገና ሞክር።
 Members.Errors.InvalidUserName,የቀረበው የተጠቃሚ ስም ልክ ያልሆነ ነው። እባክህ እሴቱን አረጋግጥ እና እንደገና ሞክር።
 Members.Errors.ProviderError,የማረጋገጫ አቅራቢው ስህተት መልሷል። እባክዎ ግቤትዎን ያረጋግጡ እና እንደገና ይሞክሩ። ችግሩ ከቀጠለ እባክዎ የስርዓት አስተዳዳሪዎን ያግኙ።
 Members.Errors.UserRejected,የተጠቃሚው የመፍጠር ጥያቄ ተሰርዟል። እባክዎ ግቤትዎን ያረጋግጡ እና እንደገና ይሞክሩ። ችግሩ ከቀጠለ እባክዎ የስርዓት አስተዳዳሪዎን ያግኙ።
 Members.Errors.Unknown,ያልታወቀ ስህተት ተከስቷል። እባክዎ ግቤትዎን ያረጋግጡ እና እንደገና ይሞክሩ። ችግሩ ከቀጠለ እባክዎ የስርዓት አስተዳዳሪዎን ያግኙ።
-Members.NewMemberRegistered,አዲስ አባል ተመዝግቧል {0} ({1})
-Members.Admin,አስተዳዳሪ
-Members.NewMemberSubject,አዲስ አባል ተመዝግቧል
-Members.CantUnlock,ተጠቃሚ የለም - መክፈት አይችልም።
 Members.ForgotPassword.Email,የይለፍ ቃልህ እንደገና እንዲጀመር ጠይቀሃል {0}. አዲሱ የይለፍ ቃልህ ከዚህ በታች ነው።
 Members.ForgotPassword.Subject,የይለፍ ቃል ዳግም ማስጀመር
 Members.ForgotPassword.SuccessMessage,አዲስ የይለፍ ቃል ወደ እርስዎ ኢሜይል ተልኳል።
 Members.ForgotPassword.ErrorMessage,የይለፍ ቃል ዳግም ማስጀመር ላይ ስህተት
-Members.ChangePassword.Success,የይለፍ ቃል ተቀይሯል።
-Members.ChangePassword.Error,አሁን ያለው የይለፍ ቃል ትክክል አይደለም ወይም አዲሱ የይለፍ ቃል ልክ ያልሆነ ነው።
-Members.ChangePassword.Title,የይለፍ ቃል ቀይር
-Members.ChangePassword.Text, አዲስ የይለፍ ቃሎች ቢያንስ ቢያንስ መሆን አለባቸው{0} ቁምፊዎች ርዝመት.
-Members.ChangePassword.Link,ከፈለጉ እዚህ ጠቅ ያድርጉ {0}
 Members.ForgotPassword.Title,የይለፍ ቃል ረሳው
-Buttons.ResetPassword,የይለፍ ቃል ዳግም አስጀምር
-Buttons.ShowPassword,የይለፍ ቃል አሳይ
-Members.ForgotPassword.Link,የይለፍ ቃልህን ረሳህ?
-Members.RegisterAsNewMember.Link,እንደ አዲስ አባል ይመዝገቡ?
+Members.ForgotPassword.Link,የይለፍ ቃልህን ረሳህ ?
+Members.HasNewPrivateMessages,አዲስ ያልተነበቡ የግል መልዕክቶች አሉህ
+Members.Label.Age,ዕድሜ
 Members.Label.AlreadyRegistered,አስቀድሜ አባል ነኝ
-Members.RegisterMessage,አዲስ አባልነት ይመዝገቡ
+Members.Label.ConfirmPassword,የይለፍ ቃል ያረጋግጡ
+Members.Label.Comment,አስተያየት
 Members.Label.CurrentPassword,የአሁኑ ሚስጥራዊ ማለፊያ ቁልፍ
-Members.Label.NewPassword,አዲስ የይለፍ ቃል
 Members.Label.ConfirmNewPassword,አዲስ የይለፍ ቃል ያረጋግጡ
+Members.Label.DateJoined,የተቀላቀለበት ቀን
+Members.Label.DisableEmailNotifications,የኢሜይል ማሳወቂያዎችን አሰናክል
+Members.Label.EmailAddress,የኢሜል አድራሻ (የአቫታር ምስልዎን ለማሳየት በግራቫታር ጥቅም ላይ ይውላል)
 Members.Label.EmailAddressBlank,የኢሜል አድራሻዎን ያስገቡ
+Members.Label.Facebook,የፌስቡክ ገጽ
+Members.Label.Location,አካባቢ
+Members.Label.NewPassword,አዲስ የይለፍ ቃል
+Members.Label.Password,የይለፍ ቃል
+Members.Label.RememberMe,አስታውሰኝ
+Members.Label.Roles,ሚናዎች
+Members.Label.Signature,ፊርማ
+Members.Label.Twitter,Twitter Url
+Members.Label.Username,የተጠቃሚ ስም
+Members.Label.UserIsApproved,ተጠቃሚ ተፈቅዷል
+Members.Label.Users,ተጠቃሚዎች
+Members.Label.UploadNewAvatar,አዲስ የመገለጫ ምስል ይስቀሉ።
+Members.Label.Website,ድህረገፅ
 Members.LoginOrText,Or
-Microsoft.Error.EnabledButNotAddedKeys,የማይክሮሶፍት መግቢያን አንቅተዋል ነገርግን የእርስዎን AppId ወይም Secret ቁልፍ ወደ forum.config አላከሉም።
-Members.Profile.IsSocialAccount,ማህበራዊ መለያ
-Members.DeleteAllPosts,ሁሉንም ልጥፎች ሰርዝ
-Members.BanUser,ተጠቃሚን አግድ
-Members.UnBanUser,ተጠቃሚን አታግድ
+Members.LogonFacebookButton,በፌስቡክ ይግቡ
+Members.LogonGoogleButton,በGoogle ይግቡ
+Members.LogonMicrosoftButton,ከማይክሮሶፍት ጋር ይግቡ
+Members.LogOnMessage,እባክዎ የተጠቃሚ ስምዎን እና የይለፍ ቃልዎን ያስገቡ። መለያ ከሌለዎ አዲስ አባልነት {0} ፡፡
 Members.MemberEmailAuthorisationNeeded,የማረጋገጫ ኢሜይል ልከንልዎታል - እባክዎ መለያዎን ለማጽደቅ በኢሜልዎ ውስጥ ያለውን የማረጋገጫ አገናኝ ጠቅ ያድርጉ።
 Members.MemberEmailAuthorisation.EmailBody,ላይ ተመዝግበዋል። {0} - ለመቀጠል ከዚህ በታች ያለውን ሊንክ በመጫን የኢሜል አድራሻዎን ማረጋገጥ አለብዎት።  {1}
 Members.MemberEmailAuthorisation.Subject,የኢሜል ማረጋገጫ
-Members.NowApproved,መለያዎ አሁን ጸድቋል - አመሰግናለሁ
 Members.MemberEmailAuthorisationNeededMessage,መለያዎን ለማጽደቅ በማረጋገጫ ኢሜልዎ ውስጥ ያለውን አገናኝ ጠቅ ያድርጉ።
 Members.MemberEmailAuthorisationResend,የማረጋገጫ ኢሜይል እንደገና ላክ
 Members.MessageMe,መልእክት ላክልኝ
-Members.LogonFacebookButton,በፌስቡክ ይግቡ
-Members.LogonGoogleButton,በGoogle ይግቡ
-Members.Profile.LastOnline,የመጨረሻው መስመር ላይ
-Members.UnableToGetEmailAddress,የኢሜል አድራሻዎን መድረስ አልተቻለም - እባክዎን ፈቃዶችዎን ያረጋግጡ
+Members.NewMemberRegistered,አዲስ አባል ተመዝግቧል {0} ({1})
+Members.NewMemberSubject,አዲስ አባል ተመዝግቧል
+Members.NowRegistered,አሁን ተመዝግበሃል
+Members.NowRegisteredNeedApproval,አሁን ተመዝግበሃል ። ግን የመድረክ አስተዳዳሪው መለያዎን መፍቀድ አለበት ።
+Members.NowLoggedIn,አሁን ገብተሃል
+Members.NowLoggedOut,አሁን ወጥተሃል
+Members.NowApproved,መለያዎ አሁን ጸድቋል - አመሰግናለሁ
+Members.NowBanned,አባል አሁን ታግዷል
+Members.NowUnBanned,አባል አሁን አልተከለከለም ።
+Members.Profile.About,ሙያ እና ክህሎቶች
+Members.Profile.Links,ማህበራዊ አገናኞች
+Members.Profile.Activity,ተሳትፎ
+Members.Profile.Title,መገለጫ
+Members.Profile.Joined,የተቀላቀለበት ቀን
+Members.Profile.DateJoined,የተቀላቀልክበት ቀን
+Members.Profile.Posts,ልጥፎች
+Members.Profile.Topics,ውይይቶች
+Members.Profile.Score,ነጥብ
+Members.Profile.Age,ዕድሜ
+Members.Profile.Location,አካባቢ
+Members.Profile.Website,ድህረገፅ
+Members.Profile.Twitter,Twitter
+Members.Profile.Facebook,Facebook:
+Members.Profile.Badges,ባጆች
+Members.Profile.Updated,መገለጫ ዘምኗል
+Members.Profile.LastOnline,በመስመር ላይ
+Members.Profile.IsSocialAccount,ማህበራዊ መለያ
+Members.Register,ይመዝገቡ
 Members.ResetPassword.Title,የይለፍ ቃል ዳግም ማስጀመር ጥያቄ ተልኳል።
 Members.ResetPassword.Text,የይለፍ ቃልዎን እንዴት እንደገና ማስጀመር እንደሚችሉ ዝርዝር መረጃ የያዘ ኢሜይል ተልኳል።
 Members.ResetPassword.EmailText,የይለፍ ቃልዎን በ ላይ ዳግም ለማስጀመር ጥያቄ ቀርቧል {0}.የይለፍ ቃልዎን እንደገና ለማስጀመር ከታች ያለውን ሊንክ ይከተሉ። ይህን ጥያቄ ካላቀረብክ እባክህ ይህን ኢሜይል ችላ በል ምንም ተጨማሪ እርምጃ አያስፈልግም እና የይለፍ ቃልዎ አይቀየርም.
 Members.ResetPassword.SuccessText,የይለፍ ቃልህ ተለውጧል።
 Members.ResetPassword.InvalidToken,ይህ ጥያቄ ልክ ያልሆነ ነው ወይም ጊዜው አልፎበታል። እባክዎ እንደገና የይለፍ ቃል ዳግም ማስጀመር ጥያቄ ያቅርቡ።
-Members.ResetPassword.Error,የይለፍ ቃልህን ዳግም ማስጀመር ላይ ስህተት ነበር። እባክዎ እንደገና ይሞክሩ።
-Members.LogonMicrosoftButton,ከማይክሮሶፍት ጋር ይግቡ
-Members.CreateAccountMessage,መለያ ይፍጠሩ
-Members.CreateAccount,መለያ ፍጠር
-Members.Label.UploadNewAvatar,አዲስ የመገለጫ ምስል ይስቀሉ።
-Member.HasNewPrivateMessages,አዲስ ያልተነበቡ የግል መልዕክቶች አሉህ
-Members.Label.DisableEmailNotifications,የኢሜይል ማሳወቂያዎችን አሰናክል
-Moderate.Title,መጠነኛ
-Moderate.NothingHere,በአሁኑ ጊዜ እዚህ ምንም ነገር የለም።
-Moderate.Topics,ርዕሶች
-Moderate.Posts,ልጥፎች
-Moderate.NavText,በመጠባበቅ ላይ ያሉ ልጥፎች/ርዕሶች
+Members.ResetPassword.Error,የይለፍ ቃልህን ዳግም ማስጀመር ላይ ስህተት ነበር ። እባክዎ እንደገና ይሞክሩ ።
+Members.RegisterAsNewMember.Link,እንደ አዲስ አባል ይመዝገቡ?
+Members.RegisterMessage,አዲስ አባልነት ይመዝገቡ
+Members.SrubAndBan,የጭረት አባል
+Members.SuccessfulSrub,ሁሉም ተፈጽሟል
+Members.SearchMembers,አባላትን ፈልግ ...
+Members.UnableToGetEmailAddress,የኢሜል አድራሻዎን መድረስ አልተቻለም - እባክዎን ፈቃዶችዎን ያረጋግጡ
+Members.UnBanUser,ተጠቃሚን አታግድ
+Members.WelcomeBack,እንኳን ደህና መጣህ {0} ተመልሰህ ሰለመጣህ ደስ ብሎናል ፡፡
+Members.Greetings,ሰላም እንዴት ነህ {0} ? እንኳን ደህና መጣህ ፡፡
+Microsoft.Error.EnabledButNotAddedKeys,የማይክሮሶፍት መግቢያን አንቅተዋል ነገርግን የእርስዎን AppId ወይም Secret ቁልፍ ወደ forum.config አላከሉም።
+Moderate.Title,በመጠባበቅ ላይ ያሉ ርዕሶች እና ልጥፎች
 Moderate.AwaitingModeration,ልጥፍዎ በአሁኑ ጊዜ መስተካከልን እየጠበቀ ነው። ከተፈቀደ በኋላ በጣቢያው ላይ ይታያል
+Moderate.NothingHere,በአሁኑ ጊዜ እዚህ ምንም ነገር የለም።
+Moderate.Topics,በመጠባበቅ ላይ ያሉ ርዕሶች
+Moderate.Posts,በመጠባበቅ ላይ ያሉ ልጥፎች
+Moderate.NavText,በመጠባበቅ ላይ ያሉ ልጥፎች/ርዕሶች
 Notification.Subscribe,ተከተል
-Notifications.NoActiveMembers,በአሁኑ ጊዜ ማንም በመስመር ላይ የለም።
 Notification.UnSubscribe,አትከተል
+Notification.Title,ማሳወቂያዎች
+Notification.PostNotification,{0} ይህንን ለጥፏል - {1}
+Notification.TopicNotification,{0} አዲስ ውይይት ጀምሯል - {1}
+Notifications.NoActiveMembers,በአሁኑ ጊዜ ማንም በመስመር ላይ የለም ።
+Notifications.NothingHere,በአሁኑ ጊዜ አዲስ ማሳወቂያ የለም ።
+Notifications.Disabled,ማሳወቂያዎች ታግደዋል ለማስጀመር  እዚህ ጠቅ ያድርጉ ፡፡
+Notifications.Enabled,ማሳወቂያዎችን  ለማገድ እዚህ ጠቅ ያድርጉ
+Notifications.Enable,ማሳወቂያን ለማስጀመር እዚህ ጠቅ ያድርጉ
+Package.Images,ምስሎች
+Package.Video,ተንቀሳቃስሽ ምስል
+Package.Address,የአድራሻ ካርታ
+Package.Label.GetPackage,ጥቅሉን ያግኙ
+Package.Annual,ዓመታዊ ጥቅል
+Package.Monthly,ወርሃዊ ጥቅል
+Package.SemiAnnual,የግማሽ ዓመት ጥቅል
+Package.Quarterly,የሩብ ዓመት ጥቅል
+Package.Name,የማስታወቂያ ጥቅል ስም
+Package.Basic.Name,መሰረታዊ ጥቅል
+Package.Basic.Desc,መሰረታዊ የማስታወቂያ ጥቅል
+Package.Super.Name,ትልቅ ጥቅል
+Package.Super.Desc,ይህ ጥቅል ከመሰረታዊ የማስታወቂያ ጥቅል የላቅ እና ተጨማሪ ምስሎች እና አጭር ቪዲዮ ለማስገባት ያስችላል
+Package.Ultimate.Name,ከፍተኛ ጥቅል
+Package.Ultimate.Desc,ይህ ጥቅል ሁሉንም አገልግሎቶች ያካተት እና በተጨማሪም የስራ አድራሻዎን በጉግል ካርታ ላይ ለማስገባት ያስችላል
+Package.Label.Info,የማስታወቂያ ጥቅል መረጃ
+Payment.Label.Create,የማስታወቂያ ክፍያ
+Payment.Label.Edit,የክፍያ አርትዖት
 Payment.NavText,ክፍያዎች
+Payment.Title,የማስታወቂያ ክፍያ
+Payment.Invoice,ደረሰኝ
+Payment.Invoice.Print,ደረሰኝ አትም
+Payment.Invoice.Footer,ስለመረጡን እናመሰግናለን ። በአገልግሎታችን እንደሚረኩ እናምናለን።
+Payment.InvoiceNo,ደረሰኝ ቁጥር
+Payment.Name,ስም
+Payment.Bank,ባንክ
+Payment.AccountNo,ሂሳብ ቁጥር
+Payment.AmountTransferred,የተላለፈው መጠን
+Payment.DateTransferred,የተላለፈበት ቀን
+Payment.Description,ለ {0} ወር ማስታወቂያ ክፍያ
+Payment.Error.InvalidReference,ያገለገለ የክፍያ ማጣቀሻ
+Payment.Error.InvalidAmount,የዋጋ መጠን በቂ አይደለም
+Payment.RefundRequest,የተመላሽ ገንዘብ ጥያቄ
+Payment.RefundRequested,የተመላሽ ገንዘብ ጥያቄዎ ከዚህ በፊት ተልኳል፡፡ ጥያቄዎ ካልተመለሰ እባከዎ በትዕግስት ይጠብቁን ፡፡
+Payment.RefundRequest.PeriodEnd,ይቅርታ የተመላሽ ገንዘብ መጠየቂያ ጊዜ አብቅቷል ፡፡
+Payment.RefundRequest.Reason,የተመላሽ ገንዘብ ጥያቄ ምክንያት ፡፡
+Payment.Reference,ማጣቀሻ ቁጥር
+Payment.Label.Reference,የተላለፈበት ማጣቀሻ ቁጥር
+Payment.Status,የክፍያ ሁኔታ
+Payment.Duration,የቆይታ ጊዜ
+Payment.Submitted,ክፍያዎ በተሳካ ሁኔታ ገብቷል፣ ክፍያው ሲረጋገጥ ማስታወቂያዎ ራሱ ይጀምራል
+Payment.Label.Back,ወደ ክፍያዎች ተመለስ
+Payment.Label.GrossPrice,ያልተጣራ ዋጋ
+Payment.Label.YourAccountNo,የእርስዎ ሂሳብ ቁጥር
+Payment.Label.Month,ወር
+Payment.Label.Discount,ቅናሽ
+Payment.Label.TotalPrice,ጠቅላላ ዋጋ
+Payment.Label.MonthlyPrice,ጠቅላላ ዋጋ / ወር
+Payment.Label.Off,% ቅናሽ
+Payment.Notification.Subject,የክፍያ ማሳወቂያ !
+Payment.Notification.Message,ሰላም {0} ያልተጠናቀቀ(ያልተከፈለ) ማስታወቂያ አለዎት ፡፡ ማስታወቂያውን ለማስጀመር እባከዎ ክፍያዎን ያጠናቁ ፡፡
+PM.NewPrivateMessageBody,{0} አሁን የግል መልእክት ልኮልዎታል።
+PM.AboutToExceedInboxSizeBody,ከግል መልእክት የገቢ መልእክት ሳጥን መጠን ሊያልፍ ነው።
+PM.AboutToExceedInboxSizeSubject,የግል መልእክት የገቢ መልእክት ሳጥን መጠን
+PM.NewMessages,አዲስ መልእክት/ቶች
+PM.NewPrivateMessage,አዲስ የግል መልእክት
+PM.NewPrivateMessageSubject,አዲስ የግል መልእክት
+PM.LastActivity,የመጨረሻ እንቅስቃሴ
+PM.MemberIsOnline,በመስመር ላይ
 PM.RecipientUsername,የተቀባዩ የተጠቃሚ ስም
-Post.Label.TopicName,ርዕስ ስም
 PM.MessageSubject,ርዕሰ ጉዳይ
-Post.Label.IsStickyTopic,ተለጣፊ ርዕስ ነው።
-Post.Label.LockTopic,የመቆለፊያ ርዕስ
-Post.label.TopicCategory,ርዕስ ምድብ
-PM.PrivateMessages,የግል መልእክቶች
-PM.From,ከ: 
-PM.Sent,ተልኳል:
-PM.BackToInbox,ወደ ገቢ መልእክት ሳጥን ተመለስ
+PM.AllMessages,ሁሉም መልዕክቶች
+PM.SendMessage,መልእክት ላክ
+PM.ShowAllMessages,ሁሉንም የ {0} መልዕክቶች አሳይ
+PM.Title,መልእክት:
+PM.From,ከ :
+PM.Sent,መልእክት ተልኳል
+PM.BackToInbox,ወደ መልእክት ሳጥን ተመለስ
+PM.GoToInbox,ወደ መልዕክት ሳጥን ሂድ
 PM.Reply,መልስ
+PM.SentPrivateMessages,የግል መልዕክቶች ተልከዋል።
+PM.To,ለ :
+PM.Subject,ርዕሰ ጉዳይ
 PM.Date,ቀን
 PM.Read,አንብብ
-PM.To,ለ
-PM.Subject,ርዕሰ ጉዳይ
-PM.SentPrivateMessages,የግል መልዕክቶች ተልከዋል።
 PM.Delete,ሰርዝ
 PM.NoMessages,በአሁኑ ጊዜ ምንም የግል መልዕክቶች የሉዎትም።
-PM.ReceivedPrivateMessages,የተቀበሉት የግል መልዕክቶች
 PM.Create,ፍጠር
+PM.ReceivedPrivateMessages,የተቀበሉት የግል መልዕክቶች
 PM.CreatePrivateMessage,የግል መልእክት ይፍጠሩ
 PM.Send,ላክ
-PM.Title,መልእክት: 
 PM.OriginalMessage,ኦሪጅናል መልእክት
 Points.ThisWeeksHighEarners,የዚህ ሳምንት ከፍተኛ ገቢዎች
+PM.PrivateMessages,የግል መልእክቶች
 PM.SendingToQuickly,በፍጥነት መልዕክቶችን ለመላክ እየሞከርክ ነው።
-PM.SentItemsOverCapcity,የተላኩት ዕቃዎች ከአቅም በላይ ናቸው - ለመላክ መልዕክቶችን ይሰርዙ
-PM.ReceivedItemsOverCapcity,{0} የገቢ መልእክት ሳጥን መጠናቸውን አልፏል - መልእክት መላክ አልቻሉም
+PM.SentItemsOverCapcity,የተላኩት መልዕክቶች ከአቅም በላይ ናቸው - ለመላክ መልዕክቶችን ይሰርዙ
+PM.ReceivedItemsOverCapcity,{0} የግል የገቢ መልእክት ሳጥን መጠናቸውን አልፏል - መልእክት መላክ አልቻሉም
 PM.MessageSent,Message Sent
 PM.UnableFindMember,ያንን አባል ማግኘት አልተቻለም
 PM.TalkToSelf,ከራስህ ጋር ማውራት ትንሽ እንግዳ ነገር ነው። አይደል?
-PM.NewPrivateMessageSubject,አዲስ የግል መልእክት
-PM.NewPrivateMessageBody,{0} አሁን የግል መልእክት ልኮልዎታል።
-PM.AboutToExceedInboxSizeBody,ከግል መልእክት የገቢ መልእክት ሳጥን አበል ሊያልፍ ነው።
-PM.AboutToExceedInboxSizeSubject,የግል መልእክት የገቢ መልእክት ሳጥን አበል
-PM.NewPrivateMessage,አዲስ የግል መልእክት
-PM.LastActivity,የመጨረሻ እንቅስቃሴ
 PM.Block,አግድ
 PM.Blocked,ታግዷል
 PM.BlockedMessage,መልእክት መላክ አልተቻለም
 PM.ShowMore,ተጨማሪ መልዕክቶችን አሳይ
 PM.ShowMoreLoading,በመጫን ላይ...
-PM.MemberIsOnline,በመስመር ላይ
-PostedIn.PageTitle,እርስዎ የለጠፍካቸው ርዕሶች እና ልጥፎች
-Post.Permalink,Permalink
-Post.MemberIsOnline,በመስመር ላይ
-Post.OthersLiked,እና {0} ሌሎች
-Post.Trusted,የታመነ,
-Post.TrustedUser,የታመነ ተጠቃሚ,
-Post.DeleteConfirmation,እርግጠኛ ነህ መሰረዝ ትፈልጋለህ?
-Post.Updated,ልጥፍ ተዘምኗል
-Post.VoteDown,አለመውደድ
-Post.PostedThis,ይህን ለጥፏል
-Post.VotedUp,ወደውታል
-Post.VotedDown,አልተወደደም
-Post.VoteUp,ወደውታል
-Post.IsSolution,መፍትሄ ነው።
-Post.Points,ነጥቦች
-Post.Posts,ልጥፎች
-Post.LastEdited,መጨረሻ የተስተካከለው
-Post.Move,አንቀሳቅስ
-Post.Edit,አርትዕ
-Post.Report,ሪፖርት አድርግ
+PM.DeleteAll,ሁሉንም የ {0} መልእክት ሰርዝ
+PM.ShowAll,ሁሉንም የ {0} መልእክት አሳይ
+PM.DeleteConfirmation,እርግጠኛ ነህ ሁሉንም የ {0} መልእክት መሰረዝ ትፈልጋለህ ?
+PM.ShowAttachements,የተያያዙ ፋይሎችን አሳይ
+Poll.Button.Create,በዚህ ርዕስ ላይ የሕዝብ አስተያየት ያክሉ
+Poll.Placeholder.TypeAnswerHere,የሕዝብ አስተያየት መልስ እዚህ ይተይቡ
+Poll.Button.Remove,የሕዝብ አስተያየትን ከርዕስ አስወግድ
+Poll.Button.Vote,ድምጽ አስገባ
+Post.By,የተለጠፈው በ
+Post.Attach,ያያይዙ
+Post.AttachedFiles,የተያያዙ ፋይሎች
+Post.Browse,አስስ...
 Post.Delete,ሰርዝ
-Post.ReplyingTo,ምላሽ መስጠት:
-Post.Reply,መልስ
-Post.PleaseWait,እባክህ ጠብቅ...
+Post.DeleteConfirmation,እርግጠኛ ነህ መሰረዝ ትፈልጋለህ?
 Post.Deleted,ልጥፍ ተሰርዟል።
-Post.Notification.NewPosts,በ ውስጥ አዲስ ልጥፍ ተፈጥሯል። {0} ርዕስ
-Post.Notification.Subject,አዲስ ልጥፍ በርቷል። 
-PostFilter.OrderBy,እዘዝ በ:
+Post.Edit,አርትዕ
+PostEdit.None,ይህ ልጥፍ በአሁኑ ጊዜ የአርትዖት ታሪክ አልለጠፈም።
+PostEdit.EditedBy,የተስተካከለው በ
+PostEdit.OriginalVersion,ዋናው
+PostEdit.EditedVersion,ተስተካክሏል።
+Post.Favourite,ተወዳጅ
+Post.Favourited,ተወዳጅ
+PostFilter.OrderBy,እዘዝ በ :
 PostFilter.Standard,መደበኛ
 PostFilter.Newest,አዲስ
 PostFilter.Recent,ቅርብ ጊዜ
 PostFilter.Votes,ድምጾች
 PostFilter.Popular,ተወዳጅ
 Post.FilesUploaded,ፋይሎች በተሳካ ሁኔታ ተሰቅለዋል።
-Post.Attach,ያያይዙ
-Post.Upload,ፋይሎችን ይስቀሉ
-Post.UploadBannedFileExtension,የፋይል ቅጥያ አይፈቀድም።
-Post.UploadFileTooBig,ፋይል ሰቀላ በጣም ትልቅ ነው።
+Post.IsSolution,መፍትሄ ነው።
+Post.Label.TopicName,ርዕስ ስም
+Post.Label.IsStickyTopic,ተለጣፊ ርዕስ ነው።
+Post.Label.LockTopic,የመቆለፊያ ርዕስ
+Post.Label.TopicCategory,ርዕስ ምድብ
+Post.LastEdited,መጨረሻ የተስተካከለው
 Post.LikedBy,የተወደደ በ
-Post.Browse,አስስ...
-Post.AttachedFiles,የተያያዙ ፋይሎች
-Post.Favourite,ተወዳጅ
-Post.Favourited,ተወዳጅ
+Post.MemberIsOnline,በመስመር ላይ
+Post.Move,አንቀሳቅስ
 Post.Move.Label.Topic,ርዕስ
 Post.Move.Label.NewTopicTitle,አዲስ ርዕስ ፍጠር
 Post.Move.Label.ReplyToPosts,ምላሾችን እና ጥቅሶችን አንቀሳቅስ
 Post.Move.PostTitle,ፖስት አንቀሳቅስ
 Post.Move.Description,ልጥፉን ወደ ነባር ርዕስ ይውሰዱ ወይም አዲስ ይፍጠሩ።
-PostEdit.Panel.Name,የአርትዖት ታሪክን ይለጥፉ
-PostEdit.None,ይህ ልጥፍ በአሁኑ ጊዜ የአርትዖት ታሪክ አልለጠፈም።
-PostEdit.EditedBy,የተስተካከለው በ
-PostEdit.OriginalVersion,ኦሪጅናል
-PostEdit.EditedVersion,ተስተካክሏል።
-Post.Quote,ጥቅስ
+Post.Notification.NewPosts,በ ውስጥ አዲስ ልጥፍ ተፈጥሯል። {0} ርዕስ
+Post.Notification.Subject,አዲስ ልጥፍ በርቷል።
+Post.OthersLiked,እና {0} ሌሎች
 Post.Options,የልጥፍ አማራጮችን ይመልከቱ
-Poll.Button.Create,በዚህ ርዕስ ላይ የሕዝብ አስተያየት ያክሉ
-Poll.Placeholder.TypeAnswerHere,የሕዝብ አስተያየት መልስ እዚህ ይተይቡ
-Poll.Button.Remove,የሕዝብ አስተያየትን ከርዕስ አስወግድ
-Poll.Button.Vote,ድምጽ አስገባ
+Post.PostedThis,ይህን ለጥፏል
+Post.Posts,ልጥፎች
+Post.Points,ነጥቦች
+Post.Report,ሪፖርት
+Post.Reported,ሪፖርት ተደርጓል
+Post.NoPosts,አሁን ምንም ልጥፎች የሉም
+Post.PostedIn,የተሳተፉኩባቸው ውይይቶች
+Post.Reply,መልስ
+Post.Share,አጋራ
+Post.Invite,ጋብዝ
+Post.ReplyingTo,ምላሽ ለ
+Post.PleaseWait,እባክዎ ይጠብቁ...
+Post.Updated,ልጥፍ ተዘምኗል
+Post.Permalink,ቋሚ አገናኝ
+Post.Quote,ጥቅስ
+Post.Upload,ፋይሎችን ይስቀሉ
+Post.UploadBannedFileExtension,የፋይል ቅጥያ አይፈቀድም።
+Post.UploadFileTooBig,ፋይል ሰቀላ በጣም ትልቅ ነው።
+Post.VoteUp,ውደድ
+Post.VotedUp,ወደውታል
+Post.VoteDown,አልወደዱትም
+Post.VotedDown,አልተወደደም
+Post.ShowMorePosts,ተጨማሪ ልጥፎችን አሳይ
+Post.ShowMorePostsLoading,ልጥፎችን በመጫን ላይ . . .
+PrivacyPolicy.Title,የግላዊነት ፖሊሲ
+Post.SpamPosts,አይፈለጌ ልጥፎች
+PrivacyPolicy.Effective,ተፈፃሚ
+PrivacyPolicy.Introduction,የግላዊነት መመሪያችን መግቢያ
+PrivacyPolicy.InformationWeCollect,የምንሰበስባቸው መረጃዎች
+PrivacyPolicy.HowCollectInformation,መረጃ እንዴት እንደምንሰበስብ
+PrivacyPolicy.GeneraPrivacyNotice,አጠቃላይ የግላዊነት ማስታወቂያ
+PrivacyPolicy.HowWeUseYourData,መረጃዎን እንዴት እንጠቀምበታለን
+PrivacyPolicy.SecurityAndEncryption,ደህንነት እና ምስጠራ
+PrivacyPolicy.DataSharing,መረጃ ማጋራት
+PrivacyPolicy.DataRetention,መረጃ ማቆያ ጊዜ
+PrivacyPolicy.YourRights,መብቶችዎ
+PrivacyPolicy.Cookies,ኩኪዎች
+PrivacyPolicy.IntDataTransfer,ዓለም አቀፍ ዝውውሮች
+PrivacyPolicy.AdditionalInformation,ተጨማሪ መረጃ
+PrivacyPolicy.WhereProcessInformation,መረጃዎን የምናስኬድበት ቦታ (አካባቢዎች)
+PrivacyPolicy.CommitmentToDataSecurity,ለውሂብ ደህንነት ያለን ቀጣይነት ያለው ቁርጠኝነት
+PrivacyPolicy.AdvertisingOnOurNetwork,በአውታረ መረባችን ላይ ማስታወቂያ
+PrivacyPolicy.PolicyChanges,የፖሊሲ ለውጦች
+PrivacyPolicy.BreachNotification,የመረጃ ጥሰት ማሳወቂያ
+PrivacyPolicy.AccountSecurity,የመለያ ደህንነት
+PrivacyPolicy.ContactUs,እኛን ያግኙ
+PrivacyPolicy.Notice.Title,አስፈላጊ ማሳሰቢያ
+PrivacyPolicy.Notice.Description,ይህ የግላዊነት ፖሊሲ {0} {1}  ያለውን የፎረም መድረካችንን ሲጠቀሙ ግላዊ መረጃዎን እንዴት እንሰበስብ፣ እንጠቀም፣ እናከማችና እንጠብቅ እንደሆነ ይቆጣጠራል። ምዝገባ ሲያደርጉ ወይም አገልግሎታችንን ሲጠቀሙ ለዚህ ፖሊሲ ተስማምተዋል ማለት ነው። ካልተስማሙ፣ አገልግሎታችንን አይጠቀሙ።
+PrivacyPolicy.CCPA,CCPA (ካሊፎርኒያ)
+PrivacyPolicy.GDPR,GDPR (የኢዩ ተጠቃሚዎች)
+PrivacyPolicy.CCPACompliant,CCPA ተገዢ
+PrivacyPolicy.GDPRCompliant,GDPR ተገዢ
+PrivacyPolicy.ETHCompliant,በኢትዮጵያ ህግ ተገዢ
+PrivacyPolicy.MayContactYou,እንዴት ልናገኝዎ እንችላለን
+PrivacyPolicy.Children,የሕፃናት ግላዊነት
+PrivacyPolicy.Amendments,ማሻሻያዎች
+PrivacyPolicy.PreparedIn,ሰነዱ GDPR (ኢዩ 2016/679)፣ CCPA (ካሊፎርኒያ) እና ዓለም አቀፍ የመረጃ ጥበቃ ምርጥ ተሞክሮዎችን ተኳሃኝ ሆኖ ተዘጋጅቷል።
+PrivacyPolicy.Version,ስሪት
+PrivacyPolicy.Documentation,ሕጋዊ ሰነድ
+PrivacyPolicy.Description,የእርስዎን ግላዊ መረጃ ለመጠበቅ ቁርጠኝነት አለን። ይህ ሰነድ ምን እንሰበስባለን፣ ለምን እንሰበስባለን፣ እና እንዴት ደህንነቱ በተጠበቀ ሁኔታ እንይዘዋለን የሚለውን ያብራራል።
 Rss.LatestActivity.Title,የቅርብ ጊዜ የውይይት መድረክ
 Rss.LatestActivity.Description,የቅርብ ጊዜ ውይይቶች
 Rss.Category.Title,{0} ውይይቶች
 Rss.Category.Description,በ ውስጥ እየተከናወኑ ያሉ የቅርብ ጊዜ ውይይቶች {0} ምድብ
-Report.Reporter,ሪፖርተር፡
+Report.Reporter,ሪፖርተር
+Report.Text,ጥቃት የሚሰነዝር ወይም አስጸያፊ ይዘት፣ የጥላቻ ወይም የስድብ ይዘት፣ ትንኮሳ፣ ጎጂ ወይም አደገኛ ህግ፣ የተሳሳተ መረጃ፣ ሽብርተኝነትን የሚያበረታታ፣ አይፈለጌ መልዕክት ወይም አሳሳች ይዘት ካለው ሪፖርት ያድርጉ…
+Report.Title,ሪፖርት
+Report.Sent,ሪፖርት ተልኳል
+Report.Reports,ሪፖርቶች
 Report.MemberReported,አባል ሪፖርት ተደርጓል
 Report.Reason,ምክንያት
 Report.MemberReport,የአባል ሪፖርት
+Report.MembersReport,የአባላት ሪፖርት
 Report.Admin,አስተዳዳሪ
-Report.PostReported,ውስጥ ሪፖርት ተደርጓል
-Report.PostReport,የፖስታ ሪፖርት
-Report.ReportPostBy,ሪፖርት አድርግ በ:
-Report.Report,ሪፖርት አድርግ 
-Report.ReportSent,ሪፖርት ተልኳል።
-Stats.LatestMembers,የቅርብ ጊዜ አባላት:
-Stats.FooterMainStatText,የእኛ {0} አባላት ለጥፈዋል {1} ጊዜያት ውስጥ  {2} ውይይቶች
-SubNav.HowToCreateAds,ማስታወቂያዎችን እንዴት መፍጠር እንደሚቻል
-SubNav.PaymentSupport,የክፍያ ድጋፍ
-SubNav.CodeOfConduct,የሥነ ምግባር ደንብ
-SubNav.LegalAndNotices,ህጋዊ እና ማሳወቂያዎች
-SubNav.Report,ሪፖርት
+Report.On,ሪፖርት ስለ
+Settings.Title,መቼት
+Settings.DarkMode,የጨለማ ሁነታ
+Search.Badges,ባጆችን ፈልግ
+Search.Categories,ምድቦችን ይፈልጉ . . .
+Search.Payments,ክፍያዎችን ይፈልጉ . . .
+Search.Members,አባላትን ይፈልጉ . . .
+Search.NoResults,ይቅርታ ምንም ውጤት አልተገኘም
+Search.Results,ውጤቶች ተገኝተዋል
+Search.Searching,የፈለጉት :
+Search.InTopic,በርዕስ
+SideBox.MyTools,የእኔ መሳሪያዎች
+Side.Search.SearchFor,ፈልግ . . .
+Side.Search.Go,ሂድ
+Side.Search,ፈልግ
+Site.Forum,መድረክ
+Site.Moto,ተልዕኳችን ከፍተኛ ጥራት ያላቸውን ጽሑፎች፣ ጥያቄዎችና መልሶች፣ ትብብር እና የጋራ መከባበርን የሚያካትት የውይይት መድረክ ለዲጂታል ማህበረሰቦች  መገንባት ነው።
+SlidePanel.CloseConfirmation,እርግጠኛ ነህ መዝጋት ትፈልጋለህ?
+Spam.FloodTestFailed,በጣም በፍጥነት እየለጠፍክ ነው።
+Stats.FooterActiveUsersText,አባላት በአሁኑ ጊዜ በመስመር ላይ:
+Stats.FooterMainStatText,የእኛ {0} አባላት {1} ጊዜ {2} ውይይቶች ውስጥ ለጥፈዋል
+Status.Label,ሁኔታ
+Status.Pending,በመጠባበቅ ላይ
+Status.Confirmed,ተረጋግጧል
+Status.Active,ንቁ
+Status.Partial,ከፊል
+Status.Completed,ተጠናቋል
+Status.Rejected,ውድቅ ተደርጓል
+Stats.LatestMembers,የቅርብ ጊዜ አባላት
+StopWord.Error,በዚህ ጣቢያ ላይ የማይፈቀድ ቃል ወይም ዩአርኤል ለማስገባት ሞክረሃል
 SubNav.Members,አባላት
 SubNav.Dashboard,ዳሽቦርድ
-SubNav.Latest,የቅርብ ጊዜ
-SubNav.Topics,Topics
+SubNav.Report,ሪፖርት
 SubNav.MyTopics,የእኔ ርዕሶች
+SubNav.Latest,የቅርብ ጊዜ
 SubNav.Following,በመከተል ላይ
-SubNav.PostedIn,ውስጥ ተለጠፈ
+SubNav.PostedIn,የተሳተፉኩባቸው ውይይቶች
 SubNav.Favourites,የእኔ ተወዳጆች
 SubNav.Badges,ባጆች
 SubNav.Packages,የማስታወቂያ ጥቅሎች
 SubNav.TopicsAndPost,ርዕሶች እና ልጥፎች
 SubNav.PointSetting,የነጥብ አሰጣጥ
 SubNav.BadgeIssuance,የባጅ አሰጣጥ
-SubNav.Advertisements,ማስታወቂያዎች
 SubNav.MyAdvertisements,የእኔ ማስታወቂያዎች
-Settings.Title,መቼት
-Side.Search,ፈልግ
-Search.NoResults,ይቅርታ ምንም ውጤት አልተገኘም።
-Stats.FooterActiveUsersText,አባላት በአሁኑ ጊዜ በመስመር ላይ:
-Site.Forum,መድረክ
-Site.Moto,ተልዕኳችን ከፍተኛ ጥራት ያላቸውን መጣጥፎች፣ ጥያቄዎች እና መልሶች፣ ትብብር እና የጋራ መከባበርን የሚያካትት የውይይት ቤተ-መጻሕፍት ለዲጂታል ማህበረሰቦች መገንባት ነው።
-Spam.FloodTestFailed,በጣም በፍጥነት እየለጠፍክ ነው።,
-Search.Results,ውጤቶች ተገኝተዋል
-SlidePanel.CloseConfirmation,እርግጠኛ ነህ መዝጋት ትፈልጋለህ?
-Side.Search.SearchFor,ፈልግ...
-Side.Search.Go,ሂድ
-SubscribedCats.NothingToShow,ማንኛውንም ምድቦች እየተከተሉ አይደሉም
-Search.Searching,መፈለግ
-Search.InTopic,በርዕስ
+SubNav.HowToCreateAds,ማስታወቂያዎችን እንዴት መፍጠር እንደሚቻል
+SubNav.PaymentSupport,የክፍያ ድጋፍ
+SubNav.CodeOfConduct,የሥነ ምግባር ደንብ
+SubNav.LegalAndNotices,ህጋዊ እና ማሳወቂያዎች
+SubNav.AdAndPayment,ማስታወቂያዎች እና ክፍያዎች
 SubscribedTopics.NothingToShow,ምንም አይነት ርዕሶችን እየተከተልክ አይደለም።
-StopWord.Error,በዚህ ጣቢያ ላይ የማይፈቀድ ቃል ወይም ዩአርኤል ለማስገባት ሞክረሃል
-Topic.Title,ርዕስ
-Topic.Votes,ድምጾች
-Topic.LatestBy,የቅርብ ጊዜ በ
-Topic.InCategory, ውስጥ
-Topic.Views,እይታዎች
-Topic.StartedBy,ተጀመረ {0} በ {1}
-Topic.Comments,መልሶች
-Topic.Subscribe,ተከተል
-Topic.DiscussionTaggedWith,መለያ የተደረገባቸው ውይይቶች: 
-Topic.UnSubscribe,አትከተል
-Topic.TitleFallBack,የውይይት ርዕስ
-Topic.Choose,ነባር ርዕስ ይምረጡ
-Topic.TagThisTopic,ለዚህ ርዕስ መለያ ይስጡ
-Topic.CreateDiscussion,ውይይት ፍጠር
+SubscribedCats.NothingToShow,ማንኛውንም ምድቦች እየተከተሉ አይደሉም
+Table.Action,አድርግ
+Text.To,ለ
+Text.From,ከ
+Text.Description,መግለጫ
+Text.ExtraInfo,ተጨማሪ መረጃ
+Text.Summary,ማጠቃለያ
+Text.Version,ስሪት
+Text.Copyright,የቅጂ መብት
+Text.AllRights,መብቱ በህግ የተጠበቀ ነው።
+Text.Platform,መድረክ
+Text.FilesNotFound,ምንም አይነት ፋይሎችን ማግኘት አልተችለም ወይም ተሰርዘዋል
 Tags.PopularTags,ታዋቂ መለያዎች
-Topic.IsLocked,ርዕስ ተቆልፏል
-Topic.Notification.NewTopics,በ ውስጥ አዲስ ርዕስ ወይም መለያ ተፈጥሯል። {0} ምድብ
-Topic.Notification.Subject,አዲስ ውይይት በርቷል።
-Topic.Deleted,ርዕስ ተሰርዟል።
-Topic.Label.SubscribeToTopic,ስለ ምላሾች ማሳወቂያ ይደርስዎታል?
-Topic.Label.TopicTitle,ርዕስ
-Topic.OptionsHeading,የርዕስ አማራጮች
-Topic.CommentsDetails,አስተያየቶች
-Topic.Label.Category,ምድብ ይምረጡ
-Topic.ShowMorePosts,ተጨማሪ ልጥፎችን አሳይ
-Topic.ShowMorePostsLoading,ልጥፎችን በመጫን ላይ...
-Topic.AlreadyAnswered,ምናልባት የእርስዎ መልስ ሊኖራቸው የሚችሉ ጥያቄዎች
-Topic.Comment,መልስ
-Topic.Title,ርዕስ
-Topic.IsSticky,ርዕስ ተለጣፊ ነው።
-Topic.IsSolved,ርዕስ ተፈቷል።
-Topic.Category,ምድብ
-Topic.IsPoll,የሕዝብ አስተያየት
-Topic.LastPost,የመጨረሻው ልጥፍ
-Topic.HotTopics,ትኩስ ርዕሶች
-Topic.Label.Tags,መለያ አክል
-Topic.Label.UploadFiles,ፋይሎችን ይስቀሉ
-Topic.Label.PollCloseAfterDays,ከተወሰኑ ቀናት ብዛት በኋላ የሕዝብ አስተያየት ይዘጋ? ለማሰናከል እንደ 0 ይውጡ
-Topic.PollClosed,ዝግ
-Twitter.Error.EnabledButNotAddedKeys,ማህበራዊ መግቢያን አንቅተዋል ነገርግን የTwitter መታወቂያ እና ሚስጥራዊ ቁልፍን በ forum.config ላይ አልጨመሩም።
+Tags.NoCreatePermission,አዲስ መለያዎችን ለመፍጠር ፈቃድ የለዎትም, ያሉትን ብቻ መጠቀም ይችላሉ
 Tasks.MarkAsSolutionReminderJob.EmailBody,የእርስዎ ርዕስ {0}ላይ {1}አለው {2} ምላሾች ግን አሁንም እንደተፈታ ምልክት አልተደረገበትም። እባክዎ ማንኛቸውም መልሶች ተገቢ መሆናቸውን ለማየት እንደገና ያረጋግጡ እና ካሉ እንደ መፍትሄ ምልክት ያድርጉባቸው።
 Tasks.MarkAsSolutionReminderJob.Subject,የእርስዎ ልጥፍ በ {0}
+TermsAndConditions.Label.Agree,የጣቢያውን ውሎች እና ሁኔታዎች አንብቤ ተስማምቻለሁ
+TermsAndConditions.ReadAgree,የጣቢያውን {0} እና {1} አንብቤ ተስማምቻለሁ ፡፡
+TermsAndConditions.PageTitle,በውሎች እና ሁኔታዎች ይስማሙ
+TermsAndConditions.Label.AgreeError,በውሎች እና ሁኔታዎች መስማማት አለብዎት
+TermsOfService.YouAgreeToOur,ከእኛ ጋር ተስማምተዋል
+TermsOfService.AndAcknowledge,እና የእኛን ንባብ እውቅና ይስጡ
+TermsOfService.Acknowledge,እውቅና ይስጡ
+TermsOfService.BySelecting,መለያ ፍጠርን በመምረጥ፣ ከእኛ
+TermsOfService.Acknowledged,ጋር ተስማምተዋል እና የእኛን የግላዊነት መመሪያ እውቅና ሰጥተዋል
+TermsOfService.Description,ወደ አገልግሎታችን እንኳን ደህና መጡ፣ እያለ ከጓደኞችዎ እና ከስራ ባልደረቦችዎ ጋር እውቀትን በማካፈል በማህበረሰቡ ውስጥ እንዲሳተፉ ይጋብዛል። እንደሌሎች ማህበረሰቦች ሁሉ፣ የማህበረሰብ አባላትዎን በሚያከብር መንገድ እንዲሳተፉ እየጠየቅን፣ ለዚህም ሲባል ህጋዊ ግዴታዎችን ለማሳወቅ የአገልግሎት ውሎች እና ሁኔታዎች አቅርበናል፡፡
+TermsOfService.ReadTerms,እባክዎ መድረካችንን ከመጠቀምዎ በፊት እነዚህን ውሎች በጥንቃቄ ያንብቡ። መለያ  በመፍጠር ወይም የ{0}ን ማንኛውንም ክፍሉን በመጠቀም ለእነዚህ ውሎች ተስማምተዋል ማለት ነው።
+TermsOfService.Title,የአጠቃቀም ውሎች እና ሁኔታዎች
+TermsOfService.Label,የአገልግሎት ውል
+TermsOfService.Notice.Title,አስፈላጊ ማሳሰቢያ — እባክዎ በጥንቃቄ ያንብቡ
+TermsOfService.Notice.LineOne,እነዚህ የአጠቃቀም ውሎች ("ውሎቹ") በእርስዎ ("ተጠቃሚ"፣ "እርስዎ") እና {0} ("ኩባንያ"፣ "እኛ"፣ "የኛ") መካከል ያለ ሕጋዊ አስገዳጅ ስምምነት ሲሆን {1} ላይ ያለውን ፎረም አጠቃቀምዎን ይቆጣጠራሉ። ከእነዚህ ውሎቹ ማናቸውም ክፍል ጋር ካልተስማሙ፣ አገልግሎቱን ሊጠቀሙ አይገባቸውም። መድረኩን መቀጠልዎ ቀጥሎ ያሉትን  ውሎች ተቀብለዋቸዋል ማለት ነው።
+TermsOfService.Notice.LineTwo,እነዚህ ውሎቹ ከ {0} ጋር አብሮ ሊነበቡ ይገባቸዋል። ሁለቱ ሰነዶች አብርው ከ {1} ጋር ሙሉ ስምምነቱን ይመሰርታሉ።
+TermsOfService.InterpretationAndDefinitions,ትርጓሜ እና ፍቺዎች
+TermsOfService.Acknowledgment,እውቅና
+TermsOfService.YourFeedback,ለእኛ የእርስዎ ግብረመልስ
+TermsOfService.LinksToOther,ወደ ሌሎች ድረ-ገጾች የሚወስዱ አገናኞች
+TermsOfService.ChangesTermsAndConditions,በእነዚህ የአገልግሎት ውሎች ላይ የተደረጉ ለውጦች
+TermsOfService.ContactUs,ያናግሩን
+TermsOfService.Accounts,የተጠቃሚ መለያዎች
+TermsOfService.CookiePolicy,የኩኪ ፖሊሲ
+TermsOfService.Acceptance,ውሎቹን መቀበል
+TermsOfService.AllRights,መብቱ በህግ የተጠበቀ ነው ።
+TermsOfService.ContentPolicy,የይዘት ፖሊሲ
+TermsOfService.Copyright,የቅጂ መብት (DMCA)
+TermsOfService.Disclaimers,ማስተባበያዎች
+TermsOfService.Definitions,ትርጓሜዎች
+TermsOfService.Eligibility,ብቁነት
+TermsOfService.LimitationofLiability,የተጠያቂነት ገደብ
+TermsOfService.Rules,ደንቦች እና ምግባር
+TermsOfService.ReputationBadges,ዝና እና ሽልማቶች
+TermsOfService.PremiumFeatures,ፕሪሚዬም ባህሪያት
+TermsOfService.PaymentsBilling,ክፍያ እና ሂሳብ
+TermsOfService.IntellectualProperty,የአዕምሯዊ ንብረት
+TermsOfService.ThirdParty,የሦስተኛ ወገን ትስስሮች
+TermsOfService.APIIntegrations,API እና ውህደቶች
+TermsOfService.Moderation,ቁጥጥር
+TermsOfService.Termination,ማቋረጥ
+TermsOfService.GoverningLaw,ተፈፃሚ ህግ
+TermsOfService.RelatedDocs,ተዛማጅ ሰነዶች
+TermsOfService.PreparedIn,ሰነዱ የኢትዮጵያ ንግድ ህግ፣ GDPR (ኢዩ 2016/679) እና ዓለም አቀፍ ምርጥ ተሞክሮዎቻ ተገዢ ሆኖ ተዘጋጅቷሉ።
 TinyMCE.InsertImage.ButtonTitle,ምስል አስገባ
 TinyMCE.InsertImage.ButtonOk,እሺ
 TinyMCE.InsertImage.ButtonClose,ገጠመ
@@ -450,79 +709,115 @@ TinyMCE.InsertImage.LabelUploadImage,ምስል ስቀል
 TinyMCE.InsertImage.Browse,አስስ
 TinyMCE.InsertImage.ExternalImage,ውጫዊ ምስል
 TinyMCE.InsertImage.ImageDescription,የምስል መግለጫ
-Tags.NoCreatePermission,አዲስ መለያዎችን ለመፍጠር ፈቃድ የለዎትም, ያሉትን ብቻ መጠቀም ይችላሉ
-TermsAndConditions.Label.Agree,የጣቢያውን ውሎች እና ሁኔታዎች አንብቤ ተስማምቻለሁ
-TermsAndConditions.PageTitle,በውሎች እና ሁኔታዎች ይስማሙ
-TermsAndConditions.Label.AgreeError,በውሎች እና ሁኔታዎች መስማማት አለብዎት
-TermsOfService.YouAgreeToOur,ከእኛ ጋር ተስማምተዋል
+Topic.AlreadyCreated,ምናልባት ከእርስዎ ርዕስ ጋር ተመሳሳይነት ሊኖራቸው የሚችሉ ውይይቶች
+Topic.Category,ምድብ
+Topic.Choose,ነባር ርዕስ ይምረጡ
+Topic.Comment,መልስ
+Topic.Comments,መልሶች
+Topic.CommentsDetails,አስተያየቶች
+Topic.CreateDiscussion,ውይይት ፍጠር
+Topic.Deleted,ርዕስ ተሰርዟል።
+Topic.DiscussionTaggedWith,መለያ የተደረገባቸው ውይይቶች:
+Topic.HotTopics,አነጋጋሪ ርዕሶች
+Topic.RecentDiscussions,የቅርብ ጊዜ ውይይቶች
+Topic.RelatedTopics,ተዛማጅ ርዕሶች
+Topic.Invitation,የውይይት ግብዣ
+Topic.Invitation.Sent,የውይይት ግብዣው በተሳካ ሁኔታ ተልኳል
+Topic.Invitation.Failed,ይቅርታ,የውይይት ግብዣው አልተሳካም
+Topic.Invitation.To,ተጋባዥ
+Topic.Invitation.Name,ስም ያስፈልጋል
+Topic.Invitation.Email,ኢሜይል ያስፈልጋል
+Topic.Invitation.Invites,በዚህ ርዕስ ላይ ውይይት ጋብዘዎታል :
+Topic.IsSticky,ርዕስ ተለጣፊ ነው።
+Topic.IsSolved,ርዕስ ተፈቷል።
+Topic.IsPoll,የሕዝብ አስተያየት
+Topic.IsLocked,ርዕስ ተቆልፏል
+Topic.InCategory,ውስጥ
+Topic.Label.Category,ምድብ ይምረጡ
+Topic.Label.PollCloseAfterDays,ከተወሰኑ ቀናት በኋላ የሕዝብ አስተያየት ይዘጋ ? እንዳይዘጋ ከፈለጉ 0 ላይ ያደርጉት(ይተዉት)
+Topic.Label.Tags,መለያ አክል
+Topic.Label.UploadFiles,ፋይሎችን ይስቀሉ
+Topic.Label.SubscribeToTopic,ስለ ምላሾች ማሳወቂያ ይደርስዎታል?
+Topic.LastPost,የመጨረሻው ልጥፍ
+Topic.LatestBy,የቅርብ ጊዜ በ
+Topic.NewTopics,አዲስ ርዕሶች
+Topic.NoDiscussions,ለአሁን ምንም አይነት ውይይቶች የሉም
+Topic.Notification.NewTopics,በ ውስጥ አዲስ ርዕስ ወይም መለያ ተፈጥሯል። {0} ምድብ
+Topic.Notification.Subject,አዲስ ውይይት ተለጠፏል።
+Topic.OptionsHeading,የርዕስ አማራጮች
+Topic.PollClosed,ዝግ
+Topic.RecentlyVisited,በቅርቡ የተጎበኙ
+Topic.Share,ውይይት አጋራ
+Topic.Share.Facebook,በፌስቡክ ላይ አጋራ
+Topic.Share.Twitter,በትዊተር ላይ አጋራ
+Topic.Share.Googleplus,በGoogleplus ላይ አጋራ
+Topic.StartedBy,የተጀመረው {0} በ {1} ,
+Topic.Started,ውይይት የተጀመረው {0} በ {1} , የመጨረሻው ልጥፍ {2}
+Topic.Suggestion,የውይይት ጥቆማ
+Topic.Subscribe,ተከተል
+Topic.ShowMoreTopics,ተጨማሪ ውይይቶችን አሳይ
+Topic.ShowMoreTopicsLoading,ውይይቶች በመጫን ላይ . . .
+Topic.TagThisTopic,ለዚህ ርዕስ መለያ ይስጡ
+Topic.Title,ርዕስ
+Topic.TitleFallBack,የውይይት ርዕስ
+Topic.UnSubscribe,አትከተል
+Topic.Votes,ድምጾች
+Topic.Views,እይታዎች
+Topic.MyTopics,እኔ የጀመርኳቸው ውይይቶች
+Twitter.Error.EnabledButNotAddedKeys,ማህበራዊ መግቢያን አንቅተዋል ነገርግን የTwitter መታወቂያ እና ሚስጥራዊ ቁልፍን በ forum.config ላይ አልጨመሩም።
+Activity.ActivityTitle,እንቅስቃሴ
+Activity.UserAwardedBadge,ተሸልሟል
+Activity.UserJoined,የመድረኩ አዲስ አባል ነው።
+Advertisement.Label.AdsService,የማስታወቂያ አገልግሎት
+Advertisement.SuccessfullyCreated,ማስታወቂያ በተሳካ ሁኔታ ተፈጥሯል
+Help.Title.AdAndPaymentSupport,የማስታወቂያ እና የክፍያ ድጋፍ
+Help.Title.GeneralSupport,አጠቃላይ ድጋፍ
+Help.Title.GettingStarted,መግቢያ
+Help.Title.RulesAndObligations,ደንቦች እና ግዴታዎች
+Layout.Nav.Help,እገዛ
+Layout.Nav.JobVaccancy,ክፍት የሥራ ቦታ
+Layout.Nav.PrivacyAndSecurity,ግላዊነት እና ደህንነት
+Layout.Nav.TermsOfService,የአገልግሎት ውል
+Layout.TermsAndConditions,ውሎች እና ሁኔታዎች
+Member.HasNewPrivateMessages,አዲስ ያልተነበቡ የግል መልዕክቶች አሉህ
+Member.ProfileUpdated,መገለጫ ተዘምኗል
+Members.DateJoined,የተቀላቀለበት ቀን
+Members.Points,ነጥቦች
+Members.Profile.DiscussionActivity,የውይይት እንቅስቃሴ
+Members.Profile.Points,ነጥቦች:
+Members.ProfileTitle,መገለጫ
+Members.Users,ተጠቃሚዎች
+Name.Label,ስም
+Payment.Label.Bank,ባንክ
+Post.Trusted,የታመነ,
+Post.TrustedUser,የታመነ ተጠቃሚ,
+Post.label.TopicCategory,ርዕስ ምድብ
+PostEdit.Panel.Name,የአርትዖት ታሪክን ይለጥፉ
+PostedIn.PageTitle,እርስዎ የለጠፍካቸው ርዕሶች እና ልጥፎች
+PrivacyPolicy.HowLongRetainPersonalData,የግል መረጃዎችን ለምን ያህል ጊዜ እናቆያለን
+PrivacyPolicy.HowWeUsePersonalData,የግል መረጃዎችን እንዴት እንደምንጠቀም
+PrivacyPolicy.IntDataTransfers,ዓለም አቀፍ የውሂብ ዝውውር
+PrivacyPolicy.WhoSharePersonalData,የግል መረጃዎችን ለማን እናጋራለን?
+Report.PostReport,የፖስታ ሪፖርት
+Report.PostReported,ውስጥ ሪፖርት ተደርጓል
+Report.Report,ሪፖርት አድርግ
+Report.ReportPostBy,ሪፖርት አድርግ በ:
+Report.ReportSent,ሪፖርት ተልኳል።
+SubNav.AdService,የማስታወቂያ አገልግሎት
+SubNav.Advertisements,ማስታወቂያዎች
+SubNav.Topics,Topics
 TermsOfService.AndAcknowledgeReadingOur,እና የእኛን ንባብ እውቅና ይስጡ
-TermsOfService.YouAgree,መለያ ፍጠርን በመምረጥ፣ ጋር ተስማምተዋል
-TermsOfService.Acknowledge,acknowledge our
-TermsOfService.BySelecting,መለያ ፍጠርን በመምረጥ፣ ከእኛ 
-TermsOfService.Acknowledged, ጋር ተስማምተዋል እና የእኛን የግላዊነት መመሪያ እውቅና ሰጥተዋል
-TermsOfService.Title,ውሎች እና ሁኔታዎች ("ውሎች")
-TermsOfService.InterpretationAndDefinitions,ትርጓሜ እና ፍቺዎች
-TermsOfService.Acknowledgment,እውቅና
-TermsOfService.Accounts,መለያዎች
 TermsOfService.Content,ይዘት
 TermsOfService.CopyrightPolicy,የቅጂ መብት ፖሊሲ
-TermsOfService.IntellectualProperty,የአዕምሯዊ ንብረት
-TermsOfService.YourFeedback,ለእኛ የእርስዎ ግብረመልስ
-TermsOfService.LinksToOther,ወደ ሌሎች ድረ-ገጾች የሚወስዱ አገናኞች
-TermsOfService.Termination,ማቋረጥ
-TermsOfService.Limitation,የተጠያቂነት ገደብ
-TermsOfService.Disclaimer, "እንደዛ ነው" እና "እንደተገኘ" ማስተባበያ
-TermsOfService.GoverningLaw,የአስተዳደር ሕግ
+TermsOfService.Disclaimer,"እንደዛ ነው" እና "እንደተገኘ" ማስተባበያ
 TermsOfService.DisputesResolution,የክርክር አፈታት
 TermsOfService.EuropeanUsers,ለአውሮፓ ህብረት (EU) ተጠቃሚዎች
-TermsOfService.USLegalCompliance,የዩናይትድ ስቴትስ የሕግ ተገዢነት
+TermsOfService.Limitation,የተጠያቂነት ገደብ
+TermsOfService.ReadAndAgree,አገልግሎታችንን ከመጠቀምዎ በፊት እባክዎ የአገልግሎት ውሎች እና ሁኔታዎች በጥንቃቄ ያንብቡና ይስማሙ ።
 TermsOfService.SeverabilityandWaiver,መቆራረጥ እና መሻር
-TermsOfService.ChangesTermsAndConditions,በእነዚህ የአገልግሎት ውሎች ላይ የተደረጉ ለውጦች
-TermsOfService.ContactUs,ያግኙን
-PrivacyPolicy.Title,የግላዊነት መመሪያ
-PrivacyPolicy.Introduction,የግላዊነት መመሪያችን መግቢያ
-PrivacyPolicy.InformationWeCollect,ምን አይነት መረጃ እንሰበስባለን?
-PrivacyPolicy.HowCollectInformation,መረጃ እንዴት እንደምንሰበስብ
-PrivacyPolicy.GeneraPrivacyNotice,አጠቃላይ የግላዊነት ማስታወቂያ
-PrivacyPolicy.HowWeUsePersonalData,የግል መረጃዎችን እንዴት እንደምንጠቀም 
-PrivacyPolicy.WhoSharePersonalData,የግል መረጃዎችን ለማን እናጋራለን?
-PrivacyPolicy.HowLongRetainPersonalData,የግል መረጃዎችን ለምን ያህል ጊዜ እናቆያለን
-PrivacyPolicy.YourRights,የእርስዎ መብቶች
-PrivacyPolicy.IntDataTransfers,ዓለም አቀፍ የውሂብ ዝውውር
-PrivacyPolicy.AdditionalInformation,ተጨማሪ መረጃ
-PrivacyPolicy.WhereProcessInformation,መረጃዎን የምናስኬድበት ቦታ (አካባቢዎች)
-PrivacyPolicy.CommitmentToDataSecurity,ለውሂብ ደህንነት ያለን ቀጣይነት ያለው ቁርጠኝነት
-PrivacyPolicy.AdvertisingOnOurNetwork,በአውታረ መረባችን ላይ ማስታወቂያ
-PrivacyPolicy.MayContactYou,እንዴት ልናገኝዎ እንችላለን
-PrivacyPolicy.Children,ልጆች
-PrivacyPolicy.Amendments,ማሻሻያዎች
-TermsOfService.Description,ወደ አገልግሎታችን እንኳን ደህና መጡ፣ እያለ ከጓደኞችዎ እና ከስራ ባልደረቦችዎ ጋር እውቀትን በማካፈል በማህበረሰቡ ውስጥ እንዲሳተፉ ይጋብዛል። እንደሌሎች ማህበረሰቦች ሁሉ፣ የማህበረሰብ አባላትዎን በሚያከብር መንገድ እንዲሳተፉ እየጠየቅን፣ ለዚህም ሲባል ህጋዊ ግዴታዎችን ለማሳወቅ የአገልግሎት ውሎች እና ሁኔታዎች አቅርበናል፡፡
-TermsOfService.ReadAndAgree,አገልግሎታችንን ከመጠቀምዎ በፊት እባክዎ የአገልግሎት ውሎች እና ሁኔታዎች በጥንቃቄ ያንብቡና ይስማሙ ።  
-Advertisement.SuccessfullyCreated,ማስታወቂያ በተሳካ ሁኔታ ተፈጥሯል
-Package.Label.GetPackage,ጥቅሉን ያግኙ
-Package.Annual,ዓመታዊ ጥቅል
-Package.Monthly,ወርሃዊ ጥቅል
-Package.SemiAnnual,የግማሽ ዓመት ጥቅል
-Package.Quarterly,የሩብ ዓመት ጥቅል
-Package.Name,የጥቅል ስም
-Package.Label.Info,የማስታወቂያ ጥቅል መረጃ
-Ad.Label.Duration,የቆይታ ጊዜ
-Ad.Label.Month,አንድ ወር
-Ad.Label.Quarter,ሩብ ዓመት(ሶስት ወር)
-Ad.Label.SemiAnnual,ስድስት ወር
-Ad.Label.Annual,አንድ ዓመት
-Ad.Label.Info,የማስታወቂያ መረጃ
-Ad.Label.SelectDuration,የቆይታ ጊዜን ይምረጡ
-Ad.Label.CompanyService,የኩባንያ ወይም የአገልግሎት ስም
-Ad.Label.MotoSlogan,የኩባንያ ሞቶ/መፈክር
-Ad.Label.Status,ሁኔታ
-Payment.Title,ክፍያ
-Payment.Label.Bank,ባንክ
-Payment.Submitted,ክፍያዎ በተሳካ ሁኔታ ገብቷል፣ ክፍያው ሲረጋገጥ ማስታወቂያዎ በራስ-ሰር ይጀምራል
-Address.Title,አድራሻ
-Address.Label.Email,ኢሜይል
-Address.Label.Line,ስልክ
-Address.Web,ድር ገጽ
-Address.Label.Country,አገር/ከተማ
-Name.Label,ስም
-Status.Pending,በመጠባበቅ ላይ
+TermsOfService.USLegalCompliance,የዩናይትድ ስቴትስ የሕግ ተገዢነት
+TermsOfService.YouAgree,መለያ ፍጠርን በመምረጥ፣ ጋር ተስማምተዋል
+Topic.AlreadyAnswered,ምናልባት የእርስዎ መልስ ሊኖራቸው የሚችሉ ጥያቄዎች
+Topic.Label.TopicTitle,ርዕስ
+Topic.ShowMorePosts,ተጨማሪ ልጥፎችን አሳይ
+Topic.ShowMorePostsLoading,ልጥፎችን በመጫን ላይ...
