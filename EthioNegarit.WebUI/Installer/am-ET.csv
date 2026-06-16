@@ -770,6 +770,14 @@ Activity.UserAwardedBadge,ተሸልሟል
 Activity.UserJoined,የመድረኩ አዲስ አባል ነው።
 Advertisement.Label.AdsService,የማስታወቂያ አገልግሎት
 Advertisement.SuccessfullyCreated,ማስታወቂያ በተሳካ ሁኔታ ተፈጥሯል
+Chat.Favourite,ተወዳጅ
+Chat.LastActivity,የመጨረሻ እንቅስቃሴ
+Chat.Members,አባላት
+Chat.Messages,መልዕክቶች
+Chat.NoRooms,እስካሁን ምንም የውይይት ክፍል የለም።
+Chat.NotFavourite,ወደ ተወዳጆች ጨምር
+Chat.SearchPlaceholder,ይፈልጉ . . .
+Chat.Subtitle,ለመወያየት ክፍል ይምረጡ ወይም አዲስ ይጀምሩ።
 Help.Title.AdAndPaymentSupport,የማስታወቂያ እና የክፍያ ድጋፍ
 Help.Title.GeneralSupport,አጠቃላይ ድጋፍ
 Help.Title.GettingStarted,መግቢያ
@@ -821,11 +829,17 @@ Topic.AlreadyAnswered,ምናልባት የእርስዎ መልስ ሊኖራቸው 
 Topic.Label.TopicTitle,ርዕስ
 Topic.ShowMorePosts,ተጨማሪ ልጥፎችን አሳይ
 Topic.ShowMorePostsLoading,ልጥፎችን በመጫን ላይ...
-Chat.Subtitle,ለመወያየት ክፍል ይምረጡ ወይም አዲስ ይጀምሩ።
-Chat.SearchPlaceholder,ይፈልጉ . . .
-Chat.Members,አባላት
-Chat.Messages,መልዕክቶች
-Chat.LastActivity,የመጨረሻ እንቅስቃሴ
-Chat.Favourite,ተወዳጅ
-Chat.NotFavourite,ወደ ተወዳጆች ጨምር
-Chat.NoRooms,እስካሁን ምንም የውይይት ክፍል የለም።
+Chat.AllRooms,ሁሉም ክፍሎች
+Chat.Connected,ተገናኝቷል
+Chat.Connecting,በመገናኘት ላይ…
+Chat.ConnectFailed,መገናኘት አልተቻለም። ለመድገም ያድሱ።
+Chat.Send,ላክ
+Chat.SignInToChat,ለመወያየት እባክዎ ይግቡ።
+Chat.NoMessages,እስካሁን መልዕክት የለም። መጀመሪያ ይሁኑ።
+Chat.Reply,መልስ ስጥ
+Chat.Like,ወድጄዋለሁ
+Chat.Flag,ምልክት አድርግ
+Chat.Online,መስመር ላይ
+Chat.ReplyingTo,ለ{0} በመመለስ ላይ
+Chat.MessageDeleted,መልዕክት ተሰርዟል
+Chat.CancelReply,መልስ ሰርዝ
