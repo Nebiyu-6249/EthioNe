@@ -770,6 +770,14 @@ Activity.UserAwardedBadge,has been awarded the
 Activity.UserJoined,is a new member in the forum
 Advertisement.Label.AdsService,Ads Service
 Advertisement.SuccessfullyCreated,Addvertisement Successfully Created
+Chat.Favourite,Favourite
+Chat.LastActivity,Last activity
+Chat.Members,Members
+Chat.Messages,Messages
+Chat.NoRooms,No chat rooms yet.
+Chat.NotFavourite,Add to favourites
+Chat.SearchPlaceholder,Search for . . .
+Chat.Subtitle,Pick a room to join the conversation, or start a new one.
 Help.Title.AdAndPaymentSupport,Ad and Payment Support
 Help.Title.GeneralSupport,General Support
 Help.Title.GettingStarted,Getting Started
@@ -821,11 +829,17 @@ Topic.AlreadyAnswered,Questions that may already have your answer
 Topic.Label.TopicTitle,Title
 Topic.ShowMorePosts,Show More Posts
 Topic.ShowMorePostsLoading,Loading Posts...
-Chat.Subtitle,Pick a room to join the conversation, or start a new one.
-Chat.SearchPlaceholder,Search for . . .
-Chat.Members,Members
-Chat.Messages,Messages
-Chat.LastActivity,Last activity
-Chat.Favourite,Favourite
-Chat.NotFavourite,Add to favourites
-Chat.NoRooms,No chat rooms yet.
+Chat.AllRooms,All rooms
+Chat.Connected,Connected
+Chat.Connecting,Connecting…
+Chat.ConnectFailed,Could not connect. Refresh to retry.
+Chat.Send,Send
+Chat.SignInToChat,Please sign in to join the conversation.
+Chat.NoMessages,No messages yet. Be the first to say something.
+Chat.Reply,Reply
+Chat.Like,Like
+Chat.Flag,Flag
+Chat.Online,online
+Chat.ReplyingTo,Replying to {0}
+Chat.MessageDeleted,message deleted
+Chat.CancelReply,Cancel reply
