@@ -21,13 +21,11 @@
         [ChildActionOnly]
         public ActionResult Index()
         {
-            LoggingService.Error("RENDER: Language.Index starting");
             var viewModel = new LanguageListAllViewModel
             {
                 Alllanguages = LocalizationService.AllLanguages,
                 CurrentLanguage = LocalizationService.CurrentLanguage.Id
             };
-            LoggingService.Error("RENDER: Language.Index done");
             if (viewModel.Alllanguages.Count() <= 1)
             {
                 return Content(string.Empty);
