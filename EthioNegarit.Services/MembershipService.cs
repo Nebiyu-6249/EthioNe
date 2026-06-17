@@ -364,23 +364,36 @@
 
                         if (settings.EmailAdminOnNewMemberSignUp)
                         {
-                            var sb = new StringBuilder();
-                            sb.Append($"<p>{string.Format(_localizationService.GetResourceString("Members.NewMemberRegistered"), settings.ForumName, settings.ForumUrl)}</p>");
-                            sb.Append($"<p>{newUser.UserName} - {newUser.Email}</p>");
-                            var email = new Email
+                            // The admin-notification email must NEVER fail the registration -
+                            // SMTP may be unconfigured on the host. Previously a Send failure
+                            // here was caught by the outer catch and rejected the whole signup
+                            // ("Sorry an error occured"). Log and carry on instead.
+                            try
                             {
-                                EmailTo = settings.AdminEmailAddress,
-                                NameTo = _localizationService.GetResourceString("Members.Admin"),
-                                Subject = _localizationService.GetResourceString("Members.NewMemberSubject")
-                            };
-                            email.Body = _emailService.EmailTemplate(email.NameTo, sb.ToString());
-                            _emailService.SendMail(email);
+                                var sb = new StringBuilder();
+                                sb.Append($"<p>{string.Format(_localizationService.GetResourceString("Members.NewMemberRegistered"), settings.ForumName, settings.ForumUrl)}</p>");
+                                sb.Append($"<p>{newUser.UserName} - {newUser.Email}</p>");
+                                var email = new Email
+                                {
+                                    EmailTo = settings.AdminEmailAddress,
+                                    NameTo = _localizationService.GetResourceString("Members.Admin"),
+                                    Subject = _localizationService.GetResourceString("Members.NewMemberSubject")
+                                };
+                                email.Body = _emailService.EmailTemplate(email.NameTo, sb.ToString());
+                                _emailService.SendMail(email);
+                            }
+                            catch (Exception emailEx)
+                            {
+                                _loggingService.Error(emailEx);
+                            }
                         }
                         _activityService.MemberJoined(newUser);
                         EventManager.Instance.FireAfterRegisterUser(this,new RegisterUserEventArgs { User = newUser });
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        // Surface the real reason instead of silently swallowing it.
+                        _loggingService.Error(ex);
                         status = MembershipCreateStatus.UserRejected;
                     }
                 }
