@@ -225,6 +225,7 @@
             }
 
             var message = new StringBuilder(ex.Message);
+            AppendEntityValidationErrors(message, ex);
 
             var inner = ex.InnerException;
             var depthCounter = 0;
@@ -232,10 +233,43 @@
             {
                 message.Append(" INNER EXCEPTION: ");
                 message.Append(inner.Message);
+                AppendEntityValidationErrors(message, inner);
                 inner = inner.InnerException;
             }
 
             Write(message.ToString());
+        }
+
+        /// <summary>
+        /// EF's <see cref="System.Data.Entity.Validation.DbEntityValidationException"/> has a
+        /// generic Message ("Validation failed for one or more entities...") - the actual
+        /// per-field reasons live only in EntityValidationErrors. Without this, a failed
+        /// SaveChanges (e.g. on registration) logs nothing useful and surfaces as a bare
+        /// "Sorry an error occurred". Append the field-level detail so the cause is visible.
+        /// </summary>
+        private static void AppendEntityValidationErrors(StringBuilder message, Exception ex)
+        {
+            var validationException = ex as System.Data.Entity.Validation.DbEntityValidationException;
+            if (validationException == null)
+            {
+                return;
+            }
+
+            foreach (var entityError in validationException.EntityValidationErrors)
+            {
+                var entityName = entityError.Entry != null && entityError.Entry.Entity != null
+                    ? entityError.Entry.Entity.GetType().Name
+                    : "Entity";
+                foreach (var validationError in entityError.ValidationErrors)
+                {
+                    message.Append(" VALIDATION: ");
+                    message.Append(entityName);
+                    message.Append('.');
+                    message.Append(validationError.PropertyName);
+                    message.Append(" - ");
+                    message.Append(validationError.ErrorMessage);
+                }
+            }
         }
 
         /// <summary>
