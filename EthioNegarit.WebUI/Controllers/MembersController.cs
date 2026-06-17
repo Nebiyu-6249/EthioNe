@@ -663,9 +663,11 @@
                 {
                     if (ModelState.IsValid)
                     {
-                        var user = new MembershipUser();
-                    user = MembershipService.GetUser(username);
-                       if (user.IsLockedOut)
+                        var user = MembershipService.GetUser(username);
+                       // GetUser returns null for an unknown username. Guard the lockout
+                       // check so a bad/unknown login falls through to ValidateUser and the
+                       // friendly "password incorrect" message below instead of 500'ing.
+                       if (user != null && user.IsLockedOut)
                        {
                             if (user.LockoutEndDate < DateTime.UtcNow)
                             {
@@ -701,8 +703,9 @@
                             var message = new GenericMessageViewModel();
                             if (MembershipService.ValidateUser(username, password, Membership.MaxInvalidPasswordAttempts))
                             {
-                                // Set last login date
-                                if (user.IsApproved && !user.IsLockedOut && !user.IsBanned)
+                                // Set last login date (user is non-null here: ValidateUser
+                                // succeeded, but guard defensively against a lookup mismatch)
+                                if (user != null && user.IsApproved && !user.IsLockedOut && !user.IsBanned)
                                 {
                                     FormsAuthentication.SetAuthCookie(username, model.RememberMe);
                                     user.LastLoginDate = DateTime.UtcNow;

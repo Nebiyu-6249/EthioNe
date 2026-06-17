@@ -1,0 +1,31 @@
+name: Build check
+
+# Compile-only validation for branches and PRs. Does NOT deploy (the deploy workflow
+# runs only on push to main). This lets a feature branch — e.g. the OWIN social-login
+# branch — prove it builds before it is merged to main, without shipping anything.
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+      - name: Restore NuGet packages
+        run: nuget restore EthioNegarit.sln
+      - name: Build (Release, no deploy)
+        run: >
+          msbuild EthioNegarit.WebUI/EthioNegarit.WebUI.csproj
+          /p:Configuration=Release
+          /p:SolutionDir=${{ github.workspace }}\

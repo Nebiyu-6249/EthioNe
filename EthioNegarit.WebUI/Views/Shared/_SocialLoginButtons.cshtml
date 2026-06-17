@@ -1,31 +1,35 @@
-﻿@using EthioNegarit.WebUI
-
+@using EthioNegarit.WebUI
+@using EthioNegarit.Utilities
+@*
+    Social login buttons (OWIN external auth). Each button shows only when social logins
+    are enabled (Settings.EnableSocialLogins) AND that provider's credentials are present
+    in Web.config <appSettings> (the same source Startup reads, kept off FTP). The links
+    start the OWIN challenge via AuthController; the provider middleware handles the
+    /signin-<provider> callback. See docs/SOCIAL_LOGIN_SETUP.md.
+*@
 @if (Html.Settings().EnableSocialLogins == true)
 {
-  @*  <div class="loginortext">
-        @Html.LanguageString("Members.LoginOrText")
-    </div>*@
-
-<div class="oauthbuttons social-auth-links text-center">   
-    @if (!string.IsNullOrEmpty(SiteConstants.Instance.FacebookAppId) && !string.IsNullOrEmpty(SiteConstants.Instance.FacebookAppSecret))
-    {  
-        <a href="@Url.Action("FacebookLogin", "FacebookOAuth" )" class="btn btn-sm btn-block btn-info facebookloginbutton">
-            <i class="fab fa-facebook mr-2"></i>
-            @Html.LanguageString("Members.LogonFacebookButton")
-        </a>
-    }
-    @if (!string.IsNullOrEmpty(SiteConstants.Instance.GooglePlusAppId) && !string.IsNullOrEmpty(SiteConstants.Instance.GooglePlusAppSecret))
-    {
-        <a class="btn btn-sm  btn-block btn-danger googleloginbutton" href="@Url.Action("GoogleLogin", "GoogleOAuth" )">
-            <i class="fab fa-google-plus mr-2"></i> 
-            @Html.LanguageString("Members.LogonGoogleButton")
-        </a>      
-    }
-    @if (!string.IsNullOrEmpty(SiteConstants.Instance.MicrosoftAppId) && !string.IsNullOrEmpty(SiteConstants.Instance.MicrosoftAppSecret))
-    {
-        <a class="btn btn-sm  btn-block btn-info microsoftloginbutton" href="@Url.Action(" MicrosoftLogin", "MicrosoftOAuth" )">
-            <i class="fa fa-windows"></i> @Html.LanguageString("Members.LogonMicrosoftButton")
-        </a>
-    }
-</div>
+    <div class="oauthbuttons social-auth-links text-center">
+        @if (!string.IsNullOrEmpty(ConfigUtils.GetAppSetting("FacebookAppId", "")) && !string.IsNullOrEmpty(ConfigUtils.GetAppSetting("FacebookAppSecret", "")))
+        {
+            <a href="@Url.Action("ExternalLogin", "Auth", new { provider = "Facebook" })" class="btn btn-sm btn-block btn-info facebookloginbutton">
+                <i class="fab fa-facebook mr-2"></i>
+                @Html.LanguageString("Members.LogonFacebookButton")
+            </a>
+        }
+        @if (!string.IsNullOrEmpty(ConfigUtils.GetAppSetting("GooglePlusAppId", "")) && !string.IsNullOrEmpty(ConfigUtils.GetAppSetting("GooglePlusAppSecret", "")))
+        {
+            <a class="btn btn-sm btn-block btn-danger googleloginbutton" href="@Url.Action("ExternalLogin", "Auth", new { provider = "Google" })">
+                <i class="fab fa-google mr-2"></i>
+                @Html.LanguageString("Members.LogonGoogleButton")
+            </a>
+        }
+        @if (!string.IsNullOrEmpty(ConfigUtils.GetAppSetting("MicrosoftAppId", "")) && !string.IsNullOrEmpty(ConfigUtils.GetAppSetting("MicrosoftAppSecret", "")))
+        {
+            <a class="btn btn-sm btn-block btn-info microsoftloginbutton" href="@Url.Action("ExternalLogin", "Auth", new { provider = "Microsoft" })">
+                <i class="fab fa-microsoft mr-2"></i>
+                @Html.LanguageString("Members.LogonMicrosoftButton")
+            </a>
+        }
+    </div>
 }
