@@ -59,3 +59,45 @@ automatically; you don't add routes for them).
 
 Social login is testable only once `ethipical.com` + SSL are live. A provider's button
 appears only when both its id and secret are set, so you can enable providers one at a time.
+
+---
+
+## Per-provider registration walkthrough
+For each provider, create an OAuth app to get the Client/App **ID + Secret**, register the
+**exact** redirect URI below, then put the id+secret in the server `Web.config` appSettings
+keys named above. Redirect URIs must match character-for-character (https, `www`, no trailing
+slash). All three require the live HTTPS domain — none work on the HTTP temp URL.
+
+### Google  → keys `GooglePlusAppId` / `GooglePlusAppSecret`
+1. https://console.cloud.google.com → create/select a project.
+2. **APIs & Services → OAuth consent screen**: choose **External**, fill app name, support
+   email, your domain; add scopes `openid`, `email`, `profile`. While in **Testing** mode add
+   your own Google account under **Test users** (or **Publish** the app for anyone to sign in).
+3. **APIs & Services → Credentials → Create credentials → OAuth client ID → Web application**.
+   - Authorised redirect URI: `https://www.ethipical.com/signin-google`
+4. Copy the **Client ID** → `GooglePlusAppId`, **Client secret** → `GooglePlusAppSecret`.
+
+### Microsoft  → keys `MicrosoftAppId` / `MicrosoftAppSecret`
+1. https://entra.microsoft.com (or portal.azure.com) → **App registrations → New registration**.
+2. Supported account types: **Accounts in any organizational directory and personal Microsoft
+   accounts** (so consumer @outlook/@hotmail works).
+3. **Redirect URI**: platform **Web** = `https://www.ethipical.com/signin-microsoft`.
+4. **Certificates & secrets → New client secret** → copy the secret **Value** (not the Id).
+5. **Application (client) ID** → `MicrosoftAppId`, secret value → `MicrosoftAppSecret`.
+
+### Facebook  → keys `FacebookAppId` / `FacebookAppSecret`
+1. https://developers.facebook.com → **My Apps → Create App** (type: **Consumer**).
+2. Add the **Facebook Login** product → **Settings**.
+   - Valid OAuth Redirect URIs: `https://www.ethipical.com/signin-facebook`
+3. **Settings → Basic**: **App ID** → `FacebookAppId`, **App Secret** → `FacebookAppSecret`.
+4. Facebook only returns email to a **Live** app; flip the app from Development to **Live**
+   (a basic app with email/public_profile usually needs no full review, but the app must be Live
+   and you must add a Privacy Policy URL — `https://www.ethipical.com/privacy`).
+
+## What happens on sign-in (the bridge, already coded)
+`AuthController.ExternalLoginCallback` reads the provider's email/name, then:
+- if a member with that email exists → logs them in (issues the `EthioNegaritAuth` forms cookie);
+- otherwise → routes through `Members/SocialLoginValidator` → `MemberRegisterLogic`, which creates
+  the local `MembershipUser`, auto-approves the social account, assigns the default role/profile,
+  and logs them in. No password is needed by the user (a random one is stored).
+Button labels are localized (`Members.Logon{Google,Microsoft,Facebook}Button`, en + am).
