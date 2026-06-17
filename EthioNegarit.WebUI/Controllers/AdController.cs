@@ -640,18 +640,15 @@
         }
         public PartialViewResult Slide()
         {
-            LoggingService.Error("RENDER: Ad.Slide starting");
             using (UnitOfWorkManager.NewUnitOfWork())
             {
                 var country = StringUtils.GetUserCountryByIp();
-                LoggingService.Error("RENDER: Ad.Slide country lookup done");
                 var activeAds = string.IsNullOrEmpty(country) ? _adService.GetActiveAds() : _adService.GetActiveAds(country).ToList();
                 // create the view model
                 var viewModel = new AdListViewModel
                 {
                     Advertisements = activeAds,
                 };
-                LoggingService.Error("RENDER: Ad.Slide done");
                 return PartialView(viewModel);
             }
         }

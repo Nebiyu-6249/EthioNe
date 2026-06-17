@@ -33,9 +33,11 @@ namespace EthioNegarit.WebUI.Controllers.OAuthControllers
         {
         }
 
-     //   public string ReturnUrl => string.Concat(SettingsService.GetSettings().ForumUrl.TrimEnd('/'), Url.Action("GoogleLogin"));
-       
-        public string ReturnUrl => "http://localhost";
+        // Absolute callback URL Google redirects back to. Must EXACTLY match the
+        // "Authorised redirect URI" registered in the Google Cloud console, e.g.
+        // https://www.ethipical.com/GoogleOAuth/GoogleLogin . Built from the configured
+        // ForumUrl so it tracks the live domain (was hard-coded to http://localhost).
+        public string ReturnUrl => string.Concat(SettingsService.GetSettings().ForumUrl.TrimEnd('/'), Url.Action("GoogleLogin"));
         public string Callback { get; private set; }
 
         public string ContentTypeAlias { get; private set; }

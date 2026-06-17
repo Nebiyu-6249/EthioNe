@@ -2,137 +2,200 @@
 @model ChatModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = Model.ChatRoom != null ? Model.ChatRoom.Name : "Chat";
+    ViewBag.Title = Model.ChatRoom != null ? Model.ChatRoom.Name : Html.LanguageString("Layout.Nav.ChatRooms").ToString();
     var canChat = User.Identity.IsAuthenticated;
+    var currentUserId = Html.CurrentMember() != null ? Html.CurrentMember().Id.ToString() : "";
+    var roomUrlBase = "";
+    if (Model.ChatRoom != null && !string.IsNullOrEmpty(Model.ChatRoom.Slug) && Model.ChatRoom.NiceUrl.EndsWith(Model.ChatRoom.Slug))
+    {
+        roomUrlBase = Model.ChatRoom.NiceUrl.Substring(0, Model.ChatRoom.NiceUrl.Length - Model.ChatRoom.Slug.Length);
+    }
 }
 
-<section class="content">
+<section class="content chat-room-view">
     <div class="container-fluid">
         <div class="row">
-            <section class="col-sm-9">
-
-                <div class="chat-header">
-                    <h3 id="roomName">@(Model.ChatRoom != null ? Model.ChatRoom.Name : "")</h3>
-                    <span id="onlineCount" class="chat-online">0 online</span>
+            <!-- Messages column -->
+            <section class="col-lg-9">
+                <div class="chat-room-header">
+                    <h3 id="roomName">@(Model.ChatRoom != null ? Model.ChatRoom.Name : "") - @Html.LanguageString("Layout.Nav.ChatRooms")</h3>
                 </div>
 
-                <div class="chat-panel" id="messages">
-                    <ul class="contents-list" id="chatmessages"></ul>
-                    <div class="empty" id="emptyState">No messages yet. Be the first to say something.</div>
+                <div class="chat-scroll" id="messages">
+                    <ul class="chat-bubbles" id="chatmessages"></ul>
+                    <div class="chat-empty" id="emptyState">@Html.LanguageString("Chat.NoMessages")</div>
                 </div>
 
-                <div class="footer-fixed">
-                    <div id="input-bar">
-                        @if (canChat)
-                        {
-                            <div id="input-wrap">
-                                <textarea id="messageInput" rows="1"
-                                          placeholder="Type a message… (Enter to send, Shift+Enter for newline)"
-                                          maxlength="2000" autocomplete="off"></textarea>
-                                <button id="sendButton" type="button" disabled>Send</button>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="chat-signin">Please sign in to join the conversation.</div>
-                        }
-                        <div id="status">Connecting…</div>
+                <div class="chat-composer">
+                    <div id="replyBanner" class="chat-reply-banner" style="display:none;">
+                        <span id="replyBannerText"></span>
+                        <a href="#" id="cancelReply" title="@Html.LanguageString("Chat.CancelReply")">&times;</a>
                     </div>
+                    @if (canChat)
+                    {
+                        <div class="chat-input-wrap">
+                            <textarea id="messageInput" rows="1"
+                                      placeholder="@Html.LanguageString("Chat.Placeholder")"
+                                      maxlength="2000" autocomplete="off"></textarea>
+                            <button id="sendButton" type="button" class="btn btn-primary" disabled>@Html.LanguageString("Chat.Send")</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="chat-signin text-muted">@Html.LanguageString("Chat.SignInToChat")</div>
+                    }
+                    <div id="status" class="chat-status">@Html.LanguageString("Chat.Connecting")</div>
                 </div>
-
             </section>
+
+            <!-- Right rail -->
+            <aside class="col-lg-3 chat-rail">
+                <a href="@Url.Action("Index", "Chat")" class="btn btn-outline-secondary btn-block chat-allrooms">
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i> @Html.LanguageString("Chat.AllRooms")
+                </a>
+
+                <div id="roomMembers" class="chat-members card"></div>
+
+                <div class="card chat-docked">
+                    <div class="card-header py-2">
+                        <span><i class="fas fa-comments" aria-hidden="true"></i> @Html.LanguageString("Layout.Nav.ChatRooms")</span>
+                        <a href="#" id="dockToggle" class="float-right text-muted" title="-">&minus;</a>
+                    </div>
+                    <div class="card-body p-0" id="dockedRooms"></div>
+                </div>
+            </aside>
         </div>
     </div>
 </section>
+
+<style>
+    .chat-room-view .chat-room-header h3 { font-weight: 600; color: #6c757d; margin: 6px 0 12px; }
+    .chat-scroll { height: 60vh; overflow-y: auto; padding: 4px 2px; }
+    .chat-bubbles { list-style: none; margin: 0; padding: 0; }
+    .chat-empty { color: #9aa3ab; text-align: center; padding: 24px; }
+    .msg-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+    .msg-row .chat-img img { width: 38px; height: 38px; border-radius: 50%; }
+    .msg-row .msg-content { flex: 1; min-width: 0; }
+    .msg-bubble {
+        background: #eef1f4; border-radius: 8px; padding: 8px 12px; color: #2b2f33;
+        word-break: break-word;
+    }
+    .msg-bubble.mine { background: #e3f0fb; }
+    .msg-bubble .chat-reply { font-size: .8rem; color: #6c757d; border-left: 3px solid #cdd3d8; padding-left: 6px; margin-bottom: 4px; }
+    .msg-bubble .deleted { color: #9aa3ab; }
+    .msg-foot { display: flex; align-items: center; gap: 8px; margin-top: 2px; padding: 0 4px; }
+    .msg-foot .chat-meta { font-size: .75rem; color: #9aa3ab; margin-left: auto; }
+    .msg-foot .chat-actions { display: flex; gap: 10px; }
+    .msg-foot .chat-actions a { color: #aeb6bd; font-size: .82rem; cursor: pointer; }
+    .msg-foot .chat-actions a:hover { color: #379fef; }
+    .msg-foot .chat-actions a.starred i { color: #e74c3c; }
+    .msg-foot .chat-actions .reply-count { color: #6c757d; }
+    .chat-composer { margin-top: 10px; }
+    .chat-input-wrap { display: flex; gap: 8px; align-items: flex-end; background: #f3f5f7; border: 1px solid #dfe3e6; border-radius: 8px; padding: 8px 10px; }
+    .chat-input-wrap textarea { flex: 1; border: none; background: transparent; outline: none; resize: none; max-height: 120px; line-height: 1.5; }
+    .chat-status { font-size: .8rem; margin-top: 6px; color: #9aa3ab; }
+    .chat-reply-banner { background: #eef1f4; border-radius: 6px; padding: 4px 10px; margin-bottom: 6px; font-size: .82rem; color: #6c757d; }
+    .chat-reply-banner a { float: right; color: #9aa3ab; font-weight: 700; text-decoration: none; }
+    .chat-rail .chat-allrooms { margin-bottom: 12px; }
+    .chat-rail .card { margin-bottom: 12px; }
+    .chat-rail .chat-docked .card-header { font-size: .85rem; font-weight: 600; }
+    .chat-rail .docked-room { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-top: 1px solid #f0f2f4; font-size: .82rem; }
+    .chat-rail .docked-room a { color: #2b2f33; }
+</style>
 
 <!-- SignalR client + the autogenerated hub proxy (jQuery is loaded by _Layout). -->
 <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
 <script src="~/signalr/hubs"></script>
 <script type="text/javascript">
     $(function () {
+        var roomId      = '@(Model.ChatRoom != null ? Model.ChatRoom.Id.ToString() : "")';
+        var canChat     = @(canChat ? "true" : "false");
+        var currentUser = '@currentUserId';
+        var roomUrlBase = '@roomUrlBase';
+        var membersUrl  = '@Url.Action("RoomMembers", "Chat")' + '?roomId=' + roomId;
+        var reportUrl   = '@Url.Action("Report", "Chat")';
 
-        var roomId   = '@(Model.ChatRoom != null ? Model.ChatRoom.Id.ToString() : "")';
-        var canChat  = @(canChat ? "true" : "false");
+        // Localized strings for client-rendered text
+        var L = {
+            connected:  '@Html.LanguageString("Chat.Connected")',
+            connectFail:'@Html.LanguageString("Chat.ConnectFailed")',
+            online:     '@Html.LanguageString("Chat.Online")',
+            like:       '@Html.LanguageString("Chat.Like")',
+            flag:       '@Html.LanguageString("Chat.Flag")',
+            reply:      '@Html.LanguageString("Chat.Reply")',
+            del:        '@Html.LanguageString("Buttons.Delete")',
+            deleted:    '@Html.LanguageString("Chat.MessageDeleted")',
+            replyingTo: '@Html.LanguageString("Chat.ReplyingTo")'
+        };
 
-        var $scroller = $('#messages');
-        var $list     = $('#chatmessages');
-        var $empty    = $('#emptyState');
-        var $input    = $('#messageInput');
-        var $send     = $('#sendButton');
-        var $status   = $('#status');
-        var $online   = $('#onlineCount');
-        var lastSender = null;
+        var $scroller = $('#messages'), $list = $('#chatmessages'), $empty = $('#emptyState');
+        var $input = $('#messageInput'), $send = $('#sendButton'), $status = $('#status');
+        var $replyBanner = $('#replyBanner'), $replyText = $('#replyBannerText');
+        var lastSender = null, replyingTo = null;
 
         var chat = $.connection.chatHub;
 
-        // ── Server → client callbacks (names match the hub) ──────────────────
+        // ── Server -> client callbacks (names match the hub) ──
         chat.client.loadHistory = function (list) {
-            $list.empty();
-            lastSender = null;
+            $list.empty(); lastSender = null;
             (list || []).forEach(function (m) { appendMessage(m); });
-            toggleEmpty();
-            scrollToBottom();
+            toggleEmpty(); scrollToBottom();
         };
-
         chat.client.roomJoined = function (id, name, count) {
-            if (name) { $('#roomName').text(name); }
-            setOnline(count);
-            $status.text('Connected').css('color', 'green');
+            if (name) { $('#roomName').text(name + ' - @Html.Raw(Html.LanguageString("Layout.Nav.ChatRooms").ToString().Replace("'", "\\'"))'); }
+            $status.text(L.connected).css('color', 'green');
         };
-
         chat.client.receiveMessage = function (m) {
-            var stick = isNearBottom();
-            appendMessage(m);
-            toggleEmpty();
-            if (stick) { scrollToBottom(); }
+            var stick = isNearBottom(); appendMessage(m); toggleEmpty(); if (stick) { scrollToBottom(); }
         };
-
-        chat.client.userJoined = function (name, count) { setOnline(count); };
-        chat.client.userLeft   = function (name, count) { setOnline(count); };
-
+        chat.client.userJoined = function () {};
+        chat.client.userLeft = function () {};
         chat.client.messageStarred = function (id, count, starred) {
-            var $btn = $('#msg-' + id + ' .star-btn');
-            $btn.toggleClass('starred', !!starred);
-            $btn.find('.star-count').text(count > 0 ? count : '');
+            var $a = $('#msg-' + id + ' .like-btn');
+            $a.toggleClass('starred', !!starred);
+            $a.find('.like-count').text(count > 0 ? count : '');
         };
-
         chat.client.messageDeleted = function (id) {
-            $('#msg-' + id + ' .chat-text').html('<em class="deleted">message deleted</em>');
-            $('#msg-' + id + ' .star-btn').remove();
+            $('#msg-' + id + ' .msg-bubble').html('<em class="deleted">' + escapeHtml(L.deleted) + '</em>');
+            $('#msg-' + id + ' .chat-actions').remove();
         };
-
-        chat.client.error = function (text) {
-            $status.text(text || 'Something went wrong.').css('color', 'red');
-        };
-
-        // ── Start connection, then join the room ─────────────────────────────
-        $.connection.hub.start()
-            .done(function () {
-                chat.server.joinRoom(roomId)
-                    .fail(function (e) { console.error('joinRoom failed:', e); });
-                if (canChat) { $send.prop('disabled', $.trim($input.val()).length === 0); $input.focus(); }
-            })
-            .fail(function (err) {
-                $status.text('Could not connect. Refresh to retry.').css('color', 'red');
-                console.error('SignalR start failed:', err);
+        chat.client.roomsList = function (rooms) {
+            var $d = $('#dockedRooms').empty();
+            (rooms || []).forEach(function (r) {
+                var url = roomUrlBase ? (roomUrlBase + r.slug) : '#';
+                $d.append('<div class="docked-room"><i class="fas fa-comments text-muted"></i>' +
+                    '<a href="' + url + '">' + escapeHtml(r.name) + '</a></div>');
             });
+        };
+        chat.client.error = function (text) { $status.text(text || '').css('color', 'red'); };
 
-        // ── Sending ──────────────────────────────────────────────────────────
+        // ── Start connection, then join the room ──
+        $.connection.hub.start().done(function () {
+            chat.server.joinRoom(roomId).fail(function (e) { console.error('joinRoom failed:', e); });
+            chat.server.getRooms();
+            if (canChat) { $send.prop('disabled', $.trim($input.val()).length === 0); $input.focus(); }
+        }).fail(function (err) {
+            $status.text(L.connectFail).css('color', 'red');
+            console.error('SignalR start failed:', err);
+        });
+
+        // Load the members rail (existing AJAX endpoint returns the _roomMembers partial)
+        $('#roomMembers').load(membersUrl);
+
+        // ── Sending / replying ──
         function sendMessage() {
             if (!canChat) { return; }
             var content = $.trim($input.val());
             if (!content) { return; }
-            if ($.connection.hub.state !== $.signalR.connectionState.connected) {
-                $status.text('Not connected yet — try again in a moment.');
-                return;
+            if ($.connection.hub.state !== $.signalR.connectionState.connected) { return; }
+            if (replyingTo) {
+                chat.server.replyToMessage(roomId, replyingTo, content).fail(function (e) { console.error('reply failed:', e); });
+                clearReply();
+            } else {
+                chat.server.sendMessage(roomId, content).fail(function (e) { console.error('send failed:', e); });
             }
-            chat.server.sendMessage(roomId, content)
-                .fail(function (e) { console.error('sendMessage failed:', e); });
-            $input.val('').css('height', 'auto');
-            $send.prop('disabled', true);
-            $input.focus();
+            $input.val('').css('height', 'auto'); $send.prop('disabled', true); $input.focus();
         }
-
         if (canChat) {
             $send.on('click', sendMessage);
             $input.on('keypress', function (e) {
@@ -143,64 +206,80 @@
                 $send.prop('disabled', $.trim(this.value).length === 0);
             });
         }
+        function clearReply() { replyingTo = null; $replyBanner.hide(); }
+        $('#cancelReply').on('click', function (e) { e.preventDefault(); clearReply(); });
 
-        // Star toggle (event-delegated, survives re-render).
-        $list.on('click', '.star-btn', function () {
+        // ── Per-message actions (delegated, survive re-render) ──
+        $list.on('click', '.like-btn', function (e) {
+            e.preventDefault();
             var id = $(this).closest('.msg-row').attr('id').replace('msg-', '');
-            chat.server.toggleStar(id).fail(function (e) { console.error('toggleStar failed:', e); });
+            chat.server.toggleStar(id).fail(function (er) { console.error('like failed:', er); });
+        });
+        $list.on('click', '.reply-btn', function (e) {
+            e.preventDefault();
+            var $row = $(this).closest('.msg-row');
+            replyingTo = $row.attr('id').replace('msg-', '');
+            var who = $row.find('.chat-user').first().text() || '';
+            $replyText.text(L.replyingTo.replace('{0}', who));
+            $replyBanner.show(); $input.focus();
+        });
+        $list.on('click', '.flag-btn', function (e) {
+            e.preventDefault();
+            var id = $(this).closest('.msg-row').attr('id').replace('msg-', '');
+            $.post(reportUrl, { MessageId: id }).fail(function () { });
+            $(this).addClass('text-danger').attr('title', '✓');
+        });
+        $list.on('click', '.delete-btn', function (e) {
+            e.preventDefault();
+            var id = $(this).closest('.msg-row').attr('id').replace('msg-', '');
+            chat.server.deleteMessage(id).fail(function (er) { console.error('delete failed:', er); });
         });
 
-        // ── Rendering ─────────────────────────────────────────────────────────
+        // ── Rendering ──
         function escapeHtml(s) { return $('<div/>').text(s == null ? '' : s).html(); }
         function formatText(s) { return escapeHtml(s).replace(/\n/g, '<br>'); }
         function formatTime(iso) { var d = new Date(iso); return isNaN(d.getTime()) ? '' : d.toLocaleString(); }
 
         function appendMessage(m) {
             var author = m.authorName || 'Unknown';
-            var isSame = (lastSender === author);
-            lastSender = author;
+            var mine = currentUser && m.authorId && (m.authorId.toLowerCase() === currentUser.toLowerCase());
 
-            var avatar = !isSame
-                ? '<div class="chat-img"><img src="https://www.gravatar.com/avatar/' +
-                      (m.gravatarHash || '') + '?s=64&d=identicon" alt="" /></div>'
-                : '<div class="chat-img" style="width:32px;flex-shrink:0;"></div>';
-
-            var meta = !isSame
-                ? '<div class="chat-meta"><span class="chat-user">' + escapeHtml(author) +
-                      '</span> <span class="chat-time">' + formatTime(m.sentAt) + '</span></div>'
-                : '';
+            var avatar = '<div class="chat-img"><img src="https://www.gravatar.com/avatar/' +
+                (m.gravatarHash || '') + '?s=64&d=identicon" alt="" /></div>';
 
             var replyTo = m.parentPreview
-                ? '<div class="chat-reply">↪ ' + escapeHtml(m.parentAuthor || '') + ': ' + escapeHtml(m.parentPreview) + '</div>'
+                ? '<div class="chat-reply">' + escapeHtml(m.parentAuthor || '') + ': ' + escapeHtml(m.parentPreview) + '</div>'
                 : '';
 
-            var text = '<div class="chat-text">' + replyTo + formatText(m.content) + '</div>';
-
             var starred = m.isStarred ? ' starred' : '';
-            var starNum = (m.starCount && m.starCount > 0) ? m.starCount : '';
-            var actions = '<div class="chat-social">' +
-                '<button type="button" class="action-btn star-btn' + starred + '" title="Star">' +
-                  '★ <span class="star-count">' + starNum + '</span>' +
-                '</button></div>';
+            var likeNum = (m.starCount && m.starCount > 0) ? m.starCount : '';
+            var replyCount = (m.replyCount && m.replyCount > 0) ? (' <span class="reply-count">' + m.replyCount + '</span>') : '';
+
+            var actions = '<div class="chat-actions">' +
+                '<a class="like-btn' + starred + '" title="' + escapeHtml(L.like) + '"><i class="fas fa-heart"></i> <span class="like-count">' + likeNum + '</span></a>' +
+                '<a class="flag-btn" title="' + escapeHtml(L.flag) + '"><i class="fas fa-flag"></i></a>' +
+                '<a class="reply-btn" title="' + escapeHtml(L.reply) + '"><i class="fas fa-reply"></i>' + replyCount + '</a>' +
+                (mine ? '<a class="delete-btn" title="' + escapeHtml(L.del) + '"><i class="fas fa-trash"></i></a>' : '') +
+            '</div>';
+
+            var foot = '<div class="msg-foot">' + actions +
+                '<span class="chat-meta"><span class="chat-user">' + escapeHtml(author) + '</span>, ' + formatTime(m.sentAt) + '</span></div>';
 
             $list.append(
-                '<li class="msg-row" id="msg-' + m.id + '">' +
-                    avatar +
-                    '<div class="msg-content">' + meta + text + '</div>' +
-                    actions +
+                '<li class="msg-row" id="msg-' + m.id + '">' + avatar +
+                    '<div class="msg-content">' +
+                        '<div class="msg-bubble' + (mine ? ' mine' : '') + '">' + replyTo + formatText(m.content) + '</div>' +
+                        foot +
+                    '</div>' +
                 '</li>'
             );
         }
 
-        function setOnline(count) {
-            var n = (typeof count === 'number') ? count : 0;
-            $online.text(n + (n === 1 ? ' online' : ' online'));
-        }
         function toggleEmpty() { $empty.toggle($list.children().length === 0); }
-        function isNearBottom() {
-            var el = $scroller[0];
-            return el.scrollHeight - el.scrollTop - el.clientHeight < 60;
-        }
+        function isNearBottom() { var el = $scroller[0]; return el.scrollHeight - el.scrollTop - el.clientHeight < 60; }
         function scrollToBottom() { $scroller.scrollTop($scroller[0].scrollHeight); }
+
+        // Docked panel minimise toggle
+        $('#dockToggle').on('click', function (e) { e.preventDefault(); $('#dockedRooms').slideToggle(150); });
     });
 </script>
