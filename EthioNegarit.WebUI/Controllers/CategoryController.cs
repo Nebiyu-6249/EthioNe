@@ -173,7 +173,6 @@
         [ChildActionOnly]
         public virtual PartialViewResult Menu()
         {
-            LoggingService.Error("RENDER: Category.Menu starting");
             // Model for the sections
             var allSections = new List<CategorySectionViewModel>();
             // Get sections from the DB
@@ -194,7 +193,6 @@
                     AllPermissionSets = allPermissionSets
                 });
             }
-            LoggingService.Error("RENDER: Category.Menu done");
             return PartialView(allSections);
         }
         [ChildActionOnly]

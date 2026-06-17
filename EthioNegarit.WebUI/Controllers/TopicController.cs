@@ -1398,19 +1398,33 @@
         {
             using (UnitOfWorkManager.NewUnitOfWork())
             {
-                var settings = SettingsService.GetSettings();
-
-                var allowedCategories = _categoryService.GetAllowedCategories(UsersRole);
-                var category = _categoryService.GetNewsCategory();
-               // var section = category.Section;
-                var topics = _topicService.GetNewsandEvent(5, category.Id);
-                var topicViewModels = ViewModelMapping.CreateTopicViewModels(topics.ToList(), RoleService, UsersRole, LoggedOnReadOnlyUser, allowedCategories, SettingsService.GetSettings());
-                // Create the main view model for the news
+                // Start with an empty, valid model. On a near-empty or freshly seeded
+                // database there is often no "news & events" category yet, so
+                // GetNewsCategory() returns null. Dereferencing it (category.Id) used to
+                // throw a NullReferenceException that 500'd the whole Discussions page
+                // (this partial renders inside _CommonSideNav -> TodayTopics).
                 var viewModel = new ActiveTopicsViewModel
                 {
-                    Topics = topicViewModels,
-                    Category = category
+                    Topics = new List<TopicViewModel>(),
+                    Category = null
                 };
+
+                try
+                {
+                    var category = _categoryService.GetNewsCategory();
+                    if (category != null)
+                    {
+                        viewModel.Category = category;
+                        var allowedCategories = _categoryService.GetAllowedCategories(UsersRole);
+                        var topics = _topicService.GetNewsandEvent(5, category.Id);
+                        viewModel.Topics = ViewModelMapping.CreateTopicViewModels(topics.ToList(), RoleService, UsersRole, LoggedOnReadOnlyUser, allowedCategories, SettingsService.GetSettings());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LoggingService.Error(ex);
+                }
+
                 return PartialView(viewModel);
             }
         }

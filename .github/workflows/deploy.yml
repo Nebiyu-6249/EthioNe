@@ -47,9 +47,13 @@ jobs:
           protocol: ftp
           timeout: 120000
           dangerous-clean-slate: false
-          # Exclude ONLY the root web.config (hand-maintained on the server with the
-          # real connection strings). Views/web.config and Areas .../Views/web.config
-          # must deploy or Razor view compilation breaks.
+          # Exclude the root web.config (hand-maintained on the server with the real
+          # connection strings) and App_Data/forum.config (hand-maintained on the
+          # server with the real OAuth/social-login secrets). Both are kept off FTP so
+          # deploys never overwrite server secrets or ship them in the build.
+          # NOTE: Views/web.config and area Views/web.config still deploy (no **/ here),
+          # which Razor view compilation needs.
           exclude: |
             Web.config
             web.config
+            App_Data/forum.config
