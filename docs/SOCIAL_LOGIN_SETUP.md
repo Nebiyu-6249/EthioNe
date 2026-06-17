@@ -1,56 +1,61 @@
-# Social login (Google / Facebook / Microsoft) — setup & status
+# Social login (Google / Microsoft / Facebook) — OWIN setup
 
-The app already ships a social-login implementation (Skybrud.Social based), wired into
-the normal registration path: a successful provider login either logs in an existing
-member (matched by email) or routes a new user through `Members/SocialLoginValidator`
-→ `MemberRegisterLogic`, which creates the local `MembershipUser`, auto-approves social
-accounts, and issues the existing forms-auth cookie (`EthioNegaritAuth`). The
-"Sign in with …" buttons live in `Views/Shared/_SocialLoginButtons.cshtml` and already
-appear on both the LogOn and Register pages.
+> This branch (`claude/social-login-owin`) replaces the older Skybrud.Social flow with
+> modern **OWIN external authentication** (Katana 3.0.1) for all three providers,
+> including Microsoft (the Skybrud version used the retired Windows Live API). It is on a
+> separate branch so a build issue can't affect the live `main`. Merge it once CI is green
+> and you've configured at least one provider.
 
-## Status by provider
-- **Google** — working after this change. The redirect URL was hard-coded to
-  `http://localhost`; it now derives from `Settings.ForumUrl`
-  (`GoogleOAuthController.ReturnUrl`).
-- **Facebook** — already correct (redirect derives from `ForumUrl`). Just needs credentials.
-- **Microsoft** — NOT enabled. The original code used the **retired Windows Live API**
-  (`apis.live.net/v5.0`) and is commented out in `MicrosoftOAuthController`. It needs a
-  modern rewrite (OWIN `Microsoft.Owin.Security.MicrosoftAccount` against the v2.0
-  endpoint, or MSAL) before it can be turned on. Leave `MicrosoftAppId`/`Secret` blank
-  and the Microsoft button stays hidden.
+## How it works
+- `Startup.cs` wires `UseCookieAuthentication` + `UseGoogleAuthentication` /
+  `UseMicrosoftAccountAuthentication` / `UseFacebookAuthentication`. Each provider is added
+  ONLY when its id+secret are present in Web.config `<appSettings>`, so with blank settings
+  nothing changes at startup.
+- `AuthController.ExternalLogin(provider)` starts the challenge; the provider returns to the
+  OWIN middleware callback (`/signin-google`, `/signin-microsoft`, `/signin-facebook`), then
+  to `AuthController.ExternalLoginCallback`.
+- The callback matches the external email to a local member: if found, it issues the normal
+  forms-auth cookie (`EthioNegaritAuth`); if not, it routes through the existing
+  `Members/SocialLoginValidator` → `MemberRegisterLogic`, which creates + auto-approves the
+  account and logs them in. No ASP.NET Identity is introduced.
+- Buttons are in `Views/Shared/_SocialLoginButtons.cshtml` (already on LogOn + Register) and
+  show only when `Settings.EnableSocialLogins` is on AND the provider's credentials exist.
 
 ## SECURITY — do this first
 A real Google client secret was previously committed in `App_Data/forum.config`. It has
-been removed from the repo, but it is in git history, so **rotate it now** in the Google
-Cloud console (delete/regenerate the OAuth client secret). Then put the new secret only
-in the **server** `forum.config` (see below) — never commit it.
+been removed from the repo but remains in git history — **rotate it** in the Google Cloud
+console. Put the new secret only in the **server** Web.config (below); never commit secrets.
 
-## Where credentials go
-`App_Data/forum.config` is now **excluded from FTP deploy** (like `web.config`), so the
-server copy is hand-maintained and never overwritten or committed. Edit the server file
-(`h:\root\home\nebiyu6249-001\www\site1\App_Data\forum.config`) and set:
-
+## Where credentials go (server Web.config `<appSettings>`)
+`Startup` reads credentials from Web.config app settings (not forum.config, not the DI
+container — both are unreliable that early in startup). Web.config is excluded from FTP, so
+these live only on the server and are never overwritten or committed. Add to
+`h:\root\home\nebiyu6249-001\www\site1\Web.config`:
 ```xml
-<setting key="GooglePlusAppId"     value="YOUR_GOOGLE_CLIENT_ID" />
-<setting key="GooglePlusAppSecret" value="YOUR_ROTATED_GOOGLE_SECRET" />
-<setting key="FacebookAppId"       value="YOUR_FACEBOOK_APP_ID" />
-<setting key="FacebookAppSecret"   value="YOUR_FACEBOOK_APP_SECRET" />
+<add key="GooglePlusAppId"     value="YOUR_GOOGLE_CLIENT_ID" />
+<add key="GooglePlusAppSecret" value="YOUR_ROTATED_GOOGLE_SECRET" />
+<add key="MicrosoftAppId"      value="YOUR_MICROSOFT_CLIENT_ID" />
+<add key="MicrosoftAppSecret"  value="YOUR_MICROSOFT_CLIENT_SECRET" />
+<add key="FacebookAppId"       value="YOUR_FACEBOOK_APP_ID" />
+<add key="FacebookAppSecret"   value="YOUR_FACEBOOK_APP_SECRET" />
 ```
+(The same key names appear commented in the repo Web.config for reference.)
 
-## OAuth app registration (redirect URIs)
-Register these exact "authorised redirect URIs" with each provider. They must match the
-live domain in `Settings.ForumUrl` (we set it to `https://www.ethipical.com`):
-- Google:   `https://www.ethipical.com/GoogleOAuth/GoogleLogin`
-- Facebook: `https://www.ethipical.com/FacebookOAuth/FacebookLogin`
+## OAuth app registration — redirect URIs
+Register these exact redirect URIs with each provider (HTTPS, real domain — providers reject
+the `ntempurl.com` temp URL and plain HTTP). Use the live domain (`ethipical.com`):
+- Google:    `https://www.ethipical.com/signin-google`
+- Microsoft: `https://www.ethipical.com/signin-microsoft`
+- Facebook:  `https://www.ethipical.com/signin-facebook`
 
-Providers require **HTTPS** and a real domain (they reject the `ntempurl.com` temp URL /
-plain HTTP). So social login only works once `ethipical.com` + Let's Encrypt SSL are live.
+These `/signin-*` paths are the OWIN middleware's default callback paths (handled
+automatically; you don't add routes for them).
 
 ## Turn it on
-1. Rotate + set the credentials in the server `forum.config` (above).
+1. Rotate + set the credentials in the server Web.config (above).
 2. Register the redirect URIs with each provider.
 3. Run `database/EnableSocialLogins.sql` (sets `Settings.EnableSocialLogins = 1`).
-4. Recycle the app pool.
+4. Recycle the app pool (touch `/site1/Web.config`).
 
-The button for a provider appears only when both its AppId and AppSecret are set, so
-Google/Facebook can be enabled independently and Microsoft stays hidden until rewritten.
+Social login is testable only once `ethipical.com` + SSL are live. A provider's button
+appears only when both its id and secret are set, so you can enable providers one at a time.
