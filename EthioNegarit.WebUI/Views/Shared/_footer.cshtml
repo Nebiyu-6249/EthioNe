@@ -31,13 +31,33 @@
                 <li><a href="@Url.Action("ContactUs", "Home")">@Html.LanguageString("Layout.Nav.SendUsMessage")</a></li>
                 <li>@Html.Raw(Html.Settings().NotificationReplyEmail)</li>
             </ul>
-            <ul class="footer-socials">
-                <li><a href="#"><img class="social-icons" src="~/content/Images/social-icons/icon-facebook.svg" alt="facebook"></a></li>
-                <li><a href="index.html"><i class="fab fa-facebook"></i></a></li>
-                <li><a href="index.html"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="index.html"><img class="social-icons" src="~/Content/Images/social-icons/icon-twitter.svg" alt="twitter"></a></li>
-                <li><a href="index.html"><img class="social-icons" src="~/Content/Images/social-icons/icon-youtube.svg" alt="youtube"></a></li>
-            </ul>
+            @{
+                // Social profile URLs come from Web.config <appSettings> (server-maintained,
+                // same file as the social-login OAuth keys) - there are no DB Settings fields
+                // for them. An icon renders only when its URL is set, so an unconfigured link is
+                // hidden instead of pointing at a non-existent /index.html (which 404'd). Set
+                // these in the SERVER Web.config, e.g. <add key="FacebookUrl" value="https://facebook.com/..." />
+                var facebookUrl = EthioNegarit.Utilities.ConfigUtils.GetAppSetting("FacebookUrl", "");
+                var twitterUrl = EthioNegarit.Utilities.ConfigUtils.GetAppSetting("TwitterUrl", "");
+                var youtubeUrl = EthioNegarit.Utilities.ConfigUtils.GetAppSetting("YouTubeUrl", "");
+            }
+            @if (!string.IsNullOrWhiteSpace(facebookUrl) || !string.IsNullOrWhiteSpace(twitterUrl) || !string.IsNullOrWhiteSpace(youtubeUrl))
+            {
+                <ul class="footer-socials">
+                    @if (!string.IsNullOrWhiteSpace(facebookUrl))
+                    {
+                        <li><a href="@facebookUrl" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook"></i></a></li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(twitterUrl))
+                    {
+                        <li><a href="@twitterUrl" target="_blank" rel="noopener" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(youtubeUrl))
+                    {
+                        <li><a href="@youtubeUrl" target="_blank" rel="noopener" title="YouTube"><i class="fab fa-youtube"></i></a></li>
+                    }
+                </ul>
+            }
         </div>
     </div>
     @*******Footer Copy Right********@
