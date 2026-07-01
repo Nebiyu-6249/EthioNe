@@ -504,7 +504,8 @@
         {
             // var timespan = DateTime.UtcNow.AddHours(-1);
             //  var timespan = DateTime.UtcNow.AddMinutes(-20);
-            if (Request.IsAjaxRequest())
+            // Only render ads when advertising is enabled site-wide.
+            if (SettingsService.GetSettings().EnableAd && Request.IsAjaxRequest())
             {
                 using (var unitOfWork = UnitOfWorkManager.NewUnitOfWork())
                 {
@@ -538,7 +539,8 @@
         public PartialViewResult Bottom()
         {
             //   var timespan = DateTime.UtcNow.AddMinutes(-15);
-            if (Request.IsAjaxRequest())
+            // Only render ads when advertising is enabled site-wide.
+            if (SettingsService.GetSettings().EnableAd && Request.IsAjaxRequest())
             {
                 using (var unitOfWork = UnitOfWorkManager.NewUnitOfWork())
                 {
