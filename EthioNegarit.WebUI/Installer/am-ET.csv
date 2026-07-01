@@ -843,3 +843,5 @@ Chat.Online,መስመር ላይ
 Chat.ReplyingTo,ለ{0} በመመለስ ላይ
 Chat.MessageDeleted,መልዕክት ተሰርዟል
 Chat.CancelReply,መልስ ሰርዝ
+Topic.ClearVisited,የተጎበኙትን አጽዳ
+Topic.NoRecentlyVisited,እስካሁን ምንም ርዕስ አልጎበኙም።

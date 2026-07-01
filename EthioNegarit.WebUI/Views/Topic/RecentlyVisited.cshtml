@@ -1,0 +1,49 @@
+@using EthioNegarit.WebUI.ViewModels
+@model RecentlyVisitedTopicsViewModel
+@{
+    ViewBag.Title = Html.Lang("Topic.RecentlyVisited");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var hasTopics = Model != null && Model.Topics != null && Model.Topics.Any();
+}
+<div class="page-header">
+    <span class="d-none d-sm-inline-block">@ViewBag.Title</span>
+    @if (hasTopics)
+    {
+        <span class="width-25">
+            <a href="@Url.Action("ClearVisited", "Topic")" class="btn btn-block btn-xs btn-success">
+                @Html.LanguageString("Topic.ClearVisited")
+            </a>
+        </span>
+    }
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-sm-9">
+                @if (hasTopics)
+                {
+                    <ul class="contents-list">
+                        @foreach (var topic in Model.Topics)
+                        {
+                            <li class="content-fluid">
+                                @{ Html.RenderPartial("_Topic", topic); }
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <div class="text-center text-muted py-5">
+                        <i class="fas fa-history fa-2x mb-2" aria-hidden="true"></i>
+                        <p>@Html.LanguageString("Topic.NoRecentlyVisited")</p>
+                    </div>
+                }
+            </section>
+            <section class="col-sm-3 side-panel">
+                <div class="panel-content">
+                    @Html.Partial("_CommonSideNav")
+                </div>
+            </section>
+        </div>
+    </div>
+</section>

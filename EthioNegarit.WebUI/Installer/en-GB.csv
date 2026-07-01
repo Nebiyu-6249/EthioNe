@@ -843,3 +843,5 @@ Chat.Online,online
 Chat.ReplyingTo,Replying to {0}
 Chat.MessageDeleted,message deleted
 Chat.CancelReply,Cancel reply
+Topic.ClearVisited,Clear visited
+Topic.NoRecentlyVisited,You haven't visited any topics yet.

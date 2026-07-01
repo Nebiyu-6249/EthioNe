@@ -46,6 +46,14 @@
                                 </p>
                             </a>
                         </li>
+                    <li class="nav-item">
+                            <a href="@Url.Action("RecentlyVisited", "Topic")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "topic" && TempData[AppConstants.CurrentAction].ToString() == "recentlyvisited" ? "active" : "")" title="Topics you recently visited">
+                                <i class="nav-icon fa fa-history text-muted text-sm"></i>
+                                <p>
+                                    @Html.Lang("Topic.RecentlyVisited")
+                                </p>
+                            </a>
+                        </li>
                 }
                 else
                 {

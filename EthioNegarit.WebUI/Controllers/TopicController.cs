@@ -1428,6 +1428,45 @@
                 return PartialView(viewModel);
             }
         }
+        // Recently-visited topics page. RecentActivity is tracked per-session (see the
+        // RecentActivityModelBinder + AddRecentTopicVisited calls). The cached Topic objects
+        // are detached from any DbContext, so re-fetch each by Id inside a unit of work to
+        // get attached, fully-loadable entities before building the view models.
+        public ActionResult RecentlyVisited()
+        {
+            using (UnitOfWorkManager.NewUnitOfWork())
+            {
+                var allowedCategories = _categoryService.GetAllowedCategories(UsersRole);
+                var recentActivity = Session["RecentActivity"] as RecentActivity;
+
+                var topicViewModels = new List<TopicViewModel>();
+                if (recentActivity != null)
+                {
+                    var ids = recentActivity.RecentTopics
+                        .Where(x => x.Topic != null)
+                        .Select(x => x.Topic.Id)
+                        .Distinct()
+                        .ToList();
+                    if (ids.Any())
+                    {
+                        var topics = ids.Select(id => _topicService.Get(id)).Where(t => t != null).ToList();
+                        topicViewModels = ViewModelMapping.CreateTopicViewModels(topics, RoleService, UsersRole,
+                            LoggedOnReadOnlyUser, allowedCategories, SettingsService.GetSettings());
+                    }
+                }
+
+                return View(new RecentlyVisitedTopicsViewModel { Topics = topicViewModels });
+            }
+        }
+        public ActionResult ClearVisited()
+        {
+            var recentActivity = Session["RecentActivity"] as RecentActivity;
+            if (recentActivity != null)
+            {
+                recentActivity.Clear();
+            }
+            return RedirectToAction("Index", "Topic");
+        }
         public ActionResult RelatedTopics(Guid topicId)
         {
             using (UnitOfWorkManager.NewUnitOfWork())

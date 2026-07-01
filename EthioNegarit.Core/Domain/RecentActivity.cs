@@ -59,6 +59,13 @@ namespace EthioNegarit.Core.Domain
         {
             get { return chatRoomCollection; }
         }
+        // Used by Topic/ClearVisited to reset the visitor's recent-activity history.
+        public void Clear()
+        {
+            topicCollection.Clear();
+            categoryCollection.Clear();
+            chatRoomCollection.Clear();
+        }
     }
     public class RecentVisited
     {
