@@ -1,0 +1,358 @@
+﻿//
+/*#region =================  Ad ================ */
+//
+.ad-container {
+    display: grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    grid-gap: 10px;
+    @media (max-width: breakpoint-max(xs)) {
+         grid-template-columns:repeat(1, minmax(0, 1fr));
+    }
+}
+
+.ad-details {
+    display: grid;
+   grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 10px;
+}
+.ad {
+    padding: 1rem;
+    border: 1px solid transparent;
+   box-shadow: $box-shadow;
+     background-color: lawngreen !important;    
+    border-radius: $border-radius;
+    justify-content: center;
+    align-items: center;
+}
+.ad-aside {
+    display: flex;
+    margin: 5px;
+    float: left;
+    width: 30%;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+    img {
+        height: 40%;
+        width: 40%;
+    }
+    @media (max-width: breakpoint-max(xs)) {
+        display: block;
+        width: 100%;
+        margin-top: 0;
+        img {
+            height: 40%;
+            width: 40%;
+        }
+    }
+}
+.ad-content {
+    display: block;
+  margin-left: 5px;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        margin-top: 5px;
+        font-size: 12px;
+        color: lighten($dark, 15%);
+        text-align: center;
+    }
+    @media (max-width: breakpoint-max(xs)) {
+        display: block;
+        margin-left: 0;
+    }
+}
+.ad-slim {
+    @include clearfix ();
+    position: relative;
+    padding: 5px;
+    border-radius: 5px;
+    color: lighten($dark, 15%);
+    .ad-content-footer {      
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+}
+.company-name {
+    display: block;
+    top: 0;
+   text-align: center;
+    padding: 5px;
+      margin: 0;
+    font-weight: 300;
+    color: $gray-500;
+    letter-spacing: 3px;
+}
+.slogan {
+    top: 0;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    line-height: 16px;
+    font-weight: 100;
+    font-size: 12px;
+}
+//
+/*#endregion ============== Ad End  ====================  */
+//
+//
+/*#region =================  Advert Popup ================ */
+//
+.popup {
+    @include clearfix ();
+    @include box-shadow($card-shadow);
+    @include border-radius($border-radius);
+    overflow: hidden;
+    elevation: higher;
+    position: relative;
+    z-index: ($zindex-advert + 1);  
+    display: none;
+      margin: 0;
+    .fullwidth {
+        display: none;
+    }
+}
+body.fullwidth {
+    .popup,
+    .popup-bottom,
+    .popup-top,
+    .bottom-left,
+    .bottom-right {
+        display: none;
+    }
+}
+//
+/*#endregion ============== Advert PopUp End  ====================  */
+//
+//
+/*#region =================  Advert Top ================ */
+//
+.popup-top {
+   position:relative;
+  margin:10px 0 0 10px;
+   top:0;
+    display: none;
+    width: 98%;
+    max-height: 120px;
+    .fullwidth {
+        display: none;
+    }
+    @media (max-width: breakpoint-max(xs)) {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+.ad-top {
+    position: relative;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: darken($gray-100, 8%);
+
+.image {
+  //  padding: 5px 5px;
+    display: block;
+    float: left;
+    width: 25%;
+    text-align: center;
+    bottom: 0;
+    img {
+        margin-top: 10px;
+        height: 20%;
+        width: 20%;
+    }
+
+    @media (max-width: breakpoint-max(xs)) {
+        display: none;
+    }
+}
+.ad-body {
+    position: relative;
+    display: block;
+    @media (max-width: breakpoint-max(xs)) {
+        margin-left: 0;
+    }
+  p {
+     margin: 0.5rem 0 0.5rem;
+     font-weight: 300;
+    }
+}
+}
+//
+/*#endregion ============== Advert Top End  ====================  */
+//
+//
+
+/*#region =================  Advert Bottom ================ */
+//
+.popup-bottom {
+  position:fixed;
+    display: none;
+    bottom: 0;
+    max-height: 120px;
+    width: 59%;
+    margin:10px;
+     margin-left:15px;
+    left:$sidebar-width;
+  justify-content: center;
+  align-items: center;
+      .sidebar-collapse & {
+        &,
+        &::before {
+            margin-left: -$sidebar-mini-width * 2.3;
+            width: 70%;
+        }
+    }
+        @include media-breakpoint-down(sm) {
+             margin: 10px;
+             margin-right: 10px;
+           margin-left: auto; // Pushes the last item to the far right
+           right:0;
+        width: 100%;       
+         }
+}
+.ad-bottom {
+    position: relative;
+    border-radius: $border-radius;
+    width: 100%;
+     text-align: center;
+    background: darken($gray-100, 8%);
+.image {
+    display: block;
+    float: left;
+    width: 30%;
+    text-align: center;
+    bottom: 0;
+    img {
+        height: 25%;
+        width: 25%;
+    }
+    @media (max-width: breakpoint-max(xs)) {
+        display: none;
+    }
+}
+.ad-body {
+    position: relative;
+    display: block;
+    @media (max-width: breakpoint-max(xs)) {
+      left: 0;
+        margin-left: auto; // Pushes the last item to the far right
+        width: 100%;
+    }
+  p {
+     margin: 0.5rem 0 0.5rem;
+     font-weight: 300;
+    }
+}
+}
+//
+/*#endregion ============== Advert Bottom End  ====================  */
+//
+//
+/*#region =================  Advert Bottom Left ================ */
+//
+.bottom-left {
+    position:fixed;
+     bottom: 0;
+    display: none;
+     height: 100px;
+        width:240px;
+          margin:5px;
+            .sidebar-collapse & {
+        &,
+        &::before {
+            margin-left: $sidebar-mini-width;
+        }
+    }
+     @include media-breakpoint-down(sm) {
+          margin: 10px;
+          margin-right: 10px;
+           margin-left: auto; // Pushes the last item to the far right
+           right:0;
+        width: 100%;       
+         }
+    }
+.ad-bottom-left {
+    display: block;
+    width: 100%;
+   image{
+        height: 20%;
+        width: 20%;
+     img {
+        height: 18%;
+        width: 18%;
+    }
+     }
+    .company-name {
+        font-size: 8px;
+    }
+}
+//
+/*#endregion ============== Advert Bottom Left End  ====================  */
+//
+
+//
+/*#region =================  Advert Bottom Right ================ */
+//
+.bottom-right {
+    position:relative;
+    display: none;
+      max-height: 300px;
+      bottom: 0;
+      width: 100%;
+     margin-bottom:0;
+     right:0;
+}
+.ad-bottom-right {
+    position:relative;
+      height:100%;
+       width:100%;
+        margin-bottom: 3px;
+        bottom: 3px;
+          justify-content: center;
+    align-items: center;
+}
+//
+/*#endregion ============== Advert Bottom Right End  ====================  */
+//
+.ad-content-aside {
+    padding: 5px 5px;
+    display: block;
+    float: left;
+    width: 280px;
+    height: 100%;
+    text-align: center;
+    bottom: 0;
+    span {
+        display: inline-block;
+    }
+    @media (max-width: breakpoint-max(xs)) {
+        display: none;
+    }
+}
+.ad-info {
+    @include clearfix ();
+    position: relative;
+    padding: 5px;
+    border-radius: 5px;
+    color: lighten($dark, 15%);
+    border-bottom: 1px solid darken($gray-400, 10%);
+
+    .ad-content-footer {     
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+}
+.payment-infos {
+    display: block;
+      @media (max-width: breakpoint-max(xs)) {
+        display: none;
+    }
+    }
+@include dark-mode () {
+    .banner, .ad {
+        background-color: lighten($dark, 3%);
+        color: $gray-500;
+    }
+}

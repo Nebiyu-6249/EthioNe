@@ -1,0 +1,285 @@
+﻿//
+/*#region =================  Chat Message ================ */
+//
+.chat-messages {
+    position: absolute;
+    height: 440px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width:95%;
+    background-color: transparent;
+    /* smooth scrolling on touch devices */
+    -webkit-overflow-scrolling: touch;
+    @include scrollbar-color-gray();
+    @include scrollbar-width-none();
+    &:hover {
+        @include scrollbar-width-thin();
+    }
+}
+.chat-social,
+.chat-message,
+.chat-text {
+    display: block;
+}
+.chat-message {
+    @include clearfix ();
+    width:100%;
+   &:hover {
+        .chat-social {
+             opacity: 1;
+            }
+        }
+}
+.chat-message:hover + .chat-social {
+  opacity: 1;
+}
+.chat-text {
+   @include border-radius($border-radius-lg);
+    background-color: darken($gray-100, 10%);
+    color: $dark;
+    position: relative;
+    margin: 5px 0 0 50px;
+    padding: 5px 6px;
+    border: 1px solid darken($gray-100, 10%);
+    font-size: 12px;
+    font-weight: 300;   
+     //Create the arrow
+    &::after,
+    &::before {
+        border: solid transparent;
+        border-right-color: darken($gray-200, 10%);
+        content: "";
+        height: 0;
+        pointer-events: none;
+        position: absolute;
+        right: 100%;
+        top: 15px;
+        width: 0;
+    }
+    &::after {
+        border-width: 5px;
+        margin-top: -5px;
+    }
+    &::before {
+        border-width: 6px;
+        margin-top: -6px;
+    }
+    .right & {
+        margin-left: 40px;
+        margin-right: 50px;
+        background-color: darken($gray-100, 6%);
+        &::after,
+        &::before {
+            border-left-color: darken($gray-200, 10%);
+            border-right-color: transparent;
+            left: 100%;
+            right: auto;
+        }
+        .chat-img,
+        .chat-name       
+        {
+            float: right;
+        }
+        .chat-social
+        {
+            float: right;
+        }
+    }
+    .message-deleted {
+     color: red;
+    }
+    .new-message & {
+       background-color:$limegreen;
+        border: 1px solid green; 
+    } 
+      &:hover {
+        background-color: darken($gray-100, 15%);
+    }
+}
+.chat-social {
+    position: relative;  
+    margin-left:auto;
+    opacity: 0.3;
+ /* property | duration | timing-function | delay */
+  transition: all 0.5s ease-in-out 0s;
+     font-size: 10px;
+    font-weight: 300;
+    color: darken($gray-500, 25%);
+    float: right;
+    padding-right:5px;
+    right:0;
+    ul {
+        padding: 0;
+        margin: 0;
+        li {
+              list-style: none;
+            display: inline-block;
+          padding: 0 10px 0 0;    
+            font-size: 12px;
+            @media (max-width: breakpoint-max(xs)) {
+                   width: 100%;
+                display: inline;
+                margin-right: 0;
+                right:0;
+            }
+        }
+    }  
+}
+.message-deleted {
+     color: red;
+    }
+.new-message{
+       background-color:$limegreen;
+        border: 1px solid green; 
+    }
+.chat-img {
+    float: left;
+    height: 40px;
+    width: 40px;
+    .right & {
+        float: right;
+          margin-right: 0;
+    }
+}
+
+.chat-timestamp {
+    color: darken($gray-500, 25%);
+    float: left;
+}
+    //
+    /*#endregion ============== Chat Message End  ====================  */
+    //
+      .sub {
+            clear:both;
+                color: #6b7280;
+              //  margin: 0 0 28px;
+                margin: 0 0 10px;
+                font-size: 14px;
+            }
+      .empty {
+            color: #9aa1ab;
+            font-size: 14px;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .status {
+            font-size: 12px;
+            color: #9aa1ab;
+            margin-top: 0;
+            margin-left:10px;
+            height: 10px;
+        }
+//
+/*#region =================  New Chat Message ================ */
+//
+
+     /* ── Input Bar ────────────────────────────────────────────────────── */
+        .input-bar {
+         //  padding: 10px 16px;
+           padding: 5px 8px;
+        }
+        .input-wrap {
+             display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            padding: 6px 10px;
+            transition: border-color .15s;
+             color:$dark;
+           background-color: darken($gray-100, 10%);
+           border: 1px solid $gray-100;
+           border-radius: 4px;
+        }
+        .input-wrap:focus-within {
+                  border-color: transparent;
+            }
+        .messageInput {
+           flex: 1;
+             background-color: darken($gray-100, 10%);
+             color: $dark;
+            border: none;
+            outline: none;
+            font-size: 13px;
+            resize: none;
+            max-height: 120px;
+            line-height: 1.5;
+        }
+        .messageInput::placeholder {
+          color: $dark;
+        }
+        .sendButton {
+              padding: 5px 14px;
+            border: none;
+            border-radius: 4px;
+                background: $blue;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .15s;
+            flex-shrink: 0;
+        }
+        .sendButton:hover {
+          background: $blue-light;
+        }
+        .sendButton:disabled {
+         background: $border;
+         cursor: not-allowed;
+            }
+ //
+ /*#endregion ============== Chat Message End  ====================  */
+ //
+           
+@include dark-mode () {
+    .input-wrap {     
+          background-color: lighten($dark, 5%);
+        color: $gray-500;
+        border: 1px solid transparent;
+        }
+     .input-wrap:focus-within {
+              //  border-color: $gray-600;
+                border-color: transparent;
+            }
+  .messageInput {
+       //  background: transparent;
+       background-color: lighten($dark, 5%);
+         color: $gray-100;
+        &:focus {
+         background-color: lighten($dark, 5%);
+        color: $gray-100;
+        // border-color: transparent;
+         border-color:$gray-600;
+  }
+        }
+      .messageInput::placeholder {
+         color: $text-primary;
+        // color: $dark;
+        }
+    .chat-text {
+              background-color: lighten($dark, 5%);
+        color: $gray-500;
+
+       border-color: lighten($dark, 15%);
+        &::before {
+                border: solid transparent;
+                border-left-color: lighten($dark, 3%);            
+         //   border-right-color: transparent;
+        }
+
+      .right{       
+      &::after
+        {
+              border: solid transparent;
+          // border-right-color: solid transparent;
+           border-left-color:lighten($dark, 3%);     
+        //   border-right-color: lighten($dark, 3%);         
+        }
+    }
+    &:hover {
+			background-color: lighten($dark, 1%);
+		}
+    }
+    .chat-social {
+        color: $gray-400;
+        }
+}

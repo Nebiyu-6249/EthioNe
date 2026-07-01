@@ -1,0 +1,86 @@
+﻿@using EthioNegarit.Utilities
+@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.ViewModels
+@model CategoryViewModel
+@{
+    Layout = null;
+    var subScribe = string.Empty;
+    var unSubscribe = string.Empty;
+    const string displayNone = "style='display:none;'";
+    if (Model.IsSubscribed)
+    {
+        subScribe = displayNone;
+    }
+    else
+    {
+        unSubscribe = displayNone;
+    }
+}
+<div class="box categoryy @(Model.ShowUnSubscribedLink ? "categorySubscribed" : "categoryUnSubscribed")">
+    <div class="box-header">
+        <span class="image d-none d-sm-inline-block">
+            @if (!string.IsNullOrEmpty(@Model.Category.Image))
+            {
+                <img src="@AppHelpers.CategoryImage(@Model.Category.Image, @Model.Category.Id,100)" alt="@Model.Category.Name" class="img-circle img-bordered-sm elevation-3" />
+            }
+            else
+            {
+                <img src="../../Content/images/default.png" class="img-circle  img-bordered-sm elevation-3" style="opacity: .8">
+
+            }
+        </span>
+        <span class="box-title">
+            <a class="" href="@Html.Raw(@Model.Category.NiceUrl)">
+                @Model.Category.Name
+            </a>
+        </span>
+        <span class="widget-right">
+            @if (Html.CurrentMember() != null && Html.Settings().EnableEmailSubscriptions)
+            {
+                <a @Html.Raw(subScribe) href="#" class="emailsubscription" data-id="@Model.Category.Id" data-type="category">
+                    <i class="far fa-star yellow-colour" aria-hidden="true"></i>
+                </a>
+                    @*if(Model.ShowUnSubscribedLink)
+                        {*@
+                    <a @Html.Raw(unSubscribe) href="#" class="emailunsubscription" data-id="@Model.Category.Id" data-type="category">
+                        <i class="fas fa-star yellow-colour" aria-hidden="true"></i>
+                    </a>
+                //}
+            }
+        </span>
+    </div>
+    <div class="box-body content-text">
+        <a href="@Model.Category.NiceUrl" class="" title="@Html.LanguageString("")">
+            @Html.Raw(string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(@Model.Category.Description), 25), "...."))
+        </a>
+     
+        </div>
+    @if (Model.Category.Topics.Count > 0)
+    {
+        <div class="box-footerr text-sm">
+            <a class="" href="@Html.Raw(@Model.Category.NiceUrl)" title=" @Html.LanguageString("Layout.Nav.Discussions")">
+                <div class="inlineitems">
+                    @Html.LanguageString("Layout.Nav.Discussions")
+                    <span class="">
+                        <i class="far fa fa-comments ml-2 mr-2">
+                            @Model.Category.Topics.Count.KiloFormat()
+                        </i>
+                    </span>
+                </div>
+            </a>
+        </div>
+            <div class="box-footer">
+                @if (Model.LatestTopic != null)
+            {
+            <text>
+                @Html.LanguageString("Category.MostRecent")
+                <a href="@Model.LatestTopic.NiceUrl">@Html.Raw(Model.LatestTopic.Name)</a>
+                @Html.Raw(string.Format(Html.LanguageString("Topic.StartedBy"),
+                                   DatesUI.GetPrettyDate(Model.LatestTopic.CreateDate.ToString()),
+                                   string.Format("<a href='{0}'>{1}</a>", Model.LatestTopic.User.NiceUrl, Model.LatestTopic.User.UserName)))
+            </text>
+            }
+            </div>
+        }
+   
+</div>

@@ -1,0 +1,47 @@
+﻿@using System.Linq;
+@using EthioNegarit.WebUI.ViewModels
+@model HighEarnersPointViewModel
+
+@{
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+}
+@if (Html.Settings().EnablePoints && Model.HighEarners.Any(x => x.Value > 0))
+{         
+                <div class="panel-header">              
+                 <h3 class="title">@Html.LanguageString("Points.ThisWeeksHighEarners")</h3>
+                </div>    
+                    <div class="highearnerss">
+                        <ul class="contents-list">
+
+                            @foreach (var dict in Model.HighEarners.Where(x => x.Value > 0))
+                {
+                                <li>
+                                    <a id="@dict.Key.Id" class="show-pop-delay" role="button" href="@dict.Key.NiceUrl" data-delay-show="300" data-delay-hide="1000" data-placement="left">
+                                        <div class="member-side">
+                                            <div class="member-header">
+                                                <div class="image">
+                                                    <img class="img-circle @(dict.Key.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm")" src="@dict.Key.MemberImage(SiteConstants.Instance.GravatarLeaderboardSize)" alt="">
+                                                </div>
+                                                <span class="member-name">
+                                                    @dict.Key.UserName
+                                                    <span class="earneramount float-right">
+                                                        <span class="circle circle-xs text-success">
+                                                            @dict.Value
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+
+									@Html.Partial("_memberPopover", new MemberPopUpViewModel { User = @dict.Key })
+                                   @* @{
+		Html.RenderPartial("_memberInfo", dict.Key);
+	}*@
+                                </li>
+                            }
+                        </ul>
+                    </div>
+           
+          
+}

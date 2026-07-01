@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "_Layout.cshtml";
+}
+@section SocialMeta{
+    @RenderSection("SocialMeta", false)
+}
+@section Header {
+    @RenderSection("Header", false)
+
+<script type="text/javascript">
+    $(function () {
+        $('body').removeClass("sidebar-mini");
+        $('body').addClass("fullwidth");
+        $['data-widget="pushmenu"'].hide();
+    });
+</script>
+}
+<div class="">
+    @RenderBody()
+</div>

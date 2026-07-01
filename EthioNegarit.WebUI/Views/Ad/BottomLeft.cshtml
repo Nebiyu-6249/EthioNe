@@ -1,0 +1,61 @@
+﻿@model EthioNegarit.WebUI.ViewModels.AdViewModel
+@*@if (Model.Advertisement != null)
+    {*@
+@*
+    @if (@Model.hasVideo)
+      {
+        <div class="float-center">
+            <video width="260" height="200" autoplay preload="auto">
+                <source src="@Url.Action("VideoStream","Ad", new { adId=@Model.Advertisement.Id})" type="video/mp4">
+            </video>
+        </div>
+      }
+      else
+      {*@
+
+            <div class="ad ad-bottom-left" id="myDivToClose" role="alert">
+                <button type="button" class="close" data-dismiss="ad-bottom-leftt" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                @if (!string.IsNullOrEmpty(Model.Advertisement.Image))
+                {
+                    <div class="image float-centerr">
+                        <img class="img-circle img-size-50 img-bordered-sm" src="@AppHelpers.AdvertImage(Model.Advertisement.Image, Model.Advertisement.Id, 110)" alt="@Model.Advertisement.Name">
+                    </div>
+                }
+                <div class="company-name text-sm text-center d-blockk">
+                    <a href=" @Model.Advertisement.NiceUrl" title=" @Model.Advertisement.Name">
+                        @Model.Advertisement.Name
+                    </a>
+                </div>
+                <div class="slogan text-xs float-centerr text-center">
+                    @Model.Advertisement.MotoSlogan
+                </div>
+                <div class="content-footer text-center">
+                    @if (@Model.Advertisement.LinkUrl != null)
+                    {
+                        <a href="@Model.Advertisement.LinkUrl" target="_blank" class="btn btn-xs text-info" title="@Model.Advertisement.Name">
+                            <i class="fas fa-external-link-alt" aria-hidden="true">
+                                @if (@Model.Advertisement.LinkText != null)
+                        {
+                                    @Model.Advertisement.LinkText
+                                }
+                                else
+                                {
+                                    @Model.Advertisement.Name
+                                }
+                            </i>
+                        </a>
+                    }
+                </div>
+            </div>
+<script>
+    $(document).ready(function () {
+        // When an element with class 'close-btn' is clicked
+        $('.close').on('click', function () {
+            // Find the closest ancestor div with the id 'myDivToClose' and hide it
+         //   $(this).closest('#myDivToClose').hide();
+            $(this).closest('.ad').hide();
+        });
+    });
+</script>

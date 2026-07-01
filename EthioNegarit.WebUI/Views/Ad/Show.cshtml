@@ -1,0 +1,194 @@
+﻿@model EthioNegarit.WebUI.ViewModels.AdViewModel
+@{
+    ViewBag.Title = Html.Raw(@Model.Advertisement.Name);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Page header -->
+ <div class="page-header">
+            <span class="">
+                <a href="@Url.Action("Index","Ad")" class="" title="@Html.LanguageString("Go To Ad Center")">
+                    <i class="ethicon fas fa-ad"></i>
+                    @Html.LanguageString("Ad Center")
+                </a>
+            </span>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <span class="width-50 text-center">
+                    @Html.Action("CreateAdButton", "Ad")
+                </span>
+            }
+    </div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-sm-9">
+                <div class="boxx add mb-5">
+@if (@Model.hasVideo)
+{
+                    <div class="ad-aside content-centerr mt-4 mb-0" style="vertical-align:middle">
+                       
+                            <div class="float-centerr">
+                                @* <video width="320" height="240" controls autoplay>*@
+                                <video width="260" height="200" autoplay preload="auto">
+                                    <source src="@Url.Action("VideoStream","File", new { adId=@Model.Advertisement.Id})" type="video/mp4">
+                                </video>
+                            </div>
+                       
+                  @*      else
+    {
+        <img class="img-circle img-size-64 img-bordered-sm mt-4 elevation-3" src="@AppHelpers.AdvertImage(Model.Advertisement.Image, Model.Advertisement.Id,110)" alt="@Model.Advertisement.Name">
+    }*@
+                    </div>
+                    }
+                    <div class="ad-content">
+                        <div class="title company-name">
+                            <a class="" href="@Model.Advertisement.NiceUrl" title="@Model.Advertisement.Name">
+                                @Model.Advertisement.Name
+                            </a>
+                        </div>
+                        <div class="sub-title slogan">
+                            @Model.Advertisement.MotoSlogan
+                        </div>
+                        <div class="content-detail">
+                            @Html.Raw(Model.Advertisement.About)
+                        </div>
+                        <div class="content-footer text-right">
+                            <div class="bottom-contentt d-none d-sm-inline-block">
+                                <div class="ad-files clearfix">
+                                    @if (@Model.Advertisement.Files != null && @Model.Advertisement.Files.Any())
+                                    {
+                                        <div class="postuploadedfilesholderr clearfix">
+                                            <ul>
+                                                @foreach (var file in @Model.Advertisement.Files.OrderByDescending(o => o.DateCreated))
+                                                {
+                                                    <li>
+                                                        @if (file.FileType != "mp4")
+                                                        {
+                                                            <img class="img-circle img-size-64 img-bordered-sm elevation-3" src="@AppHelpers.AdvertImage(@file.Filename, @Model.Advertisement.Id, 110)" alt="">
+                                                        }
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-footer text-muted text-right">
+                            @if (@Model.Advertisement.LinkUrl != null)
+                            {
+                                <a href="@Model.Advertisement.LinkUrl" target="_blank" class="btn btn-sm" title="@Model.Advertisement.Name">
+                                    <i class="fas fa-external-link-alt" aria-hidden="true">
+                                        @if (@Model.Advertisement.LinkText != null)
+                                        {
+                                            @Model.Advertisement.LinkText
+                                        }
+                                        else
+                                        {
+                                            @Model.Advertisement.Name
+                                        }
+                                    </i>
+                                </a>
+                            }
+
+                            @if (!string.IsNullOrEmpty(Model.Advertisement.Email))
+                            {
+                                <a href="#" class="btn btn-sm text-muted" title="Email">
+                                    <i class="fas fa fa-mail-forward aria-hidden=" true"">
+                                        @Model.Advertisement.Email
+                                    </i>
+                                </a>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Advertisement.Line))
+                            {
+                                <a href="#" class="btn btn-sm text-muted" title="Phone">
+                                    <i class="fas fa fa-phone aria-hidden=" true"">
+                                        @Model.Advertisement.Line
+                                    </i>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+               @* <div class="banner d-none d-sm-inline-block mt-4">
+            <div class="banner-image">
+                <img src="../../Content/images/default.png" class="img-circle img-bordered-sm elevation-3" style="opacity: .8">
+            </div>
+            <div class="banner-body pull-right">
+                <div class="title text-center text-capitalize">
+                    <p>Advertisement on EthioNegarit</p>
+                </div>
+                <p class="content-text">
+                    Do you want to reach  Our Visitors
+                    A banner is a piece of cloth or flexible material displaying a message, often used for advertising, decoration, or as a symbol of an idea or group.
+                </p>
+            </div>
+            @if (User.Identity.IsAuthenticated)
+    {
+                <span class="page-header text-sm float-right">
+                    <span></span>
+                    <span>
+                        @Html.Action("CreateTrialAdButton", "Ad")
+                    </span>
+                </span>
+            }
+        </div>*@
+
+            </section>
+            <section class="col-sm-3">
+              @*  @if (!@Model.hasVideo && !@Model.hasMap)*@
+@if (!@Model.hasMap)
+{
+                    <div class="square-smm content-center">
+                        <div class="float-center">
+                            <img src="../../Content/images/default.png" class="img-circle img-size-64 img-bordered-sm" style="opacity: .8">
+                        </div>
+                        <div class="company-name text-sm float-center">
+                            @Model.Advertisement.Name
+                        </div>
+                        <div class="slogan float-center">
+                            @Model.Advertisement.MotoSlogan
+                        </div>
+                    </div>
+                }
+
+                @*      @if (@Model.hasVideo)
+                    {
+                        <div class="float-center">
+                            @* <video width="320" height="240" controls autoplay>*@
+    @*
+                <video width="260" height="200" autoplay preload="auto">
+                    <source src="@Url.Action("VideoStream","File", new { adId=@Model.Advertisement.Id})" type="video/mp4">
+                </video>
+        </div>
+        }*@
+        <div id="map" class="content-center"></div>
+        @if (Model.hasMap)
+        {
+            @Html.Action("View", "Location", new { advertId = @Model.Advertisement.Id })
+        }
+</section>
+        </div>
+        <div class="divider  clearfix"></div>
+        <div class="banner d-none d-sm-inline-block mt-4 mb-4">
+      @*      <div class="banner-image">
+        <img src="../../Content/images/default.png" class="img-circle img-bordered-sm elevation-3" style="opacity: .8">
+    </div>*@
+            <div class="banner-body pull-rightt">
+                <div class="title text-center text-capitalize">
+                    <p>Advertisement on EthioNegarit</p>
+                </div>
+                <p class="content-text text-center p-2">
+                    Do you want to reach  Our Visitors
+                    A banner is a piece of cloth or flexible material displaying a message, often used for advertising, decoration, or as a symbol of an idea or group.
+                </p>
+            </div>
+        </div>
+
+        <div class="divider  clearfix"></div>
+        <div class="container mb-4">
+            @Html.Action("AutoSlide", "Ad")
+        </div>
+    </div>
+</section>

@@ -1,0 +1,398 @@
+﻿//
+// Component: Cards
+//
+.carddeck {
+    display: grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+  grid-gap: 10px;
+    @media (max-width: breakpoint-max(xs)) {
+        grid-template-columns:repeat(1, minmax(0, 1fr));
+    }
+}
+.card {
+    margin-bottom: map-get($spacers, 3);
+    background-color: $lightcyan;
+    color: lighten($dark, 15%);
+    display: flex;
+    flex-flow: column;
+    border-radius: 10px;
+    border: 1px solid $border;
+     border-top: 3px solid $accent;
+     transition: transform 0.18s, box-shadow 0.18s;    
+    &.maximized-card {
+        height: 100% !important;
+        left: 0;
+        max-height: 100% !important;
+        max-width: 100% !important;
+        position: fixed;
+        top: 0;
+        width: 100% !important;
+        z-index: $zindex-modal-backdrop;
+        &.was-collapsed .card-body {
+            display: block !important;
+        }
+        .card-body {
+            overflow: auto;
+        }
+        [data-card-widgett="collapse"] {
+            display: none;
+        }
+        .card-header,
+        .card-footer {
+            @include border-radius(0 !important);
+        }
+    }
+    // collapsed mode
+    &.collapsed-card {
+        .card-body,
+        .card-footer {
+            display: none;
+        }
+    }
+    .nav.flex-column:not(.nav-sidebar) {
+        > li {
+            border-bottom: 1px solid $card-border-color;
+            margin: 0;
+            &:last-of-type {
+                border-bottom: 0;
+            }
+        }
+    }
+    // fixed height to 300px
+    &.height-control {
+        .card-body {
+            max-height: 300px;
+            overflow: auto;
+        }
+    }
+    &.card-tabs {
+        &:not(.card-outline) {
+            > .card-header {
+                border-bottom: 0;
+                .nav-item {
+                    &:first-child .nav-link {
+                        border-left-color: transparent;
+                    }
+                }
+            }
+        }
+        &.card-outline {
+            .nav-item {
+                border-bottom: 0;
+                &:first-child .nav-link {
+                    border-left: 0;
+                    margin-left: 0;
+                }
+            }
+        }
+        .card-tools {
+            margin: .3rem .5rem;
+        }
+        &:not(.expanding-card).collapsed-card {
+            .card-header {
+                border-bottom: 0;
+                .nav-tabs {
+                    border-bottom: 0;
+                    .nav-item {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+        &.expanding-card {
+            .card-header {
+                .nav-tabs {
+                    .nav-item {
+                        margin-bottom: -1px;
+                    }
+                }
+            }
+        }
+    }
+    &.card-outline-tabs {
+        border-top: 0;
+        .card-header {
+            .nav-item {
+                &:first-child .nav-link {
+                    border-left: 0;
+                    margin-left: 0;
+                }
+            }
+            a {
+                border-top: 3px solid transparent;
+                &:hover {
+                    border-top: 3px solid $nav-tabs-border-color;
+                }
+                &.active {
+                    &:hover {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+        .card-tools {
+            margin: .5rem .5rem .3rem;
+        }
+        &:not(.expanding-card).collapsed-card .card-header {
+            border-bottom: 0;
+            .nav-tabs {
+                border-bottom: 0;
+                .nav-item {
+                    margin-bottom: 0;
+                }
+            }
+        }
+        &.expanding-card {
+            .card-header {
+                .nav-tabs {
+                    .nav-item {
+                        margin-bottom: -1px;
+                    }
+                }
+            }
+        }
+    }
+}
+// Maximized Card Body Scroll fix
+html.maximized-card {
+    overflow: hidden;
+}
+// Add clearfix to header, body and footer
+.card-header,
+.card-body,
+.card-footer {
+    @include clearfix ();
+}
+.card-body {
+    padding: 5px;
+    .no-header & {
+        @include border-top-radius($border-radius);
+    }
+}
+.card-header {
+    background-color: transparent;
+    border-bottom: 1px solid $card-border-color;
+    padding: (($card-spacer-y * .5) * 2) $card-spacer-x;
+    position: relative;
+    @if $enable-rounded {
+        @include border-top-radius($border-radius);
+    }
+    .collapsed-card & {
+        border-bottom: 0;
+    }
+    > .card-tools {
+        float: right;
+        margin-right: -$card-spacer-x * .5;
+        .input-group,
+        .nav,
+        .pagination {
+            margin-bottom: -$card-spacer-y * .4;
+            margin-top: -$card-spacer-y * .4;
+        }
+        [data-toggle="tooltip"] {
+            position: relative;
+        }
+    }
+}
+.card-text {
+    clear: both;
+}
+.card-title {
+    float: left;
+    font-size: $card-title-font-size;
+    font-weight: $card-title-font-weight;
+}
+.contents-list-in-card > .item {
+    border-bottom: 1px solid $card-border-color;
+    background-color: inherit;
+     padding-top:5px;
+    padding-bottom:5px;
+    &:last-of-type {
+        border-bottom-width: 0;
+    }
+}
+.category-list-in-card > .category {
+    border-bottom: 1px solid $card-border-color;
+    background-color: inherit;
+
+    &:last-of-type {
+        border-bottom-width: 0;
+    }
+}
+/* ── CONTACT CARDS ── */
+            .contact-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+                gap: 0.85rem;
+                margin: 1rem 0;
+            }
+            .contact-card {
+                background: $surface;
+                border: 1px solid $border;
+                border-radius: 10px;
+                padding: 1.1rem;
+                text-align: center;
+                transition: all 0.17s;
+            }
+                .contact-card:hover {
+                    border-color: $accent2;
+                    box-shadow: 0 4px 14px rgba(15,163,177,0.1);
+                    transform: translateY(-2px);
+                }
+            .cc-icon {
+                font-size: 1.6rem;
+                margin-bottom: 0.4rem;
+            }
+            .cc-label {
+                font-size: 0.65rem;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                color: $muted;
+                margin-bottom: 0.2rem;
+                font-family: 'DM Mono', monospace;
+            }
+            .cc-value {
+                font-size: 0.82rem;
+                font-weight: 600;
+                color: $accent;
+                word-break: break-all;
+            }
+/* ── ENCRYPTION CARDS ── */
+        .enc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0 1.5rem;
+        }
+        .enc-card {
+            background: $surface;
+            border: 1px solid $border;
+            border-radius: 10px;
+            padding: 1.1rem 1.2rem;
+            border-top: 3px solid $accent;
+            transition: transform 0.18s, box-shadow 0.18s;
+        }
+            .enc-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 20px rgba(45,125,210,0.12);
+            }
+            .enc-card .enc-icon {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+            .enc-card .enc-type {
+                font-size: 0.68rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+              color: $muted;
+                margin-bottom: 0.3rem;
+                font-family: 'DM Mono', monospace;
+            }
+            .enc-card .enc-method {
+                font-weight: 700;
+                color: $navy;
+                font-size: 0.93rem;
+                margin-bottom: 0.3rem;
+            }
+            .enc-card .enc-desc {
+                font-size: 0.8rem;
+               color: $muted;
+                line-height: 1.6;
+            }
+              /* ── RIGHTS GRID ── */
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 0.85rem;
+            margin: 1rem 0;
+        }
+        .right-card {
+        background:$surface;
+         border: 1px solid $border;
+            border-radius: 10px;
+            padding: 1rem 1.1rem;
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+            transition: border-color 0.18s, box-shadow 0.18s;
+        }
+            .right-card:hover {
+              border-color: $accent;
+                box-shadow: 0 4px 14px rgba(45,125,210,0.1);
+            }
+        .right-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+        .right-title {
+            font-weight: 700;
+            color: var(--blue);
+              color: $blue;
+            font-size: 0.87rem;
+            margin-bottom: 0.2rem;
+        }
+        .right-desc {
+            font-size: 0.8rem;
+           color: $muted;
+            line-height: 1.6;
+        }
+         /* ── FEATURE CARDS ── */
+            .feature-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+                gap: 0.9rem;
+                margin: 1rem 0 1.5rem;
+            }
+            .feature-card {
+                background: $surface;
+                border: 1px solid $border;
+                border-radius: 10px;
+                padding: 1.1rem 1.15rem;
+                border-top: 3px solid $accent;
+                transition: transform 0.17s, box-shadow 0.17s;
+            }
+                .feature-card:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 6px 20px rgba(45,125,210,0.11);
+                }
+                .feature-card.prohibited {
+                    border-top-color: $red;
+                }
+                .feature-card.allowed {
+                    border-top-color: $green;
+                }
+            .fc-icon {
+                font-size: 1.4rem;
+                margin-bottom: 0.45rem;
+            }
+            .fc-title {
+                font-weight: 700;
+                color: $navy;
+                font-size: 0.88rem;
+                margin-bottom: 0.25rem;
+                line-height: 1.4;
+            }
+            .fc-desc {
+                font-size: 0.8rem;
+                color: $muted;
+                line-height: 1.65;
+            }
+// Color variants
+@each $name, $color in $theme-colors {
+    @include cards-variant($name, $color);
+}
+@each $name, $color in $colors {
+    @include cards-variant($name, $color);
+}
+@include dark-mode () {
+    .card, .card-overview {
+        background-color: lighten($dark, 3%);
+        color: $gray-500;
+    }
+    .contents-list > .item {
+        border-bottom-color: $gray-600;
+        background-color: inherit;
+        color: inherit;
+    }
+}

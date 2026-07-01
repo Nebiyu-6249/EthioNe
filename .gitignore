@@ -1,0 +1,8 @@
+@"
+packages/
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+_bin_deployableAssemblies/
+"@ | Out-File -Encoding utf8 .gitignore

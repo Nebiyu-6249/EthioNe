@@ -1,0 +1,79 @@
+﻿@using EthioNegarit.Core.Domain.Entities
+@model Advertisement
+
+<div class="box ad">
+        <div class="ad-aside">
+            @if (!string.IsNullOrEmpty(Model.Image))
+        {
+        <img class="img-circle img-size-64 img-bordered-sm" src="@AppHelpers.AdvertImage(Model.Image, Model.Id,110)" alt="image">
+        }
+        </div>
+        <div class="ad-content">
+            <a href="@Model.NiceUrl" title="@Model.Name">
+                <div class="title company-name">
+                    @Model.Name
+                </div>
+                <div class="sub-title slogan">
+                    @Model.MotoSlogan
+                </div>
+                @*<div class="content-body">*@
+                    <div class="content-detail">
+                        @Html.Raw(Model.About)
+                    </div>
+            </a>
+			<div class="content-footer text-right">
+				<div class="bottom-content d-none d-sm-inline-block">
+					<div class="ad-files clearfix">
+						@if(@Model.Files != null && @Model.Files.Any())
+							{
+							<div class="postuploadedfilesholder clearfix">
+								<ul>
+									@foreach(var file in @Model.Files.OrderByDescending(o => o.DateCreated))
+										{
+										<li>
+											<img class="img-circle img-size-64 img-bordered-sm" src="@AppHelpers.AdvertImage(@file.Filename,@Model.Id,110)" alt="">
+										</li>
+										}
+								</ul>
+							</div>
+							}
+					</div>
+				</div>
+			</div>
+
+            <div class="content-footer text-right">
+                @if (@Model.LinkUrl != null)
+            {
+            <a href="@Model.LinkUrl" target="_blank" class="btn btn-sm text-muted" title="@Model.Name">
+                <i class="fas fa-external-link-alt" aria-hidden="true">
+                    @if (@Model.LinkText != null)
+                    {
+                        @Model.LinkText
+                    }
+                    else
+                    {
+                        @Model.Name
+                    }
+                </i>
+            </a>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.Email))
+                {
+            <a href="@Model.LinkUrl" target="_blank" class="btn btn-sm text-muted" title="Email">
+                <i class="fas fa fa-mail-forward aria-hidden=" true"">
+                    @Model.Email
+                </i>
+            </a>
+                }
+                @if (!string.IsNullOrEmpty(Model.Line))
+                {
+            <a href="@Model.LinkUrl" target="_blank" class="btn btn-sm text-muted" title="Phone">
+                <i class="fas fa fa-phone aria-hidden=" true"">
+                    @Model.Line
+                </i>
+            </a>
+                }
+            </div>
+        </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@using EthioNegarit.WebUI.Application.ExtensionMethods
+@model EthioNegarit.WebUI.ViewModels.CreateEditAdViewModel
+@{
+    ViewBag.Title = @Html.LanguageString("Ad.Label.Edit");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+   <div class="page-header">
+        <span class="width-50">
+            @ViewBag.Title
+        </span>
+        <span class="width-50">
+            <a role="button" href="@Url.Action("MyAds", "Ad")" class="btn btn-sm btn-default btn-block" title="@Html.LanguageString("Ad.Label.Back")">
+                @Html.LanguageString("Ad.Label.Back")
+            </a>
+        </span>
+    </div>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+            @using (Html.BeginForm())
+                {
+                @Html.ValidationSummary(false)
+                @Html.AntiForgeryToken()
+                @Html.Partial("_createEditAd", Model)
+                @Html.HiddenFor(x => x.Id)
+                }
+    </div>
+</section>
+

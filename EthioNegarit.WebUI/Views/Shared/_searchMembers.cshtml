@@ -1,0 +1,14 @@
+﻿
+<span class="search-box">
+    @using (Html.BeginForm("Search", "Members", FormMethod.Get))
+    {
+        <span class="input-group input-group-sm">
+            <input class="form-control" type="search" name="Search" placeholder="@Html.LanguageString("Members.SearchMembers")">
+            <span class="input-group-btn ">
+                <button class="btn btn-default btn-sm">
+                    <i class="fas fa-search fa-fw"></i>
+                </button>
+            </span>
+        </span>
+    }
+</span>

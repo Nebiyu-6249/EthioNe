@@ -1,0 +1,30 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model MemberDiscussionsViewModel
+@if (@Model.Topics.Any())
+{
+    <ul class="contents-list">
+        @foreach (var topic in Model.Topics)
+        {
+            <li class="content-fluid">
+                @{
+                    Html.RenderPartial("_Topic", topic);
+                }
+            </li>
+                    }
+    </ul>
+    <div class="clearfix"></div>
+    if (Model.TotalPages > 1)
+                {
+        <a href="#" class="showmorediscussions btn  btn-outline-success btn-sm btn-block" role="button" title="@Html.LanguageString("Topic.ShowMoreTopics")">
+            <span class="smpactive">@Html.LanguageString("Topic.ShowMoreTopics")</span>
+            <span class="smploading" style="display: none;">@Html.LanguageString("Topic.ShowMoreTopicsLoading")</span>
+        </a>
+                        }
+                    }
+                    else
+                    {
+                        <p>@Html.LanguageString("Topic.NoDiscussions")</p>
+                    }                  
+<input type="hidden" id="pageIndex" value="@(Model.PageIndex + 1)" />
+<input type="hidden" id="userId" class="userId" value="@Model.UserId" />
+<input type="hidden" id="totalPages" value="@Model.TotalPages" />

@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Html.Lang("SubNav.PostedIn");
+}
+<div class="popup popup-top">
+</div>
+<!-- /.page-header -->
+	<div class="page-header">
+        <span class="width-50">
+            @ViewBag.Title
+        </span>
+        <span class="width-25">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.Action("CreateTopicButton", "Topic")
+            }
+        </span>
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-sm-9">
+                <div class="postedin">
+                    @Html.Action("TopicsMemberHasPostedIn", "Topic")
+                </div>
+            </section>
+            <section class="col-sm-3 side-panel">
+                @Html.Partial("_CommonSideNav")
+            </section>
+        </div>
+    </div>
+</section>
+<div class="popup popup-bottom">
+</div>

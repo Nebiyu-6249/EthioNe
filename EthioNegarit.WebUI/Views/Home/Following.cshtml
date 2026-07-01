@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   ViewBag.Title = Html.Lang("Following.PageTitle");
+}
+<div class="popup popup-top">
+</div>
+	<div class="page-header">
+		<span class="">
+			@ViewBag.Title
+		</span>
+		<span class="">
+		</span>
+	</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row mb-0">
+            <section class="col-sm-12">
+                <div class="card-body card-toolss">
+                    @*<ul class="nav nav-pills ml-auto">*@
+                    <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="topics-tab" data-toggle="pill" href="#topics" role="tab" aria-controls="topics" aria-selected="true">@Html.Lang("Layout.Nav.Topics")</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="categories-tab" data-toggle="pill" href="#categories" role="tab" aria-controls="categories" aria-selected="false">@Html.LanguageString("Layout.Nav.Categories")</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" id="chatrooms-tab" data-toggle="pill" href="#chatrooms" role="tab" aria-controls="chatrooms" aria-selected="false">@Html.LanguageString("Layout.Nav.ChatRooms")</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="custom-content-above-tabContent">
+
+                        <div class="tab-pane fade show active" id="topics" role="tabpanel" aria-labelledby="topics-tab">
+
+                            <div class="followingtopics">
+                                <div class="line"></div>
+                               @* <h2 class="text-sm text-muted">@Html.Lang("Following.Topics")</h2>*@
+                                @Html.Action("GetSubscribedTopics", "Topic")
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="categories" role="tabpanel" aria-labelledby="categories-tab">
+                            <div class="following-categories">
+                                <div class="line"></div>
+                             @*   <h2 class="text-sm text-muted">@Html.Lang("Following.Categories")</h2>*@
+                                @Html.Action("GetSubscribedCategories", "Category")
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="chatrooms" role="tabpanel" aria-labelledby="chatrooms-tab">
+
+                            <div class="subscribed-Rooms">
+                                <div class="line"></div>
+                              @*  <h2 class="text-sm text-muted">@Html.Lang("Chat Rooms Subscribed")</h2>
+                            *@
+                                        @Html.Action("GetSubscribedRooms", "Chat")
+                                 
+                            </div>
+           
+        </div>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </section>       
+
+        </div>
+    </div>
+</section>
+<div class="popup popup-bottom">
+</div>

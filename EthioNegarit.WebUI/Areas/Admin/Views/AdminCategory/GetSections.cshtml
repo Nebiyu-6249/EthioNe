@@ -1,0 +1,23 @@
+﻿@model EthioNegarit.WebUI.Areas.Admin.ViewModels.ListSectionViewModel
+
+
+<div class="panel">
+    <div class="panel-heading">       
+         <p class="clearfixx">Sections are a way to group your Categories, to make them more manageable.</p>
+        <h5>All Sections</h5>
+     </div>
+    <div class="panel-content">
+        <div id="container">
+            <ul>
+                @foreach (var section in Model.Sections)
+                {
+                    <li class="maincategory">
+                        <a href="@Url.Action("AddEditSection", new {id = section.Id})">
+                            @Html.Raw(section.Name)
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

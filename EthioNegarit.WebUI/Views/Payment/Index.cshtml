@@ -1,0 +1,60 @@
+﻿@using EthioNegarit.Core.Domain.Enums
+@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.ViewModels
+@model PaymentsListViewModel
+@{
+    ViewBag.Title = "Payments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+    ViewBag.Canonical = Html.Raw(AppHelpers.CanonicalPagingTag(totalCount, Html.Settings().TopicsPerPage, Html));
+    var qs = Request.QueryString[AppConstants.PaymentViewOrder] ?? string.Empty;
+}
+@if (Request.QueryString.AllKeys.Any())
+{
+    ViewBag.Canonical = Html.Raw(string.Format("<link rel=\"canonical\" href=\"{0}\"/>", "Index"));
+}
+<!-- Page header -->
+    <div class="page-header">
+            <span class="width-30 d-none d-sm-inline-block">
+               @ViewBag.Title
+            </span>
+@if ((Model.TotalCount - 1) > 0)
+{
+            <span class="width-30 paymentorderfilter">               
+                    <text> 
+                      @*  @Html.LanguageString("Show")*@
+                    <a class="orderfilerlink @(string.IsNullOrEmpty(qs) ? "orderfilerlinkactive" : "")" href="@Url.Action("Index", "Payment")">@Html.LanguageString("All")</a> |
+                    <a class="orderfilerlink @(qs.Contains(PaymentViewOrder.Pending.ToString()) ? "orderfilerlinkactive" : "")" href="?@AppConstants.PaymentViewOrder=@PaymentViewOrder.Pending.ToString()">@Html.LanguageString("Pending")</a> |
+                    <a class="orderfilerlink @(qs.Contains(PaymentViewOrder.Confirmed.ToString()) ? "orderfilerlinkactive" : "")" href="?@AppConstants.PaymentViewOrder=@PaymentViewOrder.Confirmed.ToString()">@Html.LanguageString("Confirmed")</a> |
+                    <a class="orderfilerlink @(qs.Contains(PaymentViewOrder.Rejected.ToString()) ? "orderfilerlinkactive" : "")" href="?@AppConstants.PaymentViewOrder=@PaymentViewOrder.Rejected.ToString()">@Html.LanguageString("Rejected")</a>
+                    </text>                
+            </span>
+            <span class="width-30">
+                <span class="input-group input-group-sm">
+                    <input class="form-control" id="searchpayment" type="text" placeholder="Search. . .">
+                    <span class="input-group-btn ">
+                        <button class="btn btn-default btn-sm">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </span>
+                </span>
+            </span>
+    }      
+        </div>    
+<!-- /.page-header -->
+<section class="content">
+    <div class="container-fluid"> 
+        <div id="confirmationMessage" class="text-xs float-right" style="color: Green"></div>
+        <div class="payments" id="payments">     
+           @Html.Partial("_payments", @Model)           
+        </div>
+        @if (@totalCount > SiteConstants.Instance.AdminListPageSize)
+        {
+            <ul>
+                <li class="pagination">
+                    @Html.Pager(Convert.ToInt32(Model.PageIndex), SiteConstants.Instance.AdminListPageSize, @totalCount, new { view = qs.ToString() })
+                </li>
+            </ul>
+        }
+        </div>
+</section>

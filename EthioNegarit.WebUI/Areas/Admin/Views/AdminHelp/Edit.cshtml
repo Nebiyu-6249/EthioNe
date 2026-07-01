@@ -1,0 +1,25 @@
+﻿@model EthioNegarit.WebUI.Areas.Admin.ViewModels.CreateEditFAQViewModel
+@{
+    ViewBag.Title = "Edit FAQ";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@Html.Partial("_HelpNavButtons")
+<div class="panel">
+    <div class="panel-heading">
+        <h5>@ViewBag.Title</h5>
+    </div>
+    <div class="panel-content">
+        @using (Html.BeginForm("Edit", "AdminHelp", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(false)
+            @Html.HiddenFor(model => model.Id)
+            @Html.Partial("_HelpFields", Model)
+            <div class="submit-holder float-rightt">               
+                <a href="@Url.Action("Delete", new { id = Model.Id })" class="btn btn-sm btn-danger" role="button">Delete</a>
+                <input type="submit" class="btn btn-sm btn-success" value="Update" />
+            </div>
+        }
+
+    </div>
+</div>

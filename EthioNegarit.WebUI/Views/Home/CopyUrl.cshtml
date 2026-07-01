@@ -1,0 +1,44 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model CopyUrlViewModel
+@{
+    var urllink = @Model.RssLink.Link;
+}
+<p>Copy Url and add to your RSS Reader</p>
+        @if (Model.RssLink != null)
+        {
+            <input type="text" id="currentUrlInput" value="@urllink" style="" readonly>
+            <button class="btn btn-default" id="copyUrlButton" onclick="copyToClipboard()">
+                Copy URL
+            </button>
+        }
+        else
+        {
+            <div class="panel-body">
+                Nothing to show
+            </div>
+        }
+
+<script>
+   function copyToClipboard() {
+        // Get the value from the hidden input field
+        var urlToCopy = document.getElementById("currentUrlInput").value;
+        // Use the Clipboard API to write the text
+        navigator.clipboard.writeText(urlToCopy).then(function() {
+            // You can also change the button text temporarily for feedback
+            var button = document.getElementById("copyUrlButton");
+            button.textContent = "Copied!";
+            setTimeout(function() {
+                //  button.textContent = "Copy URL";
+                $("#copylink").modal("hide");
+             //   $("#activitylink").modal("hide");
+             //   $("#latestlink").modal("hide");
+              //  $("#categorylink").modal("hide");
+            }, 1000);
+        }).catch(function(error) {
+            // Error handling
+            console.error("Could not copy URL: ", error);
+            alert("Failed to copy URL. Please copy it manually.");
+        });
+   }
+</script>
+

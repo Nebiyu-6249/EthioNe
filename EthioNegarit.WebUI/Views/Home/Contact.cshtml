@@ -1,0 +1,58 @@
+﻿@model EthioNegarit.WebUI.ViewModels.ContactUsViewModel
+@{
+    ViewBag.Title = @Html.LanguageString("Layout.Nav.ContactUs");
+    Layout = "~/Views/Shared/_LayoutFullWidth.cshtml";
+}
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="fullscreen flex-container">
+            <div class="split split-left  d-none d-sm-inline-block">
+                @Html.Partial("_ethiopical")
+            </div>
+            <div class="split split-right">
+                <div class="vertical-center">
+                    <div class="register-logo text-center">
+                        <a href="@Html.Settings().ForumUrl">
+                            <h1>@Html.LanguageString("Forum.Name")</h1>
+                        </a>
+                    </div>
+                    <div class="title">
+                        <p class="login-box-msgg">@Html.LanguageString("Layout.Nav.ContactUs")</p>
+                    </div>
+                    <div class="mainregisterform">
+                        <form id="my-form" action="https://formspree.io/f/mwpqanre" method="POST" class="form-contactus">
+                            @Html.ValidationSummary(true)
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.Name, new { type = "text", @class = "form-control", placeholder = @Html.LanguageString("Address.Label.Name") })
+                                @Html.ValidationMessageFor(x => x.Name)
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.Email, new { type = "email", @class = "form-control", placeholder = @Html.LanguageString("Address.Label.Email") })
+                                @Html.ValidationMessageFor(x => x.Email)
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => Model.Subject, new { @class = "form-control", placeholder = @Html.LanguageString("ContactUs.Label.Subject") })
+                                @Html.ValidationMessageFor(x => x.Subject)
+                            </div>
+                            <div class="form-group">
+                                @Html.TextAreaFor(x => x.Message, new { @class = "form-control", placeholder = @Html.LanguageString("ContactUs.Label.Message"), rows = "6" })
+                                @Html.ValidationMessageFor(x => x.Message)
+                            </div>
+                            <div class="submit-holder">
+                                <a href="@Html.Settings().ForumUrl" class="btn btn-default btn-sm" role="button">@Html.LanguageString("Buttons.Cancel")</a>
+                                <button type="submit" class="btn btn-success btn-sm float-right">
+                                    @Html.LanguageString("Buttons.Send")
+                                </button>
+                            </div>
+                            @Html.HiddenFor(x => x.ReturnUrl)
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /.content -->

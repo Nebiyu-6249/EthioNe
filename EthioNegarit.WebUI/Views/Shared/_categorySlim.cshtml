@@ -1,0 +1,88 @@
+﻿@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.ViewModels
+@model CategoryViewModel
+@{
+    Layout = null;
+    var subScribe = string.Empty;
+    var unSubscribe = string.Empty;
+    const string displayNone = "style='display:none;'";
+    if (Model.IsSubscribed)
+        {
+        subScribe = displayNone;
+        }
+    else
+        {
+        unSubscribe = displayNone;
+        }
+    //TempData[AppConstants.DefaultCategoryViewBagName] = Model.Category.Id;
+}
+<div class="content-fluid">
+    <div class="content-aside d-none d-sm-inline-block">
+        <div class="image-block">
+            @if (!string.IsNullOrEmpty(@Model.Category.Image))
+                {
+                <img src="@AppHelpers.CategoryImage(@Model.Category.Image, @Model.Category.Id,100)" alt="@Model.Category.Name" class="img-circle img-bordered-sm" />
+                }
+            else
+                {
+                <img src="../../Content/images/default.png" class="img-circle  img-bordered-sm" style="opacity: .8">
+                }
+        </div>
+    </div>
+    <div class="content-detail pull-right-sm">
+        <div class="content-title">
+            <div class="title">
+                <a style="border-color: @(string.IsNullOrEmpty(Model.Category.Colour) ? "#ced1d1" : Model.Category.Colour)" href="@Html.Raw(Model.Category.NiceUrl)">@Html.Raw(Model.Category.Name)</a>
+            </div>
+        </div>
+        <div class="content-text">
+            @Html.Raw(AppHelpers.ConvertPostContent(Model.Category.Description))
+        </div>
+
+        <div class="content-footer clearfix float-right">
+            <ul>
+                <li>
+                    <a href="@Html.Raw(Model.Category.NiceUrl)" class="text-muted">
+                        <p>
+                            @string.Format(Html.LanguageString("Rss.Category.Title"), Model.TopicCount)
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <div class="">
+                        <p>
+                            @Model.PostCount @Html.LanguageString("Topic.CommentsDetails")
+                        </p>
+                    </div>
+                </li>
+                <li>
+		@if (Model.LatestTopic != null)
+			{
+			<text>
+				@Html.LanguageString("Category.MostRecent")
+				<a href="@Model.LatestTopic.NiceUrl">@Html.Raw(Model.LatestTopic.Name)</a>
+				@Html.Raw(string.Format(Html.LanguageString("Topic.StartedBy"),DatesUI.GetPrettyDate(Model.LatestTopic.CreateDate.ToString()),
+	string.Format("<a href='{0}'>{1}</a>", Model.LatestTopic.User.NiceUrl, Model.LatestTopic.User.UserName)))
+			</text>
+			}
+	</li>
+            </ul>
+
+        </div>
+    </div>
+
+</div>
+
+@if (Model.SubCategories != null)
+    {
+
+    <div class="content-footer float-right">
+        @Html.Partial("_SubCategories", new SubCategoryViewModel
+       {
+       AllPermissionSets = Model.SubCategories.AllPermissionSets,
+       ParentCategory = Model.Category
+       })
+
+    </div>
+    }
+

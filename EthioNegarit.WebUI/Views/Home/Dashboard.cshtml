@@ -1,0 +1,385 @@
+﻿@using EthioNegarit.Core.Domain.Enums
+@model EthioNegarit.WebUI.ViewModels.DashboardViewModel
+@{
+    ViewBag.Title = Model.User.UserName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Header
+{
+    <script type="text/javascript">
+		$(function () {
+			/* $.post(app_base + "Members/GetMemberDiscussions",
+                 { "Id": 'Model.User.Id' },
+                /* function (data) {
+                     $(".memberdiscussions").html(data);
+                 });*/
+		    TimeBadges();
+		});
+		function TimeBadges() {
+			var timeBadgeViewModel = new Object();
+			timeBadgeViewModel.Id = '@Model.User.Id';
+			var strung = JSON.stringify(timeBadgeViewModel);
+			$.ajax({
+				url: app_base + 'Badge/Time',
+				type: 'POST',
+				dataType: 'html',
+				data: strung,
+				contentType: 'application/json; charset=utf-8',
+				success: function (data) {
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					ShowUserMessage("Error: " + xhr.status + " " + thrownError);
+				}
+			});
+		}      
+    </script>
+}
+<div class="page-header dashboard-headerr account-@(Model.AccountStatus)">
+    <span class="">
+        <a class="" title="@Html.Lang("Members.EditProfile")" href="@Url.Action("Edit", "Members",new {id = @Html.CurrentMember().Id })">
+            <span class="mr-2">
+                @Html.CurrentMember().UserName
+                <span class="text-xs d-none d-sm-inline-block ml-2" title="@Html.LanguageString("Members.Profile.DateJoined")">
+                    @DatesUI.GetPrettyDate(Html.CurrentMember().CreateDate.ToString())
+                </span>
+            </span>
+        </a>
+    </span>
+    @if (@Html.CurrentMember().Payments.Any())
+    {
+        <span class="count-sm">
+            <a class="" role="button" href="@Url.Action("List", "Payment")" title="@Html.LanguageString("Layout.Nav.Payments")">
+                <i class="fas fa-receipt text-sm  mr-0 yellow-colour d-xl-none d-sm-inline-block"></i>
+                <span class="d-none d-sm-inline-block">@Html.LanguageString("Layout.Nav.Payments")</span>
+                @if (@Html.CurrentMember().Payments.Count(x => x.PaymentStatus == PaymentStatus.Pending) > 0)
+                {
+                    <span class="ml-22">
+                        @Html.CurrentMember().Payments.Count(x => x.PaymentStatus == PaymentStatus.Pending)
+                    </span>
+                }
+            </a>
+        </span>}
+
+    @if (@Html.CurrentMember().Advertisements.Count > 0)
+    {
+        <span class="count-sm">
+            <a class="" role="button" title="@Html.LanguageString("SubNav.MyAdvertisements")" href="@Url.Action("MyAds", "Ad")">
+                <i class="fas fa-ad text-smm d-xl-none d-sm-inline-block">
+                </i>
+                <span class="d-none d-sm-inline-block">
+                    @Html.LanguageString("Ad.Title")
+                </span>
+                <span class="ml-00">
+                    @Html.CurrentMember().Advertisements.Count
+                </span>
+            </a>
+        </span>
+
+    }
+    @if (@Html.CurrentMember().BlockedUsers.Count > 0)
+    {
+        <span class="count-sm">
+            <a class="" role="button" href="@Url.Action("Index", "Block")" title="@Html.LanguageString("Members.Blocked")">
+                <i class="fas fa-user-alt-slash  mr-00 d-xl-none d-sm-inline-block">
+                </i>
+                <span class="d-none d-sm-inline-block">
+                    @Html.LanguageString("Members.Blocked")
+                </span>
+                <span class="ml-0">
+                    @Html.CurrentMember().BlockedUsers.Count
+                </span>
+            </a>
+        </span>
+
+    }
+    @if (@Model.SpamCount > 0)
+    {
+        <span class="count-sm">
+            <a class="" role="button" title="@Html.LanguageString("Post.SpamPosts")" href="#">
+                <i class="fas fa-flag text-smm  mr-00 red-colour d-xl-none d-sm-inline-block"></i>
+                <span class="d-none d-sm-inline-block">@Html.LanguageString("Post.SpamPosts")</span>
+                <span class="ml-00">@Model.SpamCount</span>
+            </a>
+        </span>
+    }
+    @if (@Model.ReportCount > 0)
+    {
+        <span class="count-sm">
+            <a class="" role="button" title="@Html.LanguageString("Report.MembersReport")" href="#">
+                <i class="fas fa-flag red-colour d-xl-none d-sm-inline-block"></i>
+                <span class="d-none d-sm-inline-block">@Html.LanguageString("Report.Reports")</span>
+                <span class="ml-00">@Model.ReportCount</span>
+            </a>
+        </span>
+    }
+</div>
+
+<section class="content">
+    <div class="container-fluid mb-4">
+        <!-- Summary Area -->
+        <div class="overview">
+            <div class="page-header text-sm">
+                <span class="">
+                    @Html.LanguageString("Dashboard.Title.Overview")
+                </span>
+            </div>
+            <div class="dashboard-overview">
+                <div class="card">
+                    <a href="@Url.Action("Discussions","Home")" title="@Html.Lang("Dashboard.Label.TopicsStart")" class="nav-link">
+                        <div class="card-body">
+                            <div class="count mt-1">
+                                <h2>@Html.CurrentMember().Topics.Count</h2>
+                                <span class="text-uppercase">@Html.LanguageString("Dashboard.Label.Topics")</span>
+                            </div>
+                            <div class="stats stats-center">
+                                <img src="~/Content/Images/social-icons/icon-up.svg" alt="up">
+                                <span>
+                                    @Html.LanguageString("Dashboard.Label.TopicsStart")
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="card">
+                    <a href="@Url.Action("PostedIn","Home")" title="@(Html.Lang("PostedIn.PageTitle"))" class="nav-link">
+                        <div class="card-body">
+                            <div class="count mt-1">
+                                <h2>@Html.CurrentMember().Posts.Count</h2>
+                                <span class="text-uppercase">@Html.LanguageString("Post.Posts")</span>
+                            </div>
+                            <div class="stats stats-center">
+                                <img src="~/Content/Images/social-icons/icon-up.svg" alt="up">
+                                <span>
+                                    @Html.Lang("Dashboard.Label.Posts")
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="card">
+                    <a class="" title="@Html.LanguageString("Dashboard.Label.BadgesGet")" href="#memberBadges">
+                        <div class="card-body">
+                            <div class="count mt-2">
+                                @if (@Model.User.Badges.Count() > 0)
+                                {
+                                    <h2>@Model.User.Badges.Count()</h2>
+                                }
+                                else
+                                {
+                                    <h2>None</h2>
+                                }
+                                <span class="text-uppercase">@Html.LanguageString("SubNav.Badges")</span>
+                            </div>
+                            <div class="stats stats-center">
+                                <img src="~/Content/Images/social-icons/icon-up.svg" alt="up">
+                                <span>
+                                    @Html.LanguageString("Dashboard.Label.BadgesGet")
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="card">
+                    <a class="" title="@Html.LanguageString("Dashboard.Label.TotalPoints") " href="#memberPoint">
+                        <div class="card-body text-center">
+                            <div class="count mt-2">
+                                <h2>@Html.CurrentMember().TotalPoints</h2>
+                                <span class="text-uppercase">@Html.LanguageString("Post.Points")</span>
+                            </div>
+                            <div class="stats stats-center">
+                                <img src="~/Content/Images/social-icons/icon-up.svg" alt="up">
+                                <span>
+                                    @Html.LanguageString("Dashboard.Label.TotalPoints")
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <!-- Overview Area -->
+        <div class="overview">
+            <div class="page-header text-sm">
+                <span class="">
+                    @Html.LanguageString("Dashboard.Title.Subscription")
+                </span>
+            </div>
+            <div class="dashboard-overview">
+                <div class="dashboard-component">
+                    <a href="@Url.Action("Following", "Home")" class="nav-link">
+                        <div class="components">
+                            <div class="component-top">
+                                <h3 class="number">
+                                    @Model.User.TopicNotifications.Count
+                                </h3>
+                                <div class="ratee">
+                                    <i class="fa fa-star yellow-colour"></i>
+                                </div>
+                            </div>
+                            <div class="component-bottom">
+                                <p class="card-title" title="@Html.LanguageString("Dashboard.Label.TopicsFollow")">
+                                    @Html.LanguageString("Dashboard.Label.TopicsFollow")
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="dashboard-component">
+                    <a href="@Url.Action("Following", "Home")" class="nav-link">
+                        <div class="components">
+                            <div class="component-top">
+                                <h3 class="number">
+                                    @Model.User.CategoryNotifications.Count
+                                </h3>
+                                <i class="nav-icon fa fa-star yellow-colour"></i>
+                            </div>
+                            <div class="component-bottom">
+                                <p class="card-title" title="@Html.LanguageString("Dashboard.Label.CategoriesSubscribed")">
+                                    @Html.LanguageString("Dashboard.Label.CategoriesSubscribed")
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="dashboard-component">
+                    <a href="@Url.Action("Following", "Home")" class="nav-link">
+                        <div class="components">
+                            <div class="component-top">
+                                <h3 class="number">
+                                    @Model.User.ChatRoomMembers.Count
+                                </h3>
+                                <i class="nav-icon fa fa-star yellow-colour"></i>
+                            </div>
+                            <div class="component-bottom">
+                                <p class="card-title" title="@Html.LanguageString("Dashboard.Label.ChatRoomsJoined")">
+                                    @Html.LanguageString("Dashboard.Label.ChatRoomsJoined")
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="dashboard-component">
+                    <a href="@Url.Action("Index","Favourite")" class="nav-link">
+                        <div class="components">
+                            <div class="component-top">
+                                <h3 class="number">
+                                    @Model.User.Favourites.Count
+                                </h3>
+                                <i class="nav-icon fa fa-star yellow-colour"></i>
+                            </div>
+                            <div class="component-bottom">
+                                <p class="card-title" title="@Html.LanguageString("Dashboard.Label.FavouritePosts")">
+                                    @Html.LanguageString("Dashboard.Label.FavouritePosts")
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- summary Detail Area -->
+        <div class="overview">
+            <div class="page-header text-sm">
+                <span class="">
+                    @Html.LanguageString("Dashboard.Title.Actions")
+                </span>
+            </div>
+            <div class="dashboard-summary">
+                <div class="dashboard-component">
+                    <div class="components">
+                        <div class="component-top">
+                            <p class="card-title">@Html.LanguageString("Dashboard.Title.Vote")</p>
+                            <i class="fas fa-thumbs-up green-colour"></i>
+                            <i class="fas fa-thumbs-down red-colour"></i>
+                        </div>
+                        <div class="component-bottom">
+                            <h6 class="text-sm">
+                                @Html.LanguageString("Dashboard.Label.VoteGiven")
+                            </h6>
+                            <span class="rate float-right">
+                                <i class="fas fa-thumbs-up "></i>
+                                <span class="rate-up">@Html.CurrentMember().VotesGiven.Count(x => x.Amount > 0)</span>
+                            </span>
+                            <span class="rate">
+                                <i class="fas fa-thumbs-down"></i>
+                                <span class="rate-down">@Html.CurrentMember().VotesGiven.Count((x => x.Amount < 0))</span>
+                            </span>
+                        </div>
+                        <div class="component-bottom">
+                            <h6 class="text-sm">
+                                @Html.LanguageString("Dashboard.Label.MembersVote")
+                            </h6>
+                            <span class="rate">
+                                <i class="fas fa-thumbs-up"></i>
+                                <span class="rate-up">@Html.CurrentMember().Votes.Count(x => x.Amount > 0)</span>
+                            </span>
+                            <span class="rate">
+                                <i class="fas fa-thumbs-down"></i>
+                                <span class="rate-down">@Html.CurrentMember().Votes.Count((x => x.Amount < 0))</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-component">
+                    <div class="components">
+                        <div class="component-top">
+                            <p class="card-title">@Html.LanguageString("Dashboard.Title.ChatResponse")</p>
+                            <i class="fas fa-star yellow-colour"></i>
+                            <i class="fas fa-flag red-colour"></i>
+                        </div>
+                        <div class="component-bottom">
+                            <h6 class="text-sm">
+                                @Html.LanguageString("Dashboard.Label.YourResponse")
+                            </h6>
+                            <span class="rate">
+                                <i class="fas fa-star yellow-colour"></i>
+                                <span class="rate-up">@Html.CurrentMember().ChatRespondes.Count(x => x.Amount > 0)</span>
+                            </span>
+                            <span class="rate">
+                                <i class="fas fa-flag"></i>
+                                <span class="rate-down">@Html.CurrentMember().ChatRespondes.Count(x => x.Amount < 0)</span>
+                            </span>
+                        </div>
+                        <div class="component-bottom">
+                            <h6 class="text-sm">
+                                @Html.LanguageString("Dashboard.Label.MembersResponse")
+                            </h6>
+                            <span class="rate float-right">
+                                <i class="fas fa-star yellow-colour"></i>
+                                <span class="rate-up">@Html.CurrentMember().ChatResponses.Count(x => x.Amount > 0)</span>
+                            </span>
+                            <span class="rate">
+                                <i class="fas fa-flag"></i>
+                                <span class="rate-down">@Html.CurrentMember().ChatResponses.Count(x => x.Amount < 0)</span>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="memberPoint" id="memberPoint">
+            @Html.Action("MemberPoint", "Point")
+        </div>
+        <div class="" id="memberBadges">
+            @if (Model.User.Badges != null && Model.User.Badges.Any())
+            {
+                <div class="page-header">
+                    <span class="">
+                        @Html.LanguageString("SubNav.Badges")
+                    </span>
+                </div>
+                <div class="divider clearfix"></div>
+                <div class="row">
+                    @foreach (var badge in Model.User.Badges)
+                    {
+                        <section class="col-sm-4">
+                            @Html.Partial("_memberBadge", badge)
+                        </section>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,90 @@
+﻿@model EthioNegarit.WebUI.ViewModels.CreatePrivateMessageViewModel
+@*@using (Ajax.BeginForm("Create", "PrivateMessage", null, new AjaxOptions*@
+@*<div id="createpostholder">*@
+<div class="createpmholder">
+    @using (Ajax.BeginForm(null, null, new AjaxOptions
+    {
+        HttpMethod = "POST",
+        LoadingElementId = "createpmwait",
+        OnSuccess = "AjaxPmSuccess()",
+        OnFailure = "AjaxPostError('Error creating private message')",
+        UpdateTargetId = "newpmmarker",
+        OnBegin = "AjaxPmBegin()",
+    }, new { @name = "createpm", @id = "postcodeform", @class = "form-createpm" }))
+    {
+        //  @Html.ValidationSummary(true)
+        // @Html.AntiForgeryToken()
+       
+        <div class="editorholder">
+            @Html.EditorFor(x => x.Message, new { @class = "createpm required  rte", @id = "createpm" })
+            @Html.ValidationMessageFor(x => x.Message)
+        </div>
+        if (Model.EnableAttachement)
+        {
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <input type="file" id="FileUpload" class="btn-file" value="" multiple="multiple" />
+                    <span class="attachment">
+                        <a href="#" role="button" id="removeattachment" class="removeattachment" title="@Html.LanguageString("Remove Attachement/s")">
+                            <i class="fas fa-trash-alt red-colour" aria-hidden="true"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        }
+        <progress id="fileProgress" style="display: none"></progress>
+        <span id="lblMessage" style="color: Green"></span>
+        <span style="display: none;" id="createpmwait" class="spmloading ajaxspinner">
+            <i class="ethicon fa fa-spinner fa-spin"></i>
+        </span>
+            <hr />
+                <input type="submit" id="createpmbutton" class="btn btn-success btn-sm btn-block" value="@Html.LanguageString("PM.Send")" />
+                @Html.HiddenFor(x => x.To)
+    }
+</div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+          /*  var pmButton = $("#createpmbutton");
+         //   pmButton.attr("disabled", true);
+            var privateMessage = $('.createpmholder #createpm');
+            if (privateMessage.length > 0) {
+              //  pmButton.attr("disabled", false);
+                privateMessage.focusout(function (e) {
+                    if (privateMessage.length > 2) {
+                        pmButton.attr("disabled", false);
+                    } else {
+                        pmButton.attr("disabled", true);
+                    }
+                });
+            } else {
+                pmButton.attr("disabled", true);
+            }*/
+
+           /* $(document).on("change", "#createpm", function () {
+                let message = document.getElementById("createpm").value();
+                if (message.length > 2) {
+                    pmButton.attr("disabled", false);
+                } else {
+                    pmButton.attr("disabled", true);
+                }
+                });*/
+
+
+            if ($("#FileUpload").val() != "") {
+                $(".removeattachment").attr("style", "display:block");
+            } else {
+                de();
+            }
+            $(document).on("change", "#FileUpload", function () {
+                $(".removeattachment").attr("style", "display:block");
+            });
+            $('#removeattachment').click(function () {
+                $('#FileUpload').val('');
+                de();
+            });
+
+        });
+        function de() {
+            $(".removeattachment").attr("style", "display:none");
+        }
+    </script>

@@ -1,0 +1,208 @@
+﻿@using EthioNegarit.Core.Constants
+@{
+    var currentController = TempData[AppConstants.CurrentController].ToString();
+    var currentAction = TempData[AppConstants.CurrentAction].ToString();
+}
+<aside class="main-sidebar sidebar-light-primary elevation-0">
+    <div class="sidebar">
+        <nav class="mt-0">
+            <ul class="nav nav-pills nav-sidebar" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a href="@Url.Content("~/")" class="nav-link">
+                        <i class="nav-icon fa fa-fw fa-arrow-left"></i>
+                        <p>Main Site</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Admin", new { area = "Admin" })" class="nav-link @(currentController == "admin" && currentAction == "index" ? "active" : "")">
+                        <i class="nav-icon fas fa-tachometer-alt text-muted text-sm"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Settings", new { area = "Admin" }, null)" class="nav-link @(currentController == "settings" && currentAction == "index" ? "active" : "")">
+                        <i class="nav-icon fa fa-fw fa-cogs text-muted text-sm"></i> 
+                        <p>Main Settings</p>                     
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Audit", new { area = "Admin" }, null)" class="nav-link @(currentController == "audit" && currentAction == "index" ? "active" : "")">
+                        <i class="nav-icon fas fa-folder-open text-muted text-sm"></i>                        
+                        <p>Audit Trail/Log</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Sections", "AdminCategory", new { area = "Admin" }, null)" class="nav-link @(currentController == "admincategory" && currentAction == "sections" ? "active" : "")">
+                        <i class="nav-icon fas fa-folder-open text-muted text-sm"></i> 
+                        <p> Sections</p>                        
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "AdminCategory", new { area = "Admin" }, null)" class="nav-link @(currentController == "admincategory" && currentAction == "index" ? "active" : "")">
+                        <i class="nav-icon fas fa-folder-open text-muted text-sm"></i> 
+                        <p>Categories</p>                        
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "AdminChatRoom", new { area = "Admin" }, null)" class="nav-link @(currentController == "adminchatroom" && currentAction == "index" ? "active" : "")">
+                        <i class="nav-icon fas fa-folder-open text-muted text-sm"></i> 
+                        <p>Chat Rooms</p>                       
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-toggle="collapse" data-target="#tags">
+                        <i class="nav-icon fa fa-fw fa-tags text-muted text-sm"></i>
+                        <p>Tags<i class="fa fa-fw fa-caret-down right"></i></p>                                             
+                    </a>
+                    <ul id="tags" class="nav nav-pills nav-sidebar collapse">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "AdminTag", new { area = "Admin" })" class="nav-link @(currentController == "admintag" && currentAction == "index" ? "active" : "")">
+                                Manage Tags
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("MoveTags", "AdminTag", new { area = "Admin" }, null)" class="nav-link @(currentController == "admintag" && currentAction == "movetags" ? "active" : "")">
+                                Change Tags On Topics
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "AdminBadge", new { area = "Admin" })" class="nav-link @(currentController == "adminbadge" && currentAction == "index" ? "active" : "")">
+                        <i class="nav-icon fa fa-fw fa-trophy text-muted text-sm"></i>
+                        <p>Badges</p>                        
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-toggle="collapse" data-target="#permissions" class="nav-link @(currentController == "bannedemail" && currentAction == "index" ? "active" : "")">
+                        <i class="nav-icon fa fa-fw fa-check-square text-muted text-sm"></i>
+                        <p>Permissions<i class="fa fa-fw fa-caret-down right"></i></p>                       
+                    </a>
+                    <ul id="permissions" class="nav nav-pills nav-sidebar collapse">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Permissions", new { area = "Admin" }, null)" class="nav-link @(currentController == "permissions" && currentAction == "index" ? "active" : "")">
+                                <p>Manage Permissions</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("PermissionTypes", "Permissions", new { area = "Admin" }, null)" class="nav-link @(currentController == "permissions" && currentAction == "permissiontypes" ? "active" : "")">
+                                <p> Add/Remove Permission Types</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-toggle="collapse" data-target="#membership" class="nav-link @(currentController == "bannedemail" && currentAction == "index" ? "active" : "")">
+                        <i class="nav-icon fa fa-fw fa-users text-muted text-sm"></i> 
+                        <p>
+                            Membership 
+                            <i class="fa fa-fw fa-caret-down right"></i>
+                        </p>                               
+                    </a>
+                    <ul id="membership" class="nav nav-pills nav-sidebar collapse">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Manage", "Account", new { area = "Admin" }, null)" class="nav-link @(currentController == "account" && currentAction == "manage" ? "active" : "")">Manage Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("ListAllRoles", "Account", new { area = "Admin" }, null)" class="nav-link @(currentController == "account" && currentAction == "listallroles" ? "active" : "")">Manage Roles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("AddRole", "Account", new { area = "Admin" }, null)" class="nav-link @(currentController == "account" && currentAction == "addrole" ? "active" : "")">Add Roles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "AdminSocial", new { area = "Admin" }, null)" class="nav-link @(currentController == "adminsocial" && currentAction == "index" ? "active" : "")">Social Logins</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Members", "ImportExport", new { area = "Admin" }, null)" class="nav-link @(currentController == "importexport" && currentAction == "members" ? "active" : "")">Import / Export</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-toggle="collapse" data-target="#spam" class="nav-link @(currentController == "bannedemail" && currentAction == "index" ? "active" : "")">
+                        <i class="nav-icon fa fa-fw fa-frown-o text-muted text-sm"></i> 
+                        <p> Spam Prevention <i class="fa fa-fw fa-caret-down right"></i></p>                    
+                    </a>
+                    <ul id="spam" class="nav nav-pills nav-sidebar collapse">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "BannedEmail", new { area = "Admin" })" class="nav-link @(currentController == "bannedemail" && currentAction == "index" ? "active" : "")">Ban Emails</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "BannedWord", new { area = "Admin" })" class="nav-link @(currentController == "bannedword" && currentAction == "index" ? "active" : "")">Banned &amp; Stop Words</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Akismet", "AdminSpam", new { area = "Admin" })" class="nav-link @(currentController == "adminspam" && currentAction == "akismet" ? "active" : "")">Akismet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("RegistrationQuestion", "AdminSpam", new { area = "Admin" })" class="nav-link @(currentController == "adminspam" && currentAction == "registrationquestion" ? "active" : "")">Registration Question</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("SpamReporting", "AdminSpam", new { area = "Admin" })" class="nav-link @(currentController == "adminspam" && currentAction == "spamreporting" ? "active" : "")">Spam Reporting</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-toggle="collapse" data-target="#language" class="nav-link @(currentController == "bannedemail" && currentAction == "index" ? "active" : "")">
+                        <i class="nav-icon fa fa-fw fa-language text-muted text-sm"></i> 
+                        <p>Languages <i class="fa fa-fw fa-caret-down right"></i></p>                                             
+                    </a>
+                    <ul id="language" class="nav nav-pills nav-sidebar collapse">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Create", "AdminLanguage", new { area = "Admin" })" class="nav-link @(currentController == "adminlanguage" && currentAction == "create" ? "active" : "")">Add Language</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "AdminLanguage", new { area = "Admin" })" class="nav-link @(currentController == "adminlanguage" && currentAction == "index" ? "active" : "")">Edit Language</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Languages", "ImportExport", new { area = "Admin" })" class="nav-link @(currentController == "importexport" && currentAction == "languages" ? "active" : "")">Import / Export</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("CustomCode", "Settings", new { area = "Admin" }, null)" class="nav-link @(currentController == "settings" && currentAction == "customcode" ? "active" : "")">
+                        <i class="nav-icon fa fa-fw fa-code text-muted text-sm"></i> 
+                        <p>Custom Code</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-toggle="collapse" data-target="#batch" class="nav-link @(currentController == "bannedemail" && currentAction == "index" ? "active" : "")">
+                        <i class="nav-icon fa fa-fw fa-bolt text-muted text-sm"></i> 
+                        <p>
+                            Batch Tools
+                            <i class="fa fa-fw fa-caret-down right"></i>
+                        </p>
+                    </a>
+                    <ul id="batch" class="nav nav-pills nav-sidebar collapse">
+                        <li class="nav-item">
+                            <a href="@Url.Action("BatchDeleteMembers", "Batch", new { area = "Admin" }, null)" class="nav-link @(currentController == "batch" && currentAction == "batchdeletemembers" ? "active" : "")">Batch Delete Members</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("BatchMoveTopics", "Batch", new { area = "Admin" }, null)" class="nav-link @(currentController == "batch" && currentAction == "batchmovetopics" ? "active" : "")">Batch Move Topics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("BatchDeletePrivateMessages", "Batch", new { area = "Admin" }, null)" class="nav-link @(currentController == "batch" && currentAction == "batchdeleteprivatemessages" ? "active" : "")">Batch Delete Private Messages</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "AdminPrivacy", new { area = "Admin" })" class="nav-link @(currentController == "adminPrivacy" && currentAction == "index" ? "active" : "")"><i class="fa fa-fw fa-file-text-o"></i>
+                        <p>Privacy Policy</p>                     
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "AdminHelp", new { area = "Admin" })" class="nav-link @(currentController == "adminhelp" && currentAction == "index" ? "active" : "")">
+                        <i class="nav-icon fa fa-fw fa-file-text-o text-muted text-sm"></i>
+                        <p>Help - FAQ</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Log", new { area = "Admin" })" class="nav-link @(currentController == "log" && currentAction == "index" ? "active" : "")"><i class="fa fa-fw fa-file-text-o"></i> 
+                        <p>Log</p>                    
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+

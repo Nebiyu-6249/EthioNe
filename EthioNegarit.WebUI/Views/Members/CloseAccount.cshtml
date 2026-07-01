@@ -1,0 +1,48 @@
+﻿@model EthioNegarit.WebUI.ViewModels.CloseAccountViewModel
+
+@{
+    ViewBag.Title = "Close Account";
+    Layout = "~/Views/Shared/_LayoutFullWidth.cshtml";
+}
+<section class="content">
+	<div class="container-fluid">
+		<div class="centered">
+			<div class="content-center">
+				@using(Html.BeginForm("CloseAccount", "Members", FormMethod.Post, new { @class = "form-forgotpassword" }))
+					{
+					@Html.ValidationSummary(true)
+					@Html.AntiForgeryToken()
+					<fieldset>
+						<legend>@ViewBag.Title</legend>
+						<p>
+						
+	@string.Format(Html.LanguageString("Members.ChangePassword.Text"), Membership.MinRequiredPasswordLength)
+	</p>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Days)
+                            @Html.TextBoxFor(model => model.Days, new { @class = "form-control", type = "number", placeholder = @Html.LanguageString("Members.Account.CloseDays") })
+
+                            @Html.ValidationMessageFor(m => m.Days)
+                        </div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.OldPassword)
+							@Html.PasswordFor(m => m.OldPassword, new { @class = "form-control" })
+							@Html.ValidationMessageFor(m => m.OldPassword)
+						</div>
+					
+					@*	<div class="form-group">
+		@Html.LabelFor(m => m.ConfirmPassword)
+		@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.ConfirmPassword)
+	</div>*@
+						<div class="submit-holder">
+							<button type="submit" class="btn btn-sm btn-outline-success btn-block">@Html.LanguageString("Close")</button>
+						</div>
+					</fieldset>
+
+					}
+			</div>
+		</div>
+	</div>
+</section>
+

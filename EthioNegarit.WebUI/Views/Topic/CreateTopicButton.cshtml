@@ -1,0 +1,10 @@
+﻿@model EthioNegarit.WebUI.ViewModels.CreateTopicButtonViewModel
+
+@if (Model.LoggedOnUser != null && Model.LoggedOnUser.DisablePosting != true && Model.UserCanPostTopics)
+{
+    <div class="createtopicbutton">
+        <a href="@Url.Action("Create", "Topic")" class="btn btn-block btn-xs btn-success">
+            @Html.LanguageString("Layout.CreateButton")
+        </a>
+    </div>
+}

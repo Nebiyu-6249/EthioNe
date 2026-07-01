@@ -1,0 +1,108 @@
+﻿@model EthioNegarit.WebUI.ViewModels.MemberAddViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutFullWidth.cshtml";
+    ViewBag.Title = Html.LanguageString("Members.Register");
+}
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="fullscreen flex-container">
+                <div class="split split-left  d-none d-sm-inline-block">
+                    @Html.Partial("_ethiopical")
+                </div>
+                <div class="split split-right">
+                    <div class="vertical-center">
+                        <div class="register-logo text-center">
+                            <a href="@Html.Settings().ForumUrl">
+                                <p class="title">
+                                    @Html.Settings().ForumName - @Html.LanguageString("Members.CreateAccountMessage")
+                                </p>
+                            </a>
+                        </div>
+                        @if (!User.Identity.IsAuthenticated)
+                            {
+                            if (Html.Settings().DisableStandardRegistration != true)
+                                {
+                                <div class="mainregisterform">
+                                    @using (Html.BeginForm("Register", "Members", FormMethod.Post, new { @class = "form-register" }))
+                                    {
+                                        @Html.ValidationSummary(true)
+                                        @Html.AntiForgeryToken()
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(x => Model.UserName, new { @class = "form-control", placeholder = @Html.LanguageString("Members.Label.Username")})
+                                            <span class="input-field float-right"></span>
+                                            @Html.ValidationMessageFor(x => x.UserName)
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.PasswordFor(x => Model.Password, new { @class = "form-control", placeholder = @Html.LanguageString("Members.Label.Password") })
+                                         @Html.ValidationMessageFor(x => x.Password)
+                                        </div>
+                                            <div class="form-group">
+                                                @Html.PasswordFor(x => Model.ConfirmPassword, new { @class = "form-control", placeholder = @Html.LanguageString("Members.Label.ConfirmPassword")})
+                                                @Html.ValidationMessageFor(x => x.ConfirmPassword)
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.Email)
+                                                @Html.TextBoxFor(x => x.Email, new { type = "email", @class = "form-control", placeholder = @Html.LanguageString(" Members.Label.EmailAddressBlank") })
+                                                <span class="input-field float-right"></span>
+                                                @Html.ValidationMessageFor(x => x.Email)
+                                            </div>
+                                        if (!string.IsNullOrEmpty(Html.Settings().SpamQuestion))
+                                            {
+                                            <div class="form-group">
+                                                <label for="SpamAnswer">@Html.Settings().SpamQuestion</label>
+                                                @Html.TextBoxFor(x => x.SpamAnswer, new { @class = "form-control" })
+                                            </div>                                            
+                                        }
+             
+                                        <div class="form-group ml-4">                                            
+                                            @Html.CheckBoxFor(m => m.Agree, new { @class = "form-check-input", @id = "termsCheckbox" })
+                                            <label for="Agree">                    
+                                                @Html.Raw(string.Format(Html.LanguageString("TermsAndConditions.ReadAgree"), string.Format("<a href='{0}'>{1}</a>", Url.Action("Terms", "Privacy"), @Html.Lang("TermsOfService.Label")), string.Format("<a href='{0}'>{1}</a>", Url.Action("Index", "Privacy"), @Html.Lang("PrivacyPolicy.Title"))))
+                                            </label>
+                                            @Html.ValidationMessageFor(m => m.Agree)
+                                        </div>
+                                        <div class="submit-holder">
+                                                <button type="submit" class="btn btn-success btn-sm btn-block" id="submitButton" disabled="disabled">
+                                                    @Html.LanguageString("Members.CreateAccount")
+                                                </button>
+                                            </div>
+                                            @Html.HiddenFor(x => x.ReturnUrl)
+                                            }
+                                        </div>
+                                        <p>
+                                            <a href="@Url.Action("Logon", "Members")" class="text-center">
+                                                @Html.LanguageString("Members.Label.AlreadyRegistered")
+                                            </a>
+                                        </p>
+                            }
+                        }
+                        else
+                        {
+                            <div class="">
+                                <p>@Html.LanguageString("Members.Label.AlreadyRegistered")</p>
+                            </div>
+                            }
+                        <div class="panel-footer">
+                            @Html.Partial("_SocialLoginButtons")
+                        </div>                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content --> 
+<script>   
+    $(document).ready(function () {
+        $(function () {
+            $('#termsCheckbox').click(function () {
+                if ($(this).is(':checked')) {
+                    $('#submitButton').removeAttr('disabled');
+                } else {
+                    $('#submitButton').attr('disabled', 'disabled');
+                    
+                }
+            });
+        });
+    });
+</script>

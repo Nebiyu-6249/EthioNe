@@ -1,0 +1,40 @@
+﻿@model EthioNegarit.WebUI.ViewModels.CreateEditPaymentViewModel
+
+@{
+    ViewBag.Title = @Html.LanguageString("Payment.Label.Edit");
+    Layout = "~/Views/Shared/_LayoutFullWidth.cshtml";
+}
+<div class="page-header text-sm">
+    <span class="">
+        @ViewBag.Title
+    </span>
+
+    <span class="inline-item-lg float-right">
+@if (User.IsInRole(AppConstants.AdminRoleName))
+{
+    <a role="button" href="@Url.Action("Index", "Payment")" class="btn btn-sm btn-default btn-block" title="@Html.LanguageString("Payment.Label.Back")">
+        @Html.LanguageString("Payment.Label.Back")
+    </a>
+}
+else
+{
+        <a class="" role="button" href="@Url.Action("List", "Payment")" title="@Html.LanguageString("Payment")">
+            @Html.LanguageString("Payment.Label.Back")
+        </a>
+}
+</span>
+</div>
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="panels-containerr flex-containerr">
+          @using (Html.BeginForm())
+                {
+                @Html.ValidationSummary(false)
+                @Html.AntiForgeryToken()
+                @Html.Partial("_createEditPayment", Model)
+                }
+        </div>
+    </div>
+</section>

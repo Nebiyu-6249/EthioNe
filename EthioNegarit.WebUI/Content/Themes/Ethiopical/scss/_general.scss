@@ -1,0 +1,882 @@
+﻿//
+/*#region =================  Content List================ */
+//
+.contents-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+	margin-bottom:10px;   
+    ul {
+        padding: 0;
+        margin: 0;
+        li {
+            list-style: none;
+            padding: 0 0 4px 0;     
+                  }
+    }  
+}
+.list-inline {
+            display: flex;
+            flex-wrap: wrap;
+           // gap: 0.6rem;
+            gap: 1.5rem;
+           font-weight: 300;
+          > span{
+                 text-align:center;
+                font-size: 13px;
+               // padding: 10px;
+             /* > .address{
+                    display:block;
+                    width:100%;
+                     text-align:center;
+                }*/
+                    @media (max-width: breakpoint-max(xs)){
+                        display:block;
+                        width:100%;
+            }
+            }
+             > .address{
+                 clear:both;
+                    display:block;
+                    width:100%;
+                     text-align:center;
+
+                }
+        }
+//
+/*#endregion ============== Content List End  ====================  */
+//
+//
+/*#region =================  Content Fluid================ */
+//
+.content-fluid {
+    @include clearfix ();
+    position: relative;
+    padding: 5px;
+	border-radius:5px;
+     //   background-color: $lightcyan;
+   background-color: darken($gray-100, 8%);
+ // background: $info-bg;
+ // background: $tag-bg;
+//  background: linear-gradient(135deg, rgba(45,125,210,0.06) 0%, rgba(15,163,177,0.06) 100%);
+
+    color: lighten($dark, 15%);
+	 border-bottom: 1px solid darken($gray-100, 20%);
+    .content-footer {     
+       // margin-top: 5px;
+        margin-bottom: 0;
+    }
+    &:hover {
+        background-color: darken($gray-100, 10%);
+        color: $dark;
+    }
+      &:last-child {
+             border-bottom: 0;
+        }
+    @media (max-width: breakpoint-max(xs)) {
+        padding:5px;
+        margin:0;
+    }
+}
+.content-aside {
+    padding: 5px 5px;
+    display: block;
+    float: left;
+     width: 10%;
+    height: 100%;
+    text-align: center;
+    bottom: 0;
+    span {
+        display: inline-block;
+    }
+    @media (max-width: breakpoint-max(xs)) {
+        display: none;
+    }
+}
+.content-detail {
+     margin: 0;
+    padding: 0;
+    @media (max-width: breakpoint-max(xs)) {
+        margin-left: 0;
+    }
+}
+
+//
+/*#endregion ============== Content-Fluid End  ====================  */
+//
+//
+//
+/*#region =================Time Line ================ */
+//
+
+//
+/*#region =================/*Time Line ================ */
+//
+.timeline {
+    margin: 0 0 45px;
+    padding: 0;
+    position: relative;
+    // The line
+    &::before {
+        @include border-radius($border-radius);
+        background-color: $gray-300;
+        bottom: 0;
+        content: "";
+        left: 31px;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        width: 4px;
+    }
+    // Element
+    > div {
+        &::before,
+        &::after {
+            content: "";
+            display: table;
+        }
+
+        margin-bottom: 15px;
+        margin-right: 10px;
+        position: relative;
+        // The content
+        > .timeline-item {
+            @include box-shadow($card-shadow);
+            @include border-radius($border-radius);
+            background-color: $white;
+            color: $gray-700;
+            margin-left: 60px;
+            margin-right: 15px;
+            margin-top: 0;
+            padding: 0;
+            position: relative;
+            // The time and header
+            > .time {
+                color: #999;
+                float: right;
+                font-size: 12px;
+                padding: 10px;
+            }
+            // Header
+            > .timeline-header {
+                border-bottom: 1px solid $card-border-color;
+                color: $gray-700;
+                font-size: 16px;
+                line-height: 1.1;
+                margin: 0;
+                padding: 10px;
+                // Link in header
+                > a {
+                    font-weight: 600;
+                }
+            }
+            // Item body and footer
+            > .timeline-body,
+            > .timeline-footer {
+                padding: 10px;
+            }
+
+            > .timeline-body {
+                > img {
+                    margin: 10px;
+                }
+
+                > dl,
+                ol,
+                ul {
+                    margin: 0;
+                }
+            }
+
+            > .timeline-footer {
+                > a {
+                    color: $white;
+                }
+            }
+
+            > .timeline-text {
+                margin-left: 5%;
+                padding-left:5%;
+            }
+        }
+        // The icons at line
+        > .fa,
+        > .fas,
+        > .far,
+        > .fab,
+        > .fal,
+        > .fad,
+        > .svg-inline--fa,
+        > img,
+        > .ion {
+          //  background-color: $gray-500;
+           background-color: darken($gray-400, 8%);
+           color: $gray-100;
+            border-radius: 50%;
+            font-size: 16px;
+             //height: 30px;
+            //width: 30px;
+            height: 40px;
+            width: 40px;
+            line-height: 40px;
+            //left: 18px;
+             left: 12px;
+            
+            position: absolute;
+            text-align: center;
+            top: 0;
+            
+        }
+
+        > .svg-inline--fa {
+            padding: 7px;
+        }
+    }
+    // Time label
+    > .time-label {
+        // background-color: darken($gray-100, 8%);
+        > span {
+            @include border-radius(4px);
+          //  background-color: $white;
+           background-color: darken($gray-100, 8%);
+            display: inline-block;
+            font-weight: 300;
+            padding: 5px;
+        }
+    }
+}
+.timeline-body,.timeline-footer{
+     background-color: darken($gray-100, 8%);
+        color: $dark;
+}
+.timeline-inverse {
+    > div {
+        > .timeline-item {
+            @include box-shadow(none);
+            background-color: $gray-100;
+            border: 1px solid $gray-300;
+
+            > .timeline-header {
+                border-bottom-color: $gray-300;
+            }
+        }
+    }
+}
+ .timeline-text {
+    position: relative;
+   display: block;
+   margin-left: 0;
+  //  margin-left: 5%;
+            }
+//
+/*#endregion ============== Time Line End  ====================  */
+//
+// Activities
+.activityentry {
+    padding: 12px 0;
+    border-bottom: 1px $border-color solid;
+    p {
+        margin: 0;
+        padding: 0;
+    }
+    .activitybadgedescription {
+        font-weight: 300;
+    }
+    .activitysubdate {
+        font-weight: 300;
+        font-style: italic;
+        font-size: 13px;
+    }
+    .activitybadge {
+        img {
+            -ms-border-radius: 50%;
+            border-radius: 50%;
+            max-width: 40px;
+        }
+    }
+    .activityinfotext {
+        font-size: 18px;
+    }
+    &:last-child {
+        border: none;
+    }
+}
+
+//
+/*#endregion ============== Time Line End  ====================  */
+//
+//
+.notification-popover-content {
+    display: none;    
+}
+.notification-popover {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    z-index: 9999;
+    display: none;
+    min-width: 200px;
+    min-height: 32px;
+    padding: 1px;
+    text-align: left;
+    white-space: normal;
+    background-color: darken($gray-100, 6%);
+    color: lighten($dark, 15%);
+   
+     background-clip: padding-box;
+ //   border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+///////////////////////////////////////////////////////////////////
+       //Create the arrow
+    &::after,
+    &::before {
+        border: solid transparent;
+        border-right-color: darken($gray-200, 10%);
+        content: "";
+        height: 0;
+        pointer-events: none;
+        position: absolute;
+        right: 100%;
+        top: 15px;
+        width: 0;
+    }
+
+    &::after {
+        border-width: 5px;
+        margin-top: -5px;
+    }
+
+    &::before {
+        border-width: 6px;
+        margin-top: -6px;
+    }
+/////////////////////////////
+}
+.notification-popover .notification-popover-content {
+    padding: 9px 14px;
+    overflow: auto;
+    display: block;
+}
+.notification-popover .notification-popover-content > div:first-child {
+    width: 99%;
+}
+.notification-popover-title {
+    padding: 8px 14px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 18px;
+  //  background-color: #ffffff;
+    background-color: darken($gray-100, 6%);
+    color: lighten($dark, 15%);
+    border-bottom: 1px solid #f2f2f2;
+    border-radius: 5px 5px 0 0;
+}
+.notification-popover-content {
+    padding: 9px 14px;
+    overflow: auto;
+    display: none;
+}
+//
+// Component: Swiper
+//
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+.swiper-slide {
+    display: flex;
+}
+.title-name {
+    font-size: 18px;
+    font-weight: 300;
+    color: lighten($dark, 15%);
+    padding: 0;
+    margin-top: 0;
+}
+.point-award {
+    font-size: 14px;
+    font-weight: 300;
+    color: $gray-500;
+    letter-spacing: 3px;
+    padding: 0;
+    margin-top: 0;
+    span {
+        display: block;
+        letter-spacing: 5px;
+    }
+}
+.logon-message {
+    @include clearfix();
+
+    @if $enable-rounded {
+        @include border-radius($border-radius-lg);
+    }
+
+    position: absolute;
+    background-color: darken($gray-100, 6%);
+    color: lighten($dark, 15%);
+    border-width: 1px;
+    border-style: solid;
+    border-color: darken($gray-100, 10%);
+    bottom: 10px;
+    width: 95%;
+    height: 60px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    overflow: hidden;
+
+    p {
+        padding-top: 15px;
+        font-size: 16px;
+        color: lighten($dark, 15%);
+        text-align: center;
+        justify-content: center;
+    }
+}
+.social-bottom,
+.report,
+.report-text {
+    display: block;
+}
+.report {
+    @include clearfix ();
+    width:100%;
+}
+.report-infos {
+     font-size: 10px;
+    font-weight: 300;
+    display: block;
+    margin-bottom: 2px;
+}
+.member-avatar {
+    float: left;
+    height: 40px;
+    width: 40px;
+
+    .right & {
+        float: right;
+    }
+}
+.name-sm {
+    float: left;
+    font-weight: 500;
+    color: darken($gray-500, 25%);
+
+    .right & {
+        float: right;
+    }
+}
+.timestamp-sm {
+    color: darken($gray-500, 25%);
+    float: right;
+
+    .right & {
+        float: left;
+    }
+}
+.social-bottom {
+    color: darken($gray-500, 25%);
+    float: right;
+}
+.profile-tools {
+background-color: none;
+//top:10px;
+ position:relative;
+ padding:5px;
+//height:250px;
+left:0;
+width: 100%;
+}
+.profile-tools>ul {
+margin:0;
+}
+.profile-tools li {
+position:relative;
+display:block;
+width: 100%;
+  }
+.profile-tools li>a {
+position:relative;
+margin:0;
+width: 100%;
+display:table;
+border-collapse:collapse;
+border-spacing:0;
+ color: darken($gray-500, 25%);
+font-size: 13px;
+text-decoration:none;
+-webkit-transform:translateZ(0) scale(1,1);
+-webkit-transition:all .14s linear;
+transition:all .14s linear;
+border-radius:5px; 
+}
+.profile-tools .nav-text  {
+position:relative;
+display:table-cell;
+vertical-align:middle;
+//width: 75%;
+width: 80%;
+}
+.profile-tools li:hover>a,profile-tools li.active>a{
+color:#fff;
+background-color: darken($gray-500, 8%);
+}
+.site-logo {
+        padding: 10px;
+        margin: 5px;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+
+        img {
+            margin: 2px;
+            height: 50px;
+            width: 50px;
+        }
+    }
+    .site-name {
+        width: 100%;
+        text-align: center;
+        top: 0;
+        padding: 5px;
+        line-height: 30px;
+        font-weight: 300;
+        font-size: 22px;
+    }
+    .site-moto {
+        margin: 0;
+        top: 0;
+        line-height: 16px;
+        font-weight: 100;
+        font-size: 14px;
+        text-align: center;
+        padding: 0;
+    }
+    .site-info {
+        margin-top: 5rem;
+        padding: 30px;
+    }
+
+//
+/*#region =================  Split ================ */
+//
+.split {
+	position: absolute;
+  height: 100%;
+  width: 50%; 
+  z-index: 1;
+  overflow-x: hidden;
+  padding:10px;
+     @media (max-width: breakpoint-max(xs)) {
+width: 100%;
+    }
+}
+.split-left {
+  left: 0;
+}
+.split-right{
+  right: 0;
+    @media (max-width: breakpoint-max(xs)) {
+		 left: 0;                      
+    }
+}
+
+//
+/*#endregion ============== Split End  ====================  */
+//
+
+//Note Used By Get By name
+.inlineitems {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left:20px;
+    margin-right:10px;
+    span{
+       // width:30%;
+        display:inline-flex;
+        float: right;     
+        gap:10px;
+    }
+}
+
+//
+/*#region =================  Inline Items ================ */
+//
+.inline-items {
+    width:100%;
+    clear:both;
+   display: inline-flex; // Keeps the container inline while allowing flex properties
+   column-gap:20px;
+   span {
+     @include inline-gap(10px);
+    &:last-child {
+      margin-left: auto; // Pushes the last item to the far right
+    }
+
+  }
+}
+.inline-item {
+    display: flex;
+    align-items: center;
+    width:100%;
+    span{
+        display:inline-flex;
+  
+&:first-child {
+	left:0;
+	float:left;
+    }
+			&:not(:first-child) {
+  /* styles to apply to all elements except the first one */
+   margin-left: auto; // Pushes
+   
+}
+    }
+}
+.inline-item-lg {
+   width:50%;   
+    //   width:max(50%,200px);
+}
+.inline-item-md {
+  width:33%; 
+}
+.inline-item-sm {
+  width:25%; 
+}
+
+//
+/*#endregion ============== Inline Items End  ====================  */
+//
+
+/*#region =================  Center ================ */
+//
+.vertical-center {
+	position: absolute;
+	display:block;
+	width:95%;   
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+    @media (max-width: breakpoint-max(xs)) {
+top: 40%;
+    }
+}
+ .content-center{
+  position: absolute; /* Positions relative to the body/viewport */
+    top: 40%;           /* Moves top edge to the vertical midpoint */
+    left: 50%;          /* Moves left edge to the horizontal midpoint */
+    transform: translate(-50%, -50%); /* Shifts element back by half its own width/height */
+   //  overflow-y: hidden;
+}
+ .float-center {
+    display:block;   
+    text-align: center;
+    align-items: center;
+   justify-content:center;
+}
+
+//
+/*#endregion ============== Center End  ====================  */
+//
+.search-box{ 
+   right:0;
+   margin-right:0;
+   width:100%; 
+    @media (max-width: breakpoint-max(xs)) {
+        width:100%;  
+        margin-top: 0;        
+    }
+}
+.header-info {
+  display: flex;
+    flex-flow: row;
+    align-items: center;
+    font-weight: 700;
+  //  color: lighten($dark, 15%);
+    font-size: 13px;
+    text-align: center;
+    justify-content: center;
+}
+//line 
+.line {
+    width: 100%;
+     border-bottom: 1px solid darken($gray-300, 10%);
+    margin: 5px 0;
+}
+.divider {
+    width: 100%;
+   border-bottom: 1px solid darken($gray-300, 10%);
+    margin: 5px 0;
+}
+
+//
+/*#region =================Misc: Count ================ */
+//
+.count {
+    //  margin: 20px auto;
+    text-align: center;
+    justify-content: center;
+
+    h2 {
+        font-size: 3rem;
+     //   color: lighten($dark, 15%);
+        transition: color 1.3s;
+    }
+
+    span {
+        letter-spacing: 5px;
+        font-weight: 300;
+    }
+}
+
+.count h2 {
+    font-size: 3rem;
+    transition: color 1.3s;
+}
+
+//
+/*#endregion ============== Misc: Count  ====================  */
+//
+
+
+//
+/*#region =================Misc: Status ================ */
+//
+.stats {
+    margin: 0 0 0 5px;
+    font-size: 14px;
+    font-weight: 200;
+}
+.stats-down {
+    color: red;
+    font-size: 14px;
+    font-weight: 200;
+}
+.stats img,
+.stats-down img {
+    margin-bottom: 3px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.stats-center{
+     text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+//
+/*#endregion ============== Misc: Status End  ====================  */
+//
+
+
+//
+/*#region =================Misc: Rate ================ */
+//
+
+.rate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+    gap: 10px;
+
+}
+
+.rate-up {
+    color: lime;
+    font-weight: 600;
+}
+
+.rate-down {
+    color: red;
+    font-weight: 600;
+}
+//
+/*#endregion ============== Misc: Rate End  ====================  */
+//
+
+//
+/*#endregion ============== Misc: Preloader End  ====================  */
+//
+
+.bottom-message {
+ //   position: absolute;
+ //   bottom: 10px;
+    width: 100%;
+    min-height: 60px;
+    overflow: hidden;
+    text-align:center;
+     display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.count-sm {
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    padding: 0;
+    margin-top: 0;
+	 span {
+       // display: block;
+     letter-spacing: 5px;
+    }
+}
+
+
+@include dark-mode () {
+    .content-fluid {
+		background-color: lighten($dark, 3%);
+		color: $gray-500;
+		border-bottom: 1px solid darken($gray-800, 10%);
+		&:hover {
+			background-color: lighten($dark, 1%);
+			color: $gray-500;
+		}
+		&:last-child {
+			border-bottom: 0;
+		}
+	}  
+    /***********************Time Line*********************************************/
+        .timeline {
+        &::before {
+        background-color: lighten($dark, 3%);
+            }
+          > div {
+                > .fa,
+        > .fas,
+        > .far,
+        > .fab,
+        > .fal,
+        > .fad,
+        > .svg-inline--fa,
+        > img,
+        > .ion {
+        background-color: lighten($dark, 3%);
+		color: $gray-600;
+                    }
+              }
+         > .time-label {
+        > span {
+            background-color: lighten($dark, 3%);
+		color: $gray-200;
+            }
+        }
+        }
+	.timeline-body, .timeline-footer {
+		background-color: lighten($dark, 3%);
+		color: $gray-500;
+	}
+    /**************************************************************/
+    .logon-message {
+        background-color: lighten($dark, 3%);
+        color: $gray-500;
+        border-color: lighten($dark, 15%);
+    }
+}

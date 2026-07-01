@@ -1,0 +1,32 @@
+﻿<div class="site-info">
+    <div class="site-logo">
+        <img src="~/Content/Images/default.png" class="img-circle img-bordered-sm img-size-96 elevation-5" style="opacity: .8">
+    </div>
+    <div class="site-name">
+        <a href="@Html.Settings().ForumUrl">
+            <h1>@Html.LanguageString("Forum.Name")</h1>
+        </a>
+    </div>
+    <div class="site-moto">
+        <p class="text-center">
+            @Html.LanguageString("Forum.Motto")
+        </p>
+    </div>
+    <div class="list-inline float-center">
+                <span class="address">
+                    <span class="ethicon fas fa-home mr-11" aria-hidden="true"></span>
+                    @Html.Raw(Html.Settings().Address)
+                </span>
+                <span class="titlee">
+                    <span class="ethicon fas fa-globe mr-11" aria-hidden="true"></span>
+                    @Html.Raw(Html.Settings().NotificationReplyEmail)
+                </span>
+                <span class="titlee">
+                    <a href="@Url.Action("ContactUs","Home")" class="">
+                        <i class="ethicon fas fa-envelope"></i>
+                        @Html.LanguageString("Layout.Nav.SendUsMessage")
+                    </a>
+                </span>
+    </div>
+</div>
+

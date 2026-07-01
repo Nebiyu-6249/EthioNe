@@ -1,0 +1,32 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model MemberPostsViewModel
+@if (@Model.Posts.Any())
+{
+    <ul class="contents-list">
+        @foreach (var post in Model.Posts)
+        {
+            <li class="content-fluid">
+                @{
+                    Html.RenderPartial("_Post", post);
+                }
+            </li>
+                    }
+    </ul>
+    <div class="clearfix"></div>
+                    if (Model.TotalPages > 1)
+                    {
+                        <a href="#" class="showmorememberposts btn  btn-outline-success btn-sm btn-block" role="button" title="@Html.LanguageString("Post.ShowMorePosts")">
+                            <span class="smmpactive">@Html.LanguageString("Post.ShowMorePosts")</span>
+                            <span class="smmploading" style="display: none;">@Html.LanguageString("Post.ShowMorePostsLoading")</span>
+                        </a>
+                        }
+                    }
+                    else
+                    {
+                        <p>
+                            @Html.LanguageString("Post.NoPosts")
+                        </p>
+                    }
+<input type="hidden" id="pageIndex" value="@(Model.PageIndex + 1)" />
+<input type="hidden" id="userId" class="userId" value="@Model.UserId" />
+<input type="hidden" id="totalPages" value="@Model.TotalPages" />

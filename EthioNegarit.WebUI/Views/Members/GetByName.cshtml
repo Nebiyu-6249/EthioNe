@@ -1,0 +1,297 @@
+﻿@model EthioNegarit.WebUI.ViewModels.ViewMemberViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = string.Concat(Model.User.UserName, " ", Html.LanguageString("Members.ProfileTitle"));
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+   // <input type="hidden" id="userId" class="userId" value="@Model.User.Id" />
+}
+@section Header
+{
+    <script type="text/javascript">
+        $(function () {
+            $.post(app_base + "Topic/GetMemberDiscussions",
+                { "Id": '@Model.User.Id' },
+                function (data) {
+                    $(".membertopics").html(data);
+                });
+          //  TimeBadges();
+           // PointBadges();
+        });
+
+        $(function () {
+            $.post(app_base + "Post/GetMemberPosts",
+                { "Id": '@Model.User.Id' },
+                function (data) {
+                    $(".memberposts").html(data);
+                });
+          //  TimeBadges();
+          //  PointBadges();
+        });
+        function TimeBadges() {
+            var timeBadgeViewModel = new Object();
+            timeBadgeViewModel.Id = '@Model.User.Id';
+            var strung = JSON.stringify(timeBadgeViewModel);
+            $.ajax({
+                url: app_base + 'Badge/Time',
+                type: 'POST',
+                dataType: 'html',
+                data: strung,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                },
+               /* error: function (xhr, ajaxOptions, thrownError) {
+                    ShowUserMessage("Error: " + xhr.status + " " + thrownError);
+                }*/
+            });
+        }
+        function PointBadges() {
+            var pointBadgeViewModel = new Object();
+             pointBadgeViewModel.Id = '@Model.User.Id';
+            var strung = JSON.stringify(pointBadgeViewModel);
+            $.ajax({
+                url: app_base + 'Badge/Point',
+                type: 'POST',
+                dataType: 'html',
+                 data: strung,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                },
+             /*   error: function (xhr, ajaxOptions, thrownError) {
+                    ShowUserMessage("Error: " + xhr.status + " " + thrownError);
+                }*/
+            });
+        }
+    </script>
+}
+<div class="popup popup-top">
+</div>
+
+<div class="page-header">
+    <span class="d-none d-sm-inline-block">
+        <a href="@Url.Action("Search","Members")" class="" title="@Html.LanguageString("SubNav.Members")">
+            <i class="ethicon fas fa-users text-mutedd text-smm">
+            </i>
+            @Html.LanguageString("SubNav.Members")
+        </a>
+    </span>
+    <span class="width-50">
+        @Html.Partial("_searchMembers")
+    </span>
+</div><!-- /.page-header -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col-sm-3 memberavatardetailss">
+                <div class="card card-primaryy card-outlinee">
+                    <div class="card-body">
+                        <a href="@Model.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+                            <span class="memberavatar float-center">
+                                <img class="elevation-2 img-circle img-size-64 @(Model.User.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm")" src="@Model.User.MemberImage(SiteConstants.Instance.GravatarProfileSize)" alt="@Model.User.UserName">
+                            </span>
+                            <h4 class="text-smm profile-username text-center">@Model.User.UserName</h4>
+                        </a>
+                        @{
+                            Html.RenderPartial("_memberInfo", Model.User);
+                        }
+                    </div>
+                    <div class="inlineitems">
+                        @Html.LanguageString("Members.Profile.Joined")
+                        <span class="text-sm float-right">
+                            @DatesUI.GetPrettyDate(Model.User.CreateDate.ToString())
+                        </span>
+                    </div>
+                    @if (Model.User.LastActivityDate != null)
+                    {
+                        <div class="inlineitems">
+                            @(Html.LanguageString("Members.Profile.LastOnline"))
+                            <span class="text-sm float-right">
+                                @DatesUI.GetPrettyDate(Model.User.LastActivityDate.ToString())
+                            </span>
+                        </div>
+                    }
+                    <div class="inlineitems">
+                        @Html.LanguageString("Members.Profile.Score")
+                        <span class="rate text-sm float-right">
+                            <i class="fas fa-sort"></i>
+                            <span class="ml-2">
+                                @Model.User.TotalPoints
+                            </span>
+                        </span>
+                    </div>
+                    <div class="inlineitems">
+                        @Html.LanguageString("Members.Profile.Topics")
+                        <span class="rate text-sm float-right">
+                            <i class="fas fa-folder-open"></i>
+                            <span class="rate-upp ml-2">
+                                @Model.User.Topics.Count
+                            </span>
+                        </span>
+                    </div>
+                    <div class="inlineitems">
+                        @Html.LanguageString("Members.Profile.Posts")
+                        <span class="rate text-sm float-right">
+                            <i class="fas fa-comments"></i>
+                            <span class="ml-2">
+                                @Model.User.Posts.Count
+                            </span>
+                        </span>
+                    </div>
+                    <div class="inlineitems">
+                        @Html.LanguageString("Members.Profile.Badges")
+                        <span class="rate text-sm float-right">
+                            <i class="fas fa-id-badge "></i>
+                            <span class="rate-upp green-colourr ml-2">
+                                @Model.User.Badges.Count
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                @if (Model.User.About != null)
+                {
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">@Html.LanguageString("Members.Profile.About")</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>
+                                @Model.User.About
+                            </p>
+                        </div>
+                    </div>
+                }
+                @if (!Model.IsBlockedYou && Model.User.Id != Model.LoggedOnUserId)
+                {
+                    <div class="card card-primary">
+                        <div class="card-body">
+                            <div class="profile-tools">
+                                @Html.Partial("_memberProfileTools", Model)
+                                @*                                        @if (!Model.User.Roles.Any(x => x.RoleName.Contains(AppConstants.AdminRoleName)))
+                                    {
+                                    @Html.Partial("_memberProfileTools")
+                                        }*@
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">@Html.LanguageString("Members.Profile.Links")</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="profile-tools">
+                            <ul class="">
+                                @if (!string.IsNullOrEmpty(Model.User.Address))
+                                {
+                                    <li>
+                                        <span class="text-sm">
+                                            <i class="fa-lg fas fa-map-marker-alt mr-1 text-sm "></i>
+                                            <span class="nav-text" title="@Html.LanguageString("Members.Profile.Location")">
+                                                @Html.Raw(string.IsNullOrEmpty(Model.User.Address) ? "" : Model.User.Address)
+                                            </span>
+                                        </span>
+
+                                    </li>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.User.Website))
+                                {
+                                    <li>
+                                        <span class="text-sm">
+                                            <i class="fa-lg fas fa-globe mr-1 text-sm "></i>
+                                            <span class="nav-text">
+                                                @Html.Raw(string.IsNullOrEmpty(Model.User.Website) ? "" : string.Format("<a href='{0}' target='_blank' rel='nofollow'>{0}</a>", Model.User.Website))
+                                            </span>
+                                        </span>
+                                    </li>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.User.Facebook))
+                                {
+                                    <li>
+                                        <span class="text-sm">
+                                            <i class="fa-lg fab fa-facebook fa-2xb mr-1 text-sm  blue-colourr"></i>
+                                            <span class="nav-text">
+                                                @* @Html.Raw(string.IsNullOrEmpty(Model.User.Facebook) ? "" : string.Format("<a href='{0}' target='_blank' rel='nofollow'>Facebook</a>", @Model.User.Facebook))*@
+                                                @Html.Raw(string.IsNullOrEmpty(Model.User.Facebook) ? "" : string.Format("<a href='{0}' target='_blank' rel='nofollow'> '@Html.LanguageString('Members.LogonFacebookButton')'</a>", @Model.User.Facebook))
+                                            </span>
+                                        </span>
+                                    </li>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.User.Twitter))
+                                { 
+                                    <li>
+                                        <span class="text-sm">
+                                            <i class="fa-lg fab fa-twitter fa-2xb mr-1 text-sm  blue-colourr"></i>
+                                            <span class="nav-text">
+                                                @* @Html.Raw(string.IsNullOrEmpty(Model.User.Twitter) ? "" : string.Format("<a href='{0}' target='_blank' rel='nofollow'>{0}</a>", Model.User.Twitter))*@
+                                                @*   @Html.Raw(string.Format("<a href='{0}' target='_blank' rel='nofollow'>Twitter</a>", Model.User.Twitter))*@
+                                                @Html.Raw(string.IsNullOrEmpty(Model.User.Twitter) ? "" : string.Format("<a href='{0}' target='_blank' rel='nofollow'>Twitter</a>", Model.User.Twitter))
+                                            </span>
+                                        </span>
+
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-9 membermaindetails">
+                <div class="row mb-4">
+                    <section class="col-sm-12">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="topics-tab" data-toggle="pill" href="#topics" role="tab" aria-controls="topics" aria-selected="false">@Html.LanguageString("Members.Profile.Topics")</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="posts-tab" data-toggle="pill" href="#posts" role="tab" aria-controls="posts" aria-selected="true">@Html.LanguageString("Members.Profile.Posts")</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="badges-tab" data-toggle="pill" href="#badges" role="tab" aria-controls="badges" aria-selected="false">@Html.LanguageString("Members.Profile.Badges")</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="custom-content-above-tabContent">
+                                <div class="tab-pane fade show active" id="topics" role="tabpanel" aria-labelledby="topics-tab">
+                                    <div class="line"></div>
+                                    <div class="membersection memberlatesttopics">
+                                        <div class="membertopics">
+                                            <span class="spmloading ajaxspinner"> @Html.LanguageString("Ajax.PleaseWait")<i class="ethicon fa fa-spinner fa-spin"></i> </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                    <div class="line"></div>
+                                    <div class="memberposts">
+                                        <span class="ajaxspinner" title="@Html.LanguageString("Ajax.PleaseWait")">@Html.LanguageString("Ajax.PleaseWait")</span>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="badges" role="tabpanel" aria-labelledby="badges-tab">
+                                    <div class="line"></div>
+                                    @if (Model.User.Badges != null && Model.User.Badges.Any())
+                                    {
+                                        <div class="row">
+                                            @foreach (var badge in Model.User.Badges)
+                                            {
+                                                <section class="col-sm-4">
+                                                    @Html.Partial("_memberBadge", badge)
+                                                </section>
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <p>@Html.LanguageString("Badges.NoBadges")</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="popup popup-bottom">
+</div>

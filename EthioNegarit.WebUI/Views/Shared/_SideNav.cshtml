@@ -1,0 +1,222 @@
+﻿@using EthioNegarit.Core.Domain.Entities;
+<!-- Sidebar -->
+<aside class="main-sidebar main-sidebar-custom sidebar-light-primary elevation-0">
+    <div class="sidebar">
+        <nav class="mt-0">
+            <ul class="nav nav-pills nav-sidebar" data-widget="treeview" role="menu" data-accordion="false">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a href="@Url.Action("Dashboard", "Home")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "home" && TempData[AppConstants.CurrentAction].ToString() == "dashboard" ? "active" : "")">
+                            <i class="nav-icon fas fa-tachometer-alt text-sm text-muted"></i>
+                            <p>
+                                @Html.Lang("Dashboard.Title")
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Discussions", "Home")" title="@Html.Lang("Members.Topics")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "home" && TempData[AppConstants.CurrentAction].ToString() == "discussions" ? "active" : "")">
+                            <i class="nav-icon fas fa-folder-open text-muted text-sm"></i>
+                            <p>
+                                @Html.Lang("Members.Topics")
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("PostedIn", "Home")" title="Topic and Posts" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "home" && TempData[AppConstants.CurrentAction].ToString() == "postedin" ? "active" : "")">
+                            <i class="nav-icon fas fa-comments text-muted text-sm"></i>
+                            <p>
+                                @Html.Lang("Members.PostedIn")
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Following", "Home")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "home" && TempData[AppConstants.CurrentAction].ToString() == "following" ? "active" : "")">
+                            <i class="nav-icon fa fa-comment-dots text-muted text-sm"></i>
+                            <p>
+                                @Html.Lang("Members.Following")
+                            </p>
+                        </a>
+                    </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Favourite")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "favourite" && TempData[AppConstants.CurrentAction].ToString() == "index" ? "active" : "")">
+                                <i class="nav-icon fa fa-star text-muted text-sm"></i>
+                                <p>
+                                    @Html.Lang("Members.Favourites")
+                                </p>
+                            </a>
+                        </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "Home")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "home" && TempData[AppConstants.CurrentAction].ToString() == "index" ? "active" : "")">
+                            <i class="nav-icon fa fa-home text-sm"></i>
+                            <p>
+                                @Html.Lang("Layout.Nav.Home")
+                            </p>
+                        </a>
+                    </li>
+                }
+                <li class="nav-item d-xl-none d-sm-inline-block">
+                    <a href="@Url.Action("Index", "Category")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "category" && TempData[AppConstants.CurrentAction].ToString() == "index" ? "active" : "")">
+                        <i class="nav-icon fa fa-list text-sm"></i>
+                        <p>
+                            @Html.LanguageString("Layout.Nav.Categories")
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item d-xl-none d-sm-inline-block">
+                    <a href="@Url.Action("Index", "Topic")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "topic" && TempData[AppConstants.CurrentAction].ToString() == "index" ? "active" : "")">
+                        <i class="nav-icon far fa-comments text-sm"></i>
+                        <p>
+                            @Html.Lang("Layout.Nav.Discussions")
+                        </p>
+                    </a>
+                </li>
+                @if (Html.Settings().EnableChat)
+                {
+                    <li class="nav-item  d-xl-none d-sm-inline-block">
+                        <a href="@Url.Action("Index", "Chat")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "chat" && TempData[AppConstants.CurrentAction].ToString() == "index" ? "active" : "")">
+                            <i class="nav-icon fa fa-list text-sm"></i>
+                            @Html.Lang("Layout.Nav.ChatRooms")
+                        </a>
+                    </li>
+                }
+                @if (Session["RecentActivity"] != null)
+                {
+                    <li class="nav-item">
+                        <a href="@Url.Action("RecentlyVisited","Topic")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "topic" && TempData[AppConstants.CurrentAction].ToString() == "recentlyvisited" ? "active" : "")">
+                            <i class="nav-icon fas fa-folder-plus text-muted text-sm"></i>
+                            @Html.Lang("Topic.RecentlyVisited")
+                        </a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a href="@Url.Action("Search", "Members")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "members" && TempData[AppConstants.CurrentAction].ToString() == "search" ? "active" : "")">
+                        <i class="nav-icon fas fa-users text-muted text-sm"></i>
+                        <p>
+                            @Html.LanguageString("Layout.Nav.Members")
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Activity", "Home")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "home" && TempData[AppConstants.CurrentAction].ToString() == "activity" ? "active" : "")">
+                        <i class="nav-icon fas fa-clock text-muted text-sm"></i>
+                        <p>
+                            @Html.LanguageString("Activity.Title")
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Leaderboard", "Home")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "home" && TempData[AppConstants.CurrentAction].ToString() == "leaderboard" ? "active" : "")">
+                        <i class="nav-icon fas fa-trophy text-sm text-muted"></i>
+                        <p>
+                            @Html.LanguageString("Layout.Nav.Leaderboard")
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Badge")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "badge" && TempData[AppConstants.CurrentAction].ToString() == "index" ? "active" : "")">
+                        <i class="nav-icon fas fa-medal text-sm text-muted"></i>
+                        <p>
+                            @Html.LanguageString("Layout.Nav.Badges")
+                        </p>
+                    </a>
+                </li>
+                @if (!Html.Settings().EnableAd)
+                {
+                    if (User.Identity.IsAuthenticated && @Html.CurrentMember().Advertisements.Count() > 0)
+                    {
+                        <li class="nav-item nav-headerr">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-folder-open text-muted"></i>
+                                <p>
+                                    @Html.LanguageString("Members.AdAndPayment")
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("MyAds", "Ad")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "ad" && TempData[AppConstants.CurrentAction].ToString() == "myads" ? "active" : "")">
+                                        <i class="nav-icon  fas fa-tags text-sm"></i>
+                                        <p>
+                                            @Html.Lang("Members.Advertisement")
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("List", "Payment")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "payment" && TempData[AppConstants.CurrentAction].ToString() == "list" ? "active" : "")">
+                                        <i class="nav-icon fas fa-images  text-sm"></i>
+                                        <p>
+                                            @Html.LanguageString("Members.Payment")
+                                        </p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-ad text-muted"></i>
+                            <p>
+                                @Html.LanguageString("Layout.Nav.AdService")
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul id="advertisement" class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Ad")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "ad" && TempData[AppConstants.CurrentAction].ToString() == "index" ? "active" : "")">
+                                    <i class="nav-icon fas fa-images  text-sm text-muted"></i>
+                                    <p>
+                                        @Html.LanguageString("Layout.Nav.Advertisements")
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Package")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "package" && TempData[AppConstants.CurrentAction].ToString() == "index" ? "active" : "")">
+                                    <i class="nav-icon fas fa-copy text-sm text-muted"></i>
+                                    <p>
+                                        @Html.LanguageString("Layout.Nav.Packages")
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                <li class="nav-item d-xl-none d-sm-inline-block">
+                    <a href="@Url.Action("About","Home")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "home" && TempData[AppConstants.CurrentAction].ToString() == "about" ? "active" : "")">
+                        <i class="nav-icon fas fa-book text-sm"></i>
+                        <p>
+                            @Html.Lang("Layout.Nav.About")
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item d-xl-none d-sm-inline-block">
+                    <a href="@Url.Action("FAQ","Home")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "home" && TempData[AppConstants.CurrentAction].ToString() == "faq" ? "active" : "")">
+                        <i class="nav-icon far fa-question-circle"></i>
+                        <p>
+                            @Html.LanguageString("Help.FAQ")
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    @if (!Html.Settings().EnableAd)
+    {
+        <div class="sidebar-custom">
+            <div class="nav-item nav nav-pillss nav-sidebar">
+                <a href="@Url.Action("Index", "Ad")" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "ad" && TempData[AppConstants.CurrentAction].ToString() == "index" ? "active" : "")">
+                    <i class="nav-icon mr-4 fas fa-ad  text-smm text-muted"></i>
+                    <p class="hide-on-collapse">
+                        @Html.LanguageString("Layout.Nav.AdService")
+                    </p>
+                </a>
+            </div>
+        </div>
+    }
+    <div class="popup bottom-left">
+    </div>
+</aside>

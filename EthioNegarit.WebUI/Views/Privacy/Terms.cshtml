@@ -1,0 +1,120 @@
+﻿@using System.Web.Mvc.Html
+@using EthioNegarit.WebUI.Application.ExtensionMethods
+@model EthioNegarit.WebUI.ViewModels.PrivacyPolicyViewModel
+@{
+    ViewBag.Title = @Html.LanguageString("Privacy.Terms.Title"); @Html.Raw(Html.Settings().ForumName);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+  /*  <style>
+            .sidebar .nav-link {
+                font-size: 0.9rem;
+                 padding: 0.3rem 1rem;
+                 display: flex;
+                 align-items: center
+              /* font-weight: 400;
+               // padding: 0.48rem 1.5rem;               
+              //  display: flex;
+              //  align-items: center;*//*
+            }
+    </style>*/
+}
+<aside class="main-sidebar sidebar-light-primary mt-0  elevation-0">
+    @Html.Partial("_termsNav")
+</aside>
+<section class="content">
+    <div class="container-fluid">
+        <main class="main">
+            <header class="hero">
+                <div class="hero-eyebrow">@Html.LanguageString("Privacy.Policy.Documentation") · @Html.LanguageString("Forum.Name") @Html.LanguageString("Text.Platform")</div>
+                <h1>@Html.LanguageString("Forum.Name")<br><span>@Html.LanguageString("Privacy.Terms.Title")</span></h1>
+                <p class="hero-sub"> @Html.Raw(string.Format(Html.LanguageString("Privacy.Terms.Read"), @Html.Settings().ForumName))</p>
+                <div class="hero-badges">
+                    <span class="badge badge-outline">📅 @Html.Lang("Privacy.Policy.Effective"): @Model.EffectiveDate</span>
+                    <span class="badge badge-outline">🔄 @Html.LanguageString("Privacy.Policy.Version") @Model.Version</span>
+                    <span class="badge badge-gold">⚖️ @Html.LanguageString("Privacy.Policy.GDPRCompliant")</span>
+                    <span class="badge badge-green">🇪🇹 @Html.LanguageString("Privacy.Policy.ETHCompliant")</span>
+                </div>
+            </header>
+            <!-- IMPORTANT NOTICE -->
+            <div class="notice" role="note">
+                <strong>⚠ @Html.LanguageString("Privacy.Notice.Important")</strong>
+                <p class="">
+                    @Html.Raw(string.Format(Html.LanguageString("Privacy.Notice.LineOne"), @Html.Settings().ForumName, @Html.Settings().ForumUrl))
+                 </p>
+            </div>
+            <div class="notice info" role="note" style="margin-top:0;">
+                <strong>ℹ️ @Html.LanguageString("Privacy.Terms.RelatedDocs")</strong>
+                <p class="">
+                    @Html.Raw(string.Format(Html.LanguageString("Privacy.Notice.LineTwo"), string.Format("<a href='{0}'>{1}</a>", Url.Action("Index", "Privacy"), @Html.Lang("PrivacyPolicy.Title")), @Html.Settings().ForumName))
+                    </p>
+            </div>
+            @Html.Raw(Model.TermsAndConditions)
+            <div class="clearfix"></div>
+            @if (!Model.Agree && Html.CurrentMember() != null)
+            {
+                using (Html.BeginForm("Agreement", "Privacy", FormMethod.Post, new { @class = "form-report" }))
+                {
+                    @Html.ValidationSummary(true)
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.Agree, new { @class = "checkbox ml-4" }))
+                    {
+                            @Html.CheckBoxFor(m => m.Agree, new { @class = "form-check-input", @id = "termsCheckbox" })
+                        }
+                        @Html.ValidationMessageFor(m => m.Agree)
+                    </div>
+                    <div class="submit-holder">
+                        <button type="submit" class="btn btn-success btn-sm ml-2">
+                            @Html.LanguageString("Button.Continue")
+                        </button>
+                    </div>
+                }
+            }
+            <!-- FOOTER -->
+            <footer class="doc-footer">
+                <div class="footer-row">
+                    <div>
+                        <strong style="color:rgba(255,255,255,0.75)">@Html.LanguageString("Forum.Name") — @Html.LanguageString("Privacy.Terms.Title")</strong><br>
+                        @Html.LanguageString("Privacy.Policy.Version") @Model.Version &nbsp;·&nbsp; @Html.LanguageString("Privacy.Policy.Effective") @Model.EffectiveDate &nbsp;·&nbsp; &copy; @DateTime.UtcNow.Year <a href="@(Html.Settings().ForumUrl)">@Html.Settings().ForumName</a>. @Html.LanguageString("Privacy.Terms.AllRights")<br>
+                        @Html.LanguageString("Privacy.Policy.PreparedIn")
+                        <div class="clearfixx">
+                            <div class="footer-links">
+                                <a href="@Url.Action("Index", "Privacy")">@Html.LanguageString("Privacy.Policy.Title")</a>
+                                <a href="#">Cookie Policy</a>
+                                <a href="#">API Terms</a>
+                                <a href="@Url.Action("Contact", "Home")"> @Html.LanguageString("Privacy.Policy.ContactUs")</a>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="footer-tags">
+                        <span class="footer-tag">GDPR</span>
+                        <span class="footer-tag">CCPA</span>
+                        <span class="footer-tag">PCI-DSS</span>
+                        <span class="footer-tag">MIT License</span>
+                        <span class="footer-tag">DMCA</span>
+                        <span class="footer-tag">Ethiopian Law</span>
+                    </div>
+                </div>
+            </footer>
+        </main>
+            <button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="ወደ ላይ ተመለስ">↑</button>
+</div>
+</section>
+<!-- BACK TO TOP -->
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('backTop').classList.toggle('visible', window.scrollY > 400);
+  });
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>

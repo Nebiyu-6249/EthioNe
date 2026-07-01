@@ -1,0 +1,37 @@
+﻿@model EthioNegarit.Core.Domain.General.Theme
+<script type="text/javascript">
+    var app_base = '@Url.Content("~/")';
+    var largeSpinnerBlockImage = '@Url.Content("~/content/Images/ajaxloader-large.gif")';
+</script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+@(Bundle.JavaScript()
+    .Add("~/Scripts/jquery-3.1.0.min.js")
+    .Add("~/Scripts/jquery-ui.min.js")
+    .Add("~/Scripts/jquery.unobtrusive-ajax.js")
+    .Add("~/Content/bootstrap/js/bootstrap.min.js")
+    .Add("~/Scripts/jquery.validate.min.js")
+    .Add("~/Scripts/jquery.validate.unobtrusive.min.js")
+    .Add("~/Scripts/fancybox/jquery.fancybox.js")
+    .Add("~/Scripts/plugins.js")
+
+
+
+  .Add("~/Scripts/language.js")
+  .Add("~/Scripts/badges.js")
+  .Add("~/Scripts/chat.js")
+  .Add("~/Scripts/report.js")
+  .Add("~/Scripts/slideoutpanel.js")
+  .Add("~/Scripts/privatemessage.js")
+  .Add("~/Scripts/topicPost.js")
+  .Add("~/Scripts/notifications.js")
+  .Add("~/Scripts/advert.js")
+  // .Add("~/Scripts/cardwidget.js")
+  .Add("~/Scripts/Chart.js")
+  .Add("~/Scripts/payment.js")
+  .Add("~/Scripts/popover.js")
+  .Add("~/Scripts/main.js")
+  .Add("~/Scripts/general.js")  
+  .Add(Model.ThemePath + "/Scripts/general.js")
+ // .Add($"{Model.ThemePath}/Scripts/general.js")
+  .MvcRender($"~/scripts/cache/combined_{Model.ThemeName}_#.js")
+)

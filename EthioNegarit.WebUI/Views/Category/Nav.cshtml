@@ -1,0 +1,47 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model List<CategorySectionViewModel>
+@{
+    Layout = null;
+}
+<div class="panel-header">
+    <h3 class="title">@Html.LanguageString("Layout.Nav.Categories")</h3>
+</div>
+<ul class="contents-list">
+    @foreach (var sectionItem in Model.OrderBy(x => x.Section.SortOrder))
+    {
+        if (sectionItem.AllPermissionSets.Any())
+        {
+            <li class="mb-0 pl-2">
+                <a href="#" role="button" class="showcategories showhidebutton" id="showinfo" data-id="@sectionItem.Section.Id" data-toggle="collapse" data-target="#section-@sectionItem.Section.Id" title="Show/Hide" )>
+                    <div class="subheader">
+                        <p class="text-sm">
+                            <span class="">
+                                @(sectionItem.Section.Name)
+                                <i class="ethicon fas fa-angle-down mt-2 float-right showhideicon">
+                                </i>
+                            </span>
+                        </p>
+                    </div>
+                </a>
+                <div class="collapse categories" id="section-@sectionItem.Section.Id">
+                    @foreach (var category in sectionItem.AllPermissionSets.Keys)
+                    {
+                        var permissions = sectionItem.AllPermissionSets[category];
+                        <ul class="contents-list">
+                            <li class="ml-4">
+                                @Html.Partial("_categoryNav", new CategoryViewModel
+                           {
+                               Category = category.Category,
+                               LatestTopic = category.MostRecentTopic,
+                               Permissions = permissions,
+                               PostCount = category.PostCount,
+                               TopicCount = category.TopicCount
+                           })
+
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </li>}
+    }
+</ul>

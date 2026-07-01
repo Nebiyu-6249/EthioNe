@@ -1,0 +1,23 @@
+﻿@model  EthioNegarit.WebUI.ViewModels.PostedInViewModel
+@{
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+}
+    <ul class="contents-list">
+        @foreach(var topic in Model.Topics)
+			{
+			<li class="content-fluid">
+					@{
+						Html.RenderPartial("_Topic", topic);
+					}
+			
+			</li>
+							}
+    </ul>
+                @if (Model.TotalPages > 1)
+                {
+                    <ul>
+                        <li class="pagination">
+                            @Html.Pager(Convert.ToInt32(Model.PageIndex), Html.Settings().TopicsPerPage, totalCount, null, "PostedIn", "Home")
+                        </li>
+                    </ul>
+                }

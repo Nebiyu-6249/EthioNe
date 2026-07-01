@@ -1,0 +1,109 @@
+﻿@model EthioNegarit.WebUI.Areas.Admin.ViewModels.EditPrivacyPolicyViewModel
+
+@{
+    ViewBag.Title = "Privacy Policy";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="panel-heading">
+    <h5>@ViewBag.Title</h5>
+</div>
+@using (Html.BeginForm("Index", "AdminPrivacy", FormMethod.Post))
+{
+  @*  @Html.HiddenFor(model => model.Id)*@
+    @Html.ValidationSummary(false)
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastUpdate)
+        @Html.TextBoxFor(model => model.LastUpdate, new { @class = "form-control readonly" })
+        @Html.ValidationMessageFor(model => model.LastUpdate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.EffectiveDate)
+        @Html.TextBoxFor(model => model.EffectiveDate, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.EffectiveDate)
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.Version)
+        @Html.TextBoxFor(model => model.Version, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Version)
+    </div>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingPrivacyPolicy">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsePrivacyPolicy" aria-expanded="false" aria-controls="collapsePrivacyPolicy">
+                        Privacy Policy
+                    </a>
+                </h4>
+            </div>
+            <div id="collapsePrivacyPolicy" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPrivacyPolicy">
+                <div class="panel-body">
+                    <div class="form-group">
+                    @*    @Html.LabelFor(model => model.Policy)*@
+                        @Html.EditorFor(model => model.Policy)
+                        @Html.ValidationMessageFor(model => model.Policy)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingPrivacyPolicyAm">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsePrivacyPolicyAm" aria-expanded="false" aria-controls="collapsePrivacyPolicyAm">
+                        Privacy Policy Amharic
+                    </a>
+                </h4>
+            </div>
+            <div id="collapsePrivacyPolicyAm" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPrivacyPolicyAm">
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PolicyAm)
+                        @Html.EditorFor(model => model.PolicyAm)
+                        @Html.ValidationMessageFor(model => model.PolicyAm)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTermsConditions">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTermsConditions" aria-expanded="false" aria-controls="collapseTermsConditions">
+                        Terms &amp; Conditions
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTermsConditions" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTermsConditions">
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Terms)
+                        @Html.EditorFor(model => model.Terms)
+                        @Html.ValidationMessageFor(model => model.Terms)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTermsConditionsAm">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTermsConditionsAm" aria-expanded="false" aria-controls="collapseTermsConditionsAm">
+                        Terms &amp; Conditions Amharic
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTermsConditionsAm" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTermsConditionsAm">
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TermsAm)
+                        @Html.EditorFor(model => model.TermsAm)
+                        @Html.ValidationMessageFor(model => model.TermsAm)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="submit-holder">
+            <button type="submit" class="btn btn-mvc-green btn-mvc-large">Save</button>
+        </div>
+}
+

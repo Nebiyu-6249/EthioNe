@@ -1,0 +1,83 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model FAQViewModel
+@{
+    ViewBag.Title = @Html.Lang("Help.FAQ");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+    var searchFor = Html.Lang("Side.Search.SearchFor");
+   // var count = 0;
+}
+<!-- Page header -->
+<div class="page-header">
+    <span class="">
+        @ViewBag.Title
+    </span>
+    <span class="width-50">
+        @using (Html.BeginForm("FAQ", "Home", FormMethod.Get))
+        {
+            <span class="input-group input-group-sm">
+                @Html.TextBoxFor(x => Model.Search, new { @class = "form-control", placeholder = searchFor })
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </span>
+            </span>
+            @Html.HiddenFor(x => x.PageIndex)
+        }
+    </span>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col-sm-12" id="accordion">
+                @if (Model.FAQ != null)
+                {
+                    foreach (var faq in Model.FAQ)
+                    {
+                      //  count += 1;
+                        <div class="card card-primaryy card-warning card-outline">
+                            <a class="d-block w-100" data-toggle="collapse" href="#collapse-@faq.Id">
+                                <div class="card-header">
+                                    <h4 class="card-title">
+                                        @faq.Question
+                                    </h4>
+                                    <div class="card-tools">
+                                        <span class="btn btn-tool" data-card-widget="expand">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                            <div id="collapse-@faq.Id" class="collapse showw" data-parent="#accordion">
+                                <div class="card-body">
+                                    @Html.Raw(@faq.Replay)
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        @if (Model.TotalPages > 1)
+        {
+            <ul>
+                <li class="pagination">
+                    @Html.Pager(Convert.ToInt32(Model.PageIndex), SiteConstants.Instance.SearchListSize, totalCount, new { search = Model.Search })
+                </li>
+            </ul>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-12 mt-3 text-center">
+                    <p class="lead">
+                        <a href="@Url.Action("ContactUs", "Home")">@Html.LanguageString("Layout.Nav.ContactUs")</a>,
+                        @Html.LanguageString("Help.ContactUs.Message")<br />
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</section>

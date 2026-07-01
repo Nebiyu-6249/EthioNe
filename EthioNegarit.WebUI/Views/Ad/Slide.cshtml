@@ -1,0 +1,151 @@
+﻿@using EthioNegarit.Utilities
+@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.ViewModels
+@model AdListViewModel
+@{
+    var adcount = 0;
+}
+<div class="swiper mySwiper ">
+    <div class="swiper-wrapper">
+
+        @if (Model.Advertisements != null)
+        {
+            foreach (var ad in Model.Advertisements)
+            {
+                adcount += 1;
+                @*    @Html.Partial("_ad", ad)*@
+
+                <div class="ad rectangle swiper-slide">
+                    <div class="image-left image-small">
+                        <img src="@AppHelpers.AdvertImage(@ad.Image, @ad.Id,110)" class="img-circle img-bordered-sm" style="opacity: .8">
+                    </div>
+                    <div class="ad-content">
+                        <div class="company-name">
+                            <a href=" @ad.NiceUrl" title=" @ad.Name">
+                                @ad.Name
+                            </a>
+                        </div>
+                        <div class="slogan">
+                            @ad.MotoSlogan
+                        </div>
+                        <p>
+                            @Html.Raw(string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(@ad.About), 25), "..."))
+                        </p>
+                    </div>
+                </div>
+            }
+        }
+
+        @if (adcount < 3)
+        {
+            <div class="ad rectangle swiper-slide">
+                <div class="image-left image-small">
+                    @*<img src="@AppHelpers.AdvertImage(@ad.Image, @ad.Id,110)" class="img-circle img-bordered-sm" style="opacity: .8">*@
+                    <img src="../../Content/images/default.png" class="img-circle img-size-110 img-bordered-sm" style="opacity: .8">
+                </div>
+                <div class="ad-content">
+                    <div class="company-name">
+                        Company Name
+                    </div>
+                    <div class="slogan">
+                        Sub Title
+                    </div>
+                    <p>
+                        Free To Add
+                    </p>
+
+                </div>
+
+            </div>
+        }
+
+        @if (adcount < 2)
+        {
+            <div class="ad rectangle swiper-slide">
+                <div class="image-left image-small">
+                    @*<img src="@AppHelpers.AdvertImage(@ad.Image, @ad.Id,110)" class="img-circle img-bordered-sm" style="opacity: .8">*@
+                    <img src="../../Content/images/default.png" class="img-circle  img-bordered-sm" style="opacity: .8">
+                </div>
+                <div class="ad-info">
+                    <div class="company-name">
+                        Company Name
+                    </div>
+                    <div class="slogan">
+                        Sub Title
+                    </div>
+                    <p>
+                        Free To Add
+                    </p>
+                </div>
+            </div>
+        }
+
+        @if (adcount < 1)
+        {
+            <div class="ad rectangle swiper-slide">
+                <div class="image-left image-small">
+                    @*<img src="@AppHelpers.AdvertImage(@ad.Image, @ad.Id,110)" class="img-circle img-bordered-sm" style="opacity: .8">*@
+
+                    <img src="../../Content/images/default.png" class="img-circle  img-bordered-sm" style="opacity: .8">
+
+                </div>
+                <div class="ad-info">
+                    <div class="company-name">
+                        Company Name
+                    </div>
+                    <div class="slogan">
+                        Sub Title
+                    </div>
+                    <p>
+                        Free To Add
+                    </p>
+
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="swiper-pagination"></div>
+
+    @*   <div class="autoplay-progress">
+            <svg viewBox="0 0 48 48">
+                <circle cx="24" cy="24" r="20"></circle>
+            </svg>
+            <span></span>
+        </div>*@
+
+</div>
+
+
+
+<!--SWIPER JS-->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+
+        /* autoplay: {
+             delay: 2500,
+             disableOnInteraction: false
+         },*/
+
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        //when window width is >= 600px
+        breakpoints: {
+            600: {
+                slidesPerView: 3
+            }
+        },
+
+        /*   on: {
+           autoplayTimeLeft(s, time, progress) {
+           progressCircle.style.setProperty("--progress", 1 - progress);
+           progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+       }
+       }*/
+    });
+</script>

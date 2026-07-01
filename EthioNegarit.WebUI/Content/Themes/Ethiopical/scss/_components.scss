@@ -1,0 +1,1200 @@
+﻿//
+/*#region =================/*Component: Badge ================ */
+//
+
+.members-badge {
+    border: 1px solid transparent;
+    padding: 10px 20px;
+    margin:10px;
+    font-weight: 300;
+  //  font-size: 16px;
+   // text-align: center;
+  //  justify-content: center;
+}
+.badge-header {
+   // display: inline-flex;
+    position:relative;
+    margin: 5px;
+    width: 100%;
+  //  justify-content: center; /* Horizontally center */
+ // align-items: center; /* Vertically center */
+  .image{
+   //margin-top: 0;
+      width: 25%;
+    img {
+        height: 100%;
+        width: 100%;
+    }
+
+    @media (max-width: breakpoint-max(xs)) {
+        display: block;
+       text-align:center;
+        width: 100%;
+        margin-top: 0;
+        img {
+            height: 40%;
+            width: 40%;
+        }
+    }
+    }
+}
+.badge-info {
+    background-color: inherit;
+    text-align: center;
+}
+
+.badge-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 300;
+    color: lighten($dark, 15%);
+    padding: 10px;
+  //  margin-top: 15px;
+    text-align: center;
+  //  text-overflow: clip;
+
+   //  justify-content: center; /* Horizontally center */
+ // align-items: center; /* Vertically center */
+  	overflow-x: hidden;
+        text-overflow:ellipsis;
+		margin-left: auto;
+	//	width: 70%;
+        width: auto;
+   // letter-spacing:1px;
+    @media (max-width: breakpoint-max(xs)) {
+        margin-top:0;
+        }
+}
+
+.badge-award {
+    font-size: 14px;
+    font-weight: 300;
+    color: $gray-500;
+    letter-spacing: 3px;
+    padding: 0;
+    margin-top: 0;
+
+    span {
+        display: block;
+        letter-spacing: 5px;
+    }
+}
+/*
+.badge-description {
+    text-align: center;
+}*/
+//
+/*#endregion ============== Badge End  ====================  */
+//
+
+//
+/*#region =================/*Component: Buttons ================ */
+//
+//
+/*#region =================  Buttons ================ */
+//
+@mixin standard-button() {
+    display: inline-block;
+    //padding: 6px 16px;
+    padding: 7px 20px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 14px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    text-decoration: none;
+    background-color: #efefef; 
+    color: #333;
+}
+// Back button
+//.backbutton { margin-top: -8px; margin-bottom: 10px; }
+.backbutton { margin-top: 8px; margin-bottom: 10px; }
+.btn {
+    &.disabled,
+    &:disabled {
+        cursor: not-allowed;
+    }
+    // Flat buttons
+    &.btn-flat {
+        @include border-radius(0);
+        border-width: 1px;
+        box-shadow: none;
+    }
+    // input file btn
+    &.btn-file {
+        overflow: hidden;
+        position: relative;
+
+        > input[type="file"] {
+            background-color: $white;
+            cursor: inherit;
+            display: block;
+            font-size: 100px;
+            min-height: 100%;
+            min-width: 100%;
+            opacity: 0;
+            outline: none;
+            position: absolute;
+            right: 0;
+            text-align: right;
+            top: 0;
+        }
+    }
+}
+// Button color variations
+.btn-default {
+    background-color: $button-default-background-color;
+    border-color: $button-default-border-color;
+    color: $button-default-color;
+
+    &:hover,
+    &:active,
+    &.hover {
+        background-color: darken($button-default-background-color, 5%);
+        color: darken($button-default-color, 10%);
+    }
+
+    &.disabled,
+    &:disabled {
+        color: $button-default-color;
+        background-color: $button-default-background-color;
+    }
+}
+.btn-outline-light {
+    color: darken($light, 20%);
+    border-color: darken($light, 20%);
+    &.disabled,
+    &:disabled {
+        color: darken($light, 20%);
+        border-color: darken($light, 20%);
+    }
+}
+// Application buttons
+.btn-app {
+    @include border-radius(3px);
+    background-color: $button-default-background-color;
+    border: 1px solid $button-default-border-color;
+    color: $gray-600;
+    font-size: 12px;
+    height: 60px;
+    margin: 0 0 10px 10px;
+    min-width: 80px;
+    padding: 15px 5px;
+    position: relative;
+    text-align: center;
+    // Icons within the btn
+    > .fa,
+    > .fas,
+    > .far,
+    > .fab,
+    > .fal,
+    > .fad,
+    > .svg-inline--fa,
+    > .ion {
+        display: block;
+        font-size: 20px;
+    }
+
+    > .svg-inline--fa {
+        margin: 0 auto;
+    }
+
+    &:hover {
+        background-color: $button-default-background-color;
+        border-color: darken($button-default-border-color, 20%);
+        color: $button-default-color;
+    }
+
+    &:active,
+    &:focus {
+        @include box-shadow(inset 0 3px 5px rgba($black, .125));
+    }
+    // The badge
+    > .badge {
+        font-size: 10px;
+        font-weight: 400;
+        position: absolute;
+        right: -10px;
+        top: -3px;
+    }
+}
+// Box Tools
+.btn-tool {
+    background-color: transparent;
+    color: $gray-500;
+    font-size: $font-size-sm;
+    margin: -(($card-spacer-y * .5) * 2) 0;
+    padding: .25rem .5rem;
+    .btn-group.show &,
+    &:hover {
+        color: $gray-700;
+    }
+    .show &,
+    &:focus {
+        box-shadow: none !important;
+    }
+}
+// Extra Button Size
+.btn-xs {
+    @include button-size($button-padding-y-xs, $button-padding-x-xs, $button-font-size-xs, $button-line-height-xs, $button-border-radius-xs);
+}
+// OAuth Buttons
+.oauthbuttons {
+    p {
+        margin-bottom: 22px;
+    }
+
+    .btn {
+        .fa {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+    }
+}
+//////////////////////////////////////////////////////////////
+.btn-mvc, .btn-mvc:visited {
+    @include standard-button;
+    &:hover, &:focus, &:active { text-decoration: none; background-color: #e0e0e0; color: #333; }
+}
+.btn-mvc-red, .btn-mvc-red:visited {
+    @include standard-button;
+    background-color: $color-global-red;
+    color: #fff;
+    &:hover, &:focus, &:active { background-color: lighten( $color-global-red, 7%); color: #fff; }
+}
+.btn-mvc-blue, .btn-mvc-blue:visited {
+    @include standard-button;
+    background-color: $color-global-blue;
+    color: #fff;
+    &:hover, &:focus, &:active { background-color: darken($color-global-blue, 9%); color: #fff; }
+}
+.btn-mvc-green, .btn-mvc-green:visited {
+    @include standard-button;
+    background-color: $color-global-green;
+    color: #fff;
+    &:hover, &:focus, &:active { background-color: darken($color-global-green, 9%); color: #fff; }
+}
+.btn-mvc-small, .btn-mvc-small:visited { padding: 5px 12px; font-size: 12px; line-height: 12px; }
+.btn-mvc-large, .btn-mvc-large:visited { padding: 9px 25px; font-size: 19px; line-height: 19px; }
+.btn-mvc-fullwidth, .btn-mvc-fullwidth:visited { padding-left: 0; padding-right: 0; width: 100%; display: block; }
+.btn-file { position: relative; overflow: hidden;
+    input[type=file] { 
+        position: absolute; 
+        top: 0; right: 0; min-width: 100%; min-height: 100%; font-size: 100px; text-align: right; filter: alpha(opacity=0); opacity: 0; outline: none; background: white; cursor: inherit; display: block; }
+}
+// Admin options button
+.btn-show-admin-nav { padding: 10px 0; width: 100%; text-align: center; font-size: 16px; line-height: normal; height: auto; display: none; }
+//////////////////////////////////////////////////////
+           /* ── CHIPS ── */
+            .chip {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.25rem;
+                padding: 0.15rem 0.55rem;
+                border-radius: 99px;
+                font-size: 0.72rem;
+                font-weight: 600;
+            }
+
+            .chip-yes {
+                background: rgba(26,168,123,0.12);
+                color: #0d7a56;
+                border: 1px solid rgba(26,168,123,0.3);
+            }
+
+            .chip-no {
+                background: rgba(217,79,61,0.10);
+                color: #b53828;
+                border: 1px solid rgba(217,79,61,0.25);
+            }
+//
+/*#endregion ============== Buttons End  ====================  */
+//
+
+//
+/*#region =================/*Component: Callout ================ */
+//
+// Base styles (regardless of theme)
+.callout {
+  @if $enable-rounded {
+    @include border-radius($border-radius);
+  }
+
+  @if $enable-shadows {
+    box-shadow: map-get($elevations, 1);
+  } @else {
+    border: 1px solid $gray-300;
+  }
+
+//  background-color: $white;
+   background-color: darken($gray-100, 8%);
+  border-left: 5px solid $gray-200;
+  margin-bottom: map-get($spacers, 3);
+  padding: 1rem;
+
+  a {
+    color: $gray-700;
+    text-decoration: underline;
+
+    &:hover {
+      color: $gray-200;
+    }
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  // Themes for different contexts
+  &.callout-danger {
+    border-left-color: darken(theme-color("danger"), 10%);
+  }
+
+  &.callout-warning {
+    border-left-color: darken(theme-color("warning"), 10%);
+  }
+
+  &.callout-info {
+    border-left-color: darken(theme-color("info"), 10%);
+  }
+
+  &.callout-success {
+    border-left-color: darken(theme-color("success"), 10%);
+  }
+ /*  @include media-breakpoint-down(sm) {
+            //margin: 0;
+            padding:0;
+        }*/
+}
+//
+/*#endregion ============== Callout End  ====================  */
+//
+
+//
+/*#region =================/*Component: Box ================ */
+//
+//
+/*#region =================Component: Box  ================ */
+//
+.box-container {
+    display: grid;
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+  grid-gap: 10px;
+
+    @media (max-width: breakpoint-max(xs)) {
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+    }
+}
+
+.box {
+padding:5px;
+	 box-shadow:3px 3px 3px $gray-500;
+  background-color: darken($gray-100, 10%);
+    opacity:.92;
+    color: lighten($dark, 14%);
+      border-radius: 10px;
+    border: 1px solid $border;
+     border-top: 3px solid $accent;
+
+    &:hover {
+        background-color: darken($gray-100, 12%);
+        color: $dark;
+       transform: translateY(-1px);
+       transition: transform 0.18s, box-shadow 0.18s; 
+    }
+}
+.box-header {
+	display: inline-flex;
+	width: 100%;
+	min-height: 20%;
+	padding: 5px;
+	column-gap: 10px;
+	margin-right: 10px;
+	justify-content: center;
+	.image {
+		float: left;
+		width: 30%;
+           img {
+        height: 80%;
+        width: 80%;
+    }
+	}
+	.box-title {
+	display: block;
+		overflow-x: hidden;
+        text-overflow:ellipsis;
+		margin-left: auto;
+        width: auto;
+		margin-top: 15px;
+
+		@media (max-width: breakpoint-max(xs)) {		
+            position:relative;
+            width:100%;
+			text-align:center;
+			margin-top:0;
+			margin-left:0;			
+		}
+	}
+
+	span {
+		&:last-child {
+			margin-left: auto;
+		}
+	}
+
+	.widget-right {
+		margin-left: auto;
+		margin-top: 0;
+	}
+}
+.box-body{
+	text-align: center;
+	display:block;   
+    p {
+        font-size: 10px;
+        color: lighten($dark, 15%);
+    }
+}
+.box-footer {
+  //    position:absolute;
+    display: flex; 
+    padding: 5px;
+   // display: block;
+     font-size: 12px;
+    font-weight: 200;
+   // margin-top: 10px;
+   margin-bottom: 0;
+  bottom: 0;
+  // top:auto;
+}
+.info-box {
+    padding: 10px 20px;
+    font-weight: 300;
+    font-size: 16px;
+    text-align: center;
+    justify-content: center;
+}
+            /* ── HIGHLIGHT BOX ── */
+            .highlight-box {
+                background: linear-gradient(135deg, rgba(45,125,210,0.06) 0%, rgba(15,163,177,0.06) 100%);
+                border: 1px solid rgba(45,125,210,0.2);
+                border-radius: 10px;
+                padding: 1.2rem 1.4rem;
+                margin: 1rem 0 1.5rem;
+            }
+                .highlight-box p {
+                    margin: 0;
+                    font-size: 0.9rem;
+                    line-height: 1.85;
+                }
+//
+/*#endregion ============== Box End  ====================  */
+//
+//
+//
+/*#region =================/*Component: Text ================ */
+//
+//
+/*#region =================  Text ================ */
+//
+.text-bold {
+    &,
+    &.table td,
+    &.table th {
+        font-weight: 700;
+    }
+}
+
+.text-xs {
+    font-size: $font-size-xs !important;
+}
+
+.text-sm {
+    font-size: $font-size-sm !important;
+}
+
+
+.text-md {
+    font-size: $font-size-base !important;
+}
+
+.text-lg {
+    font-size: $font-size-lg !important;
+}
+
+.text-xl {
+    font-size: $font-size-xl !important;
+}
+
+// text color variations
+@each $name, $color in $colors {
+    .text-#{$name} {
+        color: #{$color} !important;
+    }
+}
+//
+/*#endregion ============== Text End  ====================  */
+//
+//
+
+//
+/*#region =================/*Component: Colors ================ */
+//
+
+// Background colors (theme colors)
+@each $name, $color in $theme-colors {
+    @include background-variant($name, $color);
+}
+// Background colors (colors)
+@each $name, $color in $colors {
+    @include background-variant($name, $color);
+}
+
+.progress-bar{
+    color:black;
+}
+.progress-bar-success{
+     background-color: green;
+   // color: red;
+}
+.progress-bar-danger{
+     background-color: red;
+   // color: red;
+}
+.progress-bar-warning{
+     background-color: yellow;
+     //#ffc107
+   // color: red;
+}
+.progress-bar-info{
+     background-color: #17a2b8;
+     //#17a2b8
+   // color: red;
+}
+.red-colour {
+   // background-color: transparent;
+    color: red;
+    //color: color-yiq(lighten($red, 3%)) !important;
+}
+
+.blue-colour {
+   // background-color: transparent;
+    color: blue;
+}
+
+.green-colour {
+   // background-color: transparent;
+    color: green;
+}
+
+.yellow-colour {
+   // background-color: transparent;
+    color: yellow;
+}
+
+.orange-colour {
+    color: orange;
+}
+
+.bg-gray {
+    background-color: $gray-500;
+    color: color-yiq($gray-500);
+}
+
+.bg-gray-light {
+    background-color: lighten($gray-200, 3%);
+    color: color-yiq(lighten($gray-200, 3%)) !important;
+}
+
+.bg-black {
+    background-color: $black;
+    color: color-yiq($black) !important;
+}
+
+.bg-white {
+    background-color: $white;
+    color: color-yiq($white) !important;
+}
+
+// Gradient Background colors (theme colors)
+@each $name, $color in $theme-colors {
+    @include background-gradient-variant($name, $color);
+}
+
+// Gradient Background colors (colors)
+@each $name, $color in $colors {
+    @include background-gradient-variant($name, $color);
+}
+
+// Backgrund Color Disabled
+[class^="bg-"].disabled {
+    opacity: .65;
+}
+
+// Text muted hover
+a.text-muted:hover {
+    color: theme-color(primary) !important;
+}
+// Link Styles
+.link-muted {
+    color: darken($gray-500, 30%);
+
+    &:hover,
+    &:focus {
+        color: darken($gray-500, 40%);
+    }
+}
+
+.link-black {
+    color: $gray-600;
+
+    &:hover,
+    &:focus {
+        color: lighten($gray-500, 20%);
+    }
+}
+
+// Accent colors (theme colors)
+@each $name, $color in $theme-colors {
+    @include accent-variant($name, $color);
+}
+
+// Accent colors (colors)
+@each $name, $color in $colors {
+    @include accent-variant($name, $color);
+}
+
+// Accent button override fix
+[class*="accent-"] {
+    @each $name, $color in $theme-colors {
+        a.btn-#{$name} {
+            color: color-yiq($color);
+        }
+    }
+}
+//
+/*#endregion ====================Colors End  ====================  */
+//
+//
+
+//
+/*#region =================/*Component: Table ================ */
+//
+ .table-wrap {
+            overflow-x: auto;
+            border-radius: 10px;
+         border: 1px solid $border;
+            margin: 1rem 0 1.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+        }
+
+        thead tr {
+          background: $navy;
+        }
+
+        thead th {
+            padding: 0.85rem 1rem;
+            text-align: left;
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.78rem;
+            white-space: nowrap;
+        }
+
+        tbody tr:nth-child(even) {
+            background: $tag-bg;
+        }
+
+        tbody tr:nth-child(odd) {
+            background: $surface;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid $border;
+            transition: background 0.15s;
+        }
+
+            tbody tr:hover {
+                background: #ddeeff44;
+            }
+
+        tbody td {
+            padding: 0.75rem 1rem;
+            vertical-align: top;
+           color: $text;
+            line-height: 1.65;
+        }
+
+            tbody td:first-child {
+                font-weight: 600;
+                color: $blue;
+            } 
+//
+/*#endregion ============== Table End  ====================  */
+//
+//
+
+
+//
+/*#region =================/*Component: Dashboard ================ */
+//
+         .account-healthy {
+  //   background-color: lawngreen;
+      background-color: none;
+    }
+         .account-warning {
+     background-color: yellow;
+    }
+           .account-danger {
+     background-color: red;
+    }
+
+
+.dashboard-overview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+    @media (max-width: breakpoint-max(xs)) {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+.dashboard-summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+    @media (max-width: breakpoint-max(xs)) {
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+.dashboard-component {
+    background-color: darken($gray-100, 6%);
+    color: lighten($dark, 15%);
+    padding: 20px 30px;
+    border-radius: 5px;
+    border: 1px solid darken($gray-400, 10%);
+}
+.dashboard-component:hover {
+    transition: .3s;
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+
+.components {
+     display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    gap: 10px;
+
+}
+.component-top,
+.component-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span{
+       // width:30%;
+        display:inline-flex;
+        float: right;     
+        gap:10px;
+    }
+}
+
+.dashboard-component h3 {
+    font-size: 1.5rem;
+    line-height: 0.6;
+}
+//
+/*#endregion ============== Dashboard End  ====================  */
+//
+
+//
+/*#region =================/*Component: Images ================ */
+//
+
+.image-sm {
+        padding: 5px 5px;
+    display: block;
+    float: left;
+     width: 80px;
+      height: 80px;
+    text-align: center;
+    bottom: 0;
+      img {
+        margin: 2px;
+        height: 40px;
+        width: 40px;
+    }
+}
+.image {
+    padding: 5px 5px;
+    display: block;
+    float: left;
+    width: 80px;
+   // width: 100%;
+    height: 100%;
+    text-align: center;
+    bottom: 0;
+
+    img {
+        margin: 2px;
+        height: 40px;
+        width: 40px;
+    }
+}
+.image-block {
+    padding: 5px 5px;
+    display: block;
+    float: left;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    bottom: 0;
+      img {
+        margin: 2px;
+        height: 40px;
+        width: 40px;
+    }
+}
+// Image bordered
+.img-bordered {
+    border: 3px solid $gray-500;
+    padding: 3px;
+}
+.img-bordered-sm {
+    border: 2px solid $gray-500;
+    padding: 2px;
+}
+.img-bordered-success {
+    border: 2px solid $color-global-green;
+   padding: 2px;
+}
+    .img-bordered-warning {
+        border: 2px solid yellow;
+    padding: 2px;
+    }
+    .img-bordered-danger {
+    border: 2px solid red;
+  padding: 2px;
+    }
+.img-circle {
+    @include border-radius(50%);
+}
+
+// Image sizes
+.img-size-128,
+.img-size-96,
+.img-size-64,
+.img-size-50,
+.img-size-32 {
+    height: auto;
+}
+.img-size-128 {
+    width: 128px;
+}
+.img-size-96 {
+    width: 96px;
+}
+.img-size-64 {
+    width: 64px;
+}
+
+.img-size-50 {
+    width: 50px;
+}
+
+.img-size-32 {
+    width: 32px;
+}
+//
+/*#endregion ============== Images End  ====================  */
+//
+//
+/*#region =================/*Component: Modal ================ */
+//
+.modal {
+   //  position: fixed; /* Stay in place */
+//  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+ // background: green;
+ // position: absolute;
+//  float: left;
+//  left: 50%;
+ // top: 50%;
+ // transform: translate(-50%, -50%);
+
+}
+.modal-content{
+    background-color: darken($gray-100, 8%);
+    color: lighten($dark, 15%);
+}
+
+//
+/*#endregion ============== Modal End  ====================  */
+//
+//
+/*#region =================/*Component: Package ================ */
+//
+.package-container {
+    display: grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+  grid-gap: 10px;
+    @media (max-width: breakpoint-max(xs)) {
+        grid-template-columns:repeat(1, minmax(0, 1fr));
+    }
+}
+.package { 
+    .description{
+        padding: 0 10px;
+        min-height:115px;
+        font-weight: 300;     
+    }
+    .package-header {
+    text-align: center;
+    padding-left: 0;
+  }
+       .package-footer {
+    text-align: center;
+    padding-left: 0;
+    padding-bottom:0;
+     margin-bottom:0;
+  bottom:0;
+  }
+}
+.package-name {
+    font-size: 14px;
+    font-weight: 200;
+    color: $gray-700;
+    letter-spacing: 3px;
+    text-align: center;
+    justify-content: center;
+    text-transform: capitalize;
+}
+.package-item {
+    @include clearfix();
+    display: block;
+    font-size: 14px;
+    font-weight: 300;
+    color: lighten($dark, 14%);
+    letter-spacing: 3px;
+    padding: 0;
+    margin: 15px;
+    span {
+        display: inline;
+        float: right;
+        font-weight: 500;
+        color: $gray-800;
+    }
+}
+.package-box {
+    padding:0;
+    border: 1px solid #ccc;
+    background-color: darken($gray-100, 10%);
+   -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.package-footer {
+  position: relative;
+  min-height: 38px;
+  border-top: 1px solid #ddd;
+  margin:0;
+  bottom:0;
+  padding:0;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  vertical-align: bottom !important;
+   color: $gray-200;
+  }
+.package-header {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  position: relative;
+  min-height: 38px;
+  color: $gray-200;
+  border-bottom: 1px solid #ddd;
+  padding-left: 12px;
+    > .package-title {
+    line-height: 36px;
+    padding: 0;
+    margin: 0;
+    display: inline;
+    text-transform: capitalize;
+  }
+}
+.package-body {
+    padding: 0;
+}
+.package-main {
+  padding: 12px;
+}
+.package-color-dark {
+  border-color: #5a5a5a;
+    > .package-header {
+    border-color: #666;
+    background: #404040;
+    color: $gray-200;
+  }
+}
+.package-footer-dark {
+    background-color: #404040;
+     color: $gray-200;
+   // color: $gray-500;
+    }
+.package-color-blue {
+  border-color: #307ecc;
+    > .package-header {
+    background: #307ecc;
+    border-color: #307ecc;
+    color: $gray-200;
+  }
+}
+.package-footer-blue {
+    background-color: #307ecc;
+     color: $gray-200;
+   // color: $gray-500;
+    }
+.package-color-green {
+  border-color: #82af6f;
+    > .package-header {
+    background: #82af6f;
+    border-color: #82af6f;
+  color: $gray-200;
+  }
+}
+.package-footer-green {
+    background-color: #82af6f;
+ color: $gray-200;
+} 
+//
+/*#endregion ============== Package End  ====================  */
+//
+
+@include dark-mode () {
+  .callout {
+    background-color: lighten($dark, 3%);
+    color: $gray-500;
+
+    &.callout-danger {
+      border-left-color: lighten($danger-alt, 10%);
+    }
+
+    &.callout-warning {
+      border-left-color: lighten($warning-alt, 10%);
+    }
+
+    &.callout-info {
+      border-left-color: lighten($info-alt, 10%);
+    }
+
+    &.callout-success {
+      border-left-color: lighten($success-alt, 10%);
+    }
+  }
+
+  /*****************Package***************************************/
+  .package-box {
+		background-color: lighten($dark, 10%);
+		color: $gray-500;
+        }
+        .package-item {
+            color: $gray-500;
+              span {
+                   color: $gray-500;
+                  }
+            }
+    /************************Modal**********************************************/
+     .modal-content {
+    background-color: rgba($dark, .85);
+    color: $white;
+    }
+     /*******************************Box********************************************************/
+     	.box {
+		background-color: lighten($dark, 3%);
+		color: $gray-500;
+		border-color: lighten($dark, 15%);
+		box-shadow: 3px 3px 3px lighten($dark, 10%);
+		&:hover {
+			background-color: lighten($dark, 1%);
+			color: $gray-500;
+		}
+	}
+         /********************************Dashboard***************************************************/
+         
+    .dashboard-component {
+        background-color: lighten($dark, 3%);
+        color: $gray-500;
+        border-color: lighten($dark, 2%);
+    }
+     /*************************Buttons*******************************************************/
+      .btn-default,
+    .btn-app {
+        background-color: lighten($dark, 2.5%);
+        color: $white;
+        border-color: $gray-600;
+
+        &:hover,
+        &:focus {
+            background-color: lighten($dark, 5%);
+            color: $gray-300;
+            border-color: lighten($gray-600, 2.5%);
+        }
+    }
+
+    .btn-light {
+        background-color: lighten($dark, 7.5%);
+        color: $white;
+        border-color: $gray-600;
+
+        &:hover,
+        &:focus {
+            background-color: lighten($dark, 10%);
+            color: $gray-300;
+            border-color: lighten($gray-600, 5%);
+        }
+    }
+
+    @each $color, $value in $theme-colors-alt {
+        .btn-#{$color} {
+            @if $color == dark {
+                @include button-variant(darken($value, 5%), lighten($value, 10%));
+            }
+            @else {
+                @include button-variant($value, $value);
+            }
+        }
+    }
+
+    @each $color, $value in $theme-colors-alt {
+        .btn-outline-#{$color} {
+            @if $color == dark {
+                @include button-outline-variant(darken($value, 20%));
+            }
+            @else {
+                @include button-outline-variant($value);
+            }
+        }
+    }
+}

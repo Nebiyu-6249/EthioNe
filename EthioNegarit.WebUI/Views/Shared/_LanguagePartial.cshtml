@@ -1,0 +1,5 @@
+﻿@model EthioNegarit.WebUI.ViewModels.LanguageListAllViewModel
+<div class="language-menu text-muted languageselector">
+    @Html.DropDownListFor(model => model.CurrentLanguage, new SelectList(Model.Alllanguages, "Id", "LanguageCulture"))
+</div>
+        

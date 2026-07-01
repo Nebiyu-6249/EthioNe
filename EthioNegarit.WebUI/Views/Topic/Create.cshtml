@@ -1,0 +1,40 @@
+﻿@model EthioNegarit.WebUI.ViewModels.CreateEditTopicViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Html.LanguageString("Topic.CreateDiscussion");
+}
+@section Header
+{
+    @(
+ Bundle.JavaScript()
+            .Add("~/Scripts/jquery.tagsinput.min.js")
+            .Add("~/Scripts/tags.js")
+            .Add("~/Scripts/createtopic.js")
+            .MvcRender("~/scripts/cache/topic-combined_#.js")
+    )
+    <script type="text/javascript">
+        counter = @(Model.PollAnswers != null ? Model.PollAnswers.Count : 0);
+    </script>
+}
+<div class="page-header">
+    <span class="width-50">
+        @ViewBag.Title
+    </span>
+</div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row mb-4">
+                <section class="col-sm-12">
+                    <div class="createtopicholder">
+                        @using (Html.BeginForm("Create", "Topic", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                            @Html.ValidationSummary(false)
+                            @Html.AntiForgeryToken()
+                            @Html.Partial("_CreateEdit_TopicPost", Model)
+                        }
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>

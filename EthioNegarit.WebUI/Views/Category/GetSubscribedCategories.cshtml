@@ -1,0 +1,15 @@
+﻿@model List<EthioNegarit.WebUI.ViewModels.CategoryViewModel>
+        
+@if(Model.Any())
+	{
+	<div class="box-container">
+		@foreach(var catModel in Model)
+			{
+				@Html.Partial("_category", catModel)
+			}
+			</div>
+			}
+else
+	{
+		<p>@Html.Lang("SubscribedCats.NothingToShow")</p>
+		}

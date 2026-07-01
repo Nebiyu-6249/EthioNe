@@ -1,0 +1,323 @@
+﻿//
+// Core: Variables
+//
+
+// COLORS
+// --------------------------------------------------------
+//
+$lightcyan: #d1ecf1 !default;
+$iceblue: #cce5ff !default;
+$limegreen: #d4edda !default;
+$barleywhite: #fff3cd !default;
+$accent: #2D7DD2 !default;
+$accent2: #0FA3B1 !default;
+//$navy: #001f3f !default;
+$navy: #0D1B2A !default;
+//$blue: #0073b7 !default;
+$blue: #1A3A5C !default;
+$lightblue: #3c8dbc !default;
+$blue-light: #379fef !default;
+$surface: #FFFFFF !default;
+$border: #D8E4F0 !default;
+$tag-bg: #E8F1FB !default;
+$warn-bg: #FFF8E6 !default;
+$warn-bdr: #E8C547 !default;
+$gold: #E8C547 !default;
+$info-bg: #EAF6FF !default;
+$info-bdr: #2D7DD2 !default;
+$bg-input: #2d2d2e !default;
+$red: #D94F3D !default;
+$light: #F4F8FF !default;
+$muted: #6B7E96 !default;
+$text: #1A2535 !default;
+$text-primary: #e8e6e3 !default;
+
+
+$teal: #39cccc !default;
+$olive: #3d9970 !default;
+$lime: #01ff70 !default;
+$orange: #ff851b !default;
+$fuchsia: #f012be !default;
+$purple: #605ca8 !default;
+$maroon: #d81b60 !default;
+$black: #111 !default;
+$gray-x-light: #d2d6de !default;
+
+$green-bg: #79f279 !default;
+//$lightgreen: #89f279;
+$lightgreen: #cafcca !default;
+$colors: map-merge( ("lightblue": $lightblue, "navy": $navy, "olive": $olive, "lime": $lime, "fuchsia": $fuchsia, "maroon": $maroon, ), $colors );
+
+/*******Cust**********************************************************/
+$green: #7bcc81 !default;
+$color-global-green: #2abd54;
+$color-global-red: #bd2a38;
+$color-global-blue: #4891dc;
+$color-global-yellow: #f2f226;
+$color-global-grey-blue: #e7eaec;
+$color-admin-grey-bg: #f3f3f4;
+$link-color: $color-global-blue;
+$border-color: $color-global-grey-blue;
+$heading-base-color: #5a5a5a;
+
+// Background Colors
+// --------------------------------------------------------
+//
+// Body background (Affects main content background only)
+$bg-light: darken($gray-100, 5%) !important;
+//$bg-light: $lightcyan !important;
+$bg-dark: lighten($dark, 7.5%) !important;
+//$bg-transparent: transparent !important;
+
+$main-bg: $color-global-grey-blue  !default;
+$dark-main-bg: lighten($dark, 7.5%) !important;
+
+
+// COLOUR CLASSES
+// --------------------------------------------------------//
+//
+//.green-colour { color: $color-global-green; }
+//.red-colour { color: $color-global-red; }
+//.blue-colour { color: $color-global-blue; }
+
+// HEADING
+// --------------------------------------------------------//
+//
+$heading-font-weight: 300;
+$heading-one-font-size: 26px;
+$heading-two-font-size: 22px;
+$heading-three-font-size: 20px;
+
+// FONTS
+// --------------------------------------------------------//
+//
+//$font-size-base:1rem !default; // Assumes the browser default, typically `16px`
+$font-size-root: 1rem !default;
+$font-light-weight: 200 !default;
+$font-md-weight: 300 !default;
+$font-bold-weight: 400 !default;
+$font-base-color: #3b3b3b;
+$font-lighter-base-color: #636267;
+$font-base-family: 'Open Sans', Arial, Helvetica, sans-serif;
+// LAYOUT
+// --------------------------------------------------------
+// Sidebar
+$sidebar-width: 250px !default;
+$sidebar-padding-x: .5rem !default;
+$sidebar-padding-y: 0 !default;
+$sidebar-custom-height: 4rem !default;
+$sidebar-custom-height-lg: 6rem !default;
+$sidebar-custom-height-xl: 8rem !default;
+$sidebar-custom-padding-x: .85rem !default;
+$sidebar-custom-padding-y: .5rem !default;
+
+// Content padding
+// --------------------------------------------------------
+$content-padding-y: 0 !default;
+$content-padding-x: $navbar-padding-x !default;
+
+// IMAGE SIZES
+// --------------------------------------------------------
+$img-size-sm: 1.875rem !default;
+$img-size-md: 3.75rem !default;
+$img-size-lg: 6.25rem !default;
+$img-size-push: .625rem !default;
+
+// MAIN HEADER
+// --------------------------------------------------------
+
+$main-header-bottom-border-width: $border-width !default;
+$main-header-bottom-border-color: $gray-300 !default;
+$main-header-bottom-border: $main-header-bottom-border-width solid $main-header-bottom-border-color !default;
+$main-header-link-padding-y: $navbar-padding-y !default;
+$main-header-height-inner: ($nav-link-height + ($main-header-link-padding-y * 2)) !default;
+
+$main-header-height: calc(#{$main-header-height-inner} + #{$main-header-bottom-border-width}) !default;
+$nav-link-sm-padding-y: .35rem !default;
+$nav-link-sm-height: ($font-size-sm * $line-height-sm + $nav-link-sm-padding-y * 1.785) !default;
+$main-header-height-sm-inner: ($nav-link-sm-height + ($main-header-link-padding-y * 2)) !default;
+$main-header-height-sm: calc(#{$main-header-height-sm-inner} + #{$main-header-bottom-border-width}) !default;
+
+// Main header skins
+$main-header-dark-form-control-bg: $gray-800 !default;
+$main-header-dark-form-control-focused-bg: $gray-700 !default;
+$main-header-dark-form-control-focused-color: $gray-400 !default;
+$main-header-dark-form-control-border-color: $gray-600 !default;
+$main-header-dark-form-control-focused-border-color: $gray-600 !default;
+$main-header-dark-placeholder-color: rgba($white, .6) !default;
+
+$main-header-light-form-control-bg: darken($gray-200, 5%) !default;
+$main-header-light-form-control-focused-bg: darken($gray-200, 7.5%) !default;
+$main-header-light-form-control-focused-color: $gray-400 !default;
+$main-header-light-form-control-border-color: $gray-400 !default;
+$main-header-light-form-control-focused-border-color: darken($gray-400, 2.5%) !default;
+$main-header-light-placeholder-color: rgba(0, 0, 0, .6) !default;
+
+// MAIN FOOTER
+// --------------------------------------------------------
+$main-footer-padding: 1rem !default;
+$main-footer-padding-sm: $main-footer-padding * .812 !default;
+$main-footer-border-top-width: 1px !default;
+$main-footer-border-top-color: $gray-300 !default;
+$main-footer-border-top: $main-footer-border-top-width solid $main-footer-border-top-color !default;
+$main-footer-height-inner: (($font-size-root * $line-height-base) + ($main-footer-padding * 2)) !default;
+$main-footer-height: calc(#{$main-footer-height-inner} + #{$main-footer-border-top-width}) !default;
+$main-footer-height-sm-inner: (($font-size-sm * $line-height-base) + ($main-footer-padding-sm * 2)) !default;
+$main-footer-height-sm: calc(#{$main-footer-height-sm-inner} + #{$main-footer-border-top-width}) !default;
+$main-footer-bg: $white !default;
+
+// SIDEBAR SKINS
+// --------------------------------------------------------
+
+// Dark sidebar
+$sidebar-dark-bg: $dark !default;
+//$sidebar-dark-bg: $bg-dark !default;
+$sidebar-dark-hover-bg: rgba(255, 255, 255, .1) !default;
+$sidebar-dark-color: #c2c7d0 !default;
+$sidebar-dark-hover-color: $white !default;
+$sidebar-dark-active-color: $white !default;
+$sidebar-dark-submenu-bg: transparent !default;
+$sidebar-dark-submenu-color: #c2c7d0 !default;
+$sidebar-dark-submenu-hover-color: $white !default;
+$sidebar-dark-submenu-hover-bg: $sidebar-dark-hover-bg !default;
+$sidebar-dark-submenu-active-color: $sidebar-dark-bg !default;
+$sidebar-dark-submenu-active-bg: rgba(255, 255, 255, .9) !default;
+
+// Light sidebar
+//$sidebar-light-bg: $lightcyan !default;
+$sidebar-light-bg: $gray-300 !default;
+$sidebar-light-hover-bg: rgba($black, .1) !default;
+$sidebar-light-color: $gray-800 !default;
+$sidebar-light-hover-color: $gray-900 !default;
+$sidebar-light-active-color: $black !default;
+$sidebar-light-submenu-bg: transparent !default;
+$sidebar-light-submenu-color: #777 !default;
+$sidebar-light-submenu-hover-color: $black !default;
+$sidebar-light-submenu-hover-bg: $sidebar-light-hover-bg !default;
+$sidebar-light-submenu-active-color: $sidebar-light-hover-color !default;
+$sidebar-light-submenu-active-bg: $sidebar-light-submenu-hover-bg !default;
+
+// SIDEBAR MINI
+// --------------------------------------------------------
+$sidebar-mini-width: ($nav-link-padding-x + $sidebar-padding-x + .8rem) * 2 !default;
+$sidebar-nav-icon-width: $sidebar-mini-width - (($sidebar-padding-x + $nav-link-padding-x) * 2) !default;
+$sidebar-user-image-width: $sidebar-nav-icon-width + ($nav-link-padding-x * .5) !default;
+
+// Forms
+// ==========================================================================
+
+// Text Inputs + Textarea
+$input-height: 3rem !default;
+$input-border-color: color("grey", "base") !default;
+$input-border: 1px solid $input-border-color !default;
+$input-background: #fff !default;
+$input-error-color: $color-global-red !default;
+$input-success-color: $color-global-green !default;
+$input-focus-color: $secondary-color !default;
+$input-font-size: 16px !default;
+$input-margin-bottom: 8px;
+$input-margin: 0 0 $input-margin-bottom 0 !default;
+$input-padding: 0 !default;
+$label-font-size: .8rem !default;
+$input-disabled-color: rgba(0,0,0, .42) !default;
+$input-disabled-solid-color: #949494 !default;
+$input-disabled-border: 1px dotted $input-disabled-color !default;
+$input-invalid-border: 1px solid $input-error-color !default;
+$input-icon-size: 2rem;
+$placeholder-text-color: lighten($input-border-color, 20%) !default;
+
+// Cards
+// --------------------------------------------------------
+
+$card-dark-border-color: lighten($gray-900, 10%) !default;
+$card-border-color: $gray-100 !default;
+$card-dark-border-color: lighten($gray-900, 10%) !default;
+$card-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2) !default;
+$card-title-font-size: 1.1rem !default;
+$card-title-font-size-sm: 1rem !default;
+$card-title-font-weight: $font-weight-normal !default;
+$card-nav-link-padding-sm-y: .4rem !default;
+$card-nav-link-padding-sm-x: .8rem !default;
+$card-img-size: $img-size-sm !default;
+
+// TRANSITIONS SETTINGS
+// --------------------------------------------------------
+
+// Transition global options
+$transition-speed: .3s !default;
+$transition-fn: ease-in-out !default;
+
+// TEXT
+// --------------------------------------------------------
+$font-size-xs: ($font-size-base * .75) !default;
+$font-size-sm: ($font-size-base * 1) !default;
+//$font-size-md: ($font-size-base * 1.5) !default;
+$font-size-xl: ($font-size-base * 2) !default;
+
+// BUTTON
+// --------------------------------------------------------
+$button-default-background-color: $gray-100 !default;
+$button-default-color: #444 !default;
+$button-default-border-color: #ddd !default;
+
+$button-padding-y-xs: .125rem !default;
+$button-padding-x-xs: .25rem !default;
+$button-line-height-xs: $line-height-sm !default;
+$button-font-size-xs: ($font-size-base * .75) !default;
+$button-border-radius-xs: .15rem !default;
+
+// Navbar Brand
+// --------------------------------------------------------
+$navbar-brand-width: 200px !default;
+
+// SLIDE OUT PANEL
+// --------------------------------------------------------
+$slide-out-panel-width: 300px !default;
+$side-panel-width: 300px !default;
+
+// Notification PANEL
+// --------------------------------------------------------
+$notification-panel-width: 350px !default;
+
+// ELEVATION
+// --------------------------------------------------------
+$elevations: ();
+$elevations: map-merge( (
+    1: unquote("0 1px 3px " + rgba($black, .12) + ", 0 1px 2px " + rgba($black, .24)), 
+    2: unquote("0 3px 6px " + rgba($black, .16) + ", 0 3px 6px " + rgba($black, .23)), 
+    3: unquote("0 10px 20px " + rgba($black, .19) + ", 0 6px 6px " + rgba($black, .23)), 
+    4: unquote("0 14px 28px " + rgba($black, .25) + ", 0 10px 10px " + rgba($black, .22)), 
+    5: unquote("0 19px 38px " + rgba($black, .3) + ", 0 15px 12px " + rgba($black, .22)), ), $elevations );
+
+// CUSTOM FORM SELECT
+// --------------------------------------------------------
+
+$custom-select-dark-indicator-color: $white !default;
+$custom-select-dark-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'><path fill='#{$custom-select-dark-indicator-color}' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>") !default;
+$custom-select-dark-background: escape-svg($custom-select-dark-indicator) right $custom-select-padding-x center / $custom-select-bg-size no-repeat !default; // Used so we can have multiple background elements (e.g., arrow and feedback icon)
+
+//Box Shadow
+$box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2) !default;
+
+// MEDIA QUERY
+// --------------------------------------------------------
+//
+$media-query-medium: 991px;
+$media-query-small: 767px;
+$media-query-mobile: 600px;
+
+// Z-INDEX
+// --------------------------------------------------------
+//
+$zindex-main-header: $zindex-fixed + 4 !default;
+$zindex-main-sidebar: $zindex-fixed + 8 !default;
+$zindex-main-footer: $zindex-fixed + 2 !default;
+$zindex-toasts: $zindex-main-sidebar + 2 !default;
+$zindex-preloader: 9999 !default;
+$zindex-slide-out-panel: $zindex-fixed + 1 !default;
+$zindex-main-advert: $zindex-fixed + 9 !default;
+$zindex-advert: $zindex-fixed + 9 !default;
+
+// ENABLE DARK MODE
+// --------------------------------------------------------
+$enable-dark-mode: true !default; // requires `@import "variables-alt";`

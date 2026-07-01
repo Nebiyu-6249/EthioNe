@@ -1,0 +1,52 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model AllBadgesViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Html.LanguageString("Badges.PageTitle");
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+}
+    <div class="page-header">
+            <span class="">
+                @ViewBag.Title
+            </span>
+        <span class="width-50">
+            <span class="search-box">
+                @using (Html.BeginForm("Index", "Badge", FormMethod.Get))
+            {
+                    <span class="input-group input-group-sm">
+                        @Html.TextBox("search", null, new { @class = "form-control", placeholder = @Html.Lang("Search.Badges") })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-sm">
+                                <i class="fas fa-search fa-fw"></i>
+                            </button>
+                        </span>
+                    </span>
+                }
+            </span>
+        </span>
+</div>
+<section class="content">
+    <div class="container-fluid">
+    @if (Model.AllBadges.Any())
+    {
+        <div class="box-container mb-4">
+           @foreach (var badge in Model.AllBadges.OrderByDescending(x => x.AwardsPoints))
+    {
+        Html.RenderPartial("_badge", badge);
+    }
+        </div>
+        if (Model.TotalPages > 1)
+        {
+            <ul>
+                <li class="pagination">
+                    @Html.Pager(Convert.ToInt32(Model.PageIndex), SiteConstants.Instance.PagingGroupSize, totalCount, new { search = Model.Search })
+                </li>
+            </ul>
+        }
+    }
+    else
+    {
+        @Html.LanguageString("Search.NoResults")
+    }
+         </div>   
+</section>

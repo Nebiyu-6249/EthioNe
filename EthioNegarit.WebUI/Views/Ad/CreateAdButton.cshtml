@@ -1,0 +1,11 @@
+﻿@model EthioNegarit.WebUI.ViewModels.CreateAdButtonViewModel
+@if (Html.CurrentMember() != null && Model.UserCanCreatAd)
+{
+          <div class="createtopicbutton">
+        <a href="@Url.Action("Create", "Ad")" class="btn btn-xs btn-outline-success btn-block" title="I Want To Advertise With You">
+            @Html.LanguageString("Ad.Label.CreateAd")
+        </a>
+    </div>
+}
+
+

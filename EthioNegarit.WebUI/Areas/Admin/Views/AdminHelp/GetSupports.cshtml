@@ -1,0 +1,36 @@
+﻿@model EthioNegarit.WebUI.Areas.Admin.ViewModels.ListHelpViewModel
+
+@{
+    var supports = Model.Supports.ToList();
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        @using (Html.BeginForm("Manage", "AdminHelp", FormMethod.Post))
+        {
+         @*   @Html.HiddenFor(x => x.PageIndex)*@
+            <div class="input-group tablesearch">
+                @Html.TextBoxFor(x => Model.Search, new { @class = "form-control" })
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Search</button>
+                </span>
+            </div>
+        }
+    </div>
+    <div class="panel-content">
+        <div id="container">
+            <ul>
+                @foreach (var support in supports)
+                {
+                    <li class="maincategory">
+                        <a href="@Url.Action("EditSupport", new { id = support.Id })">
+                            @Html.Raw(support.Title)
+                        </a>
+
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</div>

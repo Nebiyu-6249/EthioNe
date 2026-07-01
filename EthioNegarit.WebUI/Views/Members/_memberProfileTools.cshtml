@@ -1,0 +1,94 @@
+﻿@using EthioNegarit.Core.Constants
+@model EthioNegarit.WebUI.ViewModels.ViewMemberViewModel
+<ul>
+    @if (Model.User.UserName != User.Identity.Name && Html.CurrentMember().DisablePrivateMessages != true && Html.Settings().EnablePrivateMessages)
+    {
+        <li>
+            <a href="#" role="button" class="show-messages" data-id="@Model.User.Id" data-name="@string.Concat(Html.Lang("PM.Title"), Model.User.UserName)" title="@Html.LanguageString("Send Private Message")" )>
+                <i class="fa-lg text-sm far fa-envelope"></i>
+                <span class="nav-text">
+                    @Html.LanguageString("PM.SendMessage")
+                </span>
+            </a>
+        </li>
+    }
+@if (!Model.User.Roles.Any(x => x.RoleName.Contains(AppConstants.AdminRoleName))) {
+if (Model.Permissions[SiteConstants.Instance.PermissionEditMembers].IsTicked || User.IsInRole(AppConstants.AdminRoleName))
+{
+        <li>
+            <a href="@Url.Action("Edit", "Members", new { Model.User.Id }, null)" class="">
+                <i class="fa fa-user-edit fa-lg text-sm"></i>
+                <span class="nav-text">
+                    @Html.LanguageString("Members.EditMember")
+                </span>
+            </a>
+        </li>
+    }
+
+    if (Html.Settings().EnableMemberReporting && Model.User.Id != Model.LoggedOnUserId && !User.IsInRole(AppConstants.AdminRoleName))
+    {
+        <li>
+            <a href="#" class="memberreportlink" data-id="@Model.User.Id" title="@Html.LanguageString("Buttons.Report")" )>
+                <i class="fa-lg text-sm far fa-flag"></i>
+                <span class="nav-text">
+                    @Html.LanguageString("Buttons.Report")
+                </span>
+            </a>
+        </li>
+    }
+    <li>
+        <a href="#" class="pm-block" data-userid="@Model.User.Id" data-blocktext="@Html.Lang("PM.Block")" data-isblocked="@Model.IsBlocked.ToString().ToLower()" data-blockedtext="@Html.Lang("PM.Blocked")">
+            <i class="fa-lg text-sm @(Model.IsBlocked ? "fa fa-user-slash" : "fa fa-user")"></i>
+            <span class="nav-text">
+                @(Model.IsBlocked ? Html.Lang("PM.Blocked") : Html.Lang("PM.Block"))
+            </span>
+        </a>
+    </li>
+    if (User.IsInRole(AppConstants.AdminRoleName))
+    {
+        <li>
+            <a href="@Url.Action("SrubAndBanUser", "Members", new { id = Model.User.Id }, null)" class="" onclick="return confirm('@Html.LanguageString("Confirmation.SrubAndBan")')">
+                <i class="fa fa-user-slash fa-lg text-sm"></i>
+                <span class="nav-text">
+                    @Html.LanguageString("Members.SrubAndBan")
+                </span>
+            </a>
+        </li>
+        if (!Model.User.IsBanned)
+        {
+            <li>
+                <a href="@Url.Action("BanMember", "Members", new { id = Model.User.Id }, null)" class="">
+                    <i class="fa fa-user-lock fa-lg text-sm"></i>
+                    <span class="nav-text">
+                        @Html.LanguageString("Members.BanUser")
+                    </span>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="@Url.Action("UnBanMember", "Members", new { id = Model.User.Id }, null)" class="">
+                    <i class="fa fa-user-lock fa-lg text-sm"></i>
+                    <span class="nav-text">
+                        @Html.LanguageString("Members.UnBanUser")
+                    </span>
+                </a>
+            </li>
+        }
+   
+    if (!string.IsNullOrEmpty(Model.User.Comment))
+    {
+    <li>
+        <a href="@Url.Action("Edit", "Members", new { Model.User.Id }, null)" class="">
+                <i class="fa fa-comments fa-lg text-sm"></i>
+                <span class="nav-text">
+                    @Html.Raw(Model.User.Comment)
+                </span>
+            </a>
+</li>
+        }
+    }
+}
+</ul>
+

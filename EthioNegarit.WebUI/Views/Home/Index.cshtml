@@ -1,0 +1,40 @@
+﻿@using EthioNegarit.WebUI.Application.ExtensionMethods
+@{
+    Layout = "~/Views/Shared/_LayoutFullWidth.cshtml";
+    ViewBag.Title = Html.Settings().PageTitle ?? Html.Settings().ForumName;
+    ViewBag.MetaDesc = Html.Settings().MetaDesc;
+}
+<div class="container">
+    <div class="menu-panel">
+        <div class="panel-header">
+            <div class="site-name text-muted text-center">
+                <h1>@Html.LanguageString("Forum.Name")</h1>
+            </div>
+            <div class="moto text-muted">
+                <p class="text-center">
+                    @Html.LanguageString("Forum.Motto")
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="main-menu">
+        @Html.Action("GetMainStats", "Stats")
+    </div>
+</div>
+@*<div class="container">
+        <div class="main-menu">
+            @Html.Action("Menu", "Category")
+        </div>
+    </div>*@
+<div class="container">
+    <div class="clearfix">
+        @Html.Action("Slide", "Ad")
+    </div>
+</div>
+
+    <div class="clearfix">
+        @Html.Partial("_footer")
+    </div>
+   

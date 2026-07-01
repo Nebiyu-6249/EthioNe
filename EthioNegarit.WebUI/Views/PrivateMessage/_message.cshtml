@@ -1,0 +1,37 @@
+﻿@model  EthioNegarit.Core.Domain.Entities.PrivateMessage
+@{
+    var userId = Html.CurrentMember().Id;
+}
+<div class="message-block @(Model.UserFrom.Id == userId ? "message-to" : "message-from")">
+    <div class="pmmessage content-text">
+        @Html.Raw(AppHelpers.ConvertPostContent(Model.Message))
+    </div>
+    <ul class="message-tools">
+        @if (Model.IsRead && Model.UserFrom.Id == userId)
+        {
+            <li>
+                <span class="fas fa-check green-colour" aria-hidden="true"></span>
+                <span class="fas fa-eye" aria-hidden="true"></span>
+            </li>
+        }
+        @if (Model.Attachments != null)
+        {
+            <li>
+                <a href="#" role="button" class="attachmentlink" data-id="@Model.Id" title="@Html.LanguageString("Show Attachements")" )>
+                    <i class="fa fa-paperclip" aria-hidden="true"></i>
+                </a>
+            </li>
+        }
+        <li>
+            <a href="#" role="button" class="privatemessagedelete" data-id="@Model.Id" title="@Html.LanguageString("Delete Message")">
+                <i class="fas fa-trash-alt  red-colour" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li>@DatesUI.GetPrettyDate(Model.DateSent.ToString())</li>
+        <li>
+            <img src="@Model.UserFrom.MemberImage(24)" alt="@Model.UserFrom.UserName" class="smallavatar" />
+        </li>
+    </ul>
+</div>
+
+

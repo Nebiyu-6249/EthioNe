@@ -1,0 +1,95 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model List<PostReportsViewModel>
+
+@{
+    ViewBag.Title = "Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    //   var totalCount = Convert.ToInt32(Model.TotalCount);
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+}
+<!-- Page header -->
+    <div class="page-header text-smm">
+            <span class="width-25">
+               @ViewBag.Title
+            </span>
+            <span class="">
+            </span>
+    </div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <section class="col-sm-12">
+                @foreach (var modelItem in Model)
+                {
+                    if (modelItem.Reports.Any())
+                    {
+                        <ul class="contents-list">
+                            <li class="content-fluid">
+                                @{
+                                    Html.RenderPartial("_post", @modelItem.Post);
+                                }
+                            </li>
+                        </ul>
+                        <div class="row mt-00">
+                            <div class="col-sm-12">
+                                <a role="button" class="btn btn-sm btn-block showhidebutton" id="showinfo" data-toggle="collapse" data-target="#post-@modelItem.Post.Post.Id" title="Show Reports" )>
+                                    @Html.LanguageString("Show Reports")
+                                    <i class="ethicon fas fa-angle-down showhideicon">
+                                    </i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="collapse" id="post-@modelItem.Post.Post.Id">
+                            <div class="page-header text-sm">
+                                <span class="">
+                                    <a class="" title="Show all Reports" href="@Url.Action("Show", "Report", new { postId = @modelItem.Post.Post.Id })">
+                                        Reports
+                                    </a>
+                                </span>
+                                <span class="">
+                                    <a class="" title="Show all Reports" href="@Url.Action("Show", "Report", new { postId = @modelItem.Post.Post.Id })">
+                                        All Reports @modelItem.Reports.Count()
+                                    </a>                                  
+                                </span>
+                            </div>
+                            <ul class="contents-list">
+                                @foreach (var report in modelItem.Reports)
+                                {
+                                    <li class="content-fluid">                                 
+                                            <div class="content-aside d-none d-sm-inline-block">
+                                                <a href="report.Reporter.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="right" )'>
+                                                    <img class="img-circle  @(report.Reporter.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm")" src="@report.Reporter.MemberImage(32)" alt="@report.Reporter.UserName">
+                                                </a>
+                                                @{
+                                                    Html.RenderPartial("_memberInfo", report.Reporter);
+                                                }
+                                            </div>
+                                            <div class="content-detail pull-right-sm">
+                                                <div class="content-textt text-sm1">
+                                                    <a class="" title="Show all Reports" href="@Url.Action("Show", "Report", new { postId = @report.ReportedPost.Id })">
+                                                        @Html.Raw(AppHelpers.ConvertPostContent(@report.Reason))
+                                                    </a>
+                                                </div>
+                                                <div class="report-infos clearfix">
+                                                    <span class="chat-timestampp content-footerr">
+                                                        @report.Reporter.UserName Reports,
+                                                        @DatesUI.GetPrettyDate(@report.DateReport.ToString()).
+                                                    </span>
+                                                </div>
+                                            </div>
+                                    </li>
+
+                                                    }
+                            </ul>
+
+                        </div>
+                                                        }
+                                                    }
+            </section>
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,14 @@
+﻿@Html.Action("SideSearch", "Search")
+@Html.Action("Nav", "Category")
+<div class="popup bottom-right"></div>
+<div class="relatedTopics" id="relatedTopics"></div>
+@Html.Action("TodayTopics", "Topic")
+@*@Html.Action("RssFeed", "Home")*@
+@Html.Action("HotTopics", "Topic", new { amountToShow = 10 })
+	@if(User.Identity.IsAuthenticated)
+		{
+		@Html.Action("Suggestion", "Topic")
+		}	
+@Html.Action("PopularTags", "Tag", new { amountToTake = 5 })
+@Html.Action("CurrentWeekHighPointUsers", "Point")
+@Html.Action("GetRecentMembers", "Members")

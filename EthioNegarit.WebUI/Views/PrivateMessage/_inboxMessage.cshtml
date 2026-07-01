@@ -1,0 +1,121 @@
+﻿@using EthioNegarit.Utilities
+@using EthioNegarit.Core.Domain.Entities
+@model PrivateMessageListItem
+    @{ 
+        var loggedOnUserId = Html.CurrentMember() != null ? Html.CurrentMember().Id : Guid.Empty;
+        var messageToolTip = string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(Model.Message), 10), "....");
+    }
+<div class="message-item">
+	<label class="inline d-nonee d-sm-inline-blockk" title="Select">
+        <input type="checkbox" class="ace" />
+        <span class="lbl"></span>
+    </label>
+	<a class="markstarlink" href="#" role="button" data-id="@Model.MessageId" data-addremove="@(Model.IsStarred ? "Remove Star" : "Mark Star")" title="@(Model.IsStarred ? "Remove Star" : "Mark Star")">
+		<span class="staricon message-star yellow-colour @(Model.IsStarred ? "fas fa-star" : "far fa-star")" aria-hidden="true">
+		</span>
+	</a>
+    	@if (Model.HasUnreadMessages && Model.User.Id != loggedOnUserId)
+        {
+            if (Model.UnRead) {
+            <span class="fas fa-envelope green-colour ml-3" title="New Message"></span>
+            }
+            @*        if (Model.UnRead)
+        {
+        <i class="inline message-star  far fa-envelope green-colour" title="Mark as read"></i>
+    }
+    else
+    {
+        <i class="inline message-star  far fa-envelope-open text-muted" title="Mark as Unread"></i>
+    }*@
+        }
+    <span class="sender" title="@Model.User.UserName">
+        <a href="#" role="button" class="show-messages" data-id="@Model.User.Id" data-name="@string.Concat(Html.Lang("PM.Title"), Model.User.UserName)" title="@Html.Raw(string.Format(Html.LanguageString("PM.ShowAll"), @Model.User.UserName)) ">
+            @if (@Model.IsSentMessage && loggedOnUserId != @Model.User.Id)
+            {
+           <text>@Html.Lang("PM.To")</text>
+            }
+@if (@Model.IsReceivedMessage && loggedOnUserId != @Model.User.Id)
+{
+    <text>@Html.Lang("PM.From")</text>
+}
+@Model.User.UserName
+       
+        </a>
+    </span>
+    
+        <span class="time inlinee" title="@DatesUI.GetPrettyDate(@Model.Date.ToString())">
+            <i class="ethicon fas fa-clock orange-colour"></i>
+            <span class="d-none d-sm-inline-block">
+                @DatesUI.GetPrettyDate(@Model.Date.ToString())
+            </span>
+           
+        </span>
+@if (loggedOnUserId != @Model.User.Id)
+{
+	<span class="message-delete">
+        <a href="#" role="button" class="privatemessagesdeleteall" data-id="@Model.User.Id" data-confirmation="@Html.Raw(string.Format(Html.LanguageString("PM.DeleteConfirmation"), @Model.User.UserName))"  title= "@Html.Raw(string.Format(Html.LanguageString("PM.DeleteAll"), @Model.User.UserName))">
+            <i class="fas fa-trash" aria-hidden="true" style="color:red"></i>
+        </a>
+	</span>
+}
+
+@if (@Model.AttachmentCount > 1)
+{
+    <span class="attachment">
+        <a href="#" role="button" class="attachmentlink" data-id="@Model.MessageId" title="@Html.LanguageString("PM.ShowAttachements")" )>
+            <span class="mr-1 green-colourr">
+                @Html.Raw(@Model.AttachmentCount)
+            </span>
+            <i class="ethicon fa fa-paperclip" aria-hidden="true"></i>
+        </a>
+    </span>
+        
+}
+else if (@Model.AttachmentCount == 1)
+{
+        <a class="filedownload" href="@Url.Action("DownloadAttachments", "File", new { messageId = @Model.MessageId }) " title="@Html.LanguageString("Buttons.Download")">
+            <span class="attachment">
+                <i class="ethicon fa fa-paperclip"></i>
+            </span>
+        </a>
+    }
+
+@*   
+    @if (@Model.Hasattachments)
+    {
+       <a href="#" role="button" class="attachmentlink" data-id="@Model.MessageId" title="@Html.LanguageString("PM.ShowAttachements")" )>
+        <span class="attachment">
+            @if (@Model.AttachmentCount > 1)
+            {
+                <span class="mr-1 green-colourr">
+                    @Html.Raw(@Model.AttachmentCount)
+                </span>
+            }
+             <i class="ethicon fa fa-paperclip" aria-hidden="true"></i>
+
+        </span>
+    </a>
+    }*@
+    <a href = "#" role="button" class="show-messages" data-id="@Model.User.Id" data-name="@string.Concat(Html.Lang("PM.Title"), Model.User.UserName)" title="@Html.Raw(string.Format(Html.LanguageString("PM.ShowAll"), @Model.User.UserName))" )>
+        <span class="summary d-nonee d-sm-inline-blockk">
+            <span class="message-flags">
+                @if (@Model.IsSentMessage)
+                {
+                    <i class="ethicon fa fa-location-arrow orange-colour d-nonee d-sm-inline-blockk" title="@messageToolTip">
+                    </i>
+                }
+                else
+                {
+                    <i class="ethicon fa fa-inbox green-colour d-nonee d-sm-inline-blockk" title="@messageToolTip"></i>
+                }
+            </span>
+            <span class="messsage-text d-none d-sm-inline-block ml-2">
+
+                @Html.Raw(string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(@Model.Message), 10), "...."))
+
+            </span>
+        </span>
+    </a>
+</div>
+
+

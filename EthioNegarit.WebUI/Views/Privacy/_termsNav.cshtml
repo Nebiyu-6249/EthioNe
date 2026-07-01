@@ -1,0 +1,100 @@
+﻿<div class="sidebar mt-0">
+    <div class="sidebar-brand">
+        <div class="brand-logo">
+            @*    <div class="brand-emblem">⚖️</div>*@
+            <div>
+                <div class="forum-name">@Html.Settings().ForumName</div>
+            </div>
+        </div>
+        <div class="doc-label">@Html.LanguageString("Privacy.Terms.Title")</div>
+    </div>
+    <nav class="mt-0" aria-label="Terms Navigation">
+        <ul id="menu-slider" class="nav nav-pills nav-sidebar menu-collapse" data-widget="treeview" role="menu" data-accordion="true">
+            <li class="nav-item nav-headerr text-mutedd">
+                <div class="sidebar-meta">
+                    @Html.LanguageString("Privacy.Policy.Effective"): @Model.EffectiveDate · v @Model.Version<br>
+                    @Html.Settings().ForumUrl
+                </div>
+            </li>
+            <li class="nav-item nav-headerr text-mutedd">
+                <div class="nav-label">
+                    @Html.Lang("Privacy.Policy.Sections")
+                </div>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s1" class="nav-link"><span class="num">01</span><p>@Html.Lang("Privacy.Terms.Definitions")</p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s2" class="nav-link"><span class="num">02</span> <p>@Html.Lang("Privacy.Terms.Acceptance") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s3" class="nav-link"><span class="num">03</span><p>@Html.Lang("Privacy.Terms.Eligibility")</p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s4" class="nav-link"><span class="num">04</span><p>@Html.Lang("Privacy.Terms.Accounts") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s5" class="nav-link"><span class="num">05</span><p>@Html.Lang("Privacy.Terms.Rules") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s6" class="nav-link"><span class="num">06</span><p>@Html.Lang("Privacy.Terms.ContentPolicy") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s7" class="nav-link"><span class="num">07</span><p>@Html.Lang("Privacy.Policy.Terms.ReputationBadges") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s8" class="nav-link"><span class="num">08</span><p>@Html.Lang("Privacy.Policy.Terms.PremiumFeatures") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s9" class="nav-link"><span class="num">09</span><p>@Html.Lang("Privacy.Policy.Terms.PaymentsBilling")</p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s10" class="nav-link"><span class="num">10</span><p>@Html.Lang("Privacy.Terms.IntellectualProperty")</p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s11" class="nav-link"><span class="num">11</span><p>@Html.Lang("Privacy.Terms.Copyright") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s12" class="nav-link"><span class="num">12</span><p>@Html.Lang("Privacy.Terms.ThirdParty") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s13" class="nav-link"><span class="num">13</span><p>@Html.Lang("Privacy.Terms.APIIntegrations") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s14" class="nav-link"><span class="num">14</span><p>@Html.Lang("Privacy.Terms.Moderation") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s15" class="nav-link"><span class="num">15</span><p>@Html.Lang("Privacy.Terms.Termination") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s16" class="nav-link"><span class="num">16</span><p>@Html.Lang("Privacy.Terms.Disclaimers") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s17" class="nav-link"><span class="num">17</span><p>@Html.Lang("Privacy.Terms.LimitationofLiability") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="#s18" class="nav-link"><span class="num">18</span><p>@Html.Lang("Privacy.Terms.GoverningLaw") </p></a>
+            </li>
+            <li class="nav-item text-mutedd">
+            </li>
+            <li class="nav-item text-mutedd">
+                <div class="nav-divider"></div>
+                <div class="nav-label">@Html.Lang("Privacy.Terms.RelatedDocs")</div>
+            </li>
+            <li class="nav-item text-mutedd">
+                <a href="@Url.Action("Index", "Privacy")" class="related-link"><span class="num">🔒 </span>@Html.Lang("Privacy.Policy.Title")</a>
+            </li>
+            <li class="nav-item text-mutedd">
+                <div class="sidebar-footer">
+                    <div style="font-size:0.68rem;color:rgba(255,255,255,0.2);font-family:'DM Mono',monospace;">
+                        &copy; @DateTime.UtcNow.Year <a href="@(Html.Settings().ForumUrl)">@Html.Settings().ForumName</a>.
+                        <br>@Html.Lang("Privacy.Terms.AllRights")
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+

@@ -1,0 +1,11 @@
+﻿@model EthioNegarit.WebUI.ViewModels.ShowVotersViewModel
+
+@if(Model.Votes.Any())
+{
+    <ul>
+        @foreach(var vote in Model.Votes)
+        {
+            <li>@vote.User.UserName</li>
+        }
+    </ul>
+}

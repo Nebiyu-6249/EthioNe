@@ -1,0 +1,25 @@
+﻿@model EthioNegarit.WebUI.Areas.Admin.ViewModels.CreateEditFAQViewModel
+@{
+    ViewBag.Title = "Create FAQ";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@Html.Partial("_HelpNavButtons")
+
+<div class="panel">
+    <div class="panel-heading">
+        <h5>@ViewBag.Title</h5>
+    </div>
+    <div class="panel-content">
+        @using (Html.BeginForm("CreateFAQ", "AdminHelp", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(false)
+            @Html.AntiForgeryToken()
+
+            @Html.Partial("_HelpFields", Model)
+
+            <div class="submit-holder">
+                <input type="submit" class="btn btn-mvc-green btn-mvc-large" value="Create" />
+            </div>
+        }
+    </div>
+</div>

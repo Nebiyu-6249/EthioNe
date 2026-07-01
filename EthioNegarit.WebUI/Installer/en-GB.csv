@@ -1,0 +1,747 @@
+Activity.Title,Members Activity
+Activity.PostedIn,Posted in {0} .
+Activity.CreateDiscussion,Create new discussion - {0} .
+Activity.Badge,Badge
+Activity.ProfileUpdated,has an updated profile
+Activity.ProfileUpdate,Profile Updated
+Address.Title,Address 
+Activity.MemberAwardedBadge,has been awarded the
+Activity.MemberJoined,is a new member in the forum
+Activity.NewMemberJoined,A New Member Joined
+About.CategoriesText,{0} categories, containing more than {1} topics
+About.MembersText,More than {0} active members
+About.Discussions,Discussions
+About.TopicsText,More than {0} topics
+Address.Label.Country,Country/City
+Address.Label.Email,Email
+Address.Label.Line,Line
+Address.Label.Name,Name
+Address.Web,Web/Url
+Admin,Admin
+Ad.Title,Advertisements
+Ad.UploadFile,Upload New File
+Ad.Label.PostCount,Posted Count
+Ad.Label.Posted,{0} Times
+Ad.Label.Reminder,Enable Reminder
+Ad.Label.Back,Back to Advertisements
+Ad.Label.Create,Create Advertisement
+Ad.Label.Edit,Edit Advertisement
+Ad.Label.AdsService,Ad Service
+Ad.Label.Annual,Annual(One Year)
+Ad.Label.CompanyService,Company or Service name
+Ad.Label.Duration,Duration
+Ad.Label.Info,Advertisement Info
+Ad.Label.MotoSlogan,Company Moto/Slogan
+Ad.Label.Month,One Month
+Ad.Label.SelectDuration,Select Duration
+Ad.Label.SemiAnnual,Semi Annual(Six Month)
+Ad.Label.Status,Ad Status
+Ad.Label.Try,Try for {0} days ?
+Ad.Label.Quarter,Quarter(Three Month)
+Ad.Notification.Subject,Advertisement Notification !
+Ad.Notification.Message,Hello {0} You have an Ad that is still a few days away from expiration. Please visit your Ads.
+Ad.Created,Advertisement Successfully Created
+Ad.Updated,Advertisement Successfully Updated
+Ajax.PleaseWait,Please Wait...
+Ajax.Loading,Loading...
+Badges.AwardsPoints,Awards {0} points
+Badge.AuthorMarkAsSolution.Name,Your Question Solved
+Badge.AuthorMarkAsSolution.Desc,This badge is awarded to a user when they mark another users post as the solution to their topic
+Badge.UserVoteUp.Name,You've Given Your First Vote Up
+Badge.UserVoteUp.Desc,This badge is awarded to users after they make their first vote up
+Badge.PostMentionsUmbraco.Name,Umbraco Fan
+Badge.PostMentionsUmbraco.Desc,This badge is awarded to a user who mentions Umbraco in their latest post
+Badge.PosterVoteUp.Name,First Vote Up Received
+Badge.PosterVoteUp.Desc,This badge is awarded to users after they receive their first vote up from another user
+Badge.PosterMarkAsSolution.Name,Post Selected As Answer
+Badge.PosterMarkAsSolution.Desc,This badge is awarded to a user when their post is marked as the solution to a topic
+Badge.Padawan.Name,Padawan
+Badge.Padawan.Desc,Had 10 or more posts successfully marked as an answer
+Badge.OneThousandPoints.Name,Thousand Pointer
+Badge.OneThousandPoints.Desc,This badge is awarded to users who have received 1000 points
+Badge.MemberForAYear.Name,First Anniversary
+Badge.MemberForAYear.Desc,This badge is awarded to a user after their first year anniversary
+Badge.TheGrouch.Name,The Grouch
+Badge.TheGrouch.Desc,This badge is awarded to users who have voted down other users posts 10 or more times
+Badge.JediMaster.Name,Jedi Master
+Badge.JediMaster.Desc,Had 50 or more posts successfully marked as an answer
+Badge.Photogenic.Name,Photogenic
+Badge.Photogenic.Desc,Little things like uploading a profile picture make the community a better place. Thanks!
+Badge.FavouriteFirstPost.Name,First Favourite
+Badge.FavouriteFirstPost.Desc,You have Favourited your first post
+Badge.YourPostFavouritedTenTimes.Name,Recognised Post
+Badge.YourPostFavouritedTenTimes.Desc,One or more of your posts have been Favourited by 10 or more people
+Badge.YourPostFavourited.Name,Favourited Post
+Badge.YourPostFavourited.Desc,You have one or more posts that have been Favourited by another member
+Badges.UnableToAward,Unable to award badges as badge collection is null for user {0}
+Badge.UnknownBadge,Unknown badge type {0}
+Badge.BadegEnumNoClass,The badge enum type {0} has no corresponding class specified.
+Badges.PageTitle,Badges
+Badges.NoBadges,They haven't received any badges yet.
+Button.Back,Back
+Button.Cancel,Cancel
+Button.CreatePost,Add Post
+Button.ChangePassword,Change Password
+Button.Continue,Continue
+Button.Clear,Clear
+Button.Delete,Delete
+Button.DeleteAll,Delete All
+Button.Download,Download
+Button.DownloadAll,Download All
+Button.Edit,Edit
+Button.LogOn,Log On
+Button.Reply,Reply
+Button.Send,Send
+Button.SendInvitation,Send Invitation
+Button.AddGuest,Add Guest
+Button.Search,Search
+Button.Save,Save
+Button.Submit,Submit
+Button.ShowPassword,Show Password
+Button.ResetPassword,Reset Password
+Button.Report,Report
+Button.ShowMore,Show More
+Button.PressEnter,Press enter to post
+Category.AllCategories,All Categories
+Category.CategoriesSideHeading,Categories
+Category.NoDiscussions,Currently no discussions in this category
+Category.SubCategoriesHeading,Sub Categories
+Category.MostRecent,Most recent :
+Category.ExploreDiscussions,Explore Discussions in Categories
+Confirmation.DeleteMembersPosts,Are you sure? This will delete all the members posts and topics!
+Confirmation.SrubAndBan,Are you sure you want to do this? It will delete all their posts and then ban them
+ContactUs.Label.Subject,Subject
+ContactUs.Label.Message,Message
+Chat.Rooms,All Rooms
+Chat.SelectRoom,Pick a room to join the conversation.
+Chat.Disallowed,Chat temporarily disallowed
+Chat.Placeholder,Type a message … (Enter to send, Shift+Enter for newline)
+Chat.Room.Joined,Joined the Room Now 
+Chat.FreezedRooms,Freezed Rooms
+Chat.Leave,Leave
+Chat.Room, {0}'s Chat Room
+Chat.Replay,Replay
+Chat.Replies,Replies
+Chat.RoomMembers,Room Members
+Chat.ActiveNow,Active Now
+Chat.LogOut,Log Out
+Date.Minutes,Minutes
+Date.Days,Day/s
+Date.Today,Today
+Date.JustNow,Just now
+Date.OneMinuteAgo,1 minute ago
+Date.MinutesAgo,{0} minutes ago
+Date.OneHourAgo,1 hour ago
+Date.HoursAgo,{0} hours ago
+Date.Yesterday,yesterday
+Date.DaysAgo,{0} days ago
+Date.WeeksAgo,{0} weeks ago
+Date.DateCreate,Date Create
+Date.LastView, Last View
+Date.EndDate,End Date 
+Date.StartDate,Start date
+Date.Title,Date
+Dashboard.Label.Topics,topics
+Dashboard.Label.TopicsStart,Discussions you start
+Dashboard.Label.Posts,All Posts
+Dashboard.Label.BadgesGet,All Badges you Get
+Dashboard.Label.TotalPoints,Total Points You Get
+Dashboard.Label.PointsGet,Points You Get 
+Dashboard.Label.TopicsFollow,Topics Follow
+Dashboard.Label.CategoriesSubscribed,Categories Subscribed
+Dashboard.Label.ChatRoomsJoined,Chat Rooms Joined
+Dashboard.Label.FavouritePosts,Favourite Posts
+Dashboard.Title,Dashboard
+Dashboard.Title.Overview,Overview
+Dashboard.Title.Subscription,Subscription | Favourite | Follow
+Dashboard.Title.Actions,Actions | Response | FeedBack
+Dashboard.Title.PointSummary,Points Summary
+Dashboard.Title.SelectYear,Select Year
+Dashboard.Title.Vote,Vote
+Dashboard.Label.VoteGiven,Vote Given
+Dashboard.Label.MembersVote,Members Vote 
+Dashboard.Title.ChatResponse,Chat Response
+Dashboard.Label.YourResponse,Your Response
+Dashboard.Label.MembersResponse,Members Response
+Delete.Confirmation,Are you sure you want to delete ?
+Errors.LogonGeneric,Please register or log in to access this.
+Errors.NoAccess,No Access
+Errors.GenericMessage,Sorry an error occured
+Errors.NoPermission,You do not have permission to perform this action
+Error.EmailIsBanned,The email address or domain you are trying to use is banned
+Editor.NeedHelp,Need formatting help?
+Error.WrongAnswerRegistration,There was an error with your answer. Please try again
+Errors.NothingToDisplay,Nothing To Display
+Errors.NoPermissionPolls,Topic Created. But you do not have permission to create polls
+Facebook.Error.EnabledButNotAddedKeys,You have enabled Facebook login but not added your AppId or Secret key to the forum.config
+Favourites.PageTitle,My Favourites
+Favourites.NoMemberFavourites,You have not starred any posts
+File.SuccessfullyDeleted,File deleted
+Following.Topics,Topics your are following
+Following.PageTitle,Topics Categories & ChatRooms
+Following.Categories,Categories you are following
+Forum.Name,ETHIOPICAL
+Forum.Motto,Our mission is to build a platform for digital communities that includes high-quality writing, questions and answers, collaboration, and mutual respect.
+Forum.Ad,Advertisement on Ethiopical
+Forum.Ad.Slogan,Reach Our Visitors
+Google.Error.EnabledButNotAddedKeys,You have enabled social logins but not added the Google id and secret key in the forum.config
+Help.ContactUs,Contact Us
+Help.ContactUs.Message,if you found not the right anwser or you have a other question ?
+Help.FAQ,FAQ
+Help.Title,Help
+Home.LatestDiscussions,Latest Discussions
+Home.Rss,Rss
+Home.Permalinks,Permalinks
+Home.PrivacyAndSecurity,Privacy and Security
+Home.ContactUs,Contact Us
+Image.Label,Image
+Inbox.Title,Inbox
+Inbox.All,All
+Inbox.Received,Received
+Inbox.Sent,Sent
+Inbox.Unread,Unread
+Inbox.Unread.Messages,{0} Unread Message/s
+Inbox.Starred,Starred
+Inbox.Messages,Message/s
+Language.Change,Change Language
+Language.Changed,Language Changed
+Layout.CreateButton,New Discussion
+Layout.Nav.About,About
+Layout.Nav.Activity,Members Activity
+Layout.Nav.Admin,Adminstration
+Layout.Nav.Advertisements,Advertisements
+Layout.Nav.Packages,Ad Packages
+Layout.Nav.AdService,Ad Service
+Layout.Nav.Badges,Badges
+Layout.Nav.Categories,Categories
+Layout.Nav.ChatRooms,Chat Rooms
+Layout.Nav.ContactUs,Contact Us
+Layout.Nav.SendUsMessage,Send Us Message
+Layout.Nav.HelpAndSupport,Help and Support
+Layout.Nav.Home,Home
+Layout.Nav.Leaderboard,Leaderboard
+Layout.Nav.Logon,Log On
+Layout.Nav.Members,Members
+Layout.Nav.Register,Register
+Layout.Nav.Payments,Payments
+Layout.Nav.Permalinks,Permalinks
+Layout.Nav.SendUsMessage,Send us a message.
+Layout.Nav.Discussions,Discussions
+Layout.Nav.Utilities,Utilities
+Layout.PoweredBy,Powered by 
+Leaderboard.ThisWeeksStars,This Weeks Stars
+Leaderboard.ThisYearsStars,This Years Rock Stars
+Leaderboard.LeaderboardTitle,Global Leaderboard
+LogOn.LogOn,Log On
+LogOn.LogOff,Log Off
+Members.Topics,My Topics
+Members.PostedIn,Posted In
+Members.Following,Following
+Members.Favourites,My Favourites
+Members.AdAndPayment,Ad and Payments
+Members.Advertisement,My Advertisements
+Members.Account.CloseDays,Close For Days
+Members.AccountLocked,Account temporarily Locked !
+Members.AccountLockedText,Your account is locked. Please try again in
+Members.Admin,Admin
+Members.AlreadyRegistered,You are already registered? Why would you want to do it again ?
+Members.BanUser,Ban User
+Members.Blocked,Blocked Members
+Members.BlockedNone,None Members You Blocked
+Members.UnBlock,Free Up
+Members.CantUnlock,User does not exist - cannot unlock.
+Members.CloseAccount,Close Account
+Members.DeleteAccount,Delete Account
+Members.ChangePassword.Success,Password Changed
+Members.ChangePassword.Error,The current password is incorrect or the new password is invalid.
+Members.ChangePassword.Title,Change Password
+Members.ChangePassword.Text,New passwords are required to be a minimum of {0} characters in length.
+Members.ChangePassword.Link,Click here if you want to {0}
+Members.ChangePassword.TextLink,Click here,If you want to change your password
+Members.CreateAccountMessage,Create an account
+Members.CreateAccount,Creat Account
+Members.DeleteAllPosts,Delete All Posts
+Members.EditProfile,Edit Profile
+Members.EditMember,Edit Member
+Members.Errors.PasswordIncorrect,The user or password provided is incorrect.
+Members.Errors.PasswordAttemptsExceeded,The maximum number of password attempts has been exceeded.
+Members.Errors.UserLockedOut,User is locked out.
+Members.Errors.UserNotApproved,User has not been approved.
+Members.Errors.LogonGeneric,Unable to login.
+Members.Errors.DuplicateUserName,User name already exists. Please enter a different user name.
+Members.Errors.DuplicateEmail,A user name for that e-mail address already exists. Please enter a different e-mail address.
+Members.Errors.InvalidPassword,The password provided is invalid. Please enter a valid password value.
+Members.Errors.InvalidEmail,The e-mail address provided is invalid. Please check the value and try again.
+Members.Errors.InvalidAnswer,The password retrieval answer provided is invalid. Please check the value and try again.
+Members.Errors.InvalidQuestion,The password retrieval question provided is invalid. Please check the value and try again.
+Members.Errors.InvalidUserName,The user name provided is invalid. Please check the value and try again.
+Members.Errors.ProviderError,The authentication provider returned an error. Please verify your entry and try again. If the problem persists please contact your system administrator.
+Members.Errors.UserRejected,The user creation request has been canceled. Please verify your entry and try again. If the problem persists please contact your system administrator.
+Members.Errors.Unknown,An unknown error occurred. Please verify your entry and try again. If the problem persists please contact your system administrator.
+Members.ForgotPassword.Email,You have requested that your password is reset on {0}. Your new password is below
+Members.ForgotPassword.Subject,Password Reset
+Members.ForgotPassword.SuccessMessage,A new password has been emailed to you
+Members.ForgotPassword.ErrorMessage,Error resetting password
+Members.ForgotPassword.Title,Forgot Password
+Members.ForgotPassword.Link,Forgot your password ?
+Members.HasNewPrivateMessages,You have new unread Private messages
+Members.Label.Age,Age
+Members.Label.AlreadyRegistered,I already have a membership
+Members.Label.ConfirmPassword,Confirm Password
+Members.Label.Comment,Comment
+Members.Label.CurrentPassword,Current Password
+Members.Label.ConfirmNewPassword,Confirm New Password
+Members.Label.DateJoined,Date Joined
+Members.Label.DisableEmailNotifications,Disable Email Notifications
+Members.Label.EmailAddress,Email address (Used by Gravatar to show your Avatar image)
+Members.Label.EmailAddressBlank,Enter your email address
+Members.Label.Facebook,Facebook Page
+Members.Label.Location,Location
+Members.Label.Address,Address
+Members.Label.NewPassword,New Password
+Members.Label.Password,Password
+Members.Label.RememberMe,Remember Me
+Members.Label.Roles,Roles
+Members.Label.Signature,Signature
+Members.Label.Twitter,Twitter Url
+Members.Label.Username,Username
+Members.Label.UserIsApproved,User is Approved
+Members.Label.Users,Users
+Members.Label.UploadNewAvatar,Upload a new profile image
+Members.Label.Website,Website
+Members.LoginWith,Login with
+Members.LogonFacebookButton,Facebook
+Members.LogonGoogleButton,Google
+Members.LogonMicrosoftButton,Microsoft
+Members.LogOnMessage,Please enter your user name and password. Or {0} if you don't have an account
+Members.MemberEmailAuthorisationNeeded,We have sent you a confirmation email - please click the confirmation link in your email to approve your account.
+Members.MemberEmailAuthorisation.EmailBody,You have registered on {0} - In order to continue you must confirm your email address by clicking the link below. {1}
+Members.MemberEmailAuthorisation.Subject,Email Confirmation
+Members.MemberEmailAuthorisationNeededMessage,Click the link in your confirmation email to approve your account.
+Members.MemberEmailAuthorisationResend,Resend Confirmation Email
+Members.MessageMe,Message Me
+Members.NewMemberRegistered,New member registered on {0} ({1})
+Members.NewMemberSubject,New Member Registered
+Members.NowRegistered,You are now registered
+Members.NowRegisteredNeedApproval,You are now registered. But the forum admin must authorise your account
+Members.NowLoggedIn,You are now logged in
+Members.NowLoggedOut,You are now logged out
+Members.NowApproved,Your account has now been approved - Thank you
+Members.NowBanned,Member is now banned
+Members.NowUnBanned,Member is now NOT banned
+Members.Profile.About,Profession and Skills
+Members.Profile.Links,Social Links
+Members.Profile.Activity,Activity
+Members.Profile.Title, Profile
+Members.Profile.Joined,Date Join
+Members.Profile.DateJoined,Date Joined
+Members.Profile.Posts,Posts
+Members.Profile.Topics,Discussions
+Members.Profile.Score,Score
+Members.Profile.Age,Age
+Members.Profile.Location,Location
+Members.Profile.Website,Website
+Members.Profile.Twitter,Twitter
+Members.Profile.Facebook,Facebook
+Members.Profile.Badges,Badges
+Members.Profile.Updated,Profile Updated
+Members.Profile.LastOnline,Last Online
+Members.Profile.IsSocialAccount,Social Account
+Members.Register,Register
+Members.ResetPassword.Title,Password reset request sent
+Members.ResetPassword.Text,An email has been sent with details on how to reset your password. 
+Members.ResetPassword.EmailText,A request has been made to reset your password on {0}. To reset your password follow the link below. If you did not make this request then please ignore this email. No further action is required and your password will not be changed.
+Members.ResetPassword.SuccessText,Your password has been changed.
+Members.ResetPassword.InvalidToken,This request is either invalid or has expired. Please make a password reset request again.
+Members.ResetPassword.Error,There was an error resetting your password. Please try again.
+Members.RegisterAsNewMember.Link,Register as a New Member?
+Members.RegisterMessage,Register a new membership
+Members.SrubAndBan,Scrub Member
+Members.SuccessfulSrub,All done
+Members.SearchMembers,Search Members ...
+Members.UnableToGetEmailAddress,Unable to gain access to your email address - please check your permissions
+Members.UnBanUser,Unban User
+Members.WelcomeBack,Welcome Back {0} We're glad you're back.
+Members.Greetings,HI {0} Welcome Back
+Microsoft.Error.EnabledButNotAddedKeys,You have enabled Microsoft login but not added your AppId or Secret key to the forum.config
+Moderate.Title,Moderate topics and posts
+Moderate.AwaitingModeration,Your post is currently awaiting moderation. Once approved it will appear on the site
+Moderate.NothingHere,Nothing here at the moment
+Moderate.Topics,Moderate Topics
+Moderate.Posts,Moderate Posts
+Moderate.NavText,Pending Posts/Topics
+Notification.Email,Email Notification
+Notification.Subscribe,Follow
+Notification.UnSubscribe,UnFollow
+Notification.Title,Notifications
+Notification.PostNotification,{0} Post this - {1}
+Notification.TopicNotification,{0} Create New Topic - {1}
+Notifications.NoActiveMembers,No one online at the moment
+Notifications.NothingHere,There are currently no new notifications.
+Notifications.Disabled,Notifications Disabled Click Here to enable.
+Notifications.Enabled,Click here to disable notifications
+Notifications.Enable,Click here to enable notification
+Package.Images,Images
+Package.Video,Video
+Package.Address,Address Map
+Package.Label.GetPackage,Get Package
+Package.Annual,Annual package
+Package.Monthly,Monthly package
+Package.SemiAnnual,Semi Annual package
+Package.Quarterly,Quarterly package
+Package.Name,Package name
+Package.Basic.Name,Basic Package
+Package.Basic.Desc,Basic Package
+Package.Super.Name,Super Package
+Package.Super.Desc,This Package is superior to the Basic Ad Package and allows for the insertion of additional images and short video.
+Package.Ultimate.Name,Ultimate Package
+Package.Ultimate.Desc,This Ad Package includes all services and also allows you to enter your work address on Google Maps.
+Package.Label.Info,Ad Package Info
+Payment.Label.Create,Advertisement Payment
+Payment.Label.Edit,Edit Payment
+Payment.NavText,Payments
+Payment.Title,Advertisement Payment
+Payment.Invoice,Invoice
+Payment.Invoice.Print,Print Invoice
+Payment.Invoice.Footer,Thank you for choosing us.We believe you will be satisfied by our services.
+Payment.InvoiceNo,Invoice No
+Payment.Name,Name 
+Payment.Bank,Bank
+Payment.AccountNo,Account No
+Payment.AmountTransferred,Amount Transferred
+Payment.DateTransferred,Date Transferred
+Payment.Description,For {0} Month Advertisement Payment
+Payment.Error.InvalidReference,Used Payment Reference
+Payment.Error.InvalidAmount,Insufficient price Amount
+Payment.RefundRequest,Refund Request
+Payment.RefundRequested,Your refund request has already been sent. If your request has not been answered, please be patient.
+Payment.RefundRequest.PeriodEnd,Sorry, the refund request period has expired.
+Payment.RefundRequest.Reason,Reason for Refund request.
+Payment.Reference,Reference Number
+Payment.Label.Reference,Reference number of the transaction
+Payment.Status,Payment Status
+Payment.Duration,Duration
+Payment.Submitted,Payment Successfully Submitted,When Payment Confirmed Your Ad Starts Automatically
+Payment.Label.Back,Back to Payments
+Payment.Label.GrossPrice,Gross Price
+Payment.Label.YourAccountNo,Your Account No
+Payment.Label.Month,Month
+Payment.Label.Discount,Discount
+Payment.Label.TotalPrice,Total Price
+Payment.Label.MonthlyPrice,Total Price / Month
+Payment.Label.Off,% Off
+Payment.Notification.Subject,Payment Notification !
+Payment.Notification.Message,Hello {0} You have an unfinished (unpaid) Ad. Please complete your payment to launch the Ad.
+PM.NewPrivateMessageBody,{0} has just sent you a private message.
+PM.AboutToExceedInboxSizeBody,You are about to exceed your private message inbox allowance
+PM.AboutToExceedInboxSizeSubject,Private Message Inbox Allowance
+PM.NewMessages,New Message/s
+PM.NewPrivateMessage,New Private Message
+PM.NewPrivateMessageSubject,New Private Message
+PM.LastActivity,Last Activity
+PM.MemberIsOnline,Online
+PM.RecipientUsername,Recipient Username
+PM.MessageSubject,Subject
+PM.AllMessages,All Messages
+PM.SendMessage,Send a Message
+PM.ShowAllMessages,Show All Messages from {0}.
+PM.Title,Message: 
+PM.From,From : 
+PM.Sent,Message has been Sent
+PM.BackToInbox,Back To Inbox
+PM.GoToInbox,Go To Inbox
+PM.SentPrivateMessages,Sent Private Messages
+PM.To,To :
+PM.Subject,Subject
+PM.Date,Date
+PM.Read,Read
+PM.NoMessages,You currently don't have any private messages
+PM.ReceivedPrivateMessages,Received Private Messages
+PM.SendPrivateMessage,Send Private Message
+PM.OriginalMessage,Original Message
+Points.ThisWeeksHighEarners,This Weeks High Earners
+PM.PrivateMessages,Private Messages
+PM.SendingToQuickly,You are trying to send messages to quickly
+PM.SentItemsOverCapcity,Your sent items is over capacity - delete messages to be able to send
+PM.ReceivedItemsOverCapcity,{0} has exceeded their inbox size - unable to send message
+PM.MessageSent,Message Sent
+PM.UnableFindMember,Unable to find that member
+PM.TalkToSelf,Talking to yourself is a bit weird. isn't it?
+PM.Block,Block
+PM.Blocked,Blocked
+PM.BlockedMessage,Unable to send message
+PM.ShowMore,Show More Messages
+PM.ShowMoreLoading,Loading...
+PM.DeleteAll,Delete All {0}'s Message
+PM.ShowAll,Show All {0}'s Message
+PM.DeleteConfirmation,Are you sure you want to delete all messages from {0} ?
+PM.ShowAttachements,Show Attachements
+Poll.Button.Create,Add A Poll To This Topic
+Poll.Placeholder.TypeAnswerHere,Type A Poll Answer Here
+Poll.Button.Remove,Remove Poll From Topic
+Poll.Button.Vote,Submit Vote
+Post.By,Posted by
+Post.Attach,Attach
+Post.AttachedFiles,Attached Files
+Post.Browse,Browse...
+Post.Delete,Delete
+Post.DeleteConfirmation,Are you sure you want to delete?
+Post.Deleted,Post Deleted
+Post.Edit,Edit
+PostEdit.None,This post has not post edit history at the moment
+PostEdit.EditedBy,Edited By
+PostEdit.OriginalVersion,Original
+PostEdit.EditedVersion,Edited
+Post.Favourite,Favourite
+Post.Favourited,Favourited
+PostFilter.OrderBy,Order By:
+PostFilter.Standard,Standard
+PostFilter.Newest,Newest
+PostFilter.Recent,Recent
+PostFilter.Votes,Votes
+PostFilter.Popular,Popular
+Post.FilesUploaded,Files uploaded successfully
+Post.IsSolution,Is Solution
+Post.Label.TopicName,Topic Name
+Post.Label.IsStickyTopic,Is Sticky Topic
+Post.Label.LockTopic,Lock Topic
+Post.Label.TopicCategory,Topic Category
+Post.LastEdited,Last edited
+Post.LikedBy,Liked by
+Post.MemberIsOnline,Online
+Post.Move,Move
+Post.Move.Label.Topic,Topic
+Post.Move.Label.NewTopicTitle,Create New Topic
+Post.Move.Label.ReplyToPosts,Move Replies and Quotes Too
+Post.Move.PostTitle,Move Post
+Post.Move.Description,Move post to an existing topic, or create a new one.
+Post.Notification.NewPosts,A new post has been created in the {0} topic
+Post.Notification.Subject,New Post On 
+Post.OthersLiked,and {0} others
+Post.Options,View Post Options
+Post.PostedThis,posted this
+Post.Posts,Posts
+Post.Points,Points
+Post.Report,Report
+Post.Reported,Reported
+Post.NoPosts,No Posts Right Now
+Post.PostedIn,Discussions you are participated in
+Post.Reply,Reply
+Post.Share,Share
+Post.Invite,Invite
+Post.ReplyingTo,Replying To 
+Post.PleaseWait,Please Wait...
+Post.Updated,Post Updated
+Post.Permalink,Permalink
+Post.Quote,Quote
+Post.Upload,Upload Files
+Post.UploadBannedFileExtension,File extension not allowed
+Post.UploadFileTooBig,File upload is too big
+Post.VoteUp,Like
+Post.VotedUp,Liked
+Post.VoteDown,Dislike
+Post.VotedDown,Disliked
+Post.ShowMorePosts,Show More Posts
+Post.ShowMorePostsLoading,Loading Posts . . .
+PrivacyPolicy.Title,Privacy Policy
+Post.SpamPosts,Spam Posts
+Privacy.Policy.Title,Privacy Policy
+Privacy.Policy.Effective,Effective
+Privacy.Policy.Sections,Sections
+Privacy.Policy.InformationWeCollect,Information We Collect
+Privacy.Policy.HowCollectInformation,How we collect information
+Privacy.Policy.GeneraPrivacyNotice,General Privacy Notice
+Privacy.Policy.HowWeUseYourData,How We Use Your Data
+Privacy.Policy.SecurityAndEncryption,Security and Encryption
+Privacy.Policy.DataSharing,Data Sharing
+Privacy.Policy.DataRetention,Data Retention
+Privacy.Policy.YourRights,Your Rights
+Privacy.Policy.Cookies,Cookies
+Privacy.Policy.DataTransfer,International transfers
+Privacy.Policy.Changes,Policy Changes
+Privacy.Policy.BreachNotification,Breach Notification
+Privacy.Policy.Security,Account Security
+Privacy.Policy.ContactUs,Contact Us
+Privacy.Policy.Documentation,Legal Documentation
+Privacy.Policy.Description,We are committed to protecting your personal data. This document explains what we collect, why we collect it, and how we keep it safe.
+Privacy.Policy.Notice.Description,This Privacy Policy governs how {0} collects, uses, stores, and protects your personal information when you use our platform at {1}. By registering or using our services, you agree to this policy. If you do not agree, please do not use our services.
+Privacy.Policy.CCPA,CCPA (California)
+Privacy.Policy.GDPR,GDPR (EU Users)
+Privacy.Policy.CCPACompliant,CCPA Compliant
+Privacy.Policy.GDPRCompliant,GDPR Compliant
+Privacy.Policy.ETHCompliant,Ethiopian Law Compliant
+Privacy.Policy.Children,Children's Privacy
+Privacy.Policy.Amendments,Amendments
+Privacy.Policy.PreparedIn,Prepared in compliance with Ethiopian Commercial Law, GDPR (EU 2016/679), CCPA (California), and international data protection best practices.
+Privacy.Policy.Version,Version
+Privacy.Terms.Label.Agree,I have read and agree to the site Terms and Conditions
+Privacy.Terms.ReadAgree,I have read and agree to the site {0} and {1} .
+Privacy.Terms.PageTitle,Agree to Terms and Conditions
+Privacy.Terms.Label.AgreeError,You must Agree to the Terms and Conditions
+Privacy.Terms.YouAgreeToOur,you agree to our
+Privacy.Terms.AndAcknowledge,and acknowledge reading our
+Privacy.Terms.Acknowledge,acknowledge our
+Privacy.Terms.BySelecting,By selecting Create an Account, you agree to our
+Privacy.Terms.Acknowledged,and acknowledged our
+Privacy.Terms.Description,Welcomes you to our service, and we invites to participate in the community by sharing knowledge with your friends and colleagues. As with any community, we ask that you participate in a manner that respects your community members,and to this end, we have provided Terms and Conditions of Service to inform you of your legal obligations.
+Privacy.Terms.Read,Please read these Terms carefully before using our platform. By creating an account or using any part of {0}, you agree to be bound by these Terms.
+Privacy.Terms.Title,Terms and Conditions
+Privacy.Terms.Label,Terms of Service
+Privacy.Notice.Title,Important Notice
+Privacy.Notice.Important,Important Notice — Please Read Carefully
+Privacy.Notice.LineOne,These Terms & Conditions ("Terms") constitute a legally binding agreement between you ("User", "You") and {0} ("Company", "We", "Us", "Our") governing your use of the forum platform at {1}. If you do not agree with any part of these Terms, you must not access or use the Service. Your continued use of the platform constitutes acceptance.
+Privacy.Notice.LineTwo,These Terms should be read alongside our {0} ,which governs how we collect, use, and protect your personal data. Both documents form the complete agreement between you and {1}
+Privacy.Terms.InterpretationAndDefinitions,Interpretation and Definitions
+Privacy.Terms.Acknowledgment,Acknowledgment
+Privacy.Terms.YourFeedback,Your Feedback to Us 
+Privacy.Terms.LinksToOther,Links to Other Websites
+Privacy.Terms.ChangesTermsAndConditions,Changes to These Terms and Conditions
+Privacy.Terms.Accounts,User Accounts
+Privacy.Terms.CookiePolicy,Cookie Policy
+Privacy.Terms.Acceptance,Acceptance of Terms
+Privacy.Terms.AllRights,All rights reserved.
+Privacy.Terms.ContentPolicy,Content Policy
+Privacy.Terms.Copyright,Copyright (DMCA)
+Privacy.Terms.Disclaimers,Disclaimers
+Privacy.Terms.Definitions,Definitions
+Privacy.Terms.Eligibility,Eligibility
+Privacy.Terms.LimitationofLiability,Limitation of Liability
+Privacy.Terms.Rules,Rules and Conduct
+Privacy.Terms.ReputationBadges,Reputation and Badges
+Privacy.Terms.PremiumFeatures,Premium Features
+Privacy.Terms.PaymentsBilling,Payments and Billing
+Privacy.Terms.IntellectualProperty,Intellectual Property
+Privacy.Terms.ThirdParty,Third-Party Links
+Privacy.Terms.APIIntegrations,API and Integrations
+Privacy.Terms.Moderation,Moderation
+Privacy.Terms.Termination,Termination
+Privacy.Terms.GoverningLaw,Governing Law
+Privacy.Terms.RelatedDocs,Related Documents
+Privacy.Terms.PreparedIn,Prepared in compliance with Ethiopian Commercial Law, GDPR (EU 2016/679), and international best practices.
+Rss.LatestActivity.Title,Latest Forum Discussions
+Rss.LatestActivity.Description,Recent discussions
+Rss.Category.Title,{0} Discussions
+Rss.Category.Description,Latest discussions happening in the {0} category
+Report.Reporter,Reporter
+Report.Text,Report if it has Violent Or RepulsiveContent,Hatefull Or AbusiveContent , Harasement, Harmfull Or DangerousAct, Missinformation, PromotesTerrorism, Spam Or Misleading . . .
+Report.Title,Report  
+Report.Sent,Report Sent
+Report.Reports,Reports
+Report.MemberReported,Member Reported
+Report.Reason,Reason
+Report.MemberReport,Member Report
+Report.MembersReport,Members Report
+Report.Admin,Admin
+Report.On,Report On
+Setting.Title,Setting
+Setting.DarkMode,Dark Mode
+Search.Badges,Search Badges . . .
+Search.Categories,Search Categories . . . 
+Search.Payments,Search Payments . . .
+Search.Members,Search Members . . .
+Search.NoResults,Sorry no results found
+Search.Results,Results Found
+Search.Searching,Searching :
+Search.InTopic,In Topic
+Side.Search.SearchFor,Search for . . .
+Side.Search.Go,Go
+Side.Search,Search
+SlidePanel.CloseConfirmation,Are you sure you want to close?
+Spam.FloodTestFailed,You are posting too fast,
+Stats.FooterActiveUsersText,Members Currently Online:
+Stats.FooterMainStatText,Our {0} members have posted {1} times in {2} discussions
+Status.Label,Status
+Status.Pending,Pending
+Status.Confirmed,Confirmed
+Status.Active,Active
+Status.Partial,Partial
+Status.Completed,Completed
+Status.Rejected,Rejected
+Stats.LatestMembers,Latest Members:
+StopWord.Error,You have tried to enter a word or url that is not allowed on this site
+SubscribedTopics.NothingToShow,You are not following to any Topics
+SubscribedCats.NothingToShow,You are not following to any Categories
+Table.Action,Action
+Text.To,To
+Text.From,From
+Text.Description,Description
+Text.ExtraInfo,Extra Information
+Text.Summary,Summary
+Text.Version,Running v
+Text.Copyright,Copyright
+Text.AllRights,All rights reserved.
+Text.Platform,Platform
+Text.FilesNotFound,No files could be found or were deleted.
+Tags.PopularTags,Popular Tags
+Tags.NoCreatePermission,You do not have permission to create new accounts, you can only use existing ones.
+Tasks.MarkAsSolutionReminderJob.EmailBody,Your topic {0} on {1} has {2} replies but has still not been marked as solved. Please check again to see if any answers are appropriate and mark them as the solution if they are.
+Tasks.MarkAsSolutionReminderJob.Subject,Your post on {0}
+TinyMCE.InsertImage.ButtonTitle,Insert Image
+TinyMCE.InsertImage.ButtonOk,Ok
+TinyMCE.InsertImage.ButtonClose,Close
+TinyMCE.InsertImage.EnterValidUrl,Please enter a valid url
+TinyMCE.InsertImage.SelectFile,Please select a file
+TinyMCE.InsertImage.MaxFileSize,Max image file size is 2mb
+TinyMCE.InsertImage.OnlyImages,Only JPEG, PNG and GIF images can be uploaded
+TinyMCE.InsertImage.LabelUploadImage,Upload Image
+TinyMCE.InsertImage.Browse,Browse
+TinyMCE.InsertImage.ExternalImage,External Image
+TinyMCE.InsertImage.ImageDescription,Image Description
+Topic.AlreadyCreated,Discussions that may be similar to your topic
+Topic.Category,Category
+Topic.Choose,Choose Existing Topic
+Topic.Comment,Answer
+Topic.Comments,Answers
+Topic.CommentsDetails,Comments
+Topic.CreateDiscussion,Create Discussion
+Topic.Deleted,Topic Deleted
+Topic.DiscussionTaggedWith,Discussions Tagged With: 
+Topic.HotTopics,Hot Topics
+Topic.RecentDiscussions,Recent Discussions
+Topic.RelatedTopics,Related Topics
+Topic.Invitation,Discussions Invitation
+Topic.Invitation.Sent,Discussions invitation sent successfully.
+Topic.Invitation.Failed,Sorry,Discussions invitation sent failed
+Topic.Invitation.To,Invitation To
+Topic.Invitation.Name,Name Required
+Topic.Invitation.Email,Email Required
+Topic.Invitation.Invites,has invited you discussion on this topic :
+Topic.IsSticky,Topic Is Sticky
+Topic.IsSolved,Topic Is Solved
+Topic.IsPoll,Poll
+Topic.IsLocked,Topic Is Locked
+Topic.InCategory, in 
+Topic.Label.Category,Choose Category
+Topic.Label.PollCloseAfterDays,Close Poll After Specified Amount Of Days? Leave 0 to disable
+Topic.Label.Tags,Add Tag
+Topic.Label.UploadFiles,Upload Files
+Topic.Label.SubscribeToTopic,Get notified of replies?
+Topic.LastPost,Last Post
+Topic.LatestBy,Latest By
+Topic.NewTopics,New Topics
+Topic.NoDiscussions,No Discussions Right Now
+Topic.Notification.NewTopics,A new topic or tag has been created in the {0} category
+Topic.Notification.Subject,New Discussion Created
+Topic.OptionsHeading,Topic Options
+Topic.PollClosed,Closed
+Topic.RecentlyVisited,Recently Visited
+Topic.ClearVisited,Clear All Visited
+Topic.Share,Share Discussion
+Topic.Share.Facebook,Share on Facebook
+Topic.Share.Twitter,Share on Twitter
+Topic.Share.Googleplus,Share on Googleplus
+Topic.StartedBy,Started {0} by, {1} ,
+Topic.Started,Discussion Started {0} by , {1} Last Post {2}
+Topic.Suggestion,Topics Suggestion
+Topic.Subscribe,Follow
+Topic.ShowMoreTopics,Show More Discussions
+Topic.ShowMoreTopicsLoading,Loading Discussions . . .
+Topic.TagThisTopic,Tag this topic
+Topic.Title,Topic
+Topic.TitleFallBack,Discussion Topic
+Topic.UnSubscribe,UnFollow
+Topic.Votes,Votes
+Topic.Views,Views
+Topic.MyTopics,My Topics
+Topic.Saved,Saved Topics
+Twitter.Error.EnabledButNotAddedKeys,You have enabled social logins but not added the Twitter id and secret key in the forum.config

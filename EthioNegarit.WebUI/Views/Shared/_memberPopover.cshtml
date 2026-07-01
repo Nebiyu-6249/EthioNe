@@ -1,0 +1,57 @@
+﻿@model EthioNegarit.WebUI.ViewModels.MemberPopUpViewModel
+
+<div id="@Model.User.Id" class="webui-popover-content member-info">
+	<div class="member-name text-center">
+		@Model.User.UserName
+	</div>
+	<span class="date">
+		@Html.LanguageString("Members.Profile.Joined")
+		<span class="float-right">
+			@DatesUI.GetPrettyDate(@Model.User.CreateDate.ToString())
+		</span>
+
+	</span>
+	@*<span class="date">
+	@Html.LanguageString("Topics")
+	<span class="float-right">
+
+	@Model.TopicsCount.ToString()
+	</span>
+	</span>
+	<span class="date">
+		@Html.LanguageString("Members.Profile.Posts")
+		<span class="float-right">
+			@Model.PostsCount.ToString();
+		</span>
+	</span>*@
+	<span class="date">
+		@Html.LanguageString("Members.Profile.Badges")
+		<span class="float-right">
+			@Model.User.Badges.Count
+		</span>
+	</span>
+	@if(Model.User.Topics.Any())
+	{
+	<span class="date">
+		@Html.LanguageString("Members.Profile.Topics")
+		<span class="float-right">
+			@Model.User.Topics.Count
+	   </span>
+	</span>
+	}
+	@if(Model.User.Posts.Any())
+		{
+		<span class="date">
+			@Html.LanguageString("Members.Profile.Posts")
+			<span class="float-right">
+				@Model.User.Posts.Count
+			</span>
+		</span>
+		}
+	<span class="date">
+        @Html.LanguageString("Members.Profile.Score")
+		<span class="float-right">
+			@Model.User.TotalPoints
+		</span>
+	</span>
+</div>

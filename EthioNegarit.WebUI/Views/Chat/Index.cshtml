@@ -1,0 +1,51 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model ChatRoomsViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = @Html.LanguageString("Layout.Nav.ChatRooms");
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+}
+   <!-- Page header -->
+        <div class="page-header">           
+            <span class="">
+                @ViewBag.Title
+            </span>
+          @*  <span class="width-50">
+        @Html.Action("SideSearch", "Search")
+    </span>*@
+            @if (Model.Freezed != true && Model.FreezedRoomsCount > 0)
+            {
+                <span class="width-25">
+                    <a href="@Url.Action("Index", "Chat",new { freezed = true})" class="btn btn-block btn-xs btn-success">
+                        @Html.LanguageString("Chat.FreezedRooms")
+                    </a>
+                </span>
+            }
+        </div>
+        <section class="content">
+            <div class="container-fluid">
+@if (@Model.ChatRooms.Any())
+{
+                <p class="sub">@Html.LanguageString("Chat.SelectRoom")</p>
+                <div class="box-container mb-4">
+                    @foreach (var room in Model.ChatRooms)
+                    {
+                        @Html.Partial("_chatRoom", room)
+                    }
+                </div>
+                if (Model.TotalPages > 1)
+                {
+                    <ul>
+                        <li class="pagination">
+                            @Html.Pager(Convert.ToInt32(Model.PageIndex), Html.Settings().TopicsPerPage, totalCount, new { freezed = @Model.Freezed })
+                        </li>
+                    </ul>
+                }
+}
+else
+{
+    <p>@Html.LanguageString("Search.NoResults") </p>
+}
+            </div>
+        </section>
+

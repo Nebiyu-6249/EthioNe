@@ -1,0 +1,100 @@
+﻿@model EthioNegarit.WebUI.ViewModels.PackagesListViewModel
+@{
+    ViewBag.Title = @Html.Lang("SubNav.Packages");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+	<div class="page-header">
+		<span class="">
+            @ViewBag.Title			
+		</span>
+        <span class="">
+            <a href="@Url.Action("Index", "Ad")" class="mr-4" title="@Html.Lang("SubNav.AdService")">
+                @Html.Lang("SubNav.AdService")
+            </a>
+        </span>	
+	</div>
+<section class="content">
+    <div class="container-fluid">
+            <div class="package-container mb-4">
+                @foreach (var package in Model.AdPackages)
+            { 
+                        <div class="package package-box package-color-@(package.Color.ToString().ToLower())">                     
+                            <div class="package-header package-name">
+                                <h5 class="package-title text-capitalize">
+                                    @package.DisplayName
+                                </h5>
+                            </div>
+                            <div class="package-body">
+                                @{
+                                    Html.RenderPartial("_package", package);
+                                }
+                                @{
+                                    var grossCost = Convert.ToDecimal(@Model.Month) * Convert.ToDecimal(@Html.Settings().AdCostPerMonth * package.PriceRate);
+                                    var discount = grossCost * Convert.ToDecimal(@package.Discount) / 100;
+                                    var totalCost = grossCost - discount;
+                                }
+                                <hr/>
+                                @if (Model.AdvertId == Guid.Empty)
+                                {
+                                    <div class="package-item">
+                                        @Html.LanguageString("Payment.Label.Discount"):
+                                        <span class="rate-downn">
+                                            @if (@package.Discount > 0)
+                                        {
+                                        @package.Discount.ToString()  @Html.LanguageString("Payment.Label.Off")
+                                        }
+                                        else
+                                        {
+                                        <text>-</text>
+                                        }
+                                        </span>
+                                    </div>
+                                    <div class="package-item">
+                                        @Html.LanguageString("Payment.Label.MonthlyPrice")
+                                        <span>
+                                            $ @totalCost.ToString()
+                                        </span>
+                                    </div>
+                                    <div class="package-footer package-footer-@(package.Color.ToString().ToLower())">
+                                    </div>
+                                }
+                                @if (Model.AdvertId != Guid.Empty)
+                                {
+                                    <div class="package-item">
+                                        @Html.LanguageString("Payment.Duration"):
+                                        <span class="rate-downn">
+                                            @Model.Month @Html.LanguageString("Payment.Label.Month")
+                                        </span>
+                                    </div>
+                                    <div class="package-item">
+                                        @Html.LanguageString("Payment.Label.GrossPrice"):
+                                        <span class="rate-down">
+                                            @grossCost.ToString()
+                                        </span>
+                                    </div>
+                                    <div class="package-item">
+                                        @Html.LanguageString("Payment.Label.Discount"):
+                                        <span class="rate-down">
+                                            $  @discount.ToString()
+                                        </span>
+                                    </div>
+                                    <div class="package-item">
+                                        @Html.LanguageString("Payment.Label.TotalPrice")
+                                        <span>
+                                            $ @totalCost.ToString()
+                                        </span>
+                                    </div>
+                                    <div class="package-footer align-bottom package-footer-@(package.Color.ToString().ToLower())">
+                                        <a class="btn btn-block" href="@Url.Action("Create", "Payment", new { packageId = @package.Id, advertId = @Model.AdvertId, month = Model.Month })" title=@Html.LanguageString("Package.Label.GetPackage")>
+                                            <i class="ethicon fa fa-shopping-cart bigger-110"></i>
+                                            @Html.LanguageString("Package.Label.GetPackage")
+                                        </a>
+                                    </div>
+                                }
+                                    </div>
+                        </div>
+                  
+                                    }
+            </div>
+        </div>
+    </section>

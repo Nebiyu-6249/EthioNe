@@ -1,0 +1,46 @@
+﻿@model IEnumerable<EthioNegarit.WebUI.ViewModels.CategoryViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = @Html.LanguageString("Layout.Nav.Categories");
+}
+<!-- Page header -->
+<div class="page-header">
+    <span class="">
+        <a title="@ViewBag.Title" href="@Url.Action("Index", "Category")" class="">
+            @ViewBag.Title
+        </a>
+    </span>
+    <span class="width-50">
+        <span class="search-box">
+            @using (Html.BeginForm("Index", "Category", FormMethod.Get))
+            {
+                <span class="input-group input-group-sm">
+                    @Html.TextBox("name", null, new { @class = "form-control", placeholder = @Html.Lang("Search.Categories") })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </span>
+                </span>
+            }
+        </span>
+    </span>
+</div>
+<section class="content">
+    <div class="container-fluid">
+@if (@Model.Any())
+{
+        <p class="sub">@Html.Lang("Category.ExploreDiscussions")</p>     
+            <div class="box-container mb-4">
+                @foreach (var category in Model.OrderBy(x => x.SortOrder))
+                {
+                    Html.RenderPartial("_category", category);
+                }
+            </div>
+        }
+        else
+        {
+            <p>@Html.LanguageString("Search.NoResults") </p>
+        }
+    </div>
+</section>

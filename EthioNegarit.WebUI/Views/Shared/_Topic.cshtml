@@ -1,0 +1,177 @@
+﻿@using EthioNegarit.Utilities
+@model EthioNegarit.WebUI.ViewModels.TopicViewModel
+@{
+    var loggedOnUserId = Html.CurrentMember() != null ? Html.CurrentMember().Id : Guid.Empty;
+    var postToolTip = string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(Model.StarterPost.Post.PostContent), 50), "....");
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+}
+
+	@if (!Model.Permissions[SiteConstants.Instance.PermissionDenyAccess].IsTicked)
+    {
+		<div class="topicrow topicsticky-@(Model.Topic.IsSticky.ToString().ToLower()) topiclocked-@(Model.Topic.IsLocked.ToString().ToLower()) topicsolved-@(Model.Topic.Solved.ToString().ToLower())">
+			<div class="content-aside d-none d-sm-inline-block">
+				<div class="image-block">
+					<a href="@Model.Topic.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="right">
+						<img class="img-circle  @(Model.MemberIsOnline ? "img-bordered-success" : "img-bordered-sm")" src="@Model.Topic.User.MemberImage(SiteConstants.Instance.GravatarTopicSize)" alt="">
+					</a>
+					@{      Html.RenderPartial("_memberInfo", Model.Topic.User);
+					}
+				</div>
+			</div>
+			<div class="content-detail pull-right-sm">
+				<div class="topic-header">
+					<div class="widget-right d-none d-sm-inline-block">
+						@if (Model.ShowUnSubscribedLink)
+                        {
+							<p>
+								<a href="#" class="emailunsubscription" data-id="@Model.Topic.Id" data-type="topic" title="@Html.LanguageString("Topic.UnSubscribe") @Model.Topic.Name">
+									<i class="ethicon fas fa-star yellow-colour" aria-hidden="true"></i>
+									@Html.LanguageString("Topic.UnSubscribe")
+								</a>
+							</p>
+                        }
+                        else if (Model.Topic.Tags.Any())
+                        {
+							<div class="tagsinput clearfixx">
+								@foreach (var tag in Model.Topic.Tags)
+                                {
+									<span class="tag">
+										<span>
+											<a href="@Html.Raw(tag.NiceUrl)">@Html.Raw(tag.Tag)</a>
+										</span>
+									</span>
+                                }
+							</div>
+                        }
+					</div>
+					<ol class="breadcrumb text-sm mt-1 mb-2">
+						<li class="breadcrumb-item"><a href="@Model.Topic.Category.NiceUrl">@Model.Topic.Category.Name</a></li>
+						<li class="breadcrumb-item active">
+							@Model.Topic.Name
+						</li>
+					</ol>
+					<div class="topic-title">
+						<a title="@postToolTip" href="@Html.Raw(Model.Topic.NiceUrl)" class="nav-link">
+							@if (Model.Topic.IsSticky)
+                            {
+								<span class="ethicon" aria-hidden="true">
+									<img src="~/Content/Images/icon-sticky.png" alt="sticky" />
+								</span>
+                            }
+							@if (Model.Topic.IsLocked)
+                            {
+								<span class="ethicon fa-lock" aria-hidden="true"></span>
+                            }
+							@if (Model.Topic.Poll != null)
+                            {
+								<span class="ethicon" aria-hidden="true">
+									<img src="~/Content/Images/icon-poll.png" alt="poll" />
+								</span>
+                            }
+							@Html.Raw(Model.Topic.Name)
+						</a>
+					</div>
+					@*<div class="d-xl-none d-sm-block postedthis">*@
+					<div class="postedthis">
+						@*    <a href="@Model.Topic.User.NiceUrl" class="show-pop-delay" data-delay-show="300" data-delay-hide="1000" data-placement="bottom" title="@(Model.MemberIsOnline ? "Active now" :"Active " + @date2)">*@
+						<a href="@Model.Topic.User.NiceUrl" class="show-pop-delay" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+							@if(Model.Topic.User.Id != loggedOnUserId) {
+                        <span class="@(Model.MemberIsOnline ? "green-colour" : "")">
+								@Model.Topic.User.UserName
+                            </span>
+                            }
+                            else
+                            {
+                                <span>You</span>
+                            }
+                         @Html.Lang("Topic.PostedThis") @DatesUI.GetPrettyDate(@Model.Topic.CreateDate.ToString())
+						</a>
+
+						@{
+							Html.RenderPartial("_memberInfo", Model.Topic.User);
+						}
+						@*    @Html.Partial("_memberPopover", new MemberPopUpViewModel { User = @Model.Topic.User})*@
+					</div>
+				</div>
+				<div class="content-text">
+                    <a href="@Html.Raw(Model.Topic.NiceUrl)" class="">
+                        @Html.Raw(string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(Model.StarterPost.Post.PostContent), 25), "...."))
+                    </a>
+</div>
+			</div>
+			<div class="topic-footer clearfix float-right">
+				<ul>
+					<li>
+						<a href="@Html.Raw(Model.LastPostPermaLink)" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+							<img src="@Model.Topic.LastPost.User.MemberImage(SiteConstants.Instance.GravatarLatestBySize)" class="latestby img-circle @(Model.Topic.LastPost.User.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm")" alt="">
+						</a>
+						@{
+							Html.RenderPartial("_memberInfo", Model.Topic.LastPost.User);
+						}
+
+						@*@Html.Partial("_memberPopover", new MemberPopUpViewModel { User = @Model.Topic.LastPost.User })*@
+						<span class="d-none d-sm-inline-block">
+							<a href="@Html.Raw(Model.LastPostPermaLink)">
+                                @Html.Lang("Topic.LatestBy")                              
+							</a>
+							<a href="@Model.Topic.LastPost.User.NiceUrl">
+								@Model.Topic.LastPost.User.UserName
+							</a>
+						</span>
+						<span title="Latest Post">
+							@DatesUI.GetPrettyDate(Model.Topic.LastPost.DateCreated.ToString()).
+						</span>
+					</li>
+					<li>
+						<span class="stats topicanswers">
+							<span class="fas fa-comments mr-1" aria-hidden="true">
+							</span>@Model.Answers.KiloFormat()
+						</span>
+					</li>
+					<li>
+						<span class="stats topicviews">
+							<span class="fas fa-eye mr-1" aria-hidden="true"></span>@Model.Views.KiloFormat()
+						</span>
+					</li>
+					<li>
+						<span class="stats topicupvotes">
+							<i class="far fa-thumbs-up mr-1" aria-hidden="true">
+							</i>@Model.VotesUp.KiloFormat()
+						</span>
+					</li>
+					<li>
+						<span class="stats topicdownvotes">
+							<i class="far fa-thumbs-down mr-1" aria-hidden="true">
+								@Model.VotesDown.KiloFormat()
+							</i>
+						</span>
+					</li>
+					@if(Model.Topic.Solved)
+						{
+						<li>
+							<span class="stats topicsolved">
+								<i class="fas fa-check green-colour mr-1" aria-hidden="true" title="solved">
+								</i>
+							</span>
+							<span class="d-none d-sm-inline-block">
+								@Html.Lang("Topic.IsSolved")
+							</span>
+						</li>
+						}
+					@if(!Model.Topic.Solved)
+						{
+						<li>
+							<span class="stats topicsolved">
+								<i class="fas fa-question yellow-colour mr-1" aria-hidden="true" title="help">
+									@*   <span class="d-none d-sm-inline-block">
+											@Html.Lang("help")
+										</span>
+									*@
+								</i>
+							</span>
+						</li>
+						}
+				</ul>
+			</div>
+		</div>
+								}

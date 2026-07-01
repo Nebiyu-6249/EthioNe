@@ -1,0 +1,71 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model SearchViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Html.Settings().ForumName;
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+}
+@{
+   var searchFor = Html.Lang("Side.Search.SearchFor"); 
+}
+<!-- Page header -->
+    <div class="page-header">
+            <span class="width-50">
+                <span class="d-none d-sm-inline-block">
+                    @Html.LanguageString("Search.Searching")  @Model.Term -
+                </span>
+                    @Model.TotalCount @Html.LanguageString("Search.Results")
+                </span>
+            <span class="width-50">
+                @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+                {
+                    <span class="input-group input-group-sm">
+                        @Html.TextBox("term", null, new { @class = "form-control", placeholder = searchFor })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-sm">
+                                <i class="fas fa-search fa-fw"></i>
+                            </button>
+                        </span>
+                    </span>
+                }
+            </span>
+        </div>
+<section class="content">
+    <div class="container-fluid">
+		<div class="row mt-0">
+            <section class="col-sm-9">
+                @if (Model.Posts.Any())
+                {
+                    <ul class="contents-list">
+                        @foreach (var post in Model.Posts)
+                        {
+                        <li class="content-fluid">
+                            @{
+                            Html.RenderPartial("_Post", post);
+                            }
+                        </li>
+                            }
+</ul>
+
+                    if (Model.TotalPages > 1)
+                    {
+                        <ul>
+                            <li class="pagination">
+                                @Html.Pager(Convert.ToInt32(Model.PageIndex), SiteConstants.Instance.SearchListSize, totalCount, new { term = Model.Term })
+                            </li>
+                        </ul>
+                        }
+                        }
+                        else
+                        {
+                        @Html.LanguageString("Search.NoResults")
+                        }
+</section>
+			<section class="col-sm-3 side-panel">
+				<div class="panel-content">
+					@Html.Partial("_CommonSideNav")
+				</div>
+			</section>
+		</div>
+    </div>
+</section>

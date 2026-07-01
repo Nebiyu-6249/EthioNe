@@ -1,0 +1,63 @@
+﻿@model EthioNegarit.WebUI.ViewModels.RefundRequestViewModel
+
+@{
+    ViewBag.Title = @Html.LanguageString("Payment.RefundRequest");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <span class="">
+        @ViewBag.Title
+    </span>
+    <span class="width-50 text-center">
+        <a class="" role="button" href="@Url.Action("List", "Payment")" title="@Html.LanguageString("Payment")">
+            @Html.LanguageString("Payment.Label.Back")
+        </a>
+    </span>
+</div>
+<section class="content">
+    <div class="container-fluid">
+            @using (Html.BeginForm("Refund", "Payment", FormMethod.Post, new { @id = "paymentrefund", @class = "paymentrefund" }))
+            {
+                @Html.ValidationSummary(false)
+              //  @Html.AntiForgeryToken()
+
+                <div class="form-group" id="Reference">
+                    @Html.LabelFor(model => model.Reference)
+                    @Html.TextBoxFor(model => model.Reference, new { @id = "Reference", @class = "form-control", @placeholder = @Html.LanguageString("Payment.Reference") })
+                    @Html.ValidationMessageFor(model => model.Reference)
+                </div>
+                <div class="form-group" id="Datetransfer">
+                    @Html.LabelFor(model => model.DateTransfer)
+                    @Html.TextBoxFor(model => model.DateTransfer, new { @class = "form-control", @placeholder = "d//m//y" })
+                    @Html.ValidationMessageFor(model => model.DateTransfer)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Bank)
+                    @Html.EnumDropDownListFor(model => model.Bank, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Bank)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Reason)
+                    <textarea class="form-control" id="Reason" name="Reason" rows="5" cols="0" placeholder="@Html.LanguageString("Payment.RefundRequest.Reason")"></textarea>
+                    @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
+                </div>
+                <div class="row ml-lg-33">
+                    <div class="col-sm-6">
+                        <a role="button" href="@Url.Action("List", "Payment")" class="btn btn-sm btn-default btn-block" title="@Html.LanguageString("Payment.Label.Back")">
+                            @Html.LanguageString("Payment.Label.Back")
+                        </a>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="submit-holder">
+                            <button type="submit" id="" class="btn btn-sm btn-success btn-block" title="@Html.LanguageString("Buttons.Submit")">
+                                @Html.LanguageString("Buttons.Submit")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+ 
+    </div>
+</section>
+

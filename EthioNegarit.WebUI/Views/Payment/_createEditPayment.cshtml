@@ -1,0 +1,231 @@
+﻿@model EthioNegarit.WebUI.ViewModels.CreateEditPaymentViewModel
+
+@Html.HiddenFor(x => x.PackageId)
+@Html.HiddenFor(x => x.AdvertId)
+@Html.HiddenFor(x => x.Id)
+@Html.HiddenFor(x => x.Month)
+@Html.HiddenFor(x => x.TotalPrice)
+@Html.HiddenFor(x => x.Discount)
+@{ 
+  var TotalCost = @Model.TotalPrice;
+}
+	<div class="row mb-4">
+        <div class="col-sm-5">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">@Html.LanguageString("Package.Label.Info")</h3>
+                    <div class="card-tools d-xl-none d-sm-inline-block">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body payment-infos">
+                    <div class="contents-list">
+                        <ul>
+                            <li>
+                                <span class="ml-lg-5">
+                                    @Html.LanguageString("Payment.Name"):
+                                </span>
+                                <span class="float-right mr-5">
+                                    @Model.User.UserName
+                                </span>
+                            </li>
+                            <li>
+
+                                <span class="ml-lg-5">
+                                    @Html.LanguageString("Package.Name"):
+                                </span>
+                                <span class="float-right mr-5">
+                                    @Model.AdPackage.DisplayName
+                                </span>
+
+                            </li>
+                            <li>
+
+                                <span class="ml-lg-5">
+                                    <label>@Html.LanguageString("Payment.Duration"):</label>
+                                </span>
+                                <span class="float-right mr-5">
+                                    @Model.Month @Html.LanguageString("Payment.Label.Month")
+                                </span>
+
+                            </li>
+                            <li>
+
+                                <span class="ml-lg-5">
+                                    <label>@Html.LanguageString("Addition"):</label>
+                                </span>
+                                <span class="float-right mr-5">
+                                    @Model.AdPackage.Bonus Days
+                                </span>
+                            </li>
+                            <li>
+                                <span class="ml-lg-5">
+                                    <label>@Html.LanguageString("Payment.Label.GrossPrice"):</label>
+                                </span>
+                                <span class="float-right mr-5">
+                                    $ @Model.GrossPrice.ToString()
+                                </span>
+                            </li>
+                            <li>
+                                <span class="ml-lg-5">
+                                    <label>@Html.LanguageString("Payment.Label.Discount"):</label>
+                                </span>
+                                <span class="float-right mr-5">
+@*@if (Model.AdPackage.Discount > 0){*@
+    @Model.AdPackage.Discount  @Html.LanguageString("Payment.Label.Off") ($ @Model.Discount.ToString());
+    
+                                </span>
+                            </li>
+                            <li>
+                                <span class="ml-lg-5">
+                                    <label>@Html.LanguageString("Payment.Label.TotalPrice"):</label>
+                                </span>
+                                <span class="float-right mr-5">
+                                    $ @Model.TotalPrice.ToString()
+                                </span>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label class="ml-lg-5">Ethio Negarit Acounts:</label>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="ml-lg-5">
+                                    <label>CBE :</label>
+                                </span>
+                                <span class="float-right mr-5">
+                                    1000737676589
+                                </span>
+
+                            </li>
+                            <li>
+                                <span class="ml-lg-5">
+                                    <label>Hibret:</label>
+                                </span>
+                                <span class="float-right mr-5">
+                                    1000737676589
+                                </span>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">@Html.LanguageString("Payment.Title")</h3>                
+                </div>
+                <div class="card-body">                 
+                        <div class="row ml-lg-3">
+                            <div class="col-sm-4 ml-22">
+                                @Html.LabelFor(model => model.Amount)
+                            </div>
+                            <div class="col-sm-8 float-right">
+                                <div class="form-group" id="Amount">
+                                    @*     @Html.TextBoxFor(model => model.Amount, new { @class = "form-control", @readonly = "readonly", type = "number", placeholder = "@Model.Amount" })*@
+                                    @Html.TextBoxFor(model => model.Amount, new { @class = "form-control", type = "number", placeholder = @Model.Amount })
+                                    @Html.ValidationMessageFor(model => model.Amount)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ml-lg-3">
+                            <div class="col-sm-4">
+                                @Html.LabelFor(model => model.Bank)
+                            </div>
+                            <div class="col-sm-8 float-right">
+                                <div class="form-group">
+                                    @Html.EnumDropDownListFor(model => model.Bank, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Bank)
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row ml-lg-3">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.AccountNo)
+                        </div>
+                        <div class="col-sm-8 float-right">
+                            <div class="form-group" id="AccountNo">
+                                @Html.TextBoxFor(model => model.AccountNo, new { @id = "AccountNo", @class = "form-control", @placeholder = @Html.LanguageString("Payment.Label.YourAccountNo")})
+                                @Html.ValidationMessageFor(model => model.AccountNo)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ml-lg-3">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.Reference)
+                        </div>
+                        <div class="col-sm-8 float-right">
+                            <div class="form-group" id="Reference">
+                                @Html.TextBoxFor(model => model.Reference, new { @id = "Reference", @class = "form-control", @placeholder = @Html.LanguageString("Payment.Label.Reference") })
+                                @Html.ValidationMessageFor(model => model.Reference)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ml-lg-3">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.DateTransfer)
+                        </div>
+                        <div class="col-sm-8 float-right">
+                            <div class="form-group" id="Datetransfer">
+                                @Html.TextBoxFor(model => model.DateTransfer, new { @class = "form-control", @placeholder = "m//d//y" })
+                                @Html.ValidationMessageFor(model => model.DateTransfer)
+                            </div>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="Comment" rows="5" cols="0"
+                                      placeholder="Comment"></textarea>
+                        </div>
+      
+                    <div class="row ml-lg-3">
+                        <div class="col-sm-6">
+                            @if (User.IsInRole(AppConstants.AdminRoleName))
+                            {
+                                <a role="button" href="@Url.Action("Index", "Payment")" class="btn btn-sm btn-default btn-block" title="@Html.LanguageString("Payment.Label.Back")">
+                                    @Html.LanguageString("Payment.Label.Back")
+                                </a>
+                            }
+                            else {
+                            <a role="button" href="@Url.Action("List", "Payment")" class="btn btn-sm btn-default btn-block" title="@Html.LanguageString("Payment.Label.Back")">
+                                @Html.LanguageString("Payment.Label.Back")
+                            </a>
+                            }
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="submit-holder">
+                                <button type="submit" id="addpaymentbutton" class="btn btn-sm btn-success btn-block disabledd" title="@Html.LanguageString("Buttons.Submit")">
+                                    @Html.LanguageString("Buttons.Submit")
+                                </button>
+                            </div>
+                        </div>                   
+                    </div>
+                        <div id="validationSummary" class="validation-summary">
+                            <ul></ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+<script>
+    $(document).ready(function () {
+        var paymentButton = $("#addpaymentbutton");
+        paymentButton.attr("disabled", true);
+       // const reference = document.getElementById("Reference");
+        $(document).on("change", "#Reference", function () {
+           let referenceValue = this.value;
+            if (referenceValue.length > 7) {
+                paymentButton.attr("disabled", false);
+            } else {
+                paymentButton.attr("disabled", true);
+            }          
+        });
+    });
+</script>

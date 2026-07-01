@@ -1,0 +1,23 @@
+﻿@model EthioNegarit.WebUI.ViewModels.PopularTagViewModel
+
+@if (Model.PopularTags.Any())
+{ 
+                <div class="panel-header">
+                    <h3 class="title">@Html.LanguageString("Tags.PopularTags")</h3>
+                </div>
+
+                <ul class="contents-list">
+                    @foreach (var tag in Model.PopularTags)
+                    {
+                        <li>
+                            <span class="tag">
+                                <a href="@Html.Raw(tag.Key.NiceUrl)">
+                                    @Html.Raw(tag.Key.Tag)
+                                <span class="badge">@tag.Value</span>
+                            </a>
+                        </span>
+                    </li>
+                    }
+                </ul>
+
+}

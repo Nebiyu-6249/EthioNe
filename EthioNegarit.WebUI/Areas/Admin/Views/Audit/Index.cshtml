@@ -1,0 +1,65 @@
+﻿@using EthioNegarit.Core.Constants
+@using EthioNegarit.WebUI.Application.ExtensionMethods
+@model EthioNegarit.WebUI.Areas.Admin.ViewModels.AuditRecordsViewModel
+@{
+    ViewBag.Title = "Audit Trail/Log";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="panel">
+    <div class="panel-heading">
+        <h5>@ViewBag.Title</h5>
+        <div class="tools float-right">
+            <a href="@Url.Action("ClearAudit")" class="btn btn-mvc-green">Clear Audit Log</a>
+        </div>
+    </div>
+    <div class="panel-content">
+        @using (Html.BeginForm("Index", "Audit", FormMethod.Post))
+        {
+            @Html.HiddenFor(x => x.PageIndex)
+            <div class="input-group tablesearch">
+                @Html.TextBoxFor(x => Model.Search, new { @class = "form-control" })
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Search</button>
+                </span>
+            </div>
+        }
+
+        @if (Model.TotalCount > 0)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-muted text-center">IP</th>
+                        <th class="text-muted text-center">User Name</th>
+                        <th class="text-muted text-center">URL Accessed</th>
+                        <th class="text-muted text-center">Platform</th>
+                        <th class="text-muted text-center">Time Accessed</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.AuditRecords)
+                    {
+                        <tr>                          
+                            <td class="badgevalue">@item.IPAddress</td>
+                            <td class="badgevalue">@item.UserName</td>
+                            <td class="badgevalue">@item.URLAccessed</td>
+                            <td class="badgevalue">@item.Platform</td>
+                            <td class="badgevalue">@item.TimeAccessed</td>
+                         
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+          if (Model.TotalPages > 1)
+    {
+    @*   @Html.Pager(Convert.ToInt32(Model.PageIndex), SiteConstants.Instance.AdminListPageSize, Convert.ToInt32(Model.TotalCount), new { search = Model.Search })
+    *@            <div class="pagination">
+                    @Html.Pager(Convert.ToInt32(Model.PageIndex), SiteConstants.Instance.AdminListPageSize, Convert.ToInt32(Model.TotalCount), null, "Index", "Audit")
+
+                </div>
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5F9F0E71-3F11-4204-87D9-D5D58961AB37}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EthioNegarit.Core</RootNamespace>
+    <AssemblyName>EthioNegarit.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebActivator, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivator.1.5.2\lib\net40\WebActivator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants\AppConstants.cs" />
+    <Compile Include="Constants\CacheKeys.cs" />
+    <Compile Include="Constants\SiteConstants.cs" />
+    <Compile Include="Domain\Activity\Activity.cs" />
+    <Compile Include="Domain\Activity\ActivityBase.cs" />
+    <Compile Include="Domain\Activity\BadgeActivity.cs" />
+    <Compile Include="Domain\Activity\ChatRoomActivity.cs" />
+    <Compile Include="Domain\Activity\MemberJoinedActivity.cs" />
+    <Compile Include="Domain\Activity\MemberPostedActivity.cs" />
+    <Compile Include="Domain\Activity\ProfileUpdatedActivity.cs" />
+    <Compile Include="Domain\Activity\TopicCreatedActivity.cs" />
+    <Compile Include="Domain\Attributes\AddressAttribute.cs" />
+    <Compile Include="Domain\Attributes\AwardsPointsAttribute.cs" />
+    <Compile Include="Domain\Attributes\BonusAttribute.cs" />
+    <Compile Include="Domain\Attributes\ColorAttribute.cs" />
+    <Compile Include="Domain\Attributes\DescriptionAttribute.cs" />
+    <Compile Include="Domain\Attributes\DiscountAttribute.cs" />
+    <Compile Include="Domain\Attributes\DisplayNameAttribute.cs" />
+    <Compile Include="Domain\Attributes\FilePathAttribute.cs" />
+    <Compile Include="Domain\Attributes\FilesAttribute.cs" />
+    <Compile Include="Domain\Attributes\IdAttribute.cs" />
+    <Compile Include="Domain\Attributes\ImageAttribute.cs" />
+    <Compile Include="Domain\Attributes\NameAttribute.cs" />
+    <Compile Include="Domain\Attributes\PriceAttribute.cs" />
+    <Compile Include="Domain\Attributes\SortAttribute.cs" />
+    <Compile Include="Domain\Attributes\VideoAttribute.cs" />
+    <Compile Include="Domain\CategorySummary.cs" />
+    <Compile Include="Domain\Entities\Advertisement.cs" />
+    <Compile Include="Domain\Entities\Attachment.cs" />
+    <Compile Include="Domain\Entities\Badge.cs" />
+    <Compile Include="Domain\Entities\BadgeTypeTimeLastChecked.cs" />
+    <Compile Include="Domain\Entities\BannedEmail.cs" />
+    <Compile Include="Domain\Entities\BannedWord.cs" />
+    <Compile Include="Domain\Entities\Block.cs" />
+    <Compile Include="Domain\Entities\Category.cs" />
+    <Compile Include="Domain\Entities\CategoryNotification.cs" />
+    <Compile Include="Domain\Entities\CategoryPermissions.cs" />
+    <Compile Include="Domain\Entities\ChatMessage.cs" />
+    <Compile Include="Domain\Entities\ChatResponse.cs" />
+    <Compile Include="Domain\Entities\ChatRoom.cs" />
+    <Compile Include="Domain\Entities\ChatRoomMember.cs" />
+    <Compile Include="Domain\Entities\Email.cs" />
+    <Compile Include="Domain\Entities\Entity.cs" />
+    <Compile Include="Domain\Entities\FAQ.cs" />
+    <Compile Include="Domain\Entities\Favourite.cs" />
+    <Compile Include="Domain\Entities\GlobalPermission.cs" />
+    <Compile Include="Domain\Entities\Language.cs" />
+    <Compile Include="Domain\Entities\LocaleResourceKey.cs" />
+    <Compile Include="Domain\Entities\LocaleStringResource.cs" />
+    <Compile Include="Domain\Entities\Location.cs" />
+    <Compile Include="Domain\Entities\MembershipRole.cs" />
+    <Compile Include="Domain\Entities\MembershipUser.cs" />
+    <Compile Include="Domain\Entities\MembershipUserPoints.cs" />
+    <Compile Include="Domain\Entities\Package.cs" />
+    <Compile Include="Domain\Entities\Payment.cs" />
+    <Compile Include="Domain\Entities\Permission.cs" />
+    <Compile Include="Domain\Entities\PermissionForRole.cs" />
+    <Compile Include="Domain\Entities\Poll.cs" />
+    <Compile Include="Domain\Entities\PollAnswer.cs" />
+    <Compile Include="Domain\Entities\PollVote.cs" />
+    <Compile Include="Domain\Entities\Post.cs" />
+    <Compile Include="Domain\Entities\PostEdit.cs" />
+    <Compile Include="Domain\Entities\PrivacyPolicy.cs" />
+    <Compile Include="Domain\Entities\PrivateMessage.cs" />
+    <Compile Include="Domain\Entities\Report.cs" />
+    <Compile Include="Domain\Entities\Section.cs" />
+    <Compile Include="Domain\Entities\Settings.cs" />
+    <Compile Include="Domain\Entities\TagNotification.cs" />
+    <Compile Include="Domain\Entities\Topic.cs" />
+    <Compile Include="Domain\Entities\TopicNotification.cs" />
+    <Compile Include="Domain\Entities\TopicTag.cs" />
+    <Compile Include="Domain\Entities\Vote.cs" />
+    <Compile Include="Domain\Enums\AdStatus.cs" />
+    <Compile Include="Domain\Enums\AdViewQuery.cs" />
+    <Compile Include="Domain\Enums\BadgeType.cs" />
+    <Compile Include="Domain\Enums\Bank.cs" />
+    <Compile Include="Domain\Enums\CacheTimes.cs" />
+    <Compile Include="Domain\Enums\ChatReaction.cs" />
+    <Compile Include="Domain\Enums\LoginAttemptStatus.cs" />
+    <Compile Include="Domain\Enums\LoginType.cs" />
+    <Compile Include="Domain\Enums\MembershipCreateStatus.cs" />
+    <Compile Include="Domain\Enums\PackageType.cs" />
+    <Compile Include="Domain\Enums\PaymentStatus.cs" />
+    <Compile Include="Domain\Enums\PaymentViewOrder.cs" />
+    <Compile Include="Domain\Enums\PointsFor.cs" />
+    <Compile Include="Domain\Enums\PostOrderBy.cs" />
+    <Compile Include="Domain\Enums\SiteMapChangeFreqency.cs" />
+    <Compile Include="Domain\Enums\TopicViewOrder.cs" />
+    <Compile Include="Domain\Enums\UrlType.cs" />
+    <Compile Include="Domain\General\AdvertisementFile.cs" />
+    <Compile Include="Domain\General\Audit.cs" />
+    <Compile Include="Domain\General\CategoryWithSubCategories.cs" />
+    <Compile Include="Domain\General\InstallerResult.cs" />
+    <Compile Include="Domain\General\LanguageCsvReport.cs" />
+    <Compile Include="Domain\General\LogEntry.cs" />
+    <Compile Include="Domain\General\MarkAsSolutionReminder.cs" />
+    <Compile Include="Domain\General\PagedFullList.cs" />
+    <Compile Include="Domain\General\PagedList.cs" />
+    <Compile Include="Domain\General\PermissionSet.cs" />
+    <Compile Include="Domain\General\RssItem.cs" />
+    <Compile Include="Domain\General\SitemapEntry.cs" />
+    <Compile Include="Domain\General\Theme.cs" />
+    <Compile Include="Domain\General\UploadedFile.cs" />
+    <Compile Include="Domain\General\UploadFileResult.cs" />
+    <Compile Include="Domain\LinqKit\ExpandableQuery.cs" />
+    <Compile Include="Domain\LinqKit\ExpressionExpander.cs" />
+    <Compile Include="Domain\LinqKit\ExpressionVisitor.cs" />
+    <Compile Include="Domain\LinqKit\Extensions.cs" />
+    <Compile Include="Domain\LinqKit\Linq.cs" />
+    <Compile Include="Domain\LinqKit\PredicateBuilder.cs" />
+    <Compile Include="Domain\RecentActivity.cs" />
+    <Compile Include="Domain\SectionSummary.cs" />
+    <Compile Include="EqualityComparers\PermissionEqualityComparers.cs" />
+    <Compile Include="Events\BadgeEventArgs.cs" />
+    <Compile Include="Events\EthioNegaritEventArgs.cs" />
+    <Compile Include="Events\EventManager.cs" />
+    <Compile Include="Events\FavouriteEventArgs.cs" />
+    <Compile Include="Events\LoginEventArgs.cs" />
+    <Compile Include="Events\MarkedAsSolutionEventArgs.cs" />
+    <Compile Include="Events\PostMadeEventArgs.cs" />
+    <Compile Include="Events\PrivateMessageEventArgs.cs" />
+    <Compile Include="Events\RegisterUserEventArgs.cs" />
+    <Compile Include="Events\TopicMadeEventArgs.cs" />
+    <Compile Include="Events\UpdateProfileEventArgs.cs" />
+    <Compile Include="Events\VoteEventArgs.cs" />
+    <Compile Include="Exceptions\InUseUnableToDeleteException.cs" />
+    <Compile Include="Extensions\SectionExtentions.cs" />
+    <Compile Include="Interfaces\Badges\IBadge.cs" />
+    <Compile Include="Interfaces\Badges\IFavouriteBadge.cs" />
+    <Compile Include="Interfaces\Badges\IMarkAsSolutionBadge.cs" />
+    <Compile Include="Interfaces\Badges\IPointBadge.cs" />
+    <Compile Include="Interfaces\Badges\IPostBadge.cs" />
+    <Compile Include="Interfaces\Badges\IProfileBadge.cs" />
+    <Compile Include="Interfaces\Badges\ISolutionBadge.cs" />
+    <Compile Include="Interfaces\Badges\ITagBadge.cs" />
+    <Compile Include="Interfaces\Badges\ITimeBadge.cs" />
+    <Compile Include="Interfaces\Badges\IVoteDownBadge.cs" />
+    <Compile Include="Interfaces\Badges\IVoteUpBadge.cs" />
+    <Compile Include="Interfaces\Events\IEventHandler.cs" />
+    <Compile Include="Interfaces\Events\IEventManager.cs" />
+    <Compile Include="Interfaces\IEthioNegaritContext.cs" />
+    <Compile Include="Interfaces\IModelAttribute.cs" />
+    <Compile Include="Interfaces\IPagedList.cs" />
+    <Compile Include="Interfaces\Packages\IBasicPackage.cs" />
+    <Compile Include="Interfaces\Packages\IPackage.cs" />
+    <Compile Include="Interfaces\Packages\ISuperPackage.cs" />
+    <Compile Include="Interfaces\Packages\IUltimatePackage.cs" />
+    <Compile Include="Interfaces\Providers\IStorageProvider.cs" />
+    <Compile Include="Interfaces\Services\IActivityService.cs" />
+    <Compile Include="Interfaces\Services\IAdService.cs" />
+    <Compile Include="Interfaces\Services\IAdvertFileService.cs" />
+    <Compile Include="Interfaces\Services\IAttachmentService.cs" />
+    <Compile Include="Interfaces\Services\IBadgeService.cs" />
+    <Compile Include="Interfaces\Services\IBannedEmailService.cs" />
+    <Compile Include="Interfaces\Services\IBannedWordService.cs" />
+    <Compile Include="Interfaces\Services\IBlockService.cs" />
+    <Compile Include="Interfaces\Services\ICacheService.cs" />
+    <Compile Include="Interfaces\Services\ICategoryNotificationService.cs" />
+    <Compile Include="Interfaces\Services\ICategoryPermissionForRoleService.cs" />
+    <Compile Include="Interfaces\Services\ICategoryService.cs" />
+    <Compile Include="Interfaces\Services\IChatService.cs" />
+    <Compile Include="Interfaces\Services\IConfigService.cs" />
+    <Compile Include="Interfaces\Services\IEmailService.cs" />
+    <Compile Include="Interfaces\Services\IFavouriteService.cs" />
+    <Compile Include="Interfaces\Services\IGlobalPermissionForRoleService.cs" />
+    <Compile Include="Interfaces\Services\IHelpService.cs" />
+    <Compile Include="Interfaces\Services\ILocalizationService.cs" />
+    <Compile Include="Interfaces\Services\ILocationService.cs" />
+    <Compile Include="Interfaces\Services\ILogAuditService.cs" />
+    <Compile Include="Interfaces\Services\ILoggingService.cs" />
+    <Compile Include="Interfaces\Services\IMembershipService.cs" />
+    <Compile Include="Interfaces\Services\IMembershipUserPointsService.cs" />
+    <Compile Include="Interfaces\Services\IPackageService.cs" />
+    <Compile Include="Interfaces\Services\IPaymentService.cs" />
+    <Compile Include="Interfaces\Services\IPermissionService.cs" />
+    <Compile Include="Interfaces\Services\IPollAnswerService.cs" />
+    <Compile Include="Interfaces\Services\IPollService.cs" />
+    <Compile Include="Interfaces\Services\IPollVoteService.cs" />
+    <Compile Include="Interfaces\Services\IPostEditService.cs" />
+    <Compile Include="Interfaces\Services\IPostService.cs" />
+    <Compile Include="Interfaces\Services\IPrivacyPolicyService.cs" />
+    <Compile Include="Interfaces\Services\IPrivateMessageService.cs" />
+    <Compile Include="Interfaces\Services\IReflectionService.cs" />
+    <Compile Include="Interfaces\Services\IReportService.cs" />
+    <Compile Include="Interfaces\Services\IRoleService.cs" />
+    <Compile Include="Interfaces\Services\ISectionService.cs" />
+    <Compile Include="Interfaces\Services\ISettingsService.cs" />
+    <Compile Include="Interfaces\Services\ITagNotificationService.cs" />
+    <Compile Include="Interfaces\Services\ITopicNotificationService.cs" />
+    <Compile Include="Interfaces\Services\ITopicService.cs" />
+    <Compile Include="Interfaces\Services\ITopicTagService.cs" />
+    <Compile Include="Interfaces\Services\IUploadedFileService.cs" />
+    <Compile Include="Interfaces\Services\IVoteService.cs" />
+    <Compile Include="Interfaces\UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\UnitOfWork\IUnitOfWorkManager.cs" />
+    <Compile Include="LocalizedString.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UrlTypes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EthioNegarit.Utilities\EthioNegarit.Utilities.csproj">
+      <Project>{d71e2aac-9dc3-40a1-8627-e4600c68a614}</Project>
+      <Name>EthioNegarit.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

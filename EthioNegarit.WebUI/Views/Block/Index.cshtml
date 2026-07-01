@@ -1,0 +1,49 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model PublicMemberListViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Html.LanguageString("Members.Blocked");
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+}
+<div class="page-header">
+    <span class="">
+     @ViewBag.Title
+    </span>
+    <span class="width-50">
+        @Html.Partial("_searchMembers")      
+    </span>
+</div>
+<section class="content">
+    <div class="container-fluid">
+        @if (@Model.Members.Any())
+        {
+            <div class="box-container">
+                @foreach (var member in Model.Members)
+                {
+                    <div class="box member">
+                        @{
+                            Html.RenderPartial("_member", member);
+                            <span class="box-footer">
+                                <a href="#" class="btn btn-sm btn-default btn-block text-mutedd pm-block" data-userid="@member.Id">
+                                    @Html.Lang("Members.UnBlock")
+                                </a>
+                            </span>
+                        }
+                    </div>
+                            }
+            </div>
+            if (Model.TotalPages > 1)
+            {
+                <ul>
+                    <li class="pagination">
+                        @Html.Pager(Convert.ToInt32(Model.PageIndex), SiteConstants.Instance.AdminListPageSize, totalCount, null)
+                    </li>
+                </ul>
+            }
+                            }
+                            else
+                            {
+            <p>@Html.Lang("Members.BlockedNone")</p>
+        }
+    </div>
+</section>

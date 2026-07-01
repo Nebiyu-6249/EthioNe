@@ -1,0 +1,20 @@
+﻿@using EthioNegarit.Utilities
+@model EthioNegarit.Core.Domain.Entities.Badge
+@{
+    var postToolTip = string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(Model.Description), 50), "....");
+}
+    <div class="box members-badge">
+        <div class="badge-header">
+            <div class="image">
+                <img src="@Url.Content(AppHelpers.ReturnBadgeUrl(Model.Image))" class="img-size-32 img-circle elevation-2" alt="@Model.Name" />
+            </div>
+            <span class="badge-name" title="@postToolTip">
+                @Html.Raw(Model.DisplayName)
+            </span>
+            <div class="badge-award text-muted float-center">
+                @if (Model.AwardsPoints != null && Model.AwardsPoints > 0)
+                {
+                    <p class="publicbadgeawards">@(string.Format(Html.LanguageString("Badges.AwardsPoints"), Model.AwardsPoints))</p>}
+            </div>
+        </div>    
+    </div>

@@ -1,0 +1,25 @@
+﻿@model EthioNegarit.WebUI.ViewModels.UploadAdFileViewModel
+<p class="text-center">@Html.Lang("Ad.UploadFile")</p>
+<hr>
+@using (Html.BeginForm("UploadAdFiles", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+    @Html.HiddenFor(x => x.advertId)
+    <div class="inline-item mt-2">
+        <div class="input-group input-group-sm">
+            <span class="input-group-btn">
+                <span class="btn btn-sm btn-file">
+                    @Html.LanguageString("Post.Browse")
+                    <input type="file" name="Files" id="Files" value="" multiple="multiple">
+                </span>
+            </span>
+            <input type="text" class="form-control" readonly="">
+            <span class="input-group-btn">
+                <button class="btn btn-sm">
+                    <i class="ethicon fas fa-upload fa-fw"></i>
+                </button>
+                <span style="display: none;" class="ajaxspinner">@Html.LanguageString("Post.PleaseWait")</span>
+            </span>
+        </div>
+    </div>
+}
+

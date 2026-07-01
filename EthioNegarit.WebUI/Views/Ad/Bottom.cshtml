@@ -1,0 +1,51 @@
+﻿@using EthioNegarit.Utilities
+@model EthioNegarit.WebUI.ViewModels.AdViewModel
+
+@if (Model.Advertisement != null)
+{   
+    <div class="ad ad-bottom" role="alert">
+        <button type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="image">
+            @if (!string.IsNullOrEmpty(@Model.Advertisement.Image))
+                {
+                <img src="@AppHelpers.AdvertImage(@Model.Advertisement.Image, @Model.Advertisement.Id, 110)" alt="@Model.Advertisement.Name" class="img-circle  img-bordered-sm">
+            }
+            else
+            {
+                <img src="../../Content/images/default.png" class="" style="opacity: .8">
+            }
+        </div>
+        <div class="ad-body pull-rightt">
+            <div class="company-name text-sm text-center text-capitalize">
+                @Html.Raw(@Model.Advertisement.Name)
+            </div>
+            <div class="sub-title slogan">
+                @Model.Advertisement.MotoSlogan
+            </div>
+           <div class="content-text text-xs">
+        @Html.Raw(string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(@Model.Advertisement.About), 25), "...."))
+    </div>
+            <div class="banner-footer float-right">
+                @if (@Model.Advertisement.LinkUrl != null)
+                {
+                    <a href="@Model.Advertisement.LinkUrl" target="_blank" class="btn btn-xs text-info" title="@Model.Advertisement.Name">
+                        <i class="fas fa-external-link-square" aria-hidden="true">
+                            @if (@Model.Advertisement.LinkText != null)
+                    {
+                                @Model.Advertisement.LinkText
+                            }
+                            else
+                            {
+                                @Model.Advertisement.Name
+                            }
+                        </i>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+

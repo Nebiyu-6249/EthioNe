@@ -1,0 +1,57 @@
+﻿@model EthioNegarit.WebUI.ViewModels.AdminPanelViewModel
+    <li class="dropdown-item">
+    <a class="dropdown-itemm" href="@Url.Action("Index", "PrivateMessage",new { area = "" })" title="Private Message">
+        <span class="text-muted text-sm">Private Messages</span>
+            @if (@Model.PrivateMessageCount > 0)
+            {
+                <span class="badge badge-warning float-right">
+                    @Model.PrivateMessageCount
+                </span>
+            }
+    </a>
+</li>
+<li class="dropdown-item">
+    <a class="nav-linkk" href="@Url.Action("Index", "Report",new { area = "" })" title="Members Report">
+        <span class="text-muted text-sm">Reports</span>
+            @if (@Model.ReportCount > 0)
+            {
+                <span class="badge badge-warning float-right">
+                    @Model.ReportCount
+                </span>
+            }
+    </a>
+</li>
+<li class="dropdown-item">
+    <a class="nav-linkk" href="@Url.Action("List", "Ad",new { area = "" })" title="Members Advertisement">
+        <span class="text-muted text-sm">Advertisements</span>
+            @if (@Model.AdvertCount > 0)
+            {
+                <span class="badge badge-warning float-right">
+                    @Model.AdvertCount
+                </span>
+            }
+    </a>
+</li>
+
+<li class="dropdown-item">
+    <a class="dropdown-itemm" href="@Url.Action("Index", "Payment",new { area = "" })" title="Payment">
+        <span class="text-muted text-sm">Payments</span>
+            @if (@Model.PaymentCount > 0)
+            {
+                <span class="badge badge-warning float-right">
+                    @Model.PaymentCount
+                </span>
+            }
+    </a>
+</li>
+@if (@Model.ModerateCount > 0)
+{
+<li class="dropdown-item">
+    <a class="dropdown-itemm moderatepanelnav" href="@Url.Action("Index", "Moderate", new { area = "" })" data-name="@Html.Lang("Moderate.NavText")" title="Moderate Topics and Posts">
+        <span class="text-muted text-sm">Pending Topics/Posts</span>       
+            <span class="badge badge-warning float-right">
+                @Model.ModerateCount
+            </span>
+    </a>
+</li>
+}

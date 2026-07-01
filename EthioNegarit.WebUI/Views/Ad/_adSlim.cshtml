@@ -1,0 +1,342 @@
+﻿@using EthioNegarit.Core.Domain.Enums
+@using EthioNegarit.WebUI.ViewModels
+@using EthioNegarit.Core.Domain.Entities
+@model Advertisement
+@{
+    var advertId = Model.Id;
+   // var loggedOnUserId = Html.CurrentMember() != null ? Html.CurrentMember().Id : Guid.Empty;
+   // var isAdmin = User.IsInRole(AppConstants.AdminRoleName);
+}
+<div class="ad-slim">
+	<div class="content-aside d-none d-sm-inline-block">
+		<div class="image-block image content-centerr">
+			@if(!string.IsNullOrEmpty(Model.Image))
+				{
+				<img src="@AppHelpers.AdvertImage(@Model.Image, @Model.Id,64)" alt="img" class="img-circle image-sm img-bordered-sm" />
+				}
+			else
+				{
+				<img src="../../Content/images/default.png" class="img-circle image-sm img-bordered-sm" style="opacity: .8">
+				}
+		</div>
+	</div>
+	<div class="content-detail pull-right-sm">
+        <a href="@Model.NiceUrl" title="@Model.Name">
+            <div class="title company-name">
+                @Model.Name
+            </div>
+            <div class="sub-title slogan">
+                @Model.MotoSlogan
+            </div>
+
+            <div class="content-text">
+                @Html.Raw(@Model.About)
+            </div>
+        </a>
+</div>
+</div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <a role="button" class="btn btn-sm btn-outline-secondary btn-block showhidebutton" id="showinfo" data-id="@advertId" data-toggle="collapse" data-target="#adinfo-@Model.Id" title="Show/Hide" )>
+                <i class="fas fa-angle-down showhideicon">
+                </i>
+            </a>
+        </div>
+    </div>
+<div class="collapse adinfo" id="adinfo-@advertId">
+    <div class="row">
+        <div class="col-sm-5 pl-4">
+                @if (@Model.Files.Any())
+                {
+                    <p class="text-center">@Html.Lang("Post.AttachedFiles")</p>
+                    <div class="divider  clearfix"></div>
+                    <div class="ad-files">                     
+                        <ul>
+                            @foreach (var file in @Model.Files.OrderByDescending(o => o.DateCreated))
+                            {
+                                <li>
+                                    <div class="inline-item">
+                                        <span class="inline-item-sm ml-2">
+                                            @if (file.FileType != "mp4")
+                                            {
+                                                <img class="img-circle image-sm img-size-50 img-bordered-sm elevation-3" src="@AppHelpers.AdvertImage(@file.Filename, @file.Advertisement.Id, 50)" alt="image">
+                                            }
+                                            else
+                                            {
+                                                <img src="../../Content/images/default.png" class="img-circle image-sm img-size-50  img-bordered-sm elevation-3" style="opacity: .8">
+                                            }
+                                        </span>
+                                        <span class="inline-item-smm mr-44 float-right">
+                                            <a class="filedownload" href="@Url.Action("DownloadAdFile", "File", new { file.Id })" title="@Html.LanguageString("Download")">
+                                                <span class="ethicon fas fa-download fass fa-file-imagee green-colour" aria-hidden="true"></span>
+                                            </a>
+                                        </span>
+                                        <span class="width-200 float-right ml-4 mr-4">
+                                            <a href="@Url.Action("DeleteAdFile", "File", new { file.Id })" class="deleteupload" title="@Html.LanguageString("Post.Delete")">
+                                                <span class="fas fa-trash-alt inline-item-sm red-colour" aria-hidden="true"></span>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                                      
+                    </div>
+                }
+                else if ((Model.Package == null || Model.Package.Files < 1) && Model.Image != null)
+                {
+                        <div class="content-center">
+                            <img class="img-circle img-size-96 img-bordered-sm elevation-3" src="@AppHelpers.AdvertImage(Model.Image, Model.Id, 110)" alt="">
+                        </div>
+                    }
+           
+            <div class="advertuploadholder mb-0 position-relative">
+                @if (Model.Package != null && @Model.AdStatus == AdStatus.Active)
+                {
+                    if (Model.Files.Count < Model.Package.Files)
+                    {
+                        @Html.Partial("_uploadAdFile", new UploadAdFileViewModel { advertId = Model.Id, Files = null })
+                    }
+
+                }
+            </div>
+
+
+
+                </div><!-- /.col --> 
+        <div class="col-sm-7 float-rightt">
+    <p class="text-center">@Html.Lang("Ad.Label.Info")</p>
+        <div class="inline-item mb-2">
+            <span class="inline-item-lg">
+                @Html.Lang("Date.DateCreate")              
+            </span>
+            <span class="inline-item-lg">
+                @DatesUI.GetPrettyDate(Model.DateCreated.ToString())
+            </span>
+        </div>
+            @if (@Model.DateStart != null && @Model.PostCount > 0)
+            {
+                <div class="inline-item mb-2">
+                    <span class="inline-item-lg">
+                        @Html.Lang("Date.DateStart")
+                    </span>
+                    <span class="inline-item-lg">
+                        @DatesUI.GetPrettyDate(Model.DateStart.ToString())
+                    </span>
+                </div>
+            }
+            @if (@Model.DateEnd != null && @Model.PostCount > 0)
+            {
+                <div class="inline-item mb-2">
+                    <span class="inline-item-lg">
+                        @Html.Lang("Date.DateEnd")
+                    </span>
+                    <span class="inline-item-lg">
+                        @DatesUI.GetPrettyDate(Model.DateEnd.ToString())
+                    </span>
+                </div>
+            }
+        
+    @if (@Model.PostCount > 0)
+    {
+        <div class="inline-item mb-2">
+            <span class="inline-item-lg">
+                @Html.Lang("Ad.Label.PostCount")                
+            </span>
+            <span class="inline-item-lg">
+                @Html.Raw(string.Format(Html.LanguageString("Ad.Label.Posted"), @Model.PostCount))
+            @*    @Model.PostCount Times*@
+            </span>
+        </div>
+    }
+    <!----------------------->
+    @if (@Model.DateLastActive != null && @Model.PostCount > 0)
+    {
+        <div class="inline-item mb-2">
+            <span class="inline-item-lg">
+                @Html.Lang("Date.LastView")               
+            </span>
+            <span class="inline-item-lg">
+                @DatesUI.GetPrettyDate(Model.DateLastActive.ToString())
+            </span>
+        </div>
+    }
+    <!----------------------->
+@if(Model.Package != null) {
+            <div class="inline-item mb-2">
+                <span class="inline-item-lg">
+                    @Html.Lang("Package.Name")
+                </span>
+                <span class="inline-item-lg">
+                    @{ 
+                        var partialKey = string.Concat("Package.", Model.Package.Name);
+                        var displayName = string.Concat(partialKey, ".Name");
+                    }
+                    @Html.Lang(displayName)
+                   @* @Model.Package.DisplayName*@
+                </span>
+            </div>
+            }
+    <!----------------------->
+    <div class="inline-item mb-2">
+        <span class="">
+            @Html.Lang("Ad.Label.Status")
+        </span>
+        <span class="inline-item-lg">
+            <a href="#" class="btn btn-sm btn-default btn-block" title="Ad Status">
+                @if (@Model.AdStatus == AdStatus.Active)
+                {
+                    <i class="ethicon fas fa-play-circle text-sm mr-4"> </i>
+                }
+                else
+                {
+                    <i class="ethicon fas fa-pause text-sm mr-4"> </i>
+                }
+                @if(@Model.AdStatus == AdStatus.Active ){
+                @Html.LanguageString("Status.Active")
+                }
+                else if (@Model.AdStatus == AdStatus.Completed)
+                {
+                    @Html.LanguageString("Status.Completed")
+                }
+                else if (@Model.AdStatus == AdStatus.Pending)
+                {
+                    @Html.LanguageString("Status.Pending")
+                }
+                else if (@Model.AdStatus == AdStatus.Partial)
+                {
+                    @Html.LanguageString("Status.Partial")
+                }
+                
+            </a>
+        </span>
+    </div>
+  @if (@Model.AdStatus == AdStatus.Partial)
+  {
+    <div class="inline-item mb-2">
+        <span class="">
+            @Html.Lang("Package.Label.GetPackage")
+        </span>
+        <span class="inline-item-lg">
+            <a class="btn btn-sm btn-block btn-default" href="@Url.Action("Index", "Package", new { advertId = @Model.Id, month = @Model.Month })" title=@Html.LanguageString("Get Package")>
+                @Html.LanguageString("Package.Label.GetPackage")
+            </a>
+        </span>
+</div>
+  }
+        <!----------------------->
+        @{
+            var dateEnd = DateTime.UtcNow.AddDays(-AppConstants.AdReminderDaysRemains);
+        }
+        @*  @if (@Model.AdStatus == AdStatus.Completed || @Model.AdStatus == AdStatus.Partial || dateEnd > Model.DateEnd)*@
+        @if (@Model.AdStatus == AdStatus.Completed)
+        {
+            if (!Model.Payments.Where(x => x.PaymentStatus == PaymentStatus.Pending).Any())
+            {
+                <span class="mb-2">
+                    <a href="#" class="btn btn-xs btn-block btn-default showhidebuttonn" data-toggle="collapse" data-target="#package">
+                        @Html.LanguageString("Package.Label.GetPackage")
+                        <i class="fas fa-angle-down ml-4 showhideiconn" aria-hidden="true"></i>
+                    </a>
+                </span>
+                <ul id="package" class="collapse contents-list mb-4">
+                    <li>
+                        <a class="btn btn-xs btn-block btn-default" href="@Url.Action("Index", "Package", new { advertId = @Model.Id, month = 12 })" title=@Html.LanguageString("Package.Annual")>
+                            @Html.LanguageString("Package.Annual")
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-xs btn-block btn-default" href="@Url.Action("Index", "Package", new { advertId = @Model.Id, month = 6 })" title=@Html.LanguageString("Package.SemiAnnual")>
+                            @Html.LanguageString("Package.SemiAnnual")
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-xs btn-block btn-default" href="@Url.Action("Index", "Package", new { advertId = @Model.Id, month = 3 })" title=@Html.LanguageString("Package.Quarterly")>
+                            @Html.LanguageString("Package.Quarterly")
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-xs btn-block btn-default" href="@Url.Action("Index", "Package", new { advertId = @Model.Id, month = 1 })" title=@Html.LanguageString("Package.Monthly")>
+                            @Html.LanguageString("Package.Monthly")
+                        </a>
+                    </li>
+                </ul>
+            }
+        }
+        @if (@Model.AdStatus != AdStatus.Active && @Model.AdStatus != AdStatus.Partial)
+        {
+            <div class="inline-item mb-2">
+                <span class="">
+                    @Html.Lang("Payment.Title")
+                </span>
+                @if (Model.Payments.Where(x => x.PaymentStatus == PaymentStatus.Pending).Any())
+                    {
+                    <span class="inline-item-lg">
+                        <a class="btn btn-sm btn-block btn-default" href="@Url.Action("List", "Payment")" title="Pending for Confirmation">
+                            <i class="ethicon fas fa-pause mr-4">
+                            </i>
+                            @Html.LanguageString("Status.Pending")
+                        </a>
+                    </span>
+                }
+                else if (Model.Payments.Where(x => x.PaymentStatus == PaymentStatus.Rejected).Any())
+                {
+                    <span class="inline-item-lg">
+                        <a class="btn btn-sm btn-block btn-outline-danger" href="@Url.Action("List", "Payment")" title="Payment Rejected">
+                            <i class="ethicon fas fa-times mr-4">
+                            </i>
+                            @Html.LanguageString("Status.Rejected")
+                        </a>
+                    </span>
+                }
+            </div>
+        }
+     @*   @if (@Model.User.Id == loggedOnUserId || User.IsInRole(AppConstants.AdminRoleName))
+    {*@
+            @if (@Model.AdStatus == AdStatus.Active)
+            {
+                //Change to Map/Location Enabled
+                @* if (@Model.Package.Location > 1  && @Model.AdLocation.Count < 5 )*@
+        if (Model.Package != null && @Model.Package.Address > 1)
+        {
+            <div class="inline-item mb-1">
+                <a href="#" class="btn btn-xs btn-block btn-default addlocationlink" data-id="@Model.Id" title="@Html.LanguageString("Add/Remove Location")" )>
+                    <i class="fas fa-map-marker-alt mr-4"></i>
+                    @Html.LanguageString("Location")
+                </a>
+            </div>
+            }
+        }
+        <div class="inline-item mb-1">
+            <a class="btn btn-xs btn-block btn-default" href="@Url.Action("Edit","Ad", new { id = @Model.Id })" title="Edit Advert">
+                <i class="fas fa-edit mr-4">
+                </i>
+                @Html.LanguageString("Buttons.Edit")
+            </a>
+        </div>
+@if (@Model.AdStatus == AdStatus.Completed || @Model.AdStatus == AdStatus.Partial)
+{
+                    <div class="inline-item mb-1">
+                        <a class="btn btn-xs btn-block btn-outline-danger" style="cursor: help" onclick="return confirm('@(Html.LanguageString("Post.DeleteConfirmation"))')" href="@Url.Action("Delete", "Advert", new { id = @Model.Id })" title="Remove Ad">
+                            <i class="fas fa-trash-alt mr-4"></i>
+                            @Html.LanguageString("Buttons.Delete")
+                        </a>
+                    </div>
+}
+    </div>
+       
+        </div>
+    </div>
+
+<div id="location" class="modal fade" tabindex="-1" role="dialog">
+    @*modal-xl modal-dialog-centered modal-fullscreen-sm-down modal-lg*@
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">          
+            <div class="modal-body" id="modal-location">
+
+            </div>
+        </div>
+    </div>
+</div>
+ 

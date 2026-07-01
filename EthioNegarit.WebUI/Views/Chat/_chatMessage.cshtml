@@ -1,0 +1,108 @@
+﻿@using System.Linq;
+@using EthioNegarit.WebUI.ViewModels
+@model ChatMessageViewModel
+@{   
+    var timeSpan = DateTime.UtcNow.AddMinutes(-1);
+    var loggedOnUserId = Html.CurrentMember() != null ? Html.CurrentMember().Id : Guid.Empty;
+    var favourites = Model.ChatResponses.Where(x => x.Amount > 0).ToList();
+    var reports = Model.ChatResponses.Where(x => x.Amount < 0).ToList();
+    var messageId = Model.ChatMessage.Id;
+    const string disabled = "style='pointer-events:none;'";
+    const string enable = "style='cursor:pointer;'";
+    var replay = disabled;
+    var allowed = string.Empty;
+    if (Model.AllowedToResponse)
+    {
+        allowed = enable;
+    }
+    else
+    {
+        allowed = disabled;
+    }
+    if (Model.EnableReplay)
+    {
+        replay = enable;
+    }
+}
+<div class="chat-message">
+    <div class="chat-img">
+        <a href="@Model.ChatMessage.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="right">
+            @*        <a href="@Model.ChatMessage.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="right" title='@Model.ChatMessage.User.UserName active @(Model.MemberIsOnline ? "Now" : @DatesUI.GetPrettyDate(@Model.ChatMessage.User.LastActivityDate.ToString()))'>*@
+            <img class="img-circle  @(Model.MemberIsOnline ? "img-bordered-success" : "img-bordered-sm")" src="@Model.ChatMessage.User.MemberImage(32)" alt="Img">
+        </a>
+    @{Html.RenderPartial("_memberInfo", @Model.ChatMessage.User);
+    }
+    </div>
+    <div class="chat-text @(Model.ChatMessage.Deleted == true ? "message-deleted" : "") @(Model.ChatMessage.Timestamp > timeSpan ? "new-message" : "")">
+        @if (@Model.ChatMessage.Content != null)
+            {
+            @Html.Raw(AppHelpers.ConvertPostContent(@Model.ChatMessage.Content))
+        }
+    </div>
+    @if (@Model.ChatMessage.Deleted != true)
+    {
+        <div class="chat-social">
+            <ul>
+                <li class="mr-1">
+                    @if (Model.ChatMessage.User.Id != loggedOnUserId && loggedOnUserId != Guid.Empty)
+                    {
+                        <span>@Model.ChatMessage.User.UserName,</span>
+                    }
+                    @DatesUI.GetPrettyDate(@Model.ChatMessage.Timestamp.ToString())
+                </li>
+                <li>
+                    <a @Html.Raw(allowed) class="responselink" data-id="@messageId" data-responsetype="positive" data-responsetext="@Html.LanguageString("Post.Favourite")" data-responsedtext="@Html.LanguageString("Post.Favourited")" data-hasresponse="@Model.HasFavourite.ToString().ToLower()" title="@(Model.HasFavourite ? @Html.LanguageString("Post.Favourited") : @Html.LanguageString("Post.Favourite"))" style="@Html.Raw(Model.HasReport ? "disabled:'disabled';" : "")">
+                        <span class="@(Model.HasFavourite ? "fas fa-heart" : "far fa-heart") text-muted" aria-hidden="true"></span>
+                        @if (@favourites.Count > 0 && Html.Settings().EnablePoints)
+                        {
+                            <span class="count">@favourites.Count.KiloFormat()</span>
+                        }
+                    </a>
+                </li>
+                <li>
+                    @if (Html.Settings().EnableSpamReporting)
+                {
+
+                        <a @Html.Raw(allowed) class="responselink" role="button" data-id="@messageId" data-responsetype="negative" data-responsetext="@Html.LanguageString("Post.Report")" data-responsedtext="@Html.LanguageString("Post.Reported")" data-hasresponse="@Model.HasReport.ToString().ToLower()" title="@(Model.HasReport ? @Html.LanguageString("Post.Reported") : @Html.LanguageString("Post.Report"))" style="@Html.Raw(Model.HasFavourite ? "disabled:'disabled';" : "")">
+                            <i class="@(Model.HasReport ? "fas fa-flag" : "far fa-flag") text-muted" aria-hidden="true"></i>
+                            @if (@reports.Count > 0 && Html.Settings().EnablePoints)
+                            {
+                                <span class="count">@reports.Count.KiloFormat()</span>
+                            }
+                        </a>
+                    }
+                </li>
+                    @if (@Model.Replies > 0 || Model.EnableReplay)
+                {
+<li>
+                        <a @Html.Raw(replay) role="button" class="text-sm chatreplylink" data-id="@Model.ChatMessage.Id" data-roomid="@Model.ChatMessage.ChatRoom.Id" data-toggle="collapse" data-target="#replies-@Model.ChatMessage.Id" style="@Html.Raw(replay == "disabled" ? "disabled:'disabled';" : "")" title="@Html.LanguageString("Chat.Replay")")>
+                            <i class="fas fa-share text-muted mr-17">
+                            </i>
+                        </a>
+                        @if (@Model.Replies > 0)
+                    {
+                            <span class="count">
+                                @Model.Replies.KiloFormat()
+                            </span>
+                            <a role="button" href="#replies-@Model.ChatMessage.Id" class="showhidebutton navbar-button ml-2" data-toggle="collapse" aria-controls="collapseReplies">
+                               @Html.LanguageString("Chat.Replies")                                 
+                                <i class="fas fa-angle-down ml-1 showhideicon" aria-hidden="true">
+                                </i>
+                            </a>
+                        }
+
+                    </li>
+                }
+                @if (@Model.EnableDelete)
+                {
+                    <li class="text-sm">
+                        <a href="#" class="deletechatmessage" role="button" data-id="@Model.ChatMessage.Id" title="@Html.LanguageString("Buttons.Delete")">
+                            <i class="fas fa-trash-alt" aria-hidden="true">
+                            </i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>

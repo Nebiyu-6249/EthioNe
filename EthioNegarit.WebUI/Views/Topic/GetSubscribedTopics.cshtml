@@ -1,0 +1,17 @@
+﻿@model List<EthioNegarit.WebUI.ViewModels.TopicViewModel>
+@if (Model.Any())
+{
+        <ul class="contents-list">
+            @foreach (var topicModel in Model)
+            {
+            <li class="content-fluid">
+                    @Html.Partial("_Topic", topicModel)
+            </li>
+            }
+           
+        </ul>
+}
+else
+{
+  <p> @Html.Lang("SubscribedTopics.NothingToShow") </p>
+}

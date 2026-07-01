@@ -1,0 +1,73 @@
+﻿@using EthioNegarit.Utilities
+@using EthioNegarit.WebUI.ViewModels
+@model ChatRoomViewModel
+@{    
+        var subScribe = string.Empty;
+        var unSubscribe = string.Empty;
+        const string displayNone = "style='display:none;'";
+        if (Model.IsSubscribed)
+        {
+            subScribe = displayNone;
+        }
+        else
+        {
+            unSubscribe = displayNone;
+        }
+}
+@* <div class="box chat-roomm freeze-@Model.ChatRoom.Freeze.ToString()">*@
+    <div class="box chatroom">
+    <div class="box-header">
+        <span class="image d-none d-sm-inline-block">
+            <img src="../../Content/images/default.png" class="img-circle img-bordered-sm elevation-3" style="opacity: .8">
+        </span>
+        <span class="box-title">
+            <a title=" @Html.Raw(string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(@Model.ChatRoom.Description), 25), "...."))" href="@Model.ChatRoom.NiceUrl">
+                @Model.ChatRoom.Name
+            </a>
+        </span>
+        @if (Html.CurrentMember() != null && Html.Settings().EnableEmailSubscriptions)
+        {
+            <span class="widget-right">
+                <a @Html.Raw(subScribe) href="#" class="emailsubscription" data-id="@Model.ChatRoom.Id" data-type="room">
+                    <span class="far fa-star yellow-colour" aria-hidden="true"></span>
+                </a>
+                <a @Html.Raw(unSubscribe) href="#" class="emailunsubscription" data-id="@Model.ChatRoom.Id" data-type="room">
+                    <span class="fas fa-star yellow-colour" aria-hidden="true"></span>
+                </a>
+            </span>
+        }
+    </div>
+    <div class="box-body content-text">
+        <a href="@Model.ChatRoom.NiceUrl" title="Go To Discusion" class="nav-link">
+            @Html.Raw(string.Concat(StringUtils.ReturnAmountWordsFromString(StringUtils.StripHtmlFromString(@Model.ChatRoom.Description), 10), "...."))
+        </a>
+    </div>
+    <div class="box-footer">
+        @if (@Model.ChatRoom.RoomMembersCount > 0)
+        {
+            <a href="@Url.Action("RoomMembers", "Chat", new {roomId= Model.ChatRoom.Id })" class="btn btn-xs text-muted" title="Room Members">
+                <i class="far fa fa-users mr-2 text-muted">
+                    @Model.ChatRoom.RoomMembersCount
+                </i>
+            </a>
+        }
+
+        @if (@Model.ChatRoom.RoomMessageCount > 0)
+        {
+            <a href="@Model.ChatRoom.NiceUrl" class="btn btn-xs text-muted" title="Chat Messages">
+                <i class="far fa fa-comments mr-2 text-muted">
+                    @Model.ChatRoom.RoomMessageCount.KiloFormat()
+                </i>
+            </a>
+        }
+        @if (@Model.ChatRoom.LastActive != null)
+        {
+            <a href="@Model.ChatRoom.NiceUrl" class="btn btn-xs text-muted" title="Last Activity">
+                <i class="far fa fa-clock mr-2 text-muted">
+                    @DatesUI.GetPrettyDate(@Model.ChatRoom.LastActive.ToString()).
+                </i>
+            </a>
+        }
+    </div>
+    </div>
+

@@ -1,0 +1,127 @@
+﻿@using EthioNegarit.Utilities
+@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.Application.ExtensionMethods
+@using EthioNegarit.WebUI.ViewModels
+@model CategoryViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Html.Raw(Model.Category.PageTitle ?? Model.Category.Name);
+    ViewBag.MetaDesc = Model.Category.MetaDescription ?? StringUtils.StripHtmlFromString(Model.Category.Description);
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+    ViewBag.Canonical = Html.Raw(AppHelpers.CanonicalPagingTag(totalCount, Html.Settings().TopicsPerPage, Html));
+
+    var subScribe = string.Empty;
+    var unSubscribe = string.Empty;
+    const string displayNone = "style='display:none;'";
+    if (Model.IsSubscribed)
+    {
+        subScribe = displayNone;
+    }
+    else
+    {
+        unSubscribe = displayNone;
+    }
+    //TempData[AppConstants.DefaultCategoryViewBagName] = Model.Category.Id;
+}
+@section SocialMeta {
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:url" content="@HttpContext.Current.Request.Url.AbsoluteUri" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="@ViewBag.Title" />
+    <meta name="twitter:description" content="@ViewBag.MetaDesc" />
+}
+<!-- Page header -->
+	<div class="page-header">
+		<span class="inline-item-sm">
+			@Html.Raw(Model.Category.Name)
+            <span>
+                @Html.Action("GetCategoryBreadcrumb", "Category", new { category = Model.Category })
+            </span>
+            @if (@Model.Category.Topics.Count > 0)
+            {
+                <span class="ml-4 text-muted text-sm">
+                    <i class="ethicon fas fa-comments ml-4" aria-hidden="true" title="@Html.LanguageString("Topics in category")"></i>
+                    @Model.Category.Topics.Count
+                    <span class="d-none d-sm-inline-block">
+                        @Html.Lang("Layout.Nav.Topics")
+                    </span>
+                </span>
+            }
+		</span>
+       @if (Model.SubCategories != null)
+    {
+        <span class="inline-item-mdd">
+            <span class="content-footerr">
+                @Html.Partial("_subCategories", new SubCategoryViewModel
+           {
+               AllPermissionSets = Model.SubCategories.AllPermissionSets,
+               ParentCategory = Model.Category
+           })
+            </span>
+        </span>
+    }
+                <span class="">
+                    @if(Model.User != null && Html.Settings().EnableEmailSubscriptions)
+				{
+                <a @Html.Raw(subScribe) href="#" class="emailsubscription" data-id="@Model.Category.Id" data-type="category">
+                    <i class="ethicon far fa-star yellow-colour" title="@Html.LanguageString("Notification.Subscribe")" aria-hidden="true"></i>
+                    <span class="d-none d-sm-inline-block">
+                        @Html.LanguageString("Notification.Subscribe")
+                    </span>
+                </a>
+                <a @Html.Raw(unSubscribe) href="#" class="emailunsubscription" data-id="@Model.Category.Id" data-type="category">
+                    <i class="ethicon fas fa-star yellow-colour" title="@Html.LanguageString("Notification.UnSubscribe")" aria-hidden="true"></i>
+                    <span class="d-none d-sm-inline-block">
+                        @Html.LanguageString("Notification.UnSubscribe")
+                    </span>
+                </a>
+				}
+                </span><!-- /.col -->
+        <span class="d-none d-sm-inline-block mr-0">
+            <a href="#" class="rsssubscribe  rsslink" data-action="category" data-slug="@Model.Category.Slug" title="@Html.LanguageString("Home.Rss")" )>
+                <i class="ethicon fa fa-rss-square orange-colour"></i>
+            </a>
+        </span>
+</div>
+	<section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <section class="col-sm-9">
+                    <div class="content-text text-muted">
+                        @Html.Raw(AppHelpers.ConvertPostContent(Model.Category.Description))
+                    </div>
+                    @if (@Model.Category.Topics.Any())
+                    {
+                        <ul class="contents-list">
+                            @foreach (var topic in Model.Topics)
+                            {
+                                <li class="content-fluid">
+                                    @{
+                                        Html.RenderPartial("_Topic", topic);
+                                    }
+                                </li>
+                      } 
+                        </ul>
+                                        if (Model.TotalPages > 1)
+                                        {
+                                            <ul class="pagination">
+                                                <li class="">
+                                                    @Html.Pager(Convert.ToInt32(Model.PageIndex), Html.Settings().TopicsPerPage, totalCount, null)
+                                                </li>
+                                            </ul>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <p> @Html.LanguageString("Category.NoDiscussions") </p>
+                                        }                                                                      
+                </section>
+                <section class="col-sm-3 side-panel">
+                    <div class="panel-content">
+                        @Html.Partial("_CommonSideNav")
+                    </div>
+                </section>
+            </div>
+		</div>
+	</section>

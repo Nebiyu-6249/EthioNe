@@ -1,0 +1,335 @@
+﻿//
+/*#region =================/*Page: Invoice ================ */
+//
+//
+/*#region =================Invoice ================ */
+//
+.invoice-box {
+  -webkit-box-shadow: none;
+  padding: 0;
+  box-shadow: none;
+  margin: 3px 0;
+ // border: 1px solid #ccc;
+}
+.invoice-header {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  position: relative;
+  min-height: 38px;
+ // background: repeat-x #f7f7f7;
+ // background-image: -webkit-linear-gradient(top, #fff 0, #eee 100%);
+//  background-image: -o-linear-gradient(top, #fff 0, #eee 100%);
+//  background-image: linear-gradient(to bottom, #fff 0, #eee 100%);
+ // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffeeeeee', GradientType=0);
+  color: #669fc7;
+  border-bottom: 1px solid #ddd;
+  padding-left: 12px;
+    > .invoice-title {
+    line-height: 36px;
+    padding: 0;
+    margin: 0;
+    display: inline;
+  }
+    > .invoice-title > .ethicon {
+    margin-right: 5px;
+    font-weight: 400;
+    display: inline-block;
+  }
+ 
+}
+.invoice-header-large {
+  min-height: 49px;
+  padding-left: 18px;
+    > .invoice-title {
+    line-height: 48px;
+  }
+    > .invoice-toolbar {
+    line-height: 48px;
+  }
+    > .invoice-toolbar:before {
+    top: 6px;
+    bottom: 6px;
+  }
+    > .invoice-toolbar > a {
+    font-size: 15px;
+    margin: 0 1px;
+  }
+    > .invoice-toolbar > .nav-tabs > li > a {
+    line-height: 22px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    margin-top: 4px;
+  }
+    > .invoice-toolbar > .nav-tabs > li.active > a {
+    margin-top: 3px;
+  }
+}
+
+////////////////////
+  .invoice-toolbar {
+  display: inline-block;
+  padding: 0 10px;
+  line-height: 37px;
+  float: right;
+  position: relative;
+  }
+
+.invoice-toolbar:before {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: -1px;
+  border: 1px solid #d9d9d9;
+  border-width: 0 1px 0 0;
+}
+.invoice-toolbar.no-border:before {
+  display: none;
+}
+
+.invoice-body {
+  background-color: #fff;
+    .table {
+    border-top: 1px solid #e5e5e5;
+  }
+    .table thead:first-child tr {
+    background: #fff;
+  }
+    .table.table-bordered thead:first-child > tr {
+    border-top-width: 0;
+  }
+}
+
+.invoice-main {
+  padding: 12px;
+    .tab-content {
+    border-width: 0;
+  }
+    > form .input-prepend {
+    margin-bottom: 0;
+  }
+}
+
+.invoice-main.padding-24 {
+  padding: 24px;
+}
+.invoice-info {
+  line-height: 24px !important;
+  color: #444;
+  vertical-align: bottom;
+  margin-left: 9px;
+  margin-right: 9px;
+}
+.invoice-info-label {
+  display: inline-block;
+  max-width: 100px;
+  text-align: right;
+  font-size: 14px;
+}
+.invoice-box {
+    .label-large[class*="arrowed"] {
+    margin-left: 11px !important;
+    max-width: 95%;
+  }
+}
+//
+/*#endregion ============== Invoice End  ====================  */
+//
+//
+/*#region =================Print Invoice ================ */
+//
+
+@media print {
+  //Add to elements that you do not want to show when printing
+  .no-print {
+    display: none !important;
+  }
+  //Elements that we want to hide when printing
+  .main-sidebar,
+  .main-header,
+  .content-header {
+    @extend .no-print;
+  }
+
+  //This is the only element that should appear, so let's remove the margins
+  .content-wrapper,
+  .main-footer {
+    @include translate(0, 0);
+    margin-left: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .layout-fixed .content-wrapper {
+    padding-top: 0 !important;
+  }
+
+}
+
+//
+/*#endregion ============== Print Invoice End  ====================  */
+//
+
+//
+/*#endregion ============== Page End  ====================  */
+//
+
+
+//
+/*#region =================/*Page: Leaderboard ================ */
+//
+.leaderboard {
+    .leaderboardholders {
+        padding: 20px;
+    }
+    .thisyearsstars {
+       border-left: 1px darken($gray-800, 20%) dotted; 
+    }
+}
+//
+/*#endregion ============== Leaderboard End  ====================  */
+//
+//
+//
+/*#region =================/*Page: Admin ================ */
+//
+.top-nav > li > a:hover, .top-nav > li > a:focus, .top-nav > .open > a, .top-nav > .open > a:hover, .top-nav > .open > a:focus { background: $font-lighter-base-color; }
+.page-header { padding-bottom: 15px; margin: 0 0 15px; border-bottom: 1px solid #eee; }
+.panel-group .panel-heading + .panel-collapse > .panel-body, .panel-group .panel-heading + .panel-collapse > .list-group { border-top: none; }
+.form-control { border-radius: 0; }
+.input-group-btn:last-child > .btn { padding: 7px 12px 6px 12px; }
+
+// Top Nav
+.mvcforum-nav { background-color: #fff; border-bottom: 1px $border-color solid !important; padding: 0; margin: 0; }
+// Edit Member
+.membereditavatar {margin-bottom:12px;}
+// Main
+
+// Heading Styles
+h1, h2, h3, h4, h5, h6 { padding: 0; margin: 0 0 12px 0; color: $heading-base-color; font-weight: $heading-font-weight; }
+h1 { font-size: $heading-one-font-size; }
+h2 { font-size: $heading-two-font-size; }
+h3 { font-size: $heading-three-font-size; }
+h4 { font-size: 19px; }
+h5 { font-size: 17px; }
+h6 { font-size: 16px; }
+
+// General Table Styles
+table {
+    @media (max-width: $media-query-mobile) {
+        .table-adaptive {
+            caption { background-image: none; }
+            thead { display: none; }
+            tbody {
+                td { display: block;
+                    &:before { content: attr(data-th); font-weight: bold; display: inline-block; width: 6rem; }
+                }
+                tr {
+                    td {
+                        &:first-child { background: #e4e4e4; }
+                    }
+                }
+            }
+            > tbody > tr > td { border: none; border-top: 1px solid #ddd; }
+            > tbody > tr > td:first-child { border: none; }
+        }
+    }
+}
+
+.tablescroll { overflow-x: scroll; overflow-y: auto; margin: 0 0 20px 0;
+    td { min-width: 65px; }
+}
+
+// Link Styles
+
+a, a:visited { color: $link-color;
+    &:hover, &:focus { color: darken($link-color, 8%); }
+}
+// Padded Row
+.paddedrow { padding-top: 10px; padding-bottom: 3px; }
+// Top Admin Sub Nav
+.topadminsubnav { padding: 0 0 25px 0; }
+// Main Admin Body
+
+.mainadminbody { padding-top: 8px; }
+// Category List
+.mainadmincategorylist { margin: 0; padding: 15px 0;
+    li { font-size: 1.4em; list-style: none; margin: 0 0 10px 0; padding: 10px 0; border-bottom: 1px dotted #eee;
+        &.subcategoryitem { padding: 3px 0; border: 0; }
+    }
+    ul {
+        &.subcategorylist { font-size: 11px; padding: 0 0 0 5px; margin: 0 0 10px 10px; border-left: 2px #eeeeee solid; }
+    }
+}
+// Blank Pop Up Holder
+.blankcontainer { width: 720px; min-height: 400px; height: auto !important; height: 400px; }
+// Fancybox overide
+.fancybox-skin { background-color: #fff !important; }
+// Permissions Styles
+.editpermissionsspinner { margin: 0 0 0 15px; }
+.fluidheader { padding: 0 0 15px 0; }
+// Little fix to the bootstrap append button
+.input-append .add-on, .input-append .btn { margin-left: -4px; }
+// Members Admin Search
+.membersadminsearch, .tablesearch { padding-bottom: 25px; }
+// Language Tables
+.resourcevalue { width: 200px; }
+.resourcevalueinput { width: 190px; }
+// Permission Types
+.permissiontypes {
+    a, a:visited {
+        .glyphicon-remove { color: #fff; }
+    }
+}
+// Footer
+
+footer { padding: 40px 0 0 0; }
+// Log
+.logentry { padding: 5px 0; border-bottom: 1px dotted #efefef; }
+// Role permission list
+.rolepermissionlist { padding: 0; margin: 0;
+    li { list-style: none; padding: 5px 0; }
+}
+// Admin section holders
+.adminsection { border: 1px #efefef solid; -moz-border-radius: 4px; -webkit-border-radius: 4px; -khtml-border-radius: 4px; border-radius: 4px; padding: 10px; clear: both; margin: 0 0 20px 0; }
+// Label / Badge overide
+.label, .badge { font-size: 14px; }
+
+@media (max-width: $media-query-small) {
+
+    h1 { font-size: 28.5px; }
+
+    /*--- Nav Bar ---*/
+    .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top { margin-left: 0; margin-right: 0; }
+    #logindisplay { text-align: center; font-size: 14px; }
+
+    /*-- Dashboard --*/
+    .dashboardrow { padding: 0; }
+    .dashboardrow .span6 { padding-bottom: 10px; }
+
+    /*-- Admin Options --*/
+    .btn-show-admin-nav { display: block; }
+    .admin-options { display: none; }
+
+    /*--- Tabs ---*/
+    .tabs-below > .nav-tabs { border: none; }
+    .tabs-below > .nav-tabs > li { width: 49%; }
+    .tabs-below > .nav-tabs > .active > a { border-color: #ddd; }
+}
+
+
+//
+/*#endregion ============== Admin End  ====================  */
+//
+
+
+
+//
+/*#region =================/*Page: Login and Register ================ */
+//
+
+
+//
+/*#endregion ============== Login and Register End  ====================  */
+//

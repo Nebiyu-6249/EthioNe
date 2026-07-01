@@ -1,0 +1,52 @@
+﻿@model EthioNegarit.Core.Domain.Entities.Package
+@{
+    Layout = null;
+}
+        <div class="package-main">
+            <div class="description">
+                <p>
+                    @Model.Description
+                </p>
+            </div>
+            <div class="package-item">
+                @Html.Lang("Package.Images")
+                <span>
+@if (@Model.Files > 0)
+{
+                    <i class="fas fa-check green-colour"></i>
+}
+else
+{
+    <i class="fas fa-times red-colour"></i>
+}
+                </span>
+            </div>
+            <div class="package-item">
+                @Html.Lang("Package.Video")              
+                <span>
+                    @if (@Model.Files > 0 && @Model.EnableVideo == true)
+                    {
+                        <i class="fas fa-check green-colour"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-times red-colour"></i>
+                    }
+                </span>
+            </div>
+            <div class="package-item">
+                @Html.Lang("Package.Address")
+                <span>
+                    @if (@Model.Address > 0)
+                    {
+                        <i class="fas fa-check green-colour"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-times red-colour"></i>
+                    }
+                </span>
+            </div>
+
+        </div>
+ 

@@ -1,0 +1,168 @@
+﻿@using EthioNegarit.WebUI.Application.ExtensionMethods
+@using EthioNegarit.Core.Domain.Enums;
+@model EthioNegarit.WebUI.ViewModels.CreateEditAdViewModel
+
+<!-- Main content -->
+@Html.HiddenFor(x => x.PackageId)
+@Html.HiddenFor(x => x.AdStatus)
+@Html.HiddenFor(x => x.Id)
+@Html.HiddenFor(x => x.IsTrial)
+<div class="row mb-4">
+    <section class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-3 d-none d-sm-inline-block">
+                    @Html.LabelFor(model => model.Name)
+                </div>
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "companyName form-control", @placeholder = @Html.LanguageString("Ad.Label.CompanyService")})
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 d-none d-sm-inline-block">
+                    @Html.LabelFor(model => model.Moto)
+                </div>
+                <div class="col-sm-9 float-rightt">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Moto, new { @class = "form-control", @placeholder = @Html.LanguageString("Ad.Label.MotoSlogan")})
+                        @Html.ValidationMessageFor(model => model.Moto)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 d-none d-sm-inline-block">
+                    @Html.LabelFor(model => model.Line)
+                </div>
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Line, new { @class = "form-control", @placeholder = @Html.LanguageString("Address.Label.Line") })
+                        @Html.ValidationMessageFor(model => model.Line)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 d-none d-sm-inline-block">
+                    @Html.LabelFor(model => model.Email)
+                </div>
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = @Html.LanguageString("Address.Label.Email") })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 d-none d-sm-inline-block">
+                   @Html.LabelFor(model => model.Link)
+                </div>
+                <div class="col-sm-9 float-right">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Link, new { @class = "form-control", @placeholder = "http://www.example.com/" })
+                                @Html.ValidationMessageFor(model => model.Link)
+                            </div>
+                        </div>
+                        <div class="col-sm-6 float-right">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.LinkText, new { @class = "form-control", @placeholder = "Web,SignUp, . . ." })
+                                @Html.ValidationMessageFor(model => model.LinkText)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-sm-3 d-none d-sm-inline-block">
+                    @Html.LabelFor(model => model.Address)
+                </div>
+                <div class="col-sm-9 float-right">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Address, new { @class = "companyAddress form-control", @placeholder = @Html.LanguageString("Address.Label.Country") })
+                        @Html.ValidationMessageFor(model => model.Address)
+                    </div>
+                </div>
+            </div>
+        @*|| !string.IsNullOrEmpty(@Model.AdStatus)*@
+@if (Model.AdStatus == AdStatus.Partial && Model.IsTrial == false)
+{
+        <div class="row">
+            <div class="col-sm-3 d-none d-sm-inline-block">
+                @Html.LabelFor(model => model.Month)
+            </div>
+            <div class="col-sm-9 float-right">
+                <div class="form-group">               
+                    @Html.DropDownListFor(model => model.Month,Model.Months,@Html.LanguageString("Ad.Label.SelectDuration"),new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Month)
+                </div>
+            </div>
+        </div>
+} 
+        <div class="row">
+            <div class="col-sm-3">
+                @Html.LabelFor(x => x.Image)
+            </div>
+            <div class="col-sm-7">
+                <div class="form-group createuploadfiles fileupload">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-default btn-file float-right">
+                                @Html.LanguageString("Post.Browse") 
+                                <input type="file" name="Image" id="Image" value="">
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" readonly="">
+                    </div>
+                    @Html.ValidationMessageFor(x => x.Image)
+                </div>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.Img))
+            {
+                <div class="col-sm-2">
+                    <img class="img-circle img-size-32 img-bordered-sm" src="@AppHelpers.CategoryImage(Model.Img, Model.Id,32)" alt="Img" />
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-sm-10">
+                @Html.LabelFor(model => model.EnableReminder)
+            </div>
+            <div class="col-sm-2 float-right">
+                <div class="form-group">
+                    @Html.CheckBoxFor(m => m.EnableReminder)
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 topiccontent">
+                <div class="editor-field editorholder">
+                    @Html.EditorFor(model => model.About, new { @class = "form-control", @placeholder = "About" })
+                    @Html.ValidationMessageFor(model => model.About)
+                </div>
+            </div>
+        </div>
+        <div class="row">    
+            <div class="col-sm-6">
+                <a role="button" href="@Url.Action("MyAds", "Ad")" class="btn btn-sm btn-default btn-block" title="@Html.LanguageString("Ad.Label.Back")">
+                    @Html.LanguageString("Ad.Label.Back")
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <div class="submit-holder">
+                    <button type="submit" class="btn btn-sm btn-success btn-block">
+                        @if (Model.Id == Guid.Empty)
+                        {
+                            @Html.LanguageString("Buttons.Submit")
+                        }
+                        else
+                        {
+                            @Html.LanguageString("Buttons.Edit")
+                        }
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

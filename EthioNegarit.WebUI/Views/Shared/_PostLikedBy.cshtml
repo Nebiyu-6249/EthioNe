@@ -1,0 +1,35 @@
+﻿@model EthioNegarit.WebUI.ViewModels.PostLikedByViewModel
+@{
+	var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+}
+@if (Model.Votes.Any())
+{
+    <div class="postlikedby clearfix">
+        <ul>
+            <li class="text">@Html.Lang("Post.LikedBy")</li>
+            @foreach (var vote in Model.Votes.Take(4))
+            {
+                <li>
+					@*            <a href="@Model.Post.User.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="right">
+		<img class="img-circle  @(Model.Post.User.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm")" src="@Model.Post.User.MemberImage(SiteConstants.Instance.GravatarPostSize)" alt="">
+	</a>*@
+					<a href="@vote.VotedByMembershipUser.NiceUrl" class="show-pop-delay" role="button" data-delay-show="300" data-delay-hide="1000" data-placement="bottom">
+						@*<a href="@vote.VotedByMembershipUser.NiceUrl">*@
+							<img class="img-circle  @(@vote.VotedByMembershipUser.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm")" src="@vote.VotedByMembershipUser.MemberImage(SiteConstants.Instance.GravatarLikedBySize)" alt="@vote.VotedByMembershipUser.UserName" title="@vote.VotedByMembershipUser.UserName">
+						</a>
+						@{
+							Html.RenderPartial("_memberInfo", @vote.VotedByMembershipUser);
+						}
+</li>
+            }
+            @if (Model.Votes.Count > 4)
+            {
+                <li class="text othersliked" data-postid="@Model.Post.Id">
+                    <a href="#">
+                        @(string.Format(Html.Lang("Post.OthersLiked"), (Model.Votes.Count - 4)))
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+}

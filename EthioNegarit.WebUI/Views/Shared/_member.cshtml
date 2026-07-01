@@ -1,0 +1,71 @@
+﻿@using MembershipUser = EthioNegarit.Core.Domain.Entities.MembershipUser
+@model MembershipUser
+
+@{
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+}
+    <div class="member-image">
+        <a href="@Model.NiceUrl" title="">
+            <img class="elevation-2 img-circle  @(Model.LastActivityDate > date ? "img-bordered-success" : "img-bordered-sm")" src="@AppHelpers.MemberImage(@Model.Avatar,@Model.Email,@Model.Id,SiteConstants.Instance.GravatarLeaderboardSize)" alt="Image">
+        </a>
+    </div>    
+    <h4 class="text-sm text-center m-0">
+                <a href="@Model.NiceUrl" title="@Model.UserName">
+                    @Model.UserName
+                </a>
+            </h4>
+    <h1 class="text-sm text-center">
+                @Html.LanguageString("Members.Label.DateJoined")               
+                @DatesUI.GetPrettyDate(@Model.CreateDate.ToString())
+            </h1>
+	<div class="text-center">
+		<div class="inline-item count-sm">
+			<span class="ml-4 inline-item-sm">
+                @Html.LanguageString("Members.Profile.Topics")				
+			</span>
+			<span class="inline-item-sm float-center">
+				@Model.Topics.Count
+			</span>
+		</div>
+		<div class="inline-item count-sm">
+			<span class="ml-4 inline-item-sm">
+                @Html.LanguageString("Members.Profile.Posts")
+				
+			</span>
+			<span class="inline-item-sm float-center">
+				@Model.Posts.Count
+			</span>
+		</div>
+		<div class="inline-item count-sm">
+			<span class="ml-4 inline-item-sm">
+                @Html.LanguageString("Members.Profile.Score")
+			</span>
+			<span class="inline-item-sm float-center">
+				@Model.TotalPoints
+			</span>
+		</div>
+		<div class="inline-item count-sm">
+			<span class="ml-4 inline-item-smm">
+                @Html.LanguageString("Members.Profile.Badges")				
+			</span>
+			<span class="inline-item-sm float-center">
+				@Model.Badges.Count()
+			</span>
+		</div>
+
+	</div>
+    <div class="member-socials">
+        @if (!string.IsNullOrEmpty(Model.Website))
+        {
+            <a href="@Model.Website" target="_blank"><i class="fas fa-globe"></i></a>
+        }
+        @if (!string.IsNullOrEmpty(Model.Facebook))
+        {
+            <a href="@Model.Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+        }
+        @if (!string.IsNullOrEmpty(Model.Twitter))
+        {
+            <a href="@Model.Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+        }    
+    </div>
+

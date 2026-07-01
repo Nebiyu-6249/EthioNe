@@ -1,0 +1,81 @@
+﻿@using System.Web.Mvc.Html
+@using EthioNegarit.WebUI.Application.ExtensionMethods
+@model EthioNegarit.WebUI.ViewModels.PrivacyPolicyViewModel
+@{
+    ViewBag.Title = @Html.LanguageString("Privacy.Policy.Title"); @Html.LanguageString("Forum.Name");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   /* <style>
+        .sidebar .nav-link {
+            font-size: 0.9rem;
+            font-weight: 400;
+           // padding: 0.48rem 1.5rem;
+            display: flex;
+            align-items: center;
+            padding: 0.3rem 1rem;              
+        }          
+    </style>*/
+}
+<aside class="main-sidebar mt-0  elevation-0">
+    @Html.Partial("_policyNav")
+</aside>
+<section class="content">
+    <div class="container-fluid">
+        <header class="hero">
+            <div class="hero-eyebrow">@Html.LanguageString("Privacy.Policy.Documentation")</div>
+            <h1>@Html.LanguageString("Forum.Name")<br><span>@Html.LanguageString("Privacy.Policy.Title")</span></h1>
+            <p class="hero-sub">@Html.LanguageString("Privacy.Policy.Description")</p>
+            <div class="hero-badges">
+                <span class="badge badge-outline">📅 @Html.LanguageString("Privacy.Policy.Effective") @Model.EffectiveDate</span>
+                <span class="badge badge-outline">🔄 @Html.LanguageString("Privacy.Policy.Version") @Model.Version</span>
+                <span class="badge badge-gold">⚖️ @Html.LanguageString("Privacy.Policy.GDPRCompliant")</span>
+                <span class="badge badge-gold">🔒 @Html.LanguageString("Privacy.Policy.CCPACompliant")</span>
+            </div>
+        </header>
+        <!-- NOTICE -->
+        <div class="notice" role="note">
+            <strong>⚠ @Html.LanguageString("Privacy.Notice.Title")</strong>
+            <p> @Html.Raw(string.Format(Html.LanguageString("PrivacyPolicy.Notice.Description"), @Html.Settings().ForumName, @Html.Settings().ForumUrl))</p>
+        </div>
+        @Html.Raw(Model.PrivacyPolicy)
+        <!-- FOOTER -->
+        <footer class="doc-footer">
+            <div class="footer-row">
+                <div>
+                    <strong style="color:rgba(255,255,255,0.7)"> @Html.Raw(Html.Settings().ForumName) - @Html.LanguageString("Privacy.Policy.Title")</strong><br>
+                    @Html.LanguageString("Privacy.Policy.Version") @Model.Version &nbsp;·&nbsp; @Html.LanguageString("Privacy.Policy.Effective") @Model.EffectiveDate &nbsp;·&nbsp; &copy; @DateTime.UtcNow.Year <a href="@(Html.Settings().ForumUrl)"> @Html.LanguageString("Forum.Name") </a>. @Html.LanguageString("Privacy.Terms.AllRights")<br>
+                    @Html.LanguageString("Privacy.Policy.PreparedIn")
+                </div>
+                <br>
+                <div class="footer-tags">
+                    <span class="footer-tag">GDPR</span>
+                    <span class="footer-tag">CCPA</span>
+                    <span class="footer-tag">PCI-DSS</span>
+                    <span class="footer-tag">AES-256</span>
+                    <span class="footer-tag">TLS 1.3</span>
+                    <span class="footer-tag">Argon2id</span>
+                </div>
+            </div>
+        </footer>
+        <button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="ወደ ላይ ተመለስ">↑</button>
+    </div>
+</section>
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('backTop').classList.toggle('visible', window.scrollY > 400);
+  });
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>

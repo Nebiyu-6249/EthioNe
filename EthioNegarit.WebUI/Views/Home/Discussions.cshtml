@@ -1,0 +1,66 @@
+﻿@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.ViewModels
+@model MemberDiscussionsViewModel
+@{
+  @*  ViewBag.Title = Html.Lang("SubNav.MyTopics");*@
+ ViewBag.Title = Html.Lang("Topic.MyTopics");
+Layout = "~/Views/Shared/_Layout.cshtml";
+var totalCount = Convert.ToInt32(Model.TotalCount);
+ViewBag.Canonical = Html.Raw(AppHelpers.CanonicalPagingTag(totalCount, Html.Settings().TopicsPerPage, Html));
+}
+<div class="popup popup-top">
+</div>
+<!-- /.page-header -->
+	<div class="page-header">
+		<span class="width-50">
+			@ViewBag.Title	
+            	
+		</span>
+        <span class="width-25">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.Action("CreateTopicButton", "Topic")
+            }
+        </span>
+	</div>
+<section class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<section class="col-sm-9">
+				<div class="postedin">
+					@if(@Model.Topics.Any())
+						{
+						<ul class="contents-list">
+							@foreach(var topic in Model.Topics)
+								{
+								<li class="content-fluid">
+									@{
+					Html.RenderPartial("_Topic", topic);
+									}
+								</li>
+											}						
+						</ul>
+                        if (Model.TotalPages > 1)
+                {
+                            <ul>
+                                <li class="pagination">
+                                    @Html.Pager(Convert.ToInt32(Model.PageIndex), Html.Settings().TopicsPerPage, totalCount, null, "Discussions", "Home")
+                                </li>
+                            </ul>
+                        }
+                                        }
+                                        else
+                                        {
+											<p>No Discussions Right Now</p>
+											}
+
+				</div>
+			</section>
+			<section class="col-sm-3 side-panel">
+				@Html.Partial("_CommonSideNav")
+			</section>
+		</div>
+	</div>
+</section>
+<div class="popup popup-bottom">
+</div>

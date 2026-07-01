@@ -1,0 +1,47 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model RecentlyVisitedTopicsViewModel
+@{
+    ViewBag.Title = @Html.Lang("Topic.RecentlyVisited");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="popup popup-top">
+</div>
+<div class="page-header">
+    <span class="d-nonee d-sm-inline-blockk">
+        @ViewBag.Title
+    </span>
+@if (Model.Topics.Any())
+{
+    <span class="width-25">
+        <a href="@Url.Action("ClearVisited", "Topic")" class="btn btn-block btn-xs btn-success">
+            @Html.LanguageString("Topic.ClearVisited")
+        </a>
+    </span>
+    }
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-sm-9">
+                <ul class="contents-list">
+                    @foreach (var topic in Model.Topics)
+                    {
+                        <li class="content-fluid">
+                            @{
+                                Html.RenderPartial("_Topic", topic);
+                            }
+                        </li>
+                                }
+                </ul>
+            </section>
+            <section class="col-sm-3 side-panel">
+                <div class="panel-content">
+                    @Html.Partial("_CommonSideNav")
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+<div class="popup popup-bottom">
+</div>
+

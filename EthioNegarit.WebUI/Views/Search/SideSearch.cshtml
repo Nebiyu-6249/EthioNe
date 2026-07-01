@@ -1,0 +1,19 @@
+﻿@{
+    //  var searchFor = Html.Lang("Side.Search.SearchFor") + "post";
+   // var searchFor = Html.Lang("Search . . .");
+   var searchFor = Html.Lang("Side.Search.SearchFor");
+}
+<div class="search-box">
+    @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+    {
+    <div class="input-group input-group-sm">
+        @Html.TextBox("term", null, new { @class = "form-control", placeholder = searchFor })
+        <span class="input-group-btn">
+            <button class="btn btn-default btn-sm">
+                <i class="fas fa-search fa-fw"></i>
+            </button>
+        </span>
+    </div>
+        }
+</div>
+        

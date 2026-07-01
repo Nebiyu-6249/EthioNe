@@ -1,0 +1,45 @@
+﻿@model EthioNegarit.WebUI.ViewModels.CreateMessageViewModel
+@{
+    var messagemarker = "chatmessagemarker";
+}
+@if (Model.InReplyTo != null && !string.IsNullOrEmpty(Model.ReplyToUsername))
+{
+    messagemarker = "chatmessagemarker" + Model.InReplyTo;
+    <div class="showchatreplyto">
+        @Html.Lang("Post.ReplyingTo")
+        <strong>@Model.ReplyToUsername</strong>
+        <span class="text-sm float-right mr-3">
+            <a href="#" role="button" type="reset" class="cancelReplay" data-roomid="@Model.RoomId" title="@Html.LanguageString("Button.Cancel")" )>
+                @Html.LanguageString("Button.Cancel")
+                <i class="text-smm fas fa-times ml-2"></i>
+            </a>
+        </span>
+        <span class="text-sm float-right mr-3">
+       <a href="#" role="button" class="show-messages" data-id="@Model.ReplyToUserId" data-name="@string.Concat(Html.Lang("PM.Title"), Model.ReplyToUsername)" title="@Html.LanguageString("PM.SentPrivateMessage")" )>
+    <i class="text-smm far fa-envelope mr-2"></i>
+        @Html.LanguageString("PM.SentPrivateMessages")
+</a>
+        </span>
+
+</div>
+}
+@using (Ajax.BeginForm("CreateMessage", "Chat", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+ //   LoadingElementId = "createchatmessagewait",
+   // OnSuccess = "AjaxChatSuccess()",
+  // UpdateTargetId = messagemarker,
+   // OnBegin = "AjaxChatBegin()"
+}, new { @id = "chatmessageform", @class = "form-createchatmessage" }))
+{
+
+    @Html.HiddenFor(x => x.RoomId)
+    @Html.HiddenFor(x => x.InReplyTo)
+    @Html.HiddenFor(x => x.IsReplay)
+    <div class="input-bar">
+        <div class="input-wrap">          
+             <textarea class="form-control required messageInput" id="messageInput" name="Message" rows="1" placeholder="@Html.LanguageString("Chat.Placeholder")" maxlength="2000" autocomplete="off"></textarea>
+                 <button class="sendButton" id="sendButton" type="submit" disabledd>@Html.LanguageString("Button.Send")</button>
+        </div>
+    </div>
+            }

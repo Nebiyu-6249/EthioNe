@@ -1,0 +1,48 @@
+﻿@using EthioNegarit.WebUI.ViewModels
+@model PublicMemberListViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Html.LanguageString("SubNav.Members");
+    var date = DateTime.UtcNow.AddMinutes(-AppConstants.TimeSpanInMinutesToShowMembers);
+}
+<div class="popup popup-top">
+</div>
+<!-- Page header -->
+	<div class="page-header">
+		<span class="width-25 d-none d-sm-inline-block">
+			<a href="@Url.Action("Search","Members")" class="">
+				<i class="ethicon fas fa-users"></i>
+				@ViewBag.Title
+			</a>
+		</span>
+		<span class="width-50">
+			@using(Html.BeginForm("Search", "Members", FormMethod.Get))
+				{
+				<span class="input-group input-group-sm">
+					@Html.TextBoxFor(x => Model.Search, new { @class = "form-control", placeholder = @Html.LanguageString("Members.SearchMembers")})
+					<span class="input-group-btn">
+						<button class="btn btn-default btn-sm">
+							<i class="fas fa-search fa-fw"></i>
+						</button>
+					</span>
+				</span>
+					@Html.HiddenFor(x => x.PageIndex)
+				}
+		</span>
+	</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="box-container">
+            @foreach (var member in Model.Members)
+            {
+                <div class="box member">
+                    @Html.Partial("_member", member)
+                </div>
+            }
+                </div>
+    </div>
+</section>
+
+<div class="popup popup-bottom">
+</div>
+

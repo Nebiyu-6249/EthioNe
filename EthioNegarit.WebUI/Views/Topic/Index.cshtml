@@ -1,0 +1,82 @@
+﻿@using EthioNegarit.Core.Domain.Enums
+@using EthioNegarit.WebUI.Application
+@using EthioNegarit.WebUI.ViewModels
+@model ActiveTopicsViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+    ViewBag.Title = @Html.Lang("Layout.Nav.Discussions");
+    ViewBag.Canonical = Html.Raw(AppHelpers.CanonicalPagingTag(totalCount, Html.Settings().TopicsPerPage, Html));
+    var qs = Request.QueryString[AppConstants.TopicViewOrder] ?? @HttpContext.Current.Request.Url.AbsoluteUri;
+}
+<div class="popup popup-top">
+</div>
+<div class="page-header">
+    <span class="width-255 d-none d-sm-inline-block mr-4">
+        @ViewBag.Title
+    </span>
+    @if ((Model.TotalCount - 1) > 0)
+    {
+        <span class="topicpostorderfilter text-centerr ml-44 width-755">
+            <text>
+                <span class="d-none d-sm-inline-block text-muted mr-1">
+                    @Html.LanguageString("PostFilter.OrderBy")
+                </span>
+                <a class="orderfilerlink @(string.IsNullOrEmpty(qs) ? "orderfilerlinkactive" : "")" href="@Url.Action("Index", "Topic")">@Html.LanguageString("PostFilter.Recent")</a> |
+                <a class="orderfilerlink @(qs.Contains(TopicViewOrder.Popular.ToString()) ? "orderfilerlinkactive" : "")" href="?@AppConstants.TopicViewOrder=@TopicViewOrder.Popular.ToString()">@Html.LanguageString("PostFilter.Popular")</a> |
+                <a class="orderfilerlink @(qs.Contains(TopicViewOrder.View.ToString()) ? "orderfilerlinkactive" : "")" href="?@AppConstants.TopicViewOrder=@TopicViewOrder.View.ToString()">@Html.LanguageString("PostFilter.Votes")</a>
+            </text>
+        </span>
+    }
+    <span class="d-none d-sm-inline-block mr-0">
+
+        @if (Html.Settings().EnableRSSFeeds)
+        {
+            <a href="#" class="rsssubscribe latestrsslink rsslink" data-action="latest" data-slug="" title="@Html.LanguageString("Home.Rss")" )>
+                <i class="ethicon fa fa-rss-square orange-colour"></i>
+            </a>
+        }
+    </span>
+ 
+        @if (User.Identity.IsAuthenticated)
+        {
+            <span class="width-25 ml-lg-0">
+                @Html.Action("CreateTopicButton", "Topic")
+            </span>
+        }
+    
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-sm-9">
+                <ul class="contents-list">
+                    @foreach (var topic in Model.Topics)
+                    {
+                        <li class="content-fluid">
+                            @{
+                                Html.RenderPartial("_Topic", topic);
+                            }
+                        </li>
+                                }
+                </ul>
+
+                @if (Model.TotalPages > 1)
+                {
+                    <ul>
+                        <li class="pagination">                         
+                                @Html.Pager(Convert.ToInt32(Model.PageIndex), Html.Settings().TopicsPerPage, totalCount, new {order= qs.ToString() })
+                         </li>
+                    </ul>
+                }
+            </section>
+            <section class="col-sm-3 side-panel">
+                <div class="panel-content">
+                    @Html.Partial("_CommonSideNav")
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+<div class="popup popup-bottom">
+</div>

@@ -1,0 +1,56 @@
+﻿<footer>
+    <div class="container footer_container">
+        <div class="footer-one">
+            <a href="@Html.Settings().ForumUrl" class="footer-logo">
+                <h4>@Html.Settings().ForumName</h4>
+                <p>@Html.LanguageString("Site.Moto")</p>
+            </a>
+        </div>
+        <div class="footer-two">
+            <h4>@Html.LanguageString("Home.Permalinks")</h4>
+            <ul class="permalinks">
+                <li><a href="@Url.Action("Index", "Topic")">@Html.LanguageString("Layout.Nav.Discussions")</a></li>
+                <li><a href="@Url.Action("FAQ","Home")">@Html.LanguageString("Help.FAQ")</a></li>
+                @if (Html.Settings().EnableAd)
+                {
+                    <li><a href="@Url.Action("Index", "Ad")">@Html.LanguageString("SubNav.AdService")</a></li>
+                }
+            </ul>
+        </div>
+        <div class="footer-three">
+            <h4 class="text-centerr">@Html.Lang("Home.PrivacyAndSecurity")</h4>
+            <ul class="privacy">
+                <li><a href="@Url.Action("Index", "Privacy")">@Html.LanguageString("Privacy.Policy.Title")</a></li>
+                <li><a href="@Url.Action("Terms", "Privacy")">@Html.LanguageString("Privacy.Terms.Title")</a></li>
+            </ul>
+        </div>
+        <div class="footer-four">
+            <h4>@Html.LanguageString("Home.ContactUs")</h4>
+            <ul class="privacy">
+                <li><a href="@Url.Action("About", "Home")">@Html.LanguageString("Layout.Nav.About")</a></li>
+                <li><a href="@Url.Action("Contact", "Home")">@Html.LanguageString("Layout.Nav.SendUsMessage")</a></li>
+                <li>@Html.Raw(Html.Settings().NotificationReplyEmail)</li>
+            </ul>
+            <ul class="footer-socials">
+@if (!string.IsNullOrEmpty(Html.Settings().FaceBookUrl))
+{
+    <li><a href="@(Html.Settings().FaceBookUrl)" target="_blank"><i class="fab fa-facebook blue-colour"></i></a></li>
+}
+@if (!string.IsNullOrEmpty(Html.Settings().TwitterUrl))
+{
+    <li><a href="@(Html.Settings().TwitterUrl)" target="_blank"><i class="fab fa-twitter"></i></a></li>
+}             
+            </ul>
+        </div>
+    </div>
+    @*******Footer Copy Right********@
+    <div class="footer-copyright">
+        <small>@Html.LanguageString("Text.Copyright") &copy; @DateTime.UtcNow.Year <a href="@(Html.Settings().ForumUrl)">@Html.Settings().ForumName</a>.</small>
+        @Html.LanguageString("Text.AllRights")
+        <div class="float-right d-none d-sm-inline-block">@Html.Partial("_GetCurrentVersion")</div>
+    </div>
+    @if (!string.IsNullOrEmpty(Html.Settings().CustomFooterCode))
+            {
+        @Html.Raw(Html.Settings().CustomFooterCode)
+    }
+</footer>

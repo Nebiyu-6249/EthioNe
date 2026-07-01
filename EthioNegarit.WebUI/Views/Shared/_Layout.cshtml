@@ -1,0 +1,79 @@
+﻿@using EthioNegarit.Core.Domain.General
+@{
+    // Global Stuff
+    var themeName = Html.Settings().Theme;
+    var theme = new Theme
+    {
+        ThemeName = themeName,
+        ThemePath = string.Concat(SiteConstants.Instance.ThemeRootFolder, themeName)
+    };
+    TempData[AppConstants.GlobalClass] = Convert.ToBoolean(PageData[AppConstants.IsMobileDevice]) ? "mobile" : "desktop";
+    TempData[AppConstants.CurrentAction] = ViewContext.RouteData.GetRequiredString("action").ToLower();
+    TempData[AppConstants.CurrentController] = ViewContext.RouteData.GetRequiredString("controller").ToLower();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.MetaDesc" />
+    <meta property="og:url" content="@HttpContext.Current.Request.Url.AbsoluteUri" />
+    <meta property="og:description" content="@ViewBag.MetaDesc" />
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:site_name" content="@Html.Settings().ForumName" />
+    <meta property="og:type" content="website" />
+    @RenderSection("SocialMeta", false)
+    @ViewBag.Canonical
+    @Html.Partial("_StyleSheets", theme)
+    <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- Favicon -->
+    <link rel="icon" href="@Url.Content("~/Content/images/favicon.ico")" sizes="any">
+    <link rel="icon" href="@Url.Content("~/Content/images/favicon-32x32.png")" type="image/png">
+    <link rel="apple-touch-icon" href="@Url.Content("~/Content/images/apple-touch-icon.png")">
+    @Html.Partial("_JavaScript", theme)
+    @RenderSection("Header", false)
+    @if (!string.IsNullOrEmpty(Html.Settings().CustomHeaderCode))
+    {
+        @Html.Raw(Html.Settings().CustomHeaderCode)
+    }
+</head>
+<body class="@TempData[AppConstants.GlobalClass].ToString() loggedin-@(User.Identity.IsAuthenticated.ToString().ToLower()) hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        @Html.Partial("_Header")
+        @Html.Partial("_SideNav")           
+        <div class="content-wrapper"> 
+          @Html.Partial("_setting")    
+                @Html.Partial("_EmailConfirmationNotice")
+                @Html.Partial("_GenericMessage")
+                @Html.Partial("_NoScript")
+                @RenderBody()
+                @Html.Partial("_slideOutPanel")              
+            <div id="copylink" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Copy Link</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="modal-copylink">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="memberreport" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body" id="modal-memberreport">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+﻿@using EthioNegarit.Core.Domain.Entities
+@model EthioNegarit.WebUI.Areas.Admin.ViewModels.ListChatRoomsViewModel
+@{
+    var chatRooms = Model.ChatRooms.ToList();
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h5>All ChatRoom</h5>
+    </div>
+    <div class="panel-content">
+        <div id="container">
+            <ul>
+                @foreach (var room in chatRooms)
+                {
+                    <li class="maincategory">
+                        <a href="@Url.Action("EditChatRoom", new { id = room.Id })">
+                            @Html.Raw(room.Name)
+                        </a>
+                     
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+@*
+@helper GetSubCategories(Category cat)
+{
+    var subCategories = Model.Categories.Where(x => x.ParentCategory != null && x.ParentCategory.Id == cat.Id).ToList();
+    if (subCategories.Any())
+    {
+        <ul>
+            @foreach (var subCat in subCategories)
+            {
+                <li>
+                    <a href="@Url.Action("EditCategory", new { id = subCat.Id })">
+                        @Html.Raw(subCat.Name)
+                    </a>
+                    @GetSubCategories(subCat)
+                </li>
+            }
+        </ul>
+    }
+}
+*@

@@ -1,0 +1,167 @@
+﻿
+//
+/*#region ================= Main Member List ================ */
+//
+
+.member {
+    padding: 1rem;
+    &:hover {
+        .member-socials {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+        }
+    }
+}
+
+.member-socials {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    padding: 0.6rem;
+    background-color: darken($gray-100, 8%);
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    transform: translateY(-50%);
+
+    &,
+    &::before {
+        display: none;
+    }
+
+    a {
+        color: $sidebar-light-color;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.member-image {
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    img {
+        // filter: saturate(0);
+        height: 60px;
+        width: 60px;
+
+         @media (max-width: breakpoint-max(xs)) {
+        height: 40px;
+        width: 40px;
+             }
+    }
+}
+
+//
+/*#endregion ============== Main Member List  End  ====================  */
+//
+
+//
+/*#region ================= Side Member List ================ */
+//
+.member-side {
+    .member-header {
+        @include clearfix();
+        height: 50px;
+        padding: 1px;
+
+        .image {
+            padding: 2px;
+            display: block;
+            float: left;
+            width: 20%;
+            text-align: center;
+
+            img {
+                height: 40px;
+                width: 40px;
+            }
+        }
+
+        .member-name {
+            margin-left: 60px;
+            display: block;
+            font-size: 16px;
+            font-weight: 100;
+            margin-top: 10px;
+            color: lighten($dark, 1%);
+        }
+    }
+}
+
+
+.member-info {
+    color: $dark;
+    font-size: 13px;
+
+    .date {
+        display: block;
+        color: $gray-600;
+        font-size: 13px;
+        font-weight: 100;
+
+        span {
+            display: inline-block;
+        }
+    }
+}
+
+//
+/*#endregion ============== Side Member List End  ====================  */
+//
+// Leaderboard
+
+
+.member-slim {
+    color: $dark;
+    font-size: 13px;
+    display: inline;
+    flex-flow: column;
+    .image {
+        width: 20%;
+        //  text-align: center;
+        justify-content: center; /* Horizontally center */
+        align-items: center; /* Vertically center */
+    }
+    .member-profile {
+  display: inline-block;
+  padding-top:7px;
+    }
+    
+.member-profile{
+    > .username,.post-count{
+      display: block; 
+    }
+}
+    .member-point {
+        display: inline;
+        float: right;
+        margin-left: auto;
+        right: 0;
+    }
+}
+
+@include dark-mode () {
+    .member-header {
+        background-color: lighten($dark, 6%);
+
+        &:hover {
+            background-color: lighten($dark, 6%);
+            // color: darken($gray-200, 25%);
+        }
+
+        .member-name {
+            color: darken($gray-200, 25%);
+        }
+    }
+    .member-name {
+        color: darken($gray-200, 25%);
+        border-color: darken($gray-200, 25%);
+    }
+      .thisyearsstars {
+         border-left: 1px $border-color dotted; 
+
+    }
+}

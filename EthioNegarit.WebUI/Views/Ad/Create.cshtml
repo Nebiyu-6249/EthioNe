@@ -1,0 +1,25 @@
+﻿@using EthioNegarit.WebUI.Application.ExtensionMethods
+@model EthioNegarit.WebUI.ViewModels.CreateEditAdViewModel
+@{
+    ViewBag.Title = @Html.LanguageString("Ad.Label.Create");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Page Header -->
+    <div class="page-header">
+            <span class="width-50">
+                @ViewBag.Title
+            </span>
+            <span class="width-50">            
+            </span>
+    </div>
+<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+				@using (Html.BeginForm("Create", "Ad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+				{
+					@Html.ValidationSummary(false)
+					@Html.AntiForgeryToken()
+					@Html.Partial("_createEditAd", Model)
+				}
+		</div>
+	</section>

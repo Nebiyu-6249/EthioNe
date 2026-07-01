@@ -1,0 +1,78 @@
+﻿@using EthioNegarit.WebUI.Application.ExtensionMethods
+@model EthioNegarit.WebUI.ViewModels.MovePostViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Html.LanguageString("Post.Move.PostTitle");
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-0">
+            <div class="col-sm-9">
+                <p>@Html.Lang("Post.Move.Description")</p>
+            </div>
+            <div class="col-sm-3">
+                    <a href="@Html.Raw(Model.Post.Post.Topic.NiceUrl)" class="btn btn-outline-success btn-xs btn-block">
+                        @Html.LanguageString("Back")
+                    </a>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row mb-0">
+            <div class="col-sm-12">
+                @using (Html.BeginForm("MovePost", "post", FormMethod.Post, new { @class = "form-report" }))
+                {
+                    @Html.HiddenFor(x => Model.PostId)
+                    @Html.ValidationSummary(false)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TopicId)
+                        @Html.DropDownListFor(model => model.TopicId, Model.LatestTopics, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TopicId)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TopicTitle)
+                        @Html.TextBoxFor(model => model.TopicTitle, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TopicTitle)
+                    </div>
+
+                    <div class="checkbox">
+                        @using (Html.BeginLabelFor(m => m.MoveReplyToPosts, new { @class = "checkbox" }))
+                        {
+                            @Html.CheckBoxFor(m => m.MoveReplyToPosts)
+                        }
+                        @Html.ValidationMessageFor(m => m.MoveReplyToPosts)
+                    </div>
+
+                    <div class="submit-holder">
+                        <div class="row mb-0">
+                            <div class="col-sm-6">
+                                <a href="@Html.Raw(Model.Post.Post.Topic.NiceUrl)" class="btn btn-outline-success btn-xs btn-block">
+                                    @Html.LanguageString("Back")
+                                </a>
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="submit" class="btn btn-outline-success btn-xs btn-block">
+                                    @Html.LanguageString("Buttons.Save")
+                                </button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                }
+                        </div>
+                    </div>
+
+        <div class="row mb-0">
+            <div class="col-sm-12">
+                <p>&nbsp;</p>
+                @Html.Partial("_Post", Model.Post)
+            </div>
+        </div>
+    </div>
+</section>

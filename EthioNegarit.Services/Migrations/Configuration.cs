@@ -1,0 +1,353 @@
+namespace EthioNegarit.Services.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+    using Core.Constants;
+    using Core.Domain.Entities;
+    using Utilities;
+    using System.Collections.Generic;
+    using System.Data.SqlTypes;
+    using System.IO;
+    using System.Text;
+    using System.Web.Hosting;
+    internal sealed class Configuration : DbMigrationsConfiguration<EthioNegarit.Services.Data.Context.EthioNegaritContext>
+    {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
+        }
+        protected override void Seed(Data.Context.EthioNegaritContext context)
+        {
+            #region Initial Installer Code
+            // Add the language - If it's not already there
+            const string langCulture = "en-GB";
+            var language = context.Language.FirstOrDefault(x => x.LanguageCulture == langCulture);
+            if (language == null)
+            {
+                var cultureInfo = LanguageUtils.GetCulture(langCulture);
+                language = new Language
+                {
+                    Name = cultureInfo.EnglishName,
+                    LanguageCulture = cultureInfo.Name,
+                };
+                context.Language.Add(language);
+                // Save the language
+                context.SaveChanges();
+                // Now add the default language strings
+                var file = HostingEnvironment.MapPath(@"~/Installer/en-GB.csv");
+                var commaSeparator = new[] { ',' };
+                if (file != null)
+                {
+                    // Unpack the data
+                    var allLines = new List<string>();
+                    using (var streamReader = new StreamReader(file, Encoding.UTF8, true))
+                    {
+                        while (streamReader.Peek() >= 0)
+                        {
+                            allLines.Add(streamReader.ReadLine());
+                        }
+                    }
+                    // Read the CSV file and import all the keys and values
+                    var lineCounter = 0;
+                    foreach (var csvline in allLines)
+                    {
+                        var line = csvline;
+                        if (line.StartsWith("\""))
+                        {
+                            line = line.Replace("\"", "");
+                        }
+                        lineCounter++;
+                        // Only split on the first comma, so the value strings can have commas in
+                        var keyValuePair = line.Split(commaSeparator, 2, StringSplitOptions.None);
+                        // Get the key and value
+                        var key = keyValuePair[0];
+                        var value = keyValuePair[1];
+                        if (string.IsNullOrEmpty(key))
+                        {
+                            // Ignore empty keys
+                            continue;
+                        }
+                        if (string.IsNullOrEmpty(value))
+                        {
+                            // Ignore empty values
+                            continue;
+                        }
+                        // Trim both the key and value
+                        key = key.Trim();
+                        value = value.Trim();
+                        // Create the resource key
+                        var resourceKey = new LocaleResourceKey
+                        {
+                            Name = key,
+                            DateAdded = DateTime.UtcNow,
+                        };
+                        context.LocaleResourceKey.Add(resourceKey);
+                        // Set the value for the resource
+                        var stringResource = new LocaleStringResource
+                        {
+                            Language = language,
+                            LocaleResourceKey = resourceKey,
+                            ResourceValue = value
+                        };
+                        context.LocaleStringResource.Add(stringResource);
+                    }
+                    // Save the language strings
+                    context.SaveChanges();
+                }
+                var saveRoles = false;
+                // Create the admin role if it doesn't exist
+                var adminRole = context.MembershipRole.FirstOrDefault(x => x.RoleName == AppConstants.AdminRoleName);
+                if (adminRole == null)
+                {
+                    adminRole = new MembershipRole { RoleName = AppConstants.AdminRoleName };
+                    context.MembershipRole.Add(adminRole);
+                    saveRoles = true;
+                }
+                // Create the Standard role if it doesn't exist
+                var standardRole = context.MembershipRole.FirstOrDefault(x => x.RoleName == SiteConstants.Instance.StandardMembers);
+                if (standardRole == null)
+                {
+                    standardRole = new MembershipRole { RoleName = SiteConstants.Instance.StandardMembers };
+                    context.MembershipRole.Add(standardRole);
+                    saveRoles = true;
+                }
+                // Create the Guest role if it doesn't exist
+                var guestRole = context.MembershipRole.FirstOrDefault(x => x.RoleName == AppConstants.GuestRoleName);
+                if (guestRole == null)
+                {
+                    guestRole = new MembershipRole { RoleName = AppConstants.GuestRoleName };
+                    context.MembershipRole.Add(guestRole);
+                    saveRoles = true;
+                }
+                if (saveRoles)
+                {
+                    context.SaveChanges();
+                }
+                // Create Start Section
+                if (!context.Section.Any())
+                {
+                    // Doesn't exist so add Start Section
+                    const string sectionName = "Topics and Article";
+                    var section = new Section
+                    {
+                        Name = sectionName,
+                        SortOrder = 1,
+                        DateCreated = DateTime.UtcNow
+                    };
+                    context.Section.Add(section);
+                    context.SaveChanges();
+                }
+                // Create Start Category
+                if (!context.Category.Any())
+                {
+                    // Doesn't exist so add category
+                    const string catName = "Articles";
+                    var section = context.Section.FirstOrDefault();
+                    var cat = new Category
+                    {
+                        Name = catName,
+                        ModeratePosts = false,
+                        ModerateTopics = false,
+                        Slug = ServiceHelpers.CreateUrl(catName),
+                        Section = section,
+                        DateCreated = DateTime.UtcNow
+                    };
+                    context.Category.Add(cat);
+                    context.SaveChanges();
+                }
+                // if the settings already exist then do nothing
+                // If not then add default settings
+                var currentSettings = context.Setting.FirstOrDefault();
+                if (currentSettings == null)
+                {
+                    // create the settings
+                    var settings = new Settings
+                    {
+                        ForumName = "EthioPical",
+                        ForumUrl = "http://www.ethiopical.com",
+                        IsClosed = false,
+                        EnableRSSFeeds = true,
+                        DisplayEditedBy = true,
+                        EnablePostFileAttachments = false,
+                        EnableMarkAsSolution = true,
+                        EnableSpamReporting = true,
+                        EnableMemberReporting = true,
+                        EnableEmailSubscriptions = true,
+                        ManuallyAuthoriseNewMembers = false,
+                        EmailAdminOnNewMemberSignUp = false,
+                        TopicsPerPage = 10,
+                        PostsPerPage = 10,
+                        ActivitiesPerPage = 20,
+                        EnablePrivateMessages = true,
+                        EnablePrivateMessagesAttachements = true,
+                        MaxPrivateMessagesPerMember = 50,
+                        PrivateMessageFloodControl = 1,
+                        EnableSignatures = false,
+                        EnablePoints = true,
+                        PointsAllowedToVoteAmount = 1,
+                        PointsAllowedForExtendedProfile = 1,
+                        PointsAddedPerPost = 1,
+                        PointsAddedForSolution = 4,
+                        PointsDeductedNagativeVote = 2,
+                        PointsAddedPostiveVote = 2,
+                        AdminEmailAddress = "abebedure@gmail.com",
+                        NotificationReplyEmail = "noreply@myemail.com",
+                        SMTPEnableSSL = false,
+                       // Theme = "EthioNegarit",
+                       Theme = "Ethiopical",
+                        NewMemberStartingRole = standardRole,
+                        DefaultLanguage = language,
+                        EnableAkisment = false,
+                        EnableSocialLogins = false,
+                        EnablePolls = true,
+                        MarkAsSolutionReminderTimeFrame = 7,
+                        EnableEmoticons = true,
+                        SuspendRegistration = false,
+                        DisableStandardRegistration = false,                     
+                        PointsPerView = 1,                        
+                        AdCostPerMonth = 3000,
+                        TempLockedDays = 3,                   
+                        EnableAd = true,
+                        EnableChat = true,
+                        SpamCountToBan = 10,
+                        PointsDeductPerSpam = 10,
+                        ReportCountsToLock = 30,
+                        ReportCountsToFlaggedAsSpam = 30,
+                        AdTrialDays = 7
+                    };
+                    context.Setting.Add(settings);
+                    context.SaveChanges();
+                }
+                // If the admin user exists then don't do anything else
+                const string adminUsername = "admin";
+                if (context.MembershipUser.FirstOrDefault(x => x.UserName == adminUsername) == null)
+                {
+                    // create the admin user and put him in the admin role
+                    var admin = new MembershipUser
+                    {
+                        Email = "abebedure@gmail.com",
+                        UserName = adminUsername,
+                        Password = "#AbebeDure#A*0911992743#a*",
+                        IsApproved = true,
+                        DisableEmailNotifications = false,
+                        DisablePosting = false,
+                        DisablePrivateMessages = true,
+                        CreateDate = DateTime.UtcNow,
+                        LastLockoutDate = (DateTime)SqlDateTime.MinValue,
+                        LockoutEndDate = (DateTime)SqlDateTime.MinValue,
+                        LastPasswordChangedDate = (DateTime)SqlDateTime.MinValue,
+                        LastLoginDate = DateTime.UtcNow,
+                        LastActivityDate = (DateTime)SqlDateTime.MinValue,
+                        IsLockedOut = false,
+                        NotificationLastChecked = (DateTime)SqlDateTime.MinValue,
+                        LoginFailedCount = 0,
+                        LoginCount = 0,
+                        Slug = ServiceHelpers.CreateUrl(adminUsername)
+                    };
+                    // Hash the password
+                    var salt = StringUtils.CreateSalt(AppConstants.SaltSize);
+                    var hash = StringUtils.GenerateSaltedHash(admin.Password, salt);
+                    admin.Password = hash;
+                    admin.PasswordSalt = salt;
+                    // Put the admin in the admin role
+                    admin.Roles = new List<MembershipRole> { adminRole };
+                    context.MembershipUser.Add(admin);
+                    context.SaveChanges();
+                }
+                // Create the initial category permissions
+                // Edit Posts
+                if (context.Permission.FirstOrDefault(x => x.Name == SiteConstants.Instance.PermissionEditPosts) == null)
+                {
+                    var permission = new Permission { Name = SiteConstants.Instance.PermissionEditPosts };
+                    context.Permission.Add(permission);
+                    // NOTE: Because this is null - We assumed it's a new install so carry on checking and adding the other permissions
+                    // Read Only
+                    if (context.Permission.FirstOrDefault(x => x.Name == SiteConstants.Instance.PermissionReadOnly) == null)
+                    {
+                        var p = new Permission { Name = SiteConstants.Instance.PermissionReadOnly };
+                        context.Permission.Add(p);
+                    }
+                    // Delete Posts
+                    if (context.Permission.FirstOrDefault(x => x.Name == SiteConstants.Instance.PermissionDeletePosts) == null)
+                    {
+                        var p = new Permission { Name = SiteConstants.Instance.PermissionDeletePosts };
+                        context.Permission.Add(p);
+                    }
+                    // Sticky Topics
+                    if (context.Permission.FirstOrDefault(x => x.Name == SiteConstants.Instance.PermissionCreateStickyTopics) ==
+                        null)
+                    {
+                        var p = new Permission { Name = SiteConstants.Instance.PermissionCreateStickyTopics };
+                        context.Permission.Add(p);
+                    }
+                    // Lock Topics
+                    if (context.Permission.FirstOrDefault(x => x.Name == SiteConstants.Instance.PermissionLockTopics) == null)
+                    {
+                        var p = new Permission { Name = SiteConstants.Instance.PermissionLockTopics };
+                        context.Permission.Add(p);
+                    }
+                    // Vote In Polls
+                    if (context.Permission.FirstOrDefault(x => x.Name == SiteConstants.Instance.PermissionVoteInPolls) == null)
+                    {
+                        var p = new Permission { Name = SiteConstants.Instance.PermissionVoteInPolls };
+                        context.Permission.Add(p);
+                    }
+                    // Create Polls
+                    if (context.Permission.FirstOrDefault(x => x.Name == SiteConstants.Instance.PermissionCreatePolls) == null)
+                    {
+                        var p = new Permission { Name = SiteConstants.Instance.PermissionCreatePolls };
+                        context.Permission.Add(p);
+                    }
+                    // Create Topics
+                    if (context.Permission.FirstOrDefault(x => x.Name == SiteConstants.Instance.PermissionCreateTopics) == null)
+                    {
+                        var p = new Permission { Name = SiteConstants.Instance.PermissionCreateTopics };
+                        context.Permission.Add(p);
+                    }
+
+                    // Attach Files
+                    if (context.Permission.FirstOrDefault(x => x.Name == SiteConstants.Instance.PermissionAttachFiles) == null)
+                    {
+                        var p = new Permission { Name = SiteConstants.Instance.PermissionAttachFiles };
+                        context.Permission.Add(p);
+                    }
+                    // Deny Access
+                    if (context.Permission.FirstOrDefault(x => x.Name == SiteConstants.Instance.PermissionDenyAccess) == null)
+                    {
+                        var p = new Permission { Name = SiteConstants.Instance.PermissionDenyAccess };
+                        context.Permission.Add(p);
+                    }
+                    // === Global Permissions === //
+                    // Deny Access
+                    if (context.Permission.FirstOrDefault(x => x.Name == SiteConstants.Instance.PermissionEditMembers) == null)
+                    {
+                        var p = new Permission { Name = SiteConstants.Instance.PermissionEditMembers, IsGlobal = true };
+                        context.Permission.Add(p);
+                    }
+                    // Insert Editor Images
+                    if (context.Permission.FirstOrDefault(x => x.Name == SiteConstants.Instance.PermissionInsertEditorImages) ==
+                        null)
+                    {
+                        var p = new Permission { Name = SiteConstants.Instance.PermissionInsertEditorImages, IsGlobal = true };
+                        context.Permission.Add(p);
+                    }
+                    // Save to the database
+                    context.SaveChanges();
+                }
+            }
+            else
+            {
+                // ---- Do Data Updates here
+                // Insert Editor Images
+                if (context.Permission.FirstOrDefault(x => x.Name == SiteConstants.Instance.PermissionInsertEditorImages) == null)
+                {
+                    var p = new Permission { Name = SiteConstants.Instance.PermissionInsertEditorImages, IsGlobal = true };
+                    context.Permission.Add(p);
+                }
+            }
+            #endregion
+        }
+    }
+}

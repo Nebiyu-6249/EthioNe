@@ -1,0 +1,68 @@
+﻿@model EthioNegarit.WebUI.ViewModels.MainStatsViewModel
+@{
+    ViewBag.Title = @Html.LanguageString("Layout.Nav.About");
+    Layout = "~/Views/Shared/_LayoutFullWidth.cshtml";
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-sm-6 float-center">
+           @Html.Partial("_ethiopical")
+            </section>
+            <section class="col-sm-6 vertical-centerr mt-44">             
+                    <div class="boxx content-fluid mb-2 mt-2">
+                        <span class="badge-name" title="">
+                         Since  / Year Started
+                        </span>
+                        <div class="badge-awardd text-muted float-center">
+                            <p class="publicbadgeawards">
+                                @Html.Raw(Html.Settings().YearStarted)
+                            </p>
+                        </div>
+                    </div>
+                <div class="boxx content-fluid mb-2 mt-2">
+                    <a href="@Url.Action("Index","Topic")" class="">
+                        <span class="badge-name" title="">
+                            <i class="ethicon fas fa-comments mr-4"></i>
+                            @Html.LanguageString("About.Discussions")
+                        </span>
+                        <div class="badge-awardd text-muted float-center">
+                            <div class="badge-award text-muted float-center">
+                                <p class="publicbadgeawards">@(string.Format(Html.LanguageString("About.TopicsText"), @Model.TopicCount))</p>
+                            </div>
+                        </div>
+                    </a>
+                </div> 
+                <div class="boxx content-fluid mb-2 mt-2">
+                    <a href="@Url.Action("Search","Members")" class="">
+                        <span class="badge-name" title="">
+                            <i class="ethicon fas fa-users mr-4"></i>
+                            @Html.LanguageString("SubNav.Members")
+                        </span>
+                        <div class="badge-awardd text-muted float-center">
+                            <div class="badge-award text-muted float-center">
+                                <p class="publicbadgeawards">@(string.Format(Html.LanguageString("About.MembersText"), @Model.MemberCount))</p>
+                            </div>
+                        </div>
+                    </a>
+                </div> 
+                <div class="boxx content-fluid mb-2 mt-2">
+                    <a href="@Url.Action("Index","Category")" class="">
+                        <span class="badge-name" title="">
+                            <i class="ethicon fas fa-sort mr-4"></i>
+                            @Html.LanguageString("Layout.Nav.Categories")                   
+                    </span>
+                    <div class="badge-awardd text-muted float-center">
+                        <div class="badge-award text-muted float-center">
+                            <p class="publicbadgeawards">@(string.Format(Html.LanguageString("About.CategoriesText"),Model.CategoryCount, Model.TopicCount))</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>            
+            </section>
+        </div>
+    </div>
+</section>
+<div class="clearfix">
+    @Html.Partial("_footer")
+</div>
