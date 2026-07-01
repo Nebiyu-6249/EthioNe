@@ -54,6 +54,10 @@ namespace EthioNegarit.WebUI.ViewModels
         public int? TotalPages { get; set; }
         public Category Category { get; set; }
     }
+    public class RecentlyVisitedTopicsViewModel
+    {
+        public IList<TopicViewModel> Topics { get; set; }
+    }
     public class PostedInViewModel
     {
         public List<TopicViewModel> Topics { get; set; }

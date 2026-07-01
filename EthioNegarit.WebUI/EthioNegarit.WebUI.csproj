@@ -3453,6 +3453,7 @@
     <Content Include="Views\Chat\_roomMembers.cshtml" />
     <Content Include="Views\Shared\_memberInfo.cshtml" />
     <Content Include="Views\Topic\NewsAndEvent.cshtml" />
+    <Content Include="Views\Topic\RecentlyVisited.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Chat\_chatRooms.cshtml" />
     <Content Include="Themes\EthioNegarit\scss\_chat.scss" />
