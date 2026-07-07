@@ -848,3 +848,9 @@ Topic.NoRecentlyVisited,You haven't visited any topics yet.
 SeeMore.More,See More
 SeeMore.Less,See Less
 SubNav.MyActivity,My Activity
+PayPal.Pay,Pay with PayPal
+PayPal.Or,or
+PayPal.Success,Payment successful — your ad is now active.
+PayPal.Cancelled,PayPal payment cancelled.
+PayPal.Failed,PayPal payment could not be completed. Please try again.
+PayPal.NotConfigured,PayPal is not available at the moment.

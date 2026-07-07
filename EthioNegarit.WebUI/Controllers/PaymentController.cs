@@ -13,6 +13,7 @@
     using Core.Domain.Enums;
     using System.Text;
     using Application;
+    using Application.Payments;
     using System.Data.SqlTypes;
     public partial class PaymentController : BaseController
     {
@@ -99,6 +100,8 @@
                     TotalPrice = (double)totalPrice,
                     Amount = (double)totalPrice
                 };
+                // Show the "Pay with PayPal" button only when PayPal credentials are configured on the server.
+                ViewBag.PayPalEnabled = new PayPalService().IsConfigured;
                 return View(viewModel);
             }
         }
@@ -170,6 +173,271 @@
             }
             return View(viewModel);
         }
+
+        // ---------------------------------------------------------------------
+        // PayPal Checkout (Orders v2). The whole flow is inert unless PayPal
+        // credentials are set on the server (Web.config appSettings PayPal:*).
+        // Amounts are verified server-side on capture before the ad is granted.
+        // ---------------------------------------------------------------------
+
+        // Step 1: create a PayPal order for the chosen package/duration, persist a
+        // Pending payment keyed by the PayPal order id, then redirect to PayPal.
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult PayPalCheckout(Guid packageId, Guid advertId, int month)
+        {
+            var payPal = new PayPalService();
+            if (!payPal.IsConfigured)
+            {
+                ShowMessage(new GenericMessageViewModel
+                {
+                    Message = LocalizationService.GetResourceString("PayPal.NotConfigured"),
+                    MessageType = GenericMessages.warning
+                });
+                return RedirectToAction("Create", new { packageId, advertId, month });
+            }
+
+            using (var unitOfWork = UnitOfWorkManager.NewUnitOfWork())
+            {
+                var settings = SettingsService.GetSettings();
+                var loggedOnUser = MembershipService.GetUser(LoggedOnReadOnlyUser.Id);
+                var advert = _adService.Get(advertId);
+                var package = _packageService.GetPackage(packageId);
+                if (advert == null || package == null)
+                {
+                    return ErrorToHomePage(LocalizationService.GetResourceString("Errors.GenericMessage"));
+                }
+
+                // Same price formula as the manual (bank transfer) flow.
+                var grossPrice = month * settings.AdCostPerMonth * package.PriceRate;
+                var discount = grossPrice * package.Discount / 100;
+                var totalPrice = grossPrice - discount;
+                var charge = payPal.ToChargeAmount((double)totalPrice);
+
+                var returnUrl = Url.Action("PayPalReturn", "Payment", null, Request.Url.Scheme);
+                var cancelUrl = Url.Action("PayPalCancel", "Payment", null, Request.Url.Scheme);
+                var order = payPal.CreateOrder(charge, advert.Id.ToString(), returnUrl, cancelUrl);
+                if (!order.Success)
+                {
+                    LoggingService.Error("PayPal create-order failed: " + order.Error);
+                    ShowMessage(new GenericMessageViewModel
+                    {
+                        Message = LocalizationService.GetResourceString("PayPal.Failed"),
+                        MessageType = GenericMessages.danger
+                    });
+                    return RedirectToAction("Create", new { packageId, advertId, month });
+                }
+
+                // Persist a Pending payment keyed by the PayPal order id (Reference)
+                // so the capture on return can be reconciled server-side.
+                var payment = new Payment
+                {
+                    InvoiceNo = 0,
+                    Reference = order.OrderId,
+                    Month = month,
+                    TotalPrice = (double)totalPrice,
+                    Discount = (double)discount,
+                    Amount = (double)totalPrice,
+                    DateTransfer = DateTime.UtcNow,
+                    PaymentMode = "PayPal",
+                    AccountNo = order.OrderId,
+                    DateConfirmed = (DateTime)SqlDateTime.MinValue,
+                    ConfirmedBy = null,
+                    User = loggedOnUser,
+                    PaymentStatus = PaymentStatus.Pending,
+                    Package = package,
+                    Advertisement = advert,
+                    Comment = string.Format("PayPal order {0} for {1} {2}", order.OrderId, charge.ToString("0.00"), payPal.Currency),
+                    DateSubmitted = DateTime.UtcNow
+                };
+                _paymentService.Add(payment);
+                advert.AdStatus = AdStatus.Pending;
+
+                try
+                {
+                    unitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    unitOfWork.Rollback();
+                    LoggingService.Error(ex);
+                    ShowMessage(new GenericMessageViewModel
+                    {
+                        Message = LocalizationService.GetResourceString("PayPal.Failed"),
+                        MessageType = GenericMessages.danger
+                    });
+                    return RedirectToAction("Create", new { packageId, advertId, month });
+                }
+
+                return Redirect(order.ApproveUrl);
+            }
+        }
+
+        // Step 2: PayPal redirects the payer back here (?token=<orderId>&PayerID=...).
+        // Capture the order, verify it COMPLETED server-side, then activate the ad.
+        [Authorize]
+        public ActionResult PayPalReturn(string token, string PayerID)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                ShowMessage(new GenericMessageViewModel
+                {
+                    Message = LocalizationService.GetResourceString("PayPal.Failed"),
+                    MessageType = GenericMessages.danger
+                });
+                return RedirectToAction("List", "Payment");
+            }
+
+            var payPal = new PayPalService();
+            using (var unitOfWork = UnitOfWorkManager.NewUnitOfWork())
+            {
+                var settings = SettingsService.GetSettings();
+                var loggedOnUser = MembershipService.GetUser(LoggedOnReadOnlyUser.Id);
+                var payment = _paymentService.GetPaymentByReference(token).FirstOrDefault();
+                if (payment == null)
+                {
+                    ShowMessage(new GenericMessageViewModel
+                    {
+                        Message = LocalizationService.GetResourceString("PayPal.Failed"),
+                        MessageType = GenericMessages.danger
+                    });
+                    return RedirectToAction("List", "Payment");
+                }
+
+                // Only the payer (or an admin) may complete this payment.
+                if (payment.User.Id != LoggedOnReadOnlyUser.Id && !User.IsInRole(AppConstants.AdminRoleName))
+                {
+                    return ErrorToHomePage(LocalizationService.GetResourceString("Errors.NoPermission"));
+                }
+
+                // Idempotent: if this order was already confirmed, don't capture again.
+                if (payment.PaymentStatus == PaymentStatus.Confirmed)
+                {
+                    ShowMessage(new GenericMessageViewModel
+                    {
+                        Message = LocalizationService.GetResourceString("PayPal.Success"),
+                        MessageType = GenericMessages.success
+                    });
+                    return RedirectToAction("List", "Payment");
+                }
+
+                // Verify the money server-side before granting anything.
+                var capture = payPal.CaptureOrder(token);
+                if (!capture.Success)
+                {
+                    LoggingService.Error("PayPal capture failed for order " + token + ": " + capture.Error);
+                    ShowMessage(new GenericMessageViewModel
+                    {
+                        Message = LocalizationService.GetResourceString("PayPal.Failed"),
+                        MessageType = GenericMessages.danger
+                    });
+                    return RedirectToAction("List", "Payment");
+                }
+
+                // Activate the ad - mirrors the admin Confirm flow.
+                var package = payment.Package;
+                var advert = payment.Advertisement;
+                advert.Package = payment.Package;
+                if (payment.PaymentStatus == PaymentStatus.Pending)
+                {
+                    advert.DateStart = DateTime.UtcNow;
+                }
+                var adCloseAfter = (payment.Month * AppConstants.TimeSpanMonthDays) + package.Bonus;
+                advert.DateEnd = DateTime.UtcNow.AddDays(adCloseAfter);
+                advert.AdStatus = AdStatus.Active;
+                payment.InvoiceNo = _paymentService.GetConfirmedPaymentsCount() + 1;
+                payment.PaymentStatus = PaymentStatus.Confirmed;
+                payment.ConfirmedBy = loggedOnUser.Id;
+                payment.DateConfirmed = DateTime.Now;
+                payment.Comment = string.Concat(payment.Comment, " | captured ", capture.CapturedAmount.ToString("0.00"), " ",
+                    capture.CurrencyCode, " (", capture.CaptureId, ")");
+
+                // Best-effort confirmation email (never blocks activation).
+                try
+                {
+                    var user = MembershipService.GetUser(payment.User.Id);
+                    var email = new Email
+                    {
+                        EmailTo = user.Email,
+                        NameTo = user.UserName,
+                        Subject = string.Concat(LocalizationService.GetResourceString("Payment Confirmed" + " "), settings.ForumName)
+                    };
+                    var sb = new StringBuilder();
+                    sb.AppendFormat("<p>{2} : <a href=\"{0}\">{1}</a></p>",
+                        string.Concat(settings.ForumUrl.TrimEnd('/'), advert.NiceUrl), advert.Name,
+                        LocalizationService.GetResourceString("Payment Confirmed in"));
+                    email.Body = _emailService.EmailTemplate(email.NameTo, sb.ToString());
+                    _emailService.SendMail(email);
+                }
+                catch (Exception ex)
+                {
+                    LoggingService.Error(ex);
+                }
+
+                try
+                {
+                    unitOfWork.Commit();
+                    ShowMessage(new GenericMessageViewModel
+                    {
+                        Message = LocalizationService.GetResourceString("PayPal.Success"),
+                        MessageType = GenericMessages.success
+                    });
+                }
+                catch (Exception ex)
+                {
+                    unitOfWork.Rollback();
+                    LoggingService.Error(ex);
+                    ShowMessage(new GenericMessageViewModel
+                    {
+                        Message = LocalizationService.GetResourceString("PayPal.Failed"),
+                        MessageType = GenericMessages.danger
+                    });
+                }
+            }
+            return RedirectToAction("List", "Payment");
+        }
+
+        // Payer clicked "Cancel and return" on PayPal. Drop the abandoned Pending
+        // payment so the ad reverts to Partial and can be paid again cleanly.
+        [Authorize]
+        public ActionResult PayPalCancel(string token)
+        {
+            if (!string.IsNullOrEmpty(token))
+            {
+                using (var unitOfWork = UnitOfWorkManager.NewUnitOfWork())
+                {
+                    var payment = _paymentService.GetPaymentByReference(token).FirstOrDefault();
+                    if (payment != null
+                        && payment.PaymentStatus == PaymentStatus.Pending
+                        && payment.User.Id == LoggedOnReadOnlyUser.Id)
+                    {
+                        var advert = payment.Advertisement;
+                        _paymentService.Delete(payment);
+                        if (advert != null && advert.AdStatus == AdStatus.Pending)
+                        {
+                            advert.AdStatus = AdStatus.Partial;
+                        }
+                        try
+                        {
+                            unitOfWork.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            unitOfWork.Rollback();
+                            LoggingService.Error(ex);
+                        }
+                    }
+                }
+            }
+            ShowMessage(new GenericMessageViewModel
+            {
+                Message = LocalizationService.GetResourceString("PayPal.Cancelled"),
+                MessageType = GenericMessages.info
+            });
+            return RedirectToAction("List", "Payment");
+        }
+
         [HttpPost]
         [Authorize(Roles = AppConstants.AdminRoleName)]
         //[ValidateAntiForgeryToken]
