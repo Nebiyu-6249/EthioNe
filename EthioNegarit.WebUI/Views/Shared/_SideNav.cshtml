@@ -14,6 +14,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-folder-open text-muted text-sm"></i>
+                            <p>
+                                @Html.Lang("SubNav.MyActivity")
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                    <li class="nav-item">
                         <a href="@Url.Action("Discussions", "Home")" title="Discussions you have created" class="nav-link @(TempData[AppConstants.CurrentController].ToString() == "home" && TempData[AppConstants.CurrentAction].ToString() == "discussions" ? "active" : "")">
                             <i class="nav-icon fas fa-folder-open text-muted text-sm"></i>
                             <p>
@@ -54,6 +63,8 @@
                                 </p>
                             </a>
                         </li>
+                        </ul>
+                    </li>
                 }
                 else
                 {
