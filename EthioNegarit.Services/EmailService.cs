@@ -65,11 +65,32 @@ namespace EthioNegarit.Services
                     var smtpEnableSsl = settings.SMTPEnableSSL;
                     var fromEmail = settings.NotificationReplyEmail;
 
-                    // If no SMTP settings then log it
+                    // Fall back to Web.config <appSettings> when the DB has no SMTP host, so the
+                    // owner can keep SMTP credentials in the SERVER Web.config (excluded from FTP,
+                    // never committed) instead of the database. DB settings win when present.
                     if (string.IsNullOrEmpty(smtp))
                     {
-                        // Not logging as it makes the log file massive
-                        //_loggingService.Error("There are no SMTP details in the settings, unable to send emails");
+                        smtp = ConfigUtils.GetAppSetting("Smtp:Host", string.Empty);
+                        smtpUsername = ConfigUtils.GetAppSetting("Smtp:Username", string.Empty);
+                        smtpPassword = ConfigUtils.GetAppSetting("Smtp:Password", string.Empty);
+                        smtpPort = ConfigUtils.GetAppSetting("Smtp:Port", string.Empty);
+                        var sslConfig = ConfigUtils.GetAppSetting("Smtp:EnableSsl", string.Empty);
+                        bool sslParsed;
+                        if (!string.IsNullOrEmpty(sslConfig) && bool.TryParse(sslConfig, out sslParsed))
+                        {
+                            smtpEnableSsl = sslParsed;
+                        }
+                        var fromConfig = ConfigUtils.GetAppSetting("Smtp:From", string.Empty);
+                        if (!string.IsNullOrEmpty(fromConfig))
+                        {
+                            fromEmail = fromConfig;
+                        }
+                    }
+
+                    // No SMTP host configured anywhere - nothing to do. (Not logged: this runs
+                    // every few seconds and would flood the log.)
+                    if (string.IsNullOrEmpty(smtp) || string.IsNullOrEmpty(fromEmail))
+                    {
                         return;
                     }
 
@@ -96,17 +117,27 @@ namespace EthioNegarit.Services
                     // Loop through email email create a mailmessage and send it
                     foreach (var message in emails)
                     {
-                        var msg = new MailMessage
+                        // Isolate each send: one bad address or transient failure must not
+                        // abort the whole batch. Only successfully-sent mails are dequeued;
+                        // failures are logged and left for the next cycle to retry.
+                        try
                         {
-                            IsBodyHtml = true,
-                            Body = message.Body,
-                            From = new MailAddress(fromEmail),
-                            Subject = message.Subject
-                        };
-                        msg.To.Add(message.EmailTo);
-                        mySmtpClient.Send(msg);
+                            var msg = new MailMessage
+                            {
+                                IsBodyHtml = true,
+                                Body = message.Body,
+                                From = new MailAddress(fromEmail),
+                                Subject = message.Subject
+                            };
+                            msg.To.Add(message.EmailTo);
+                            mySmtpClient.Send(msg);
 
-                        emailsToDelete.Add(message);
+                            emailsToDelete.Add(message);
+                        }
+                        catch (Exception exSend)
+                        {
+                            _loggingService.Error(exSend);
+                        }
                     }
 
                     // Loop through the sent emails and delete them
