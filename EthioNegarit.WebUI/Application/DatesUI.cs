@@ -21,6 +21,12 @@ namespace EthioNegarit.WebUI.Application
             DateTime time;
             if (DateTime.TryParse(date, out time))
             {
+                // Uninitialised/min dates (DateTime.MinValue = year 0001, SqlDateTime.MinValue
+                // = 1753-01-01) are not real dates - render nothing instead of "01 January 1753".
+                if (time.Year <= 1900)
+                {
+                    return string.Empty;
+                }
                 var span = DateTime.UtcNow.Subtract(time);
                 var totalDays = (int)span.TotalDays;
                 var totalSeconds = (int)span.TotalSeconds;
