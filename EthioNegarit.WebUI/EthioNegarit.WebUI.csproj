@@ -3558,6 +3558,7 @@
     <Compile Include="Application\Localization\Localizer.cs" />
     <Compile Include="Application\MemoryFile.cs" />
     <Compile Include="Application\MobileExtensions.cs" />
+    <Compile Include="Application\Payments\PayPalService.cs" />
     <Compile Include="Application\Providers\MembershipProvider.cs" />
     <Compile Include="Application\Providers\RoleProvider.cs" />
     <Compile Include="Application\RouteHandlers\SlugRouteHandler.cs" />

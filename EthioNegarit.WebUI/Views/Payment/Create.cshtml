@@ -23,6 +23,26 @@
                 @Html.AntiForgeryToken()
                 @Html.Partial("_createEditPayment", Model)
             }
+            @if (ViewBag.PayPalEnabled != null && (bool)ViewBag.PayPalEnabled)
+            {
+                <div class="row mb-4">
+                    <div class="col-sm-12 text-center">
+                        <div class="paypal-divider mb-2">
+                            <span>@Html.LanguageString("PayPal.Or")</span>
+                        </div>
+                        @using (Html.BeginForm("PayPalCheckout", "Payment", FormMethod.Post, new { @id = "paypalform", @class = "paypalform" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="packageId" value="@Model.PackageId" />
+                            <input type="hidden" name="advertId" value="@Model.AdvertId" />
+                            <input type="hidden" name="month" value="@Model.Month" />
+                            <button type="submit" id="paypalbutton" class="btn btn-primary" title="@Html.LanguageString("PayPal.Pay")">
+                                <i class="fab fa-paypal mr-1"></i> @Html.LanguageString("PayPal.Pay")
+                            </button>
+                        }
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </section>
