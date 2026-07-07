@@ -156,6 +156,9 @@ namespace Akismet.NET
             request.ContentLength = content.Length;
             request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
             request.UserAgent = "Akismet.NET";
+            // Never let a slow/unreachable Akismet hang the request thread (posting).
+            request.Timeout = 5000;
+            request.ReadWriteTimeout = 5000;
 
             StreamWriter writer = null;
             try

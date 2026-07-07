@@ -452,8 +452,18 @@
 
                     try
                     {
-                        // Only send the email if the admin is not manually authorising emails or it's pointless
-                        ////////        SendEmailConfirmationEmail(userToSave);
+                        // Queue the email-confirmation message (SendEmailConfirmationEmail only
+                        // actually queues when NewMemberEmailConfirmation is enabled and the member
+                        // isn't manually authorised). Wrapped so a mail/template problem can never
+                        // fail the registration itself - it just gets logged.
+                        try
+                        {
+                            SendEmailConfirmationEmail(userToSave);
+                        }
+                        catch (Exception mailEx)
+                        {
+                            LoggingService.Error(mailEx);
+                        }
 
                         unitOfWork.Commit();
 
