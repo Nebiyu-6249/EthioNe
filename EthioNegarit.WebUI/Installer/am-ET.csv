@@ -845,3 +845,12 @@ Chat.MessageDeleted,መልዕክት ተሰርዟል
 Chat.CancelReply,መልስ ሰርዝ
 Topic.ClearVisited,የተጎበኙትን አጽዳ
 Topic.NoRecentlyVisited,እስካሁን ምንም ርዕስ አልጎበኙም።
+SeeMore.More,ተጨማሪ አሳይ
+SeeMore.Less,አሳንስ
+SubNav.MyActivity,የኔ እንቅስቃሴ
+PayPal.Pay,በ PayPal ይክፈሉ
+PayPal.Or,ወይም
+PayPal.Success,ክፍያው ተሳክቷል — ማስታወቂያዎ አሁን ንቁ ነው።
+PayPal.Cancelled,የ PayPal ክፍያ ተሰርዟል።
+PayPal.Failed,የ PayPal ክፍያ ማጠናቀቅ አልተቻለም። እባክዎ እንደገና ይሞክሩ።
+PayPal.NotConfigured,PayPal በአሁኑ ጊዜ አይገኝም።
