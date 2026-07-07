@@ -1,0 +1,69 @@
+@*
+    Reusable "See More / See Less" expander. Progressive enhancement: the clamp is applied by
+    JS ONLY when the content actually overflows, so with JS off all text is fully readable.
+    Applies to known long-text containers (.post-content, .chat-text, .msg-bubble) and any
+    element you opt in with class="see-more-text". Call window.applySeeMore(container) after
+    injecting content dynamically (the SignalR chat does this for new messages). Tune the line
+    count via the --see-more-lines CSS variable.
+*@
+<style>
+    :root { --see-more-lines: 5; }
+    .see-more-content.see-more-clamped {
+        display: -webkit-box;
+        -webkit-line-clamp: var(--see-more-lines, 5);
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .see-more-content.see-more-expanded {
+        display: block;
+        overflow: visible;
+        -webkit-line-clamp: unset;
+    }
+    .see-more-toggle {
+        display: inline-block; margin-top: 4px; padding: 0;
+        background: none; border: none; cursor: pointer;
+        color: var(--accent, #379fef); font-size: .85rem; font-weight: 600;
+    }
+    .see-more-toggle:hover { text-decoration: underline; }
+</style>
+<script type="text/javascript">
+    (function () {
+        var SELECTORS = '.see-more-text, .post-content, .chat-text, .msg-bubble';
+        var labels = {
+            more: '@Html.Raw(Html.LanguageString("SeeMore.More").ToString().Replace("'", "\\'"))',
+            less: '@Html.Raw(Html.LanguageString("SeeMore.Less").ToString().Replace("'", "\\'"))'
+        };
+
+        function enhance(el) {
+            if (!el || el.getAttribute('data-see-more') === 'done') { return; }
+            el.setAttribute('data-see-more', 'done');
+            el.classList.add('see-more-content', 'see-more-clamped');
+            // If it doesn't actually overflow the clamp, show it in full with no button.
+            if (el.scrollHeight <= el.clientHeight + 2) {
+                el.classList.remove('see-more-clamped', 'see-more-content');
+                return;
+            }
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'see-more-toggle';
+            btn.setAttribute('aria-expanded', 'false');
+            btn.textContent = labels.more;
+            btn.addEventListener('click', function () {
+                var expanded = el.classList.toggle('see-more-expanded');
+                el.classList.toggle('see-more-clamped', !expanded);
+                btn.textContent = expanded ? labels.less : labels.more;
+                btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            });
+            if (el.parentNode) { el.parentNode.insertBefore(btn, el.nextSibling); }
+        }
+
+        window.applySeeMore = function (root) {
+            var scope = root || document;
+            var els = scope.querySelectorAll(SELECTORS);
+            for (var i = 0; i < els.length; i++) { enhance(els[i]); }
+        };
+
+        if (document.readyState !== 'loading') { window.applySeeMore(); }
+        else { document.addEventListener('DOMContentLoaded', function () { window.applySeeMore(); }); }
+    })();
+</script>

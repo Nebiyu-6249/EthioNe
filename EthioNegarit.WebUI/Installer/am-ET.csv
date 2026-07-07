@@ -845,3 +845,5 @@ Chat.MessageDeleted,መልዕክት ተሰርዟል
 Chat.CancelReply,መልስ ሰርዝ
 Topic.ClearVisited,የተጎበኙትን አጽዳ
 Topic.NoRecentlyVisited,እስካሁን ምንም ርዕስ አልጎበኙም።
+SeeMore.More,ተጨማሪ አሳይ
+SeeMore.Less,አሳንስ

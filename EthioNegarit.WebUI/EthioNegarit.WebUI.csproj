@@ -3428,6 +3428,7 @@
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Shared\_categoryList.cshtml" />
     <Content Include="Views\Shared\_footer.cshtml" />
+    <Content Include="Views\Shared\_SeeMore.cshtml" />
     <Content Include="Themes\EthioNegarit\scss\_popover.scss" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LayoutFullWidth.cshtml" />
