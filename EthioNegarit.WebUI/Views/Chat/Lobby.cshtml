@@ -273,6 +273,8 @@
                     '</div>' +
                 '</li>'
             );
+            // Apply the See-More clamp to the newly added message (if long enough).
+            if (window.applySeeMore) { window.applySeeMore(document.getElementById('msg-' + m.id)); }
         }
 
         function toggleEmpty() { $empty.toggle($list.children().length === 0); }
